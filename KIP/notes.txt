@@ -1,0 +1,97 @@
+Sections:
+0-Connecting high value use cases with the technical platform investment
+--KDS Data Science published a paper titled "Data Science Execution Framework Built on KIP".  The most basic fundamentals are not fully intact:
+A-Data scientists are not going to nievely rely on external to KDS built extract transform and load data pipelines.  The ability to reverse engineer what is built is what will reduce redundancy and redundancy reduction reduces complexity and increases development speed and cost.
+today: Data is processed into 36 databases into Snowflake (if we were completely uniform we would have <10 as a company) and then KDS orchestrates data pipelines into an Azure data lake using Dagster and Azure container jobs.
+proposed: We would reduce the complexity of our data storage, which is made possible by organizational changes in data engineering for critical domains, to start with landing data in the Azure data lake in a medallion architecture.  This allows the critical capability of processing data with or without Snowflake.  Note: This would require open-source tables to be used (the most common is iceberg which was built by Netflix in 2014 and expanded upon by Palantir in recent years for government compliance)
+B-The orchestration of data capabilities is a critical data platform capability.  If we maintain separation of data engineers and data scientists then what results is asynchronous data pipelines or fully redundant data pipelines.  KDS has invested over a year of senior data science and data engineering talent into the usage of Airflow and Dagster.  The two most common open-source data orchestrators.  The orchestration matters because it allows us to chain together workflows, increasing data velocity and decreasing cost, while also provider a clear more traceable data lineage.
+today: KTG uses Jams most predominately which is a closed-source scheduler that has been used for many years.  KDS is self-managing Dagster which is a lower cost but includes care and feeding.  This would not be discontinued but made more scalable for work outside of data science.
+proposed: Kiewit would move to a more robust open-source scheduler like a managed instance of either Airflow or Dagster.  
+
+
+1-Scaling data engineering talent within Kiewit so that we can move faster
+--Fully outsourced projects will make it hard for us to iterate on what is built because we did not build it.
+--We don't seem to be growing Kiewit specific data knowledge and have hit a plateau
+
+2-Data science capability gaps should be defined as self-service or KDS data sciencde gaps and not portrayed as a reason why we haven't solved top use cases.  The true reason we have not solved these marquee use cases is either we are working on it with the business or we lack the data and process to collect the data.  
+--KDS data science went through a 3 months technical evaluation with phData and overwhelmingly the capabilities gaps are not present in KDS data science.  Here is a detailed item list:
+ 
+A: AI Workbench: KDS offers a three pronged approach to this:
+1-high end macbook computers which solves 90% of any use cases.  
+2-local compute workhorses: We recognize the value of low cost experimentation and have purchased 2 A100 Nvidia 40gb VRAM GPU's (2021), 4 A100 Nvidia 80gb VRAM GPU's (2023-2024), rented 8 H100's (2025), and now purchased 16 Nvidia B200's.
+3-Cloud scalability with Modal or Azure services.  Modal is a platform that is very developer friendly and was a lot more cost efficient than a 6 month provisioned compute engagement with Google.
+B: Vector Embedding & Storage: pgVector has been used by KDS.  Here is background on pgVector: pgVector is an open-source PostgreSQL extension that enables efficient storage, indexing, and similarity search for vector embeddings directly in the database. This allows us to store, retrieve, and query high-dimensional data (such as machine learning model embeddings, document or image vectors) alongside our existing structured data, without relying on external vector databases. Using pgVector, we can leverage standard SQL tools and workflows for vector search use cases (such as semantic search, recommendation systems, and AI-powered retrieval), and efficiently scale these capabilities as our data grows, while keeping integration with our analytics and data pipelines seamless.
+C: Model Registry: Kiewit does not have the velocity of data to justify a solution that would support retraining models below a frequency of quarterly.  So, setting up automated registry and retraining services at Kiewit would be a very low or negative ROI.  If we had this need the time would leverage mlflow.  Presently we can roll back versions of models, the model training data, scoring and inferences because we run our models in Azure as container app API's.  This is a robust improvement we made in late 2021 where we predominately had batch inferences.
+D: Feature Store: Solved problem - Data is made accessible in Snowflake and on Azure data lake (usually with iceberg tables that enable a 0 copy architecture)
+E: Batch Training/Inference: This is a capability that Kiewit has had since 2017 when we released the watchdog model and the PSI model.  This is a basic and core capability.
+F: Model Drift Monitoring: Use cases and how you score them are very unique.  We have not found it valuable to invest in model monitoring that scales beyond a data domain.  Because there was very little reusability we think dashboard solutions and documentation on models meet the need at Kiewit.
+G: Real-Time Inference: KDS does this today at a scale of 100k+ inferences per month.  This is done by hosting models in Azure container app API's.
+H: Model Observability: KDS believes that the models are observable today by in prediction application visuals and dashboards made by each data scientist that are reviewed at weekly data science meetings.
+I: Model Context: KDS believes that open-source tooling like Postgres and FastAPI will be sufficient to enable high value AI models within Kiewit.  If another open-source tool arrives then we will investigate further and are happy to take input.
+J: AI Evals & Prompt Management: We presently have Atlas forge that stores data labels for AI evaluation and helps tune our AI prompts (RAG).  This has been very valuable in projects like commodity management (processed 20k tickets in the past 60 days), engineered equipment data extraction, and the tax invoice project to name a few.
+
+3-Innovatively acquiring data (video, unstructured quote data, technical documents, etc.).  Kiewit needs to find partners and custom build applications and workflows that enable us to collect the data that is lost in Sharepoint, desktops, emails, vendor calls, and video 
+One of the most significant gaps between where we are today and the value we could ultimately realize as an enterprise is our limited ability to capture and digitize valuable data. Today, much of our data is either:
+collected but effectively discarded (stored locally or on SharePoint),
+collected inconsistently and never centralized, or
+not captured at all.
+Last - I would argue we are not innovative in how we capture data. We are probably a little too stuck (as an org) in considering data to be neat rows and columns and not thoughtful enough about what is possible in today’s technology landscape
+
+To generate meaningful enterprise value, we need to innovate not only in how we process and analyze data, but in what data we capture and how we collect it. The current proposal effectively addresses the platform and infrastructure required to ingest, process, and surface data—but it does not yet address the upstream challenge of ensuring the right data exists in the ecosystem to begin with. Realizing the full value of a platform like this will require deliberate process redesign (with meaningful change management efforts) and targeted technology investments to capture data that is currently fragmented or uncollected. Without that, we risk optimizing the processing of an incomplete dataset rather than transforming the breadth and quality of data available to drive automation, insight, and risk reduction.
+--Kiewit needs to pick partners to massively accelerate data going into the KIP platform.  
+--Kiewit needs to normalize this data within it's own data architecture
+--InEight has the majority of the data we need: subcontracts and material contracts, estimate files, quantity claiming, scheduling relationships, design model viewer.  Exceptions are cost details, invoice documents, and CRM which are SAP modules.  There is not nearly enough focus on moving this data into a data science accessible format (parquet's in bronze for structure data and documents in bronze for unstructured data, iceberg tables in silver not only describe tabular data but help relate unstructured data to structured data, virtualize the data in snowflake)
+
+4-Developing robust data strategies with accountability from senior members of the Kiewit organization
+A: High-Impact Use Cases: The overall business case or value prop would benefit from defining a few bold, high-value use cases with clear, quantified returns. The deck captures strong themes, but the examples remain high-level, which makes it difficult to evaluate how this proposed platform would specifically enable those outcomes. Well-defined use cases will help us understand not only the potential business value but also how much of that value is driven by the platform itself versus the additional process changes or data capture efforts required to realize it. Establishing 3–5 such “big-rock” opportunities—potentially through upcoming data strategy work with PhData’s support—would strengthen confidence that this investment will translate into measurable enterprise impact. *I believe this is on the horizon, but another trade off we had to make given the tight timeline.
+B: Business led workshops: Building on point #2, I think we’d benefit from a series of workshops (led by a third party like PhData) but focused on leaders and managers within the domain/business, not technologists. The initial use cases were primarily defined through a technical lens; bringing in business operators will help surface the most impactful and aspirational (“BHAG”) opportunities grounded in real operational pain points. This should help us to further define more explicit use cases and start to put a business case to them and show how KIP is needed to enable the specific use case. These sessions would also accelerate our data strategy work, as the discussions naturally align with defining domain-level strategies. I believe this is already envisioned for future scope, but I want to emphasize its importance.
+C: We’ve discussed this in the context of KDS ownership and the broader org model, but I think each core domain needs a clear executive-level sponsor - ideally at the Exec Committee/SVP level - who owns and shapes the vision for that domain. This mirrors the CAT model and ensures accountability, prioritization, and continuity of focus as the platform and data strategies evolve. As it stands, I don’t see this layer explicitly reflected in the proposed KIP org chart (maybe this is the Exec Sponsor? But I cannot tell if this is over all KIP or at the domain level). Regardless, I think this level of executive accountability and engagement is critical for sustained alignment and enterprise traction.
+Here's the high value use cases: 
+--quantity generation
+--automated takeoff
+
+--engineered equipment specifications and price prediction
+--subcontract contract specification and pricing capture
+--supplier performance and evaluation
+--supplier correspondence data capture
+--price escalation modeling
+
+--estimate cost modeling
+--estimate and project risk modeling
+
+--self-service analytics
+--spreadsheet and localized data ingestion
+
+--data models
+
+5-technology delivery model
+--colin's team does strategy, project management, product management, adoption planning
+--Jimmy/Jake are accountability for Profit and Loss.  Get the right people to the table.
+--Matt's team delivers analytical solutions
+--KTG delivers data collection solutions
+
+KDS current: 
+Data Domain Managers
+-Generation of roadmap for respective data domain
+-Partner with operations leadership to ensure products are built to directly improve operations and ensure products are adopted.
+-Ensure standards for data architecture are met 
+-Zipper up with KTG product owners on priorities
+-Establish and monitor data quality rules
+-Define master/certified data and ensure availability
+
+Data Sponsors 
+Identification of datasets to be ingested / managed
+Identification of data related pain points.
+Feedback & input on data products
+
+Executive Council
+Approval of budget 
+Large priority approval
+Selection of data sponsors
+
+Executive Committee
+Review overall trajectory
+Select executive council
+
+Augmentation to current: (Data Domain Managers [defined more clearly as product managers, project managers, and BI analysts], Data Sponsors who are the key stakeholders of a domain, and an executive council / committee for executive decisions) woudl be augmented by Jimmy Nolan focused on ensuring our investment has the highest ROI (P&L accountability) and Jake Macholtz is responsible for construction.
+

@@ -1,0 +1,123 @@
+Sr. Data Manager (Sr. Data Engineering Manager)
+Location: Lone Tree, CO, US | Omaha, NE, US | Lenexa, KS, US
+Requisition ID: [TBD]
+
+Job Level: Senior Level
+
+Home District/Group: DHO Kiewit Data Services
+
+Department: Data Services
+
+Market: Corporate Home Office
+
+Employment Type: Full Time
+
+Position Overview
+We are seeking a highly accomplished Sr. Data Manager to lead and scale our data engineering organization as we build the Kiewit Intelligence Platform (KIP). This role combines technical leadership, team management, and strategic platform development — ensuring our data infrastructure can support enterprise-scale AI, analytics, and operational automation across a $25B+ construction enterprise.
+
+As a Sr. Data Manager, you will:
+• Lead and grow a team of 10-15 data engineers and platform data architects
+• Design and implement large-scale distributed data processing systems on Azure cloud platform
+• Drive the technical roadmap for data ingestion, orchestration, and lakehouse architecture
+• Partner with executive leadership and senior data scientists to align platform capabilities with business objectives
+• Establish engineering standards, best practices, and DevOps culture across the organization
+
+You'll partner closely with the VP of Data Services and Domain Managers to:
+• Build enterprise data pipelines processing 100B+ records across SAP, InEight, Primavera, and custom systems
+• Implement open-source orchestration platforms (Dagster/Airflow) and lakehouse architecture (Iceberg tables)
+• Deploy Model Context Protocol (MCP) servers enabling secure AI agent access to enterprise data
+• Scale infrastructure supporting 20,000+ predictive algorithms and real-time analytics
+• Mentor and develop engineering talent while maintaining a culture of technical excellence
+
+This position is ideal for someone with deep expertise in Azure cloud architecture, Python, Kubernetes, distributed systems, and a proven track record of leading high-performing engineering teams in fast-paced environments.
+
+District Overview
+Kiewit Data Services' (KDS) mission is to make Kiewit the premier data-driven organization in our industry. We are building the Kiewit Intelligence Platform (KIP) — a four-layer data and AI platform that will enable us to scale revenue to $25B+ without linearly scaling headcount. KDS is a cross-functional organization combining data engineering, data science, platform architecture, and product management. Our core functions are Data Quality, Governance, Enablement, Analytics, and AI/ML. We believe in world-class engineering practices, open-source technologies, and the power of data to transform construction operations.
+
+Location
+This role is available for candidates to work remotely or from one of our office locations in Omaha, NE, Lone Tree, CO or Lenexa, KS.
+
+Responsibilities
+
+Technical Leadership & Architecture:
+• Design and implement enterprise-scale data infrastructure supporting 100B+ records, 3.6TB+ data volumes
+• Lead cloud architecture decisions on Azure using Terraform/Pulumi for infrastructure-as-code
+• Establish technical standards for data pipelines, orchestration, monitoring, and data quality
+• Drive adoption of modern lakehouse architecture (Iceberg tables, Polaris catalog, Snowflake integration)
+• Implement DevOps practices including CI/CD, GitOps, infrastructure-as-code, and automated testing
+• Architect solutions for real-time data processing, streaming analytics, and high-throughput APIs
+• Partner with senior data scientists to ensure platform capabilities support ML/AI workloads and model deployment
+
+Team Management & Development:
+• Lead, mentor, and grow a team of 10-15 data engineers and platform data architects
+• Conduct technical interviews, hiring, and onboarding for data engineering roles
+• Establish career development paths, technical skill progression, and engineering competency frameworks
+• Foster a culture of collaboration, innovation, and continuous learning
+• Provide technical guidance on complex architectural decisions and system design
+• Balance team workload across platform development, operational support, and innovation initiatives
+
+Platform Development & Delivery:
+• Lead development of L0 (Data Sources) and L1 (Data Factory) layers of KIP
+• Build and manage ELT pipelines from SAP, InEight, Primavera P6, engineering models (BIM/CAD), and custom systems
+• Deploy enterprise orchestration platforms with comprehensive monitoring, lineage tracking, and data quality controls
+• Implement Model Context Protocol servers enabling LLMs secure access to data assets
+• Support AI/ML teams with scalable compute infrastructure including Kubernetes clusters and GPU workloads
+• Deliver high-performance APIs serving analytics, predictions, and operational systems
+
+Strategic Partnerships & Collaboration:
+• Partner with senior data scientists on ML/AI infrastructure, feature engineering, and model deployment pipelines
+• Collaborate with construction operations, shared services, and project teams to understand data requirements
+• Work with security, compliance, and governance teams to ensure enterprise-level data protection and privacy standards
+• Present technical roadmaps and progress updates to executive leadership
+• Drive adoption of data products through training, documentation, and enablement
+
+Qualifications
+
+Required:
+• Bachelor's degree in Computer Science, Engineering, Data Science, or related technical field (Master's preferred)
+• 10+ years of experience in data engineering, software development, or cloud architecture
+• 5+ years of experience leading engineering teams, including hiring, mentoring, and performance management
+• Deep expertise in Azure cloud services (Azure Data Lake, AKS, Functions, SQL Database, Data Factory, etc.) with Infrastructure-as-Code (Terraform/Pulumi)
+• Advanced proficiency in Python, SQL, and BASH scripting
+• Production experience with Kubernetes, Docker, and containerized application deployment
+• Strong background in distributed systems, data pipeline architecture, and ETL/ELT patterns
+• Experience with relational databases (PostgreSQL, MySQL, Oracle, Snowflake) and NoSQL systems (MongoDB, Redis)
+• Proven ability to design, build, and operate large-scale data processing systems (TB+ daily volumes)
+• Excellence in Git, CI/CD, and DevOps practices (Jenkins, GitLab CI, Azure DevOps)
+
+Preferred:
+• Experience with data lakehouse architecture (Delta Lake, Iceberg, Hudi)
+• Familiarity with orchestration platforms (Airflow, Dagster, Prefect)
+• Background in construction, engineering, or manufacturing data systems
+• Knowledge of data governance, lineage tracking, and data quality frameworks
+• Experience with Snowflake, data catalogs (Alation, Collibra), and BI platforms
+• Understanding of AI/ML infrastructure, MLOps, and serving high-throughput prediction APIs
+• Hands-on experience with monitoring/observability tools (Prometheus, Grafana, Datadog)
+• Exposure to streaming platforms (Kafka, Kinesis) and real-time analytics
+
+Leadership Competencies:
+• Strategic thinking with ability to translate business needs into technical roadmaps
+• Excellent communication skills — able to influence executive stakeholders and mentor junior engineers
+• Proven track record of building high-performing teams and developing engineering talent
+• Comfortable in fast-paced, ambiguous environments with evolving requirements
+• Strong problem-solving skills with ability to debug complex distributed systems
+• Commitment to engineering excellence, code quality, and operational reliability
+• Passion for leveraging data and technology to drive business transformation
+
+Other Requirements:
+• Regular, reliable attendance
+• Work productively and meet deadlines timely
+• Communicate and interact effectively and professionally with supervisors, employees, and others individually or in a team environment
+• Perform work safely and effectively. Understand and follow oral and written instructions, including warning signs, equipment use, and other policies
+• Work during normal operating hours to organize and complete work within given deadlines. Work overtime and weekends as required
+• Ability to travel occasionally for team meetings, conferences, or vendor partnerships
+
+Base Compensation: $150,000/yr - $190,000/yr
+(Actual compensation is subject to variation due to such factors as education, experience, skillset, and/or location)
+
+This posting will be active from: [Start Date] - [End Date]
+
+We offer our fulltime staff employees a comprehensive benefits package that's among the best in our industry, including top-tier medical, dental and vision plans covering eligible employees and dependents, voluntary wellness and employee assistance programs, life insurance, disability, retirement plans with matching, and generous paid time off.
+
+Equal Opportunity Employer, including disability and protected veteran status.
+

@@ -1,0 +1,70 @@
+Helios
+
+How do you orchestrate updates from sources across the board?
+
+-15 domains of information that come into Helios.  Each of those sources comes in on different frequencies.
+
+Comes into raw
+Then canonical
+An event might be:
+Action based from data sources like service intervals compared to hours on equipment.  
+
+How do you write hours on the machine:IOT gateway from telematics devices: 
+All API’s in AWS
+We have an API before the database and after the database.
+API takes .json and moves it to parquet with data checks.
+POST call is made on API then another call to land into DB.
+They have more than 100,000 API’s
+There is an API registry for all API’s
+Pipeline framework:register pipelines (unique id)
+Have API endpoints to each pipeline (unique id)
+We use Apigee - integrates with AWS but built by Google to manage the ecosystem of API’s
+
+We have our own orchestration tool that we call AEX (Analytics Execution) which is a custom built tool.  There is orchestration, observability and interface with model services.  This sounds a lot like Dagster.
+
+They use cloud watch logs significantly.  Every activity writes to cloud watch logs.  These integrate really well with a git-hub co-pilot.
+
+Do you use airflow?  DE does not but there are teams that do.  Everyone loves airflow that uses it but it’s not a data engineering platform.
+
+Dynamo for really large datasets or RDB’s.
+
+DynamoDB is a fully managed, server-less NoSQL database service offered by Amazon Web Services (AWS)
+
+Are you using iceberg tables?
+What catalog for iceberg tables are you using?
+
+Do you write to snowflake directly?  
+We take a snapshot 
+Canonical, base, derived we’re piping into snowflake - these are materialized objects!  We store
+the history of data in Snowflake
+Canonical Input = Bronze, Base (cleansed quality data) = Silver, Master = Platinum, Derived = Gold
+
+Daniella does have a lot of DS in Snowflake that is duplicated.  It’s more of a pain point for DE.
+
+What does pipeline visualizer look like?
+Best thing since sliced bread.  We didn’t have good luck look at external solutions.
+You can sort by: pipeline, domain, : it’s a DAG
+
+Built off of cloud watch metrics and needed a visualizer.  So, we built a web app.
+Corey has 1,400 pipelines so we have a visualizer that we can use to troubleshoot data movements.
+
+Do you have any code integrations?  How do you find code integrations?  The repo is not integrated with the visualizer.
+You can go into git-hub and do a fuzzy search.  
+
+We use MCP servers to grab data from Snowflake, pipeline framework, cloud watch logs, then git-hub co-pilot into an LLM and it summarizes the defect.
+
+What’s the fastest way to retrieve large datasets?
+Kinesis is used:This service allows for the continuous ingestion and processing of large volumes of data records (gigabytes per second) for real-time analytics use cases. It supports automatic scaling of shards to manage data throughput and provides server-less operation, eliminating the need to provision or manage servers.
+
+What would you do for silver?  Would you be concerned with using iceberg?
+Corey: you’re going in the right direction.  We have an ACID details derived asset.  It’s all the telematics data that feeds VisionLink.  The beauty of it is that the data updates could be slow but the tables in silver would be fast to read.
+
+We’re mostly RDB but not history.  All history is in Snowflake.  We do have a history database in the service layer. 
+
+Apigee, kinesis, and pipeline visualizer
+
+
+
+
+
+

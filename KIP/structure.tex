@@ -1,0 +1,80 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% House Style Structure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+% PACKAGES AND OTHER CONFIG
+%----------------------------------------------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{microtype}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{titling}
+
+% TikZ
+\usepackage{tikz}
+\usetikzlibrary{positioning, calc, fit, arrows.meta}
+
+\usepackage[svgnames]{xcolor}
+\usepackage[hang, small, labelfont=bf, up, textfont=it]{caption}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+%----------------------------------------------------------------------------------------
+% MARGINS AND SPACING
+%----------------------------------------------------------------------------------------
+\usepackage{geometry}
+\geometry{
+    top=1.0cm,
+    bottom=1.0cm,
+    left=1.5cm,
+    right=1.5cm,
+    includehead,
+    includefoot,
+}
+\setlength{\columnsep}{7mm}
+
+%----------------------------------------------------------------------------------------
+% FONTS
+%----------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{XCharter}
+
+%----------------------------------------------------------------------------------------
+% HEADERS AND FOOTERS (house style)
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+% Headers
+\lhead{}
+\chead{\textit{\thetitle}}
+\rhead{}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}}
+
+\fancypagestyle{firstpage}{
+    \fancyhf{}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+%----------------------------------------------------------------------------------------
+% ABSTRACT HELPERS
+%----------------------------------------------------------------------------------------
+\usepackage{lettrine}
+\usepackage{fix-cm}
+\usepackage{xstring}
+\newcommand{\initial}[1]{\lettrine[lines=3,findent=4pt,nindent=0pt]{\color{Black}{#1}}{}}
+\newcommand{\lettrineabstract}[1]{\StrLeft{#1}{1}[\firstletter]\initial{\firstletter}\textmd{\StrGobbleLeft{#1}{1}}}

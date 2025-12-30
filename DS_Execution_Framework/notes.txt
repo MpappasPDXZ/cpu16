@@ -1,0 +1,22 @@
+1-Storage abstraction: Usage of API's to abstract tables
+1a: look at caterpillar paper and talk about the benefits of using API's in no more than 5 bullets (executive summary).
+1b: I have a picture of the api catalog within Azure that we have: 01_swagger_docs.png.  
+1c: I want to show a node diagram that data from 1-source --> 2-API (from 1-source) --> 3-storage (from 2-API) then an arrow to 4-API (from 3-storage) and an arrow up to ML model (from 4-API) and an arrow down to application from storage (from 4-API).
+
+2-Event-driven: Increased velocity of data movements
+2a: source will initiate entire pipeline.  please cite caterpillar data movement information.
+2b: this will simplify the code management which increases our production of machine learning system velocity.
+3b: Data science will have high performance compute requirements which will be orchestrated by either of the open-source tools: Airflow and Dagster, customized to our business.  I have three screenshots for this: 01_flow.png shows an overall DAG.  The other screenshot: 01_flow_code_observability.png shows the reposistory connection string.  The last screenshot shows the machine learning model code repository: 01_flow_ml_endpoint.png.
+
+3-Extensibility: Usage of iceberg tables and Polaris catalog
+3a: First the storage layer in bronze: shows the layers: Blob containers>datalake>bronze>p6>spread_service>p6central>schedule_id=22785>year=2025>month=09>day=04.  here's the image: 01_storage_silver.png.
+this layer is built for speed of writes by source.
+3b: Second layer is iceberg tables in silver: shows the metadata folder and the data folder under a file directory by source.  here's the image: 01_storage_silver.png.  This layer is built for extensibility into snowflake for a technical audience and is the layer the API's read from to serve applications and machine learning models in production.
+3c: Third layer is gold which will be modeled by data architecture to meet the specifications of product management.  This will be extensibile by the business in Snowflake and catalogued by data architecture in Alation, the data catalog tool.
+Here are the images: 
+polaris catalog: shows tables that are iceberg format in a snowflake hosted service.  image:  01_storage_polaris.png
+Snowflake (Kiewit Data Platform aka KDP): shows how iceberg tables are extensible with any other data in our KDP.  image: 01_storage_snowflake.png
+
+4-Data integrity and quality: Business encoded logic will ensure the silver objects, used by applications and machine learning models, will be high quality.  This will be Atlas prism. I will later come in and add content here.
+1-Quality data by regression analysis: we will eliminate innocuous samples that no one knows are incorrect data until they are plotted against a highly correlated secondary variable.  
+2-Chain of evidence: We have a need to eliminate a hung loop of feedback: Often managers will spot a single sample that is incorrect and tell someone to fix it while also telling another person that the data is incorrect.  We need to go to a closed loop system that allows correction of data.  We are titling this system Prism.

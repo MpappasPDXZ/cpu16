@@ -1,0 +1,46 @@
+To create a task (issue) in Linear via scripting, you'll typically use their API or integrations (like Slack Asks) by sending structured data, but the core steps involve authentication, defining the issue data (title, team, priority), making an API request (e.g., POST /issues) or using an integration trigger, and handling the response, often with a tool like curl or a programming language (Python/JS) to connect your script to Linear's backend. 
+This video provides a beginner's tutorial on using the Linear app:
+Related video thumbnail
+48s
+
+
+Speak About Digital
+YouTube • May 23, 2023
+Key Steps to Scripting a Linear Task
+Authentication: Get an API Key from your Linear settings to authorize your script to make changes.
+Identify Target: Know the specific Team ID or Project ID where the issue should live.
+Define Issue Data: Structure the task details (Title, Description, Assignee ID, Label IDs, Project ID, etc.) as a JSON object.
+Choose Your Method:
+API Call (Most Flexible): Use curl or a language (Python, JS) to send a POST request to the Linear API endpoint with your JSON data.
+Slack Integration: Use "Asks" to trigger issue creation from Slack, which syncs comments and status.
+Email Forwarding: Forward emails to a special Linear email address to create issues. 
+This video shows how to create and manage projects in the Linear app:
+Related video thumbnail
+58s
+
+
+Tech Express
+YouTube • Sep 3, 2024
+Example: Using curl (API)
+Get API Key: Find in Linear settings.
+Construct Request:
+bash
+curl 'api.linear.app' \
+-H 'Authorization: Bearer YOUR_API_KEY' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+  "query": "mutation IssueCreate($input: IssueCreateInput!) { issueCreate(input: $input) { issue { id } } }",
+  "variables": {
+    "input": {
+      "title": "Automated Task from Script",
+      "teamId": "YOUR_TEAM_ID",
+      "description": "This task was created via a curl command.",
+      "priority": "High"
+    }
+  }
+}'
+Replace Placeholders: YOUR_API_KEY, YOUR_TEAM_ID (Find IDs in Linear URL when viewing Team/Project).
+For Non-Code Users (Basic Steps)
+Use Keyboard Shortcuts: Press C to open the issue modal.
+Click the "+" Icon: Top left of the app.
+Fill Details: Add Title, Description, Assignee, Priority, Labels, Project, then click "Create Issue". 

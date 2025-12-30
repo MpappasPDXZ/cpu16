@@ -1,0 +1,73 @@
+Palantir Use Cases - Kiewit Implementation
+
+1. KIEWIT CORE ONTOLOGY + AI AGENTS
+    Core Ontology Development including any new relevant data sources
+    Construction Ontology and AI Agents
+    Engineering Ontology and AI Agents
+    Procurement Ontology and AI Agents
+    Conversational agents and small automations (2 included)
+    ⚠️ NOTE: Agents were not scoped and lacked any clear ROI.
+
+2. CENTRALIZED TAKEOFF
+    PDF/Drawing Quantity Extraction, Standardization and Material Ontology mapping
+    3D Model Quantity Extraction, Standardization and Material Ontology mapping
+    📌 NOTE: Centralized Takeoff + Estimate 360 together = design ingestion → Kiewit's takeoff vision models → estimate quantity product from partial model design.
+
+3. ESTIMATE 360
+    Estimate 360: centralized view across Construction, Engineering and Procurement
+    Construction Estimate: Takeoff to InEight Estimate mapping and connection
+    Engineering Estimate: RFP (PDF) / Takeoff → Engineering Scope
+    Procurement Estimate: Takeoff → Procurement Package → Line item
+
+4. SCHEDULING
+    Construction Schedule: WBS, structures, activities, durations, dependencies
+    Engineering Schedule: design phase schedules with appropriate milestones and dependencies
+    Procurement Schedule: procurement milestones, vendor selection timelines, material delivery scheduling
+        📌 NOTE: Procurement Schedule = add-on to Source 360 (supplier quote comparison tool Palantir is already building for Kiewit).
+    Integrated Master Schedule: cross-discipline schedule integration, dependencies
+    💡 OPPORTUNITY: Construction Equipment Scheduling could be high-value — Kiewit spends $1B/year on construction equipment.
+
+5. EXECUTION
+    Takeoff → Work Planning
+    Initial Work Package Generation
+    Short Interval Planning Generation
+
+6. RESOURCE MANAGEMENT
+    Category management and cost procurement
+    Project digital cockpit (PDC)
+
+7. VENDOR PERFORMANCE
+    Vendor Recommendation
+    Vendor Health
+
+
+CONCERNS
+━━━━━━━━
+
+1. Go-forward pricing beyond Year 1 is a real concern — no de-escalation in cost is coming.
+
+2. We have been getting scoping for free because the engineers on the account are still tied to delivery of Source 360 or TRACE and are doing scoping on the side.
+
+3. The workflow is somewhat chronological — all downstream work depends on model quantities and components being in place first.
+
+
+PRICING SUMMARY (CY2026)
+━━━━━━━━━━━━━━━━━━━━━━━━
+
+                            Budget          Recommended
+Palantir Services:          8 FDEs-Year     15 FDEs-Year
+Software License + Usage:   $15,000,000     $30,000,000
+
+
+WORKSTREAM ESTIMATES
+━━━━━━━━━━━━━━━━━━━━
+
+Workstream                  Budget              Recommended
+Core Ontology + AI Agents   2 FDEs - 4 months   3 FDEs - 6 months
+Centralized Takeoff         4 FDEs - 1 year     4 FDEs - 1 year
+Estimate 360                —                   4 FDEs - 9 months
+Scheduling                  2 FDEs - 6 months   4 FDEs - 9 months
+Execution                   —                   4 FDEs - 6 months
+Resource Management         3 FDEs - 6 months   3 FDEs - 6 months
+Vendor Performance          2 FDEs - 3 months   2 FDEs - 3 months
+

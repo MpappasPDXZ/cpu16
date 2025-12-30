@@ -1,0 +1,128 @@
+ 
+
+Key Feedback on Palantir Proposal & Deck 
+
+1. Commercial Structure & Economics 
+
+Profit Sharing: In discussions between Alex Karp and our CEO, profit sharing was referenced as part of the partnership model. This proposal does not reflect that in any way. We need clarity on whether profit sharing is still on the table and, if not, why it was removed. 
+
+Duration & Licensing Costs: The proposal is scoped as a one-year engagement, primarily focused on building workflows. What is unclear—and critical to this evaluation—is the ongoing licensing cost post-build. 
+
+We would need pricing certainty for at least 2 years, ideally 3+, at a favorable rate to Kiewit. 
+
+Without long-term licensing clarity, it is impossible to evaluate total cost of ownership or ROI. 
+
+Shape 
+
+2. Ontology Strategy: Value vs. Lock-In 
+
+There is a clear push to deepen Kiewit’s investment in the Palantir ontology. While there is real scale value in doing so, there is also a meaningful strategic tradeoff: 
+
+The more data, systems, and institutional knowledge we embed, the stickier the platform becomes. 
+
+This increases switching costs and reduces future optionality. 
+
+This dynamic needs to be explicitly acknowledged and weighed as part of the decision. 
+
+Shape 
+
+3. Agents & Workflow Autonomy 
+
+Automation and Agents sound compelling, but it raises two practical questions that the deck does not yet answer: what specific agents would we actually build, and what decision rights are we truly willing to delegate to them? This is where I struggle to see near-term reality. There is a fundamental tension: many of the tasks where agency would create the most value also carry meaningful risk, and in those cases the organization is unlikely to tolerate fully autonomous decision-making (i.e. we wouldn’t let TRACE product a spec without detailed human review). Conversely, the lower-risk tasks we are willing to grant agency to (ex: invoice reconciliation for invoices < $10k) often deliver more limited value. Agents can help scale lower-level activities, but the bigger opportunity is in high-value, high-risk work. In my view, we’re better off focusing AI efforts on powerful assistants that support human decision-makers in higher-risk contexts, rather than autonomous agents. I don’t think this distinction is well understood today, nor is it clearly reflected in the proposed deck.Shape 
+
+4. Lack of Use Case Precision & Scoping 
+
+Across the roadmap and proposed initiatives, the use cases are extremely vague: 
+
+Outcomes are not clearly defined. 
+
+Success criteria are unclear. 
+
+There is no credible sense of scope, timeline, or value realization. 
+
+This makes it impossible to judge whether: 
+
+The proposed price point is justified. 
+
+Palantir is the right solution at all. 
+
+Or whether these capabilities would be better built internally. 
+
+Key principle: 
+We should not invest this heavily without well-defined use cases that we have agreed make sense to outsource to/build within Palantir. 
+
+Historical Lesson: Procurement Example 
+
+A direct parallel exists with procurement. Early in the Procurement discussions there was an interest in doing a ‘rebates use case’.  
+
+If we had agreed to a $3M “procurement use case” upfront, we would have ended up with a low-value rebates workflow. 
+
+Instead, we deeply scoped the problem first, which led to Source360—a high-value, enterprise-critical solution. 
+
+This proposal lacks that same rigor. The sequence must be: 
+
+Clearly define the use case 
+
+Scope effort, timeline, and outcomes 
+
+Estimate value and ROI 
+
+Then evaluate whether Palantir is the right investment 
+
+Shape 
+
+6. Use Cases That Merit Further Focus 
+
+There are some promising ideas, but they need refinement and confirmation: 
+
+Estimate Takeoff (Reframed) 
+
+The real opportunity is less about takeoffs and more about normalizing engineering data across multiple modeling tools into a usable, standardized format. 
+
+Construction Estimating 
+
+Work Plans 
+
+These feel directionally right but are not yet in an actionable, scoped state. 
+
+Shape 
+
+7. Notable Gaps in the Proposal 
+
+Several high-potential or cost-offset opportunities are missing entirely: 
+
+Engineered Equipment 
+
+No mention of an equipment data or engineering equipment repository. 
+
+This is a highly interconnected domain and a compelling candidate use case. 
+
+Engineering Equipment Repository 
+
+A use case we should pursue regardless; the open question is whether Palantir is the right platform. 
+
+GEP Replacement Opportunity 
+
+No discussion of replacing or offsetting GEP. 
+
+We already replicate some GEP workloads into Source360 and pay ~$2M+ annually for GEP. 
+
+This could represent a meaningful cost offset and strategic consolidation opportunity. 
+
+This ties directly to the ask to evaluate all 56 use cases and prioritize them. So just a small example that more work is needed on the use case front. 
+
+Shape 
+
+8. Overall 
+
+There are good ideas and directionally interesting concepts, but: 
+
+The proposal lacks rigor. 
+
+Use cases are insufficiently scoped. 
+
+Economics and long-term commitments are unclear. 
+
+We need significantly more definition on what we are building, why, how long it takes, what value we expect, and what we are paying long-term before this can be evaluated as a serious investment. 
+
+ 

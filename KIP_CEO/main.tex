@@ -1,0 +1,595 @@
+\documentclass[12pt, a4paper]{article}
+
+\setlength{\headheight}{15pt}
+
+% Suppress showhyphens redefinition warning
+\usepackage{silence}
+\WarningFilter{latex}{Command \showhyphens has changed.}
+
+\usepackage{float}
+\usepackage[table]{xcolor}
+
+\input{structure.tex}
+
+\title{Kiewit Intelligence Platform: Executive Summary}
+\author{Matt Pappas}
+\date{\today}
+
+     \begin{document}
+
+     \pagestyle{plain}
+     \renewcommand{\thepage}{\arabic{page}}
+     
+     \thispagestyle{plain}
+
+ %----------------------------------------------------------------------------------------
+ % PAGE 1: WHY NOW AND WHO?
+ %----------------------------------------------------------------------------------------
+ \begin{center}
+     \noindent\rule{\linewidth}{2pt}
+     
+     \vspace{0.15em}
+     
+     {\large Kiewit Intelligence Platform} \\[0.1em]
+     {\small Scaling revenue without linearly scaling headcount growth by accelerating our data platform capabilities}
+
+     
+     \vspace{0.15em}
+     
+     \noindent\rule{\linewidth}{2pt}
+ \end{center}
+
+ \vspace{0.05em}
+
+ %----------------------------------------------------------------------------------------
+ % OPPORTUNITY DEFINITION
+ %----------------------------------------------------------------------------------------
+ {\footnotesize
+ \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X@{}}
+ \rowcolor{black!10}
+ \textbf{\large Opportunity Definition} \\
+ \end{tabularx}
+
+ \vspace{0.2em}
+
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X@{}}
+Kiewit has made tremendous (arguably industry-leading) progress in the organization's digital journey over the last 15 years:
+
+\vspace{0.1em}
+
+\begin{itemize}
+    \item Consolidated back-office systems (SAP, GEP, etc)
+    \item The most robust Project Lifecycle Management suite in the industry (InEight)
+\end{itemize}
+
+\vspace{0.1em}
+
+\hspace{4em}\includegraphics[width=0.6\textwidth]{Ineight_lifecycle.png}
+
+\vspace{0.1em}
+
+\begin{itemize}
+    \item Robust data foundation, with a decade of well-curated data; it's not just the organization, but the continually improving way we've been collecting and managing our data.
+\end{itemize}
+
+
+\hspace{4em}{\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}p{4cm}r@{}}
+\rowcolor{black!8}
+\textbf{Data Asset} & \textbf{Scale} \\
+\rowcolor{white}
+SAP (ECC REPL) & 100B records / 3.6TB \\
+\rowcolor{black!3}
+InEight & 33.1B records / 1.63TB \\
+\rowcolor{white}
+Cost Report & 224M records / 15M churn per day \\
+\rowcolor{black!3}
+Invoice Documents & 1.2M per year \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+}
+
+\vspace{0.1em}
+\begin{itemize}
+    \item We find ourselves at the next inflection point, both from a technical and a business perspective:
+\end{itemize}
+
+\vspace{0.05em}
+
+\hspace{2em}\begin{tikzpicture}[
+    node distance=0.8cm,
+    box/.style={draw, rounded corners, align=center, inner sep=3pt, minimum width=2.2cm, minimum height=0.7cm, font=\footnotesize},
+    stage/.style={box, fill=black!8}
+]
+    \node[stage] (p1) {Perception AI};
+    \node[stage, right=of p1] (p2) {Generative AI};
+    \node[stage, right=of p2] (p3) {Agentic AI};
+    \node[stage, right=of p3] (p4) {Physical AI};
+    \node[stage, right=of p4] (p5) {Operational AI};
+    
+    \draw[->, >=Latex, thick] (p1) -- (p2);
+    \draw[->, >=Latex, thick] (p2) -- (p3);
+    \draw[->, >=Latex, thick] (p3) -- (p4);
+    \draw[->, >=Latex, thick] (p4) -- (p5);
+    
+    \node[below=0.1cm of p1, font=\tiny, text width=2.2cm, align=center] {Computer vision, pattern recognition};
+    \node[below=0.1cm of p2, font=\tiny, text width=2.2cm, align=center] {Content and data creation (conversational)};
+    \node[below=0.1cm of p3, font=\tiny, text width=2.2cm, align=center] {Digital agents act autonomously};
+    \node[below=0.1cm of p4, font=\tiny, text width=2.2cm, align=center] {Understands physics, reasons in physical world};
+    \node[below=0.1cm of p5, font=\tiny, text width=2.2cm, align=center] {Robotics at industrial scale};
+    
+    \node[below right=0.5cm and -0.9cm of p5, font=\tiny, text width=3cm, align=right] {\textit{Source: Jensen Huang, NVIDIA GTC 10-28-2025}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\begin{itemize}
+    \item Explosive growth trajectory with human capital as primary constraint:
+\end{itemize}
+
+\vspace{0.05em}
+
+\hspace{4em}{\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lrrr@{}}
+\rowcolor{black!8}
+\textbf{Year} & \textbf{Revenue} & \textbf{Staff} & \textbf{Hires} \\
+\rowcolor{white}
+2023 & \$16.3B & 13,080 & 2,679 \\
+\rowcolor{black!3}
+2024 & \$16.5B & 13,625 & 2,790 \\
+\rowcolor{white}
+2025 & \$18.3B & 17,129 & 3,391 \\
+\rowcolor{black!3}
+2026 & \$25.0B & 20,000 & 4,500 \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+}
+
+\vspace{0.3em}
+
+\textbf{\textit{Kiewit is uniquely positioned to leapfrog our competition, and maximize shareholder return, through the smart application of data and emerging technology—if we get focused and act}} \\
+\end{tabularx}
+}
+
+\vspace{0.4em}
+
+%----------------------------------------------------------------------------------------
+% KIP PROGRAM STRUCTURE
+%----------------------------------------------------------------------------------------
+{\footnotesize
+\begin{tikzpicture}
+    \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{KIP Program Structure}};
+\end{tikzpicture}
+
+\vspace{0.05em}
+
+ \renewcommand{\arraystretch}{1.05}
+ \begin{tabularx}{\textwidth}{@{}
+ >{\raggedright\arraybackslash}p{4.5cm}
+ >{\raggedright\arraybackslash}X@{}}
+ \textbf{Leadership} & \textbf{Responsibility} \\
+ \midrule
+ \textbf{Macholtz / Nolan} & 
+ Executive investment oversight of Construction Operations and Shared Services \\
+ \midrule
+ \textbf{Dill / Freeman} & 
+ Executive program oversight of Kiewit Technology Group / Kiewit Data Services. Dill has oversight of technical solution composition (technology stack) \\
+ \midrule
+ \textbf{Pappas / Davis} & 
+ Technical program and technology stack development oversight. Davis has strategy of data domain planning and integration (architecture) \\
+ \bottomrule
+ \end{tabularx}
+ \renewcommand{\arraystretch}{1.0}
+ }
+
+ \newpage
+
+ %----------------------------------------------------------------------------------------
+ % PAGE 2: WHAT IS KIP
+ %----------------------------------------------------------------------------------------
+ 
+ \begin{center}
+     \noindent\rule{\linewidth}{2pt}
+     
+    \vspace{0.15em}
+    
+    {\Large What is KIP?} \\[0.2em]
+    {\small A four-layer platform integrating enterprise data sources, modern data factory capabilities, AI-powered intelligence, and operational automations}
+    
+    \vspace{0.15em}
+     
+     \noindent\rule{\linewidth}{2pt}
+\end{center}
+
+\vspace{0.1em}
+
+% Two-column layout: levels on left, image and pain points on right
+ {\footnotesize
+\begin{tabular}{@{}p{0.25\textwidth}@{\hspace{0.05\textwidth}}p{0.70\textwidth}@{}}
+\raggedright\arraybackslash
+\vspace{0.15em}
+
+{\footnotesize \textbf{L0: Data Sources}
+
+{\scriptsize Enterprise systems (SAP, InEight, GEP), P6 schedules, estimate files, 3rd party contracts, engineering models, procurement data (Source360), spatial scans and video capture (FieldAI), SharePoint, and real-time operational streams}}
+
+\vspace{0.4em}
+
+{\footnotesize \textbf{L1: Data Factory}
+
+{\scriptsize Open-source orchestration platform with modern lakehouse architecture. Ingests enterprise data from SAP, InEight, and Primavera to data lake. Model Context Protocol (MCP) servers provide LLMs secure, standardized access to data assets with lineage tracking}}
+
+\vspace{0.4em}
+
+    {\footnotesize \textbf{L2: Kiewit Intelligence}
+    
+    {\scriptsize AI-powered data ingestion to open-source tables via Polaris catalog. 20,000+ predictive algorithms (FastAPI/Azure) deliver industry-leading labor hour estimates. AI agents for conversational search and document generation. Centralized data science team drives continuous quality improvement at ingestion}}
+
+\vspace{0.4em}
+
+    {\footnotesize \textbf{L3: Automations}
+    
+    {\scriptsize Operational workflow automation for Takeoffs, Estimating, Scheduling, and Work Planning. Powered by 16-node NVIDIA B200 high-performance compute cluster. Data science team ramping to deliver operational staff improvements and back-office reductions}}
+ &
+     \begin{minipage}[t]{\linewidth}
+         \raggedleft
+         \raisebox{-\height}{\includegraphics[width=0.90\textwidth]{landscape.png}}
+         
+         \vspace{0.6em}
+         
+         \raggedright
+        \begin{tikzpicture}
+            \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=0.95\linewidth, align=left] {\scriptsize\textbf{Addressed Data Science Velocity Hindrances}};
+        \end{tikzpicture}
+         
+         \vspace{0.2em}
+         
+         {\scriptsize
+    {\footnotesize \textbf{1. Data Access \& Discoverability:}} Controlled access to medallion storage requires separate data engineering involvement. Open-source table technology makes operational data (model quantities, component claiming, scheduling) discoverable in both data lake and warehouse.
+    
+    \vspace{0.15em}
+    
+    {\footnotesize \textbf{2. Data Availability:}} Design model data not ingested/normalized, InEight scheduling relationships unavailable, custom systems (LAND, KADE, ADAPT) need integration. Partnering for high-velocity ingestion of key sources like Source360.
+    
+    \vspace{0.15em}
+    
+    {\footnotesize \textbf{3. Orchestration \& Redundancy:}} Critical capability to connect pipelines and monitor data health. Enable reverse engineering to eliminate dataset duplication. Reduce enterprise redundancy (36+ Snowflake databases plus on-premises ODS).
+    
+    \vspace{0.15em}
+    
+    {\footnotesize \textbf{4. Skills \& Organization:}} Build internal data engineering capabilities in single organization with joint priorities. Augment with external partners (phData, InCycle) while developing key domain expertise internally.
+         }
+     \end{minipage}
+     \end{tabular}
+     }
+
+     \newpage
+
+     % L0: Data Sources
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{L0: Data Sources}};
+     \end{tikzpicture}
+     }
+
+     \vspace{-0.5em}
+
+     {\scriptsize
+     \begin{tabular}{@{}p{0.525\textwidth}@{\hspace{0.05\textwidth}}p{0.375\textwidth}@{}}
+     \begin{minipage}[t]{\linewidth}
+         \renewcommand{\arraystretch}{0.95}
+         \begin{tabular}{@{}p{0.05\linewidth}p{0.90\linewidth}@{}}
+         \textbf{1} & \textbf{Unstructured Model Data at Scale}
+         
+         {\scriptsize Extract and normalize design model data from BIM/CAD systems to enable quantity takeoffs, clash detection, and project analytics} \\[0.1em]
+         \textbf{2} & \textbf{InEight Project Data Integration}
+         
+         {\scriptsize Critical operational data: schedule relationships, component quantity claiming, procurement contracts, and cost tracking for real-time project insights} \\[0.1em]
+         \textbf{3} & \textbf{Palantir Ontology Integration}
+         
+         {\scriptsize Ingest Source360 (procurement) and TRACE systems from Palantir's Ontology into KIP for unified data access and cross-platform analytics} \\[0.1em]
+         \textbf{4} & \textbf{Mechanical Equipment List (MEL)}
+         
+         {\scriptsize Early-stage estimate data available at <250 hours, including high-level specifications and equipment details critical for predictive estimating} \\[0.1em]
+         \textbf{5} & \textbf{ODS Decommission \& ORS Modernization}
+         
+         {\scriptsize Migrate on-premises ODS to cloud-based lakehouse architecture. Modernize ORS reporting systems including JOR and Cost Report for enhanced performance} \\[0.1em]
+         \textbf{6} & \textbf{Access Workflow Improvement}
+         
+         {\scriptsize Streamline data provisioning and Azure service setup. Automate tier-1 data domain access to reduce friction and accelerate data science velocity} \\
+         \end{tabular}
+         \renewcommand{\arraystretch}{1.0}
+     \end{minipage}
+     &
+     \begin{minipage}[c]{\linewidth}
+         \centering
+         \includegraphics[width=0.68\linewidth]{landscape_l0.png}
+     \end{minipage}
+     \end{tabular}
+     }
+
+     % L1: Data Factory
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{L1: Data Factory}};
+     \end{tikzpicture}
+     }
+
+     \vspace{-0.5em}
+
+     {\scriptsize
+     \begin{tabular}{@{}p{0.525\textwidth}@{\hspace{0.05\textwidth}}p{0.375\textwidth}@{}}
+     \begin{minipage}[t]{\linewidth}
+         \renewcommand{\arraystretch}{0.95}
+         \begin{tabular}{@{}p{0.05\linewidth}p{0.90\linewidth}@{}}
+         \textbf{1} & \textbf{Open-Source Orchestration Platform}
+         
+         {\scriptsize Deploy enterprise-grade orchestration with modern lakehouse architecture for scalable data pipeline management} \\[0.15em]
+         \textbf{2} & \textbf{Enterprise Data Ingestion}
+         
+         {\scriptsize Automated ingestion from SAP, InEight, and Primavera to data lake with quality controls and validation} \\[0.15em]
+         \textbf{3} & \textbf{Model Context Protocol (MCP) Servers}
+         
+         {\scriptsize Provide LLMs secure, standardized access to data assets with full lineage tracking for AI agent enablement} \\[0.15em]
+         \textbf{4} & \textbf{Data Catalog \& Lineage}
+         
+         {\scriptsize Comprehensive metadata management and data lineage tracking to ensure discoverability and trust} \\[0.15em]
+         \textbf{5} & \textbf{Reduce Data Redundancy}
+         
+         {\scriptsize Eliminate duplication created by organizational boundaries through centralized data management and shared data assets} \\[0.15em]
+         \textbf{6} & \textbf{FinOps}
+         
+         {\scriptsize Monitor and reduce cloud expenditure through optimization of data storage, compute resources, and pipeline efficiency} \\[0.15em]
+         \textbf{7} & \textbf{Self-Service Enablement}
+         
+         {\scriptsize Streamline field access through Alation data catalog, enabling discovery and self-service analytics without centralized bottlenecks} \\
+         \end{tabular}
+         \renewcommand{\arraystretch}{1.0}
+     \end{minipage}
+     &
+     \begin{minipage}[c]{\linewidth}
+         \centering
+         \includegraphics[width=0.68\linewidth]{landscape_l1.png}
+     \end{minipage}
+     \end{tabular}
+     }
+
+
+     % L2: Kiewit Intelligence
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{L2: Kiewit Intelligence}};
+     \end{tikzpicture}
+     }
+
+     \vspace{-0.9em}
+
+     {\scriptsize
+     \begin{tabular}{@{}p{0.525\textwidth}@{\hspace{0.05\textwidth}}p{0.375\textwidth}@{}}
+     \begin{minipage}[t]{\linewidth}
+         \renewcommand{\arraystretch}{0.95}
+         \begin{tabular}{@{}p{0.05\linewidth}p{0.90\linewidth}@{}}
+         \textbf{1} & \textbf{AI-Powered Data Ingestion}
+         
+         {\scriptsize Web application ingests spreadsheets to open-source tables, registered in Polaris catalog for unified Snowflake and local compute access} \\[0.15em]
+         \textbf{2} & \textbf{Predictive Estimating at Scale}
+         
+         {\scriptsize 20,000+ algorithms hosted in Azure container services (FastAPI) deliver industry-leading labor hour predictions for construction projects} \\[0.15em]
+         \textbf{3} & \textbf{Enterprise AI Agents}
+         
+         {\scriptsize Conversational search and content generation across all KIP data. Intelligent document processing with spatial labeling for operational insights} \\[0.15em]
+         \textbf{4} & \textbf{Continuous Data Quality}
+         
+         {\scriptsize Centralized data science team implements automated quality improvement loop, moving beyond binary checks to intelligent data correction at ingestion} \\
+         \end{tabular}
+         \renewcommand{\arraystretch}{1.0}
+     \end{minipage}
+     &
+     \begin{minipage}[c]{\linewidth}
+         \centering
+         \includegraphics[width=0.68\linewidth]{landscape_l2.png}
+     \end{minipage}
+     \end{tabular}
+     }
+
+     % L3: Automations
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{L3: Automations}};
+     \end{tikzpicture}
+     }
+
+     \vspace{-0.9em}
+
+     {\scriptsize
+     \begin{tabular}{@{}p{0.525\textwidth}@{\hspace{0.05\textwidth}}p{0.375\textwidth}@{}}
+     \begin{minipage}[t]{\linewidth}
+         \renewcommand{\arraystretch}{0.95}
+         \begin{tabular}{@{}p{0.05\linewidth}p{0.90\linewidth}@{}}
+         \textbf{1} & \textbf{Schedule Automation}
+         
+         {\scriptsize AI-driven schedule generation and optimization to accelerate project planning and reduce manual sequencing effort} \\[0.15em]
+         \textbf{2} & \textbf{Quantity Generation \& Takeoffs}
+         
+         {\scriptsize Automated extraction of quantities from design models for estimating and procurement, eliminating manual takeoff processes} \\[0.15em]
+         \textbf{3} & \textbf{Commodity Management}
+         
+         {\scriptsize Reconcile bills of lading to purchase orders and commodity systems, streamlining procurement tracking and cost control} \\[0.15em]
+         \textbf{4} & \textbf{Tax Data Extraction}
+         
+         {\scriptsize Extract sales and use tax (GST/HST in Canada) from invoices and use LLM reasoning to identify overpayments for recovery} \\[0.15em]
+         \textbf{5} & \textbf{Generative Arbitration}
+         
+         {\scriptsize AI-powered analysis and drafting support for contract disputes and arbitration to improve shared services efficiency} \\
+         \end{tabular}
+         \renewcommand{\arraystretch}{1.0}
+     \end{minipage}
+     &
+     \begin{minipage}[c]{\linewidth}
+         \centering
+         \includegraphics[width=0.68\linewidth]{landscape.png}
+     \end{minipage}
+     \end{tabular}
+     }
+
+     \newpage
+
+     %----------------------------------------------------------------------------------------
+     % PAGE 4: COST AND SCHEDULE
+     %----------------------------------------------------------------------------------------
+     
+     \begin{center}
+         \noindent\rule{\linewidth}{2pt}
+         
+         \vspace{0.15em}
+         
+         {\large What Will KIP Cost \& Be Delivered?}
+         
+         \vspace{0.15em}
+         
+         \noindent\rule{\linewidth}{2pt}
+     \end{center}
+
+     \vspace{-0.9em}
+
+     % Cost Breakdown
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{\large KIP Cost Breakdown}};
+     \end{tikzpicture}
+     }
+
+     \vspace{0.1em}
+
+     {\footnotesize
+     \renewcommand{\arraystretch}{1.05}
+     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3cm}@{}}
+     \toprule
+     \textbf{Category} & \textbf{Capabilities Delivered} & \textbf{Cost} \\
+     \midrule
+     Software/Hardware & Enterprise orchestration, closed-source models (AI agents), Snowflake expansion, monitoring tools, additional NVIDIA hardware & \$5M \\
+     \midrule
+     phData Services & SAP data ingestion, data strategy workshops, architecture planning & \$4M \\
+     \midrule
+     InCycle Services & InEight data ingestion and landing in Lake & \$3M \\
+     \midrule
+     Staff Augmentation (5-10 FTE) & Contract data engineers at \$300/hr for 12 months (2000 hrs/FTE) & \$3M-\$6M \\
+     \midrule
+     Strategic Partnerships & Palantir (Source360/TRACE ingestion), FieldAI (LIDAR/project progress scans) & \$8M \\
+     \midrule
+     Permanent Staff Additions & Full-stack data engineers, data scientists, platform data architects (10-15 FTEs) & \$10M \\
+     \midrule
+     \textbf{Total (2026-2027)} & & \textbf{\$33M-\$36M} \\
+     \bottomrule
+     \end{tabularx}
+     \renewcommand{\arraystretch}{1.0}
+     }
+
+     \vspace{1.0em}
+
+     % Cost Allocation by Layer
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{\large KIP Cost Allocation by Layer}};
+     \end{tikzpicture}
+     }
+
+     \vspace{0.1em}
+
+     {\footnotesize
+     \renewcommand{\arraystretch}{1.05}
+     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}X>{\raggedleft\arraybackslash}p{3cm}@{}}
+     \toprule
+     \textbf{Layer} & \textbf{Key Investments} & \textbf{Cost} \\
+     \midrule
+     \textbf{L0: Data Sources} & phData (SAP), InCycle (InEight), Palantir (Source360/TRACE), FieldAI (LIDAR scans), MEL ingestion, ODS migration & \$15M \\
+     \midrule
+     \textbf{L1: Data Factory} & Open-source orchestration, pipeline monitoring (Prometheus/Grafana), MCP servers, data catalog, staff augmentation & \$8M-\$11M \\
+     \midrule
+     \textbf{L2: Kiewit Intelligence} & Atlas Vault/Prism/Forge development, predictive estimating platform, AI agents, closed-source models, permanent staff & \$8M \\
+     \midrule
+     \textbf{L3: Automations} & NVIDIA hardware, automation use cases (schedule, quantity, commodity, tax, arbitration), data science scaling & \$2M-\$3M \\
+     \midrule
+     \textbf{Total (2026-2027)} & & \textbf{\$33M-\$36M} \\
+     \bottomrule
+     \end{tabularx}
+     \renewcommand{\arraystretch}{1.0}
+     
+     \vspace{0.3em}
+     
+     {\scriptsize \textit{Note: Estimated allocation is \$18M-\$20M in 2026 (foundation, L0 data sources, initial L1 buildout) and \$15M-\$16M in 2027 (L1 completion, L2 intelligence platform, L3 automation scaling).}}
+     }
+
+     \newpage
+
+     % Delivery Schedule
+     {\footnotesize
+     \begin{tikzpicture}
+         \node[fill=black!10, rounded corners=3pt, inner sep=4pt, text width=\textwidth-8pt, align=left] {\textbf{\large KIP Delivery Schedule}};
+     \end{tikzpicture}
+     }
+     \vspace{-0.9em}
+
+     {\scriptsize
+     \renewcommand{\arraystretch}{1.1}
+     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{5.5cm}*{8}{>{\centering\arraybackslash}X}@{}}
+     \toprule
+     \textbf{Initiative} & \textbf{Q4 2025} & \textbf{Q1 2026} & \textbf{Q2 2026} & \textbf{Q3 2026} & \textbf{Q4 2026} & \textbf{Q1 2027} & \textbf{Q2 2027} & \textbf{Q3 2027} \\
+     \midrule
+     \multicolumn{9}{@{}l}{\cellcolor{black!15}\textbf{Foundation}} \\
+     \midrule
+     Macholtz/Nolan Automation Oversight & \textbullet & \textbullet & & & & & & \\
+     Data Strategy Workshops (phData) & \textbullet & \textbullet & & & & & & \\
+     Unified Data Eng./Science Leadership & & \textbullet & $\star$ & & & & & \\
+     \midrule
+     \multicolumn{9}{@{}l}{\cellcolor{black!15}\textbf{L0: Data Sources}} \\
+     \midrule
+     InEight Data Acquisition (InCycle) & \textbullet & \textbullet & \textbullet & \textbullet & & & & \\
+     Mechanical Equipment List (MEL) Ingestion & & \textbullet & \textbullet & \textbullet & $\star$ & & & \\
+     SAP Document Ingestion & \textbullet & \textbullet & \textbullet & & & & & \\
+     SAP Data to Lake \& Snowflake & \textbullet & \textbullet & \textbullet & \textbullet & & & & \\
+     ODS Migration (SQL to Lake/Iceberg) & \textbullet & \textbullet & \textbullet & \textbullet & & & & \\
+     Model Ingestion Tools (LAND/UPV) & & \textbullet & \textbullet & \textbullet & \textbullet & & & \\
+     \hspace{0.5em}$\rightarrow$ Spatial Labels \& Account Codes & & & & & & & & \\
+     FieldAI Autonomous Jobsite Capture & & & & & \textbullet & \textbullet & \textbullet & \\
+     \hspace{0.5em}$\rightarrow$ Spatial Labels \& Account Codes & & & & & & & & \\
+     Supplier Cost Estimation (Source360) & & & & & \textbullet & \textbullet & $\star$ & \\
+     Unstructured Docs (SharePoint/InEight Document) & & & & & & \textbullet & \textbullet & \textbullet \\
+     \midrule
+     \multicolumn{9}{@{}l}{\cellcolor{black!15}\textbf{L1: Data Factory}} \\
+     \midrule
+     Pipeline Rationalization (36$\rightarrow$<10) & \textbullet & \textbullet & $\star$ & & & & & \\
+     Full-Stack Data Engineering Hiring & & & \textbullet & \textbullet & \textbullet & \textbullet & & \\
+     Open-Source Tables (Iceberg) \& Catalog & \textbullet & \textbullet & \textbullet & $\star$ & & & & \\
+     Open-Source Orchestration (Dagster/Airflow) & & & \textbullet & \textbullet & $\star$ & & & \\
+     Pipeline Monitoring, DAG \& Reverse Engineering & & & \textbullet & \textbullet & \textbullet & & & \\
+     Legacy Platform Decommission & & & & & & & \textbullet & \textbullet \\
+     Self-Service Analytics Enablement & & & & & & & \textbullet & \textbullet \\
+     \midrule
+     \multicolumn{9}{@{}l}{\cellcolor{black!15}\textbf{L2: Kiewit Intelligence}} \\
+     \midrule
+     Atlas Vault Structured Data Ingestion & & \textbullet & \textbullet & \textbullet & $\star$ & & & \\
+     MCP Server Implementation & & & \textbullet & \textbullet & \textbullet & $\star$ & & \\
+     Predictive Estimating Platform (20K algos) & & & & \textbullet & \textbullet & \textbullet & \textbullet & $\star$ \\
+     Atlas Forge Document Processing & & & & \textbullet & \textbullet & \textbullet & \textbullet & \\
+     Enterprise AI Agents (Search/Generation) & & & & & \textbullet & \textbullet & \textbullet & $\star$ \\
+     Continuous Data Quality Loop & & & \textbullet & \textbullet & \textbullet & \textbullet & \textbullet & \textbullet \\
+     \midrule
+     \multicolumn{9}{@{}l}{\cellcolor{black!15}\textbf{L3: Automations}} \\
+     \midrule
+     \textbf{Operations Automations (Macholtz)} & & & & & & & & \\
+     \hspace{0.5em}$\rightarrow$ Schedule Automation & & & & \textbullet & \textbullet & $\star$ & & \\
+     \hspace{0.5em}$\rightarrow$ Quantity Generation & & & & & \textbullet & \textbullet & \textbullet & \\
+     \hspace{0.5em}$\rightarrow$ Commodity Mgmt. (Bill of Lading to PO) & & & & & \textbullet & \textbullet & \textbullet & \\
+     \textbf{Shared Services Efficiency (Nolan)} & & & & & & & & \\
+     \hspace{0.5em}$\rightarrow$ Tax Data Extraction & & & & & & \textbullet & \textbullet & \textbullet \\
+     \hspace{0.5em}$\rightarrow$ Generative Arbitration & & & & & & \textbullet & \textbullet & \textbullet \\
+     \bottomrule
+     \end{tabularx}
+     \renewcommand{\arraystretch}{1.0}
+     }
+
+     \end{document}
+

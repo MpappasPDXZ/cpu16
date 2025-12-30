@@ -1,0 +1,11 @@
+
+1-Access: Evaluate process for provisioning dataset access and azure service setup and look for automation opportunities.  Focus on tier 1 data domains to start.
+2-Planning: Implement lineage and monitoring / prioritize lineage gaps through workshops with 3rd party, Jimmy/Jake, and document what we’re going to do for each data domain.  We know we need estimate files, 3rd party contracts, quantities, scheduling – start those immediately and then workshop the rest.
+3-New Data: Begin to kickoff building net new data ingestion tasks (may be an application needed like a model normalization application or P6 schedule certification and ingestion application)
+4-Eliminate Duplication: Catalog & determine an attack plan to reduce duplication of Kiewit data objects.  Start to use a medallion lake architecture and then snowflake.
+5-Orchestration: Develop a robust orchestration tool and engine:-monitoring/validation, scheduling, code reverse engineering, & CI/CD pipeline (organizational code promotion will require approvers across current company boundaries)
+6-Pipeline Health (inventory) Custom App: Automate data validation with ERP / project systems // build a pipeline health application. stack (airflow, dagster, azure data factory, informatica)
+7-FinOps Model: metadata catalog, data modeling efforts, and continuous cost optimization through reducing duplication and looking at development patterns
+8-Decommission ODS & Optimize ORS: ODS decommission, cost report optimization, JOR optimization
+9-Improve Data Accuracy: Build a centralized data science team with the core objective of improving and fixing data as it’s ingested into KIP.  This would feed a continuous data improvement loop.  Today we are binary data quality.
+10-Self-service business intelligence: Today we are SSRS and Power BI with our goal being to modernize our certified reports like CRM opportunity results into a modern BI tool and reduce centrally completed BI reports & associated overhead.

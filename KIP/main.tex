@@ -1,0 +1,740 @@
+\documentclass[12pt, a4paper]{article}
+
+\setlength{\headheight}{15pt}
+
+\usepackage{float}
+\usepackage[table]{xcolor}
+
+% Suppress showhyphens redefinition warning
+\usepackage{silence}
+\WarningFilter{latex}{Command \showhyphens has changed.}
+
+\input{structure.tex}
+
+\title{Kiewit Intelligence Platform to Enable High ROI Use Cases}
+\newcommand{\othertitle}{Kiewit Data Services}
+\author{Matt Pappas}
+\date{\today}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+% EXECUTIVE ABSTRACT (HOUSE STYLE)
+%----------------------------------------------------------------------------------------
+\begin{center}
+
+    \vspace{0.5em}
+
+    {\LARGE \bfseries \MakeUppercase{Executive Abstract} \par}
+
+    \vspace{0.25em}
+
+    {\small Kiewit Intelligence Platform to Enable High ROI Use Cases}
+
+    \vspace{0.25em}
+
+    {\small \emph{Kiewit Data Services}}
+
+    \vspace{0.5em}
+    
+\end{center}
+
+{\small
+\renewcommand{\arraystretch}{1.05}
+\centering
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{2.8cm}
+  >{\raggedright\arraybackslash}p{\dimexpr\textwidth-2.8cm-2\tabcolsep-\arrayrulewidth\relax}@{}}
+\toprule
+\textbf{Critical Success Factor} & \textbf{Executive Summary} \\
+\midrule
+\textbf{Platform Fundamentals} &
+\vspace{-0.5\baselineskip}
+\begin{itemize}[leftmargin=*, nosep, topsep=0pt, partopsep=0pt]
+  \item Open-source first: Iceberg tables (Bronze/Silver/Gold), Dagster/Airflow orchestration with pipeline inventory to reduce 36 Snowflake databases to <10 domain-organized databases
+  \item Transition from organization-based databases (KTG=ENT, KDS=KDS) to topical domain structure; API-First Data Access with FastAPI/Swagger
+  \item Event-Driven source-initiated pipelines; Atlas Prism for data science data quality with regression validation and closed-loop chain of evidence
+\end{itemize} \\
+\midrule
+\textbf{Full-Stack Data Engineering} &
+\vspace{-0.5\baselineskip}
+\begin{itemize}[leftmargin=*, nosep, topsep=0pt, partopsep=0pt]
+  \item Evolve from SQL database admins and closed-system specialists (Azure Data Factory, JAMS) to full-stack engineers with software capabilities for unstructured data movements
+  \item Critical for managing predominantly unstructured data (video, documents, quotes); Operating APIs-as-applications and open-source schedulers
+  \item Costly but essential investment for evenly yoking data engineering with data science; Enables parallel collaboration vs. sequential handoffs
+\end{itemize} \\
+\midrule
+\textbf{Data Science Readiness} &
+\vspace{-0.5\baselineskip}
+\begin{itemize}[leftmargin=*, nosep, topsep=0pt, partopsep=0pt]
+  \item 3-month phData evaluation of KDS Data Science Execution Framework confirms capabilities are not the constraint
+  \item 10 areas assessed: AI Workbench, pgVector, model registry, feature store, batch training, drift monitoring, 100k+/month real-time inference, observability, open-source tools, AI evaluation (Atlas Forge)
+  \item True constraints: data availability, collection processes, business engagement, data engineering velocity
+\end{itemize} \\
+\midrule
+\textbf{Data Acquisition Innovation} &
+\vspace{-0.5\baselineskip}
+\begin{itemize}[leftmargin=*, nosep, topsep=0pt, partopsep=0pt]
+  \item KIP 3.0 must support multiple \textit{modalities of data ingestion}: video, text, design drawings; Creating new data sources essential for generative design use cases
+  \item Incorporate construction design-specific software applications to integrate and normalize data between design software systems; Platform cannot compensate for missing data
+  \item InEight (Kiewit's wholly owned subsidiary) synergy is huge enabler: invest in augmenting InEight features vs. rebuilding; Alternative: external providers (Palantir) or custom internal builds
+\end{itemize} \\
+\midrule
+\textbf{Executive Accountability \& Technology Delivery Model (Organizational Model)} &
+\vspace{-0.5\baselineskip}
+\begin{itemize}[leftmargin=*, nosep, topsep=0pt, partopsep=0pt]
+  \item Caterpillar model: SVP P\&L accountability by domain (not day-to-day delivery, but executive presence ensuring business engagement and high ROI); Big goals easy to explain (e.g., double revenue in 5 years)
+  \item phData-led strategy workshops (like Palantir engagement model) to accelerate written domain strategies and drive business participation
+  \item Four delivery functions: (1) Strategy/PM/Adoption (Colin), (2) P\&L Accountability (Jimmy/Jake), (3) Analytical Solutions (Matt), (4) Data Collection (KTG); Covers roadmap, adoption, ROI, data science, ML infrastructure, APIs, source integration
+\end{itemize} \\
+\bottomrule
+\end{tabularx}
+}
+
+\thispagestyle{empty}
+\newpage
+
+%----------------------------------------------------------------------------------------
+%\tTITLE PAGE (HOUSE STYLE)
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{2pt} % Top rule
+
+    \vspace{0.5em}
+
+    {\LARGE \bfseries \MakeUppercase{\thetitle} \par}
+
+    \vspace{0.25em}
+
+    {\small \othertitle}
+
+    \vspace{0.5em}
+    
+    \noindent\rule{\linewidth}{2pt} % Bottom rule
+
+    \vspace{0.5em}
+
+    % Left-aligned author/date block
+    \makebox[\linewidth][l]{%
+      \begin{tabular}{@{} l @{}}
+        \textbf{Author:} Matt Pappas \\ [6pt]
+        \textbf{Date:} \today \\ [6pt]
+        \textbf{Reviewers:} \\
+        \hspace{1em}Jack Bruck, Sr. Data Scientist \\
+        \hspace{1em}Colin Davis, Sr. Director of Data Strategy \\
+        \hspace{1em}Dave Freeman, VP Data and Operations Finance \\
+        \hspace{1em}Jack Macholtz, InEight President
+
+      \end{tabular}%
+    }
+
+    \vspace{0.5em}
+
+    \noindent\rule{\linewidth}{2pt} % Bottom rule
+\end{center}
+
+\setcounter{page}{1}
+\thispagestyle{firstpage}
+
+%----------------------------------------------------------------------------------------
+% CONTENT
+%----------------------------------------------------------------------------------------
+
+\section{Platform Fundamentals}
+
+KDS Data Science published a paper titled "Data Science Execution Framework Built on KIP" that outlines the technical architecture required to enable high-value use cases. However, realizing this value depends on two fundamental requirements: first, ensuring the most basic platform fundamentals are fully intact—data pipeline architecture and orchestration that distinguish rapid development from bottlenecks. Second, and equally critical, we need access to the right data. We cannot solve design quantity generation use cases without design model data, nor can we deliver procurement intelligence without vendor correspondence data. The platform enables value creation, but only when paired with systematic data acquisition.
+
+\subsection{Data Pipeline Architecture: From External Dependencies to Internal Control}
+
+\paragraph{Current State}
+Data is processed into 36 databases in Snowflake—a number that would be fewer than 10 if we operated with complete uniformity across the company. KDS then orchestrates additional data pipelines into an Azure data lake using Dagster and Azure container jobs. This fragmented approach creates several challenges:
+
+Data scientists cannot naively rely on ETL pipelines built external to KDS. The inability to reverse engineer what is built increases redundancy, and redundancy reduction is essential to decreasing complexity while increasing development speed and cost efficiency.
+
+When pipelines are built as black boxes by external teams, data scientists must either accept suboptimal data structures or rebuild pipelines from scratch. This duplication wastes engineering resources and creates maintenance burden across multiple systems.
+
+\paragraph{Proposed Architecture}
+We would reduce the complexity of our data storage through \textbf{organizational changes} in data engineering for critical domains. The foundation of this approach is landing data in the Azure data lake using a medallion architecture (Bronze, Silver, Gold layers). This enables the critical capability of processing data with or without Snowflake.
+
+This architectural shift requires open-source table formats—the most common being Apache Iceberg, which was built by Netflix in 2014 and expanded upon by Palantir in recent years for government compliance. Critically, \textbf{the default becomes writing data into Iceberg tables} rather than the current model where data is only written into Azure SQL tables upon request. This default-to-Iceberg approach dramatically speeds up development by making data immediately available without waiting for custom SQL provisioning.
+
+Open-source table structures like Iceberg enable three critical capabilities: (1) \textbf{extensibility of data into Snowflake} for business users and enterprise reporting, (2) \textbf{compute flexibility} allowing data scientists to process the same datasets locally on laptops, on our high-performance compute cluster (16$\times$B200 GPUs from Nvidia), or in cloud environments—without data duplication, and (3) \textbf{default data availability} eliminating the request-based provisioning bottleneck that slows current development cycles.
+
+Iceberg tables provide:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Schema evolution without breaking downstream consumers
+    \item Time travel for reproducibility and auditing
+    \item ACID transactions for data integrity
+    \item Metadata-based query optimization for performance
+    \item Zero-copy architecture enabling data access across multiple compute engines
+    \item Seamless virtualization into Snowflake while maintaining source data in Azure data lake
+    \item Hidden partitioning that abstracts complexity, preventing user errors and ensuring optimized query performance without requiring deep knowledge of physical table structure
+\end{itemize}
+
+By abstracting physical storage behind stable Iceberg table interfaces, data scientists can confidently build on foundational datasets without worrying about upstream changes breaking their models.
+
+\subsection{Orchestration: Enabling Transparent, Traceable Data Lineage}
+
+\paragraph{The Orchestration Challenge}
+The orchestration of data capabilities is a critical data platform capability. When data engineers and data scientists maintain separation, the result is either asynchronous data pipelines or fully redundant data pipelines.
+
+\paragraph{First Step: Pipeline Inventory and Prioritization}
+Before implementing new orchestration tooling, we must inventory all existing data pipelines across the organization. This inventory will identify:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Redundant pipelines that can be consolidated or eliminated
+    \item Critical pipelines to prioritize for medallion architecture migration (lake $\rightarrow$ virtualized Iceberg $\rightarrow$ Snowflake)
+    \item Pipelines with unclear ownership or undocumented business logic
+    \item Opportunities to orchestrate currently isolated workflows
+\end{itemize}
+
+This inventory phase is essential to "cull the herd" of redundant pipelines before layering orchestration on top of existing complexity. The goal is to rationalize what exists, determine where medallion architecture provides the highest value, and make all pipeline code reverse-engineerable through version control and documentation standards.
+
+Once we've identified priority pipelines, we can systematically migrate them to the medallion architecture with proper orchestration, monitoring, and transparent data lineage.
+
+\paragraph{Orchestration Technology Selection}
+KDS has invested over a year of senior data science and data engineering talent into evaluating Airflow and Dagster—the two most common open-source data orchestrators. Orchestration matters because it allows us to chain together workflows, increasing data velocity and decreasing cost, while also providing clear, more traceable data lineage.
+
+\paragraph{Current State}
+KTG uses JAMS most predominantly, which is a closed-source scheduler that has been used for many years. KDS is self-managing Dagster, which is lower cost but includes care and feeding. This approach works for data science workloads but does not scale for work outside of data science.
+
+\paragraph{Proposed Solution}
+Kiewit would move to a more robust open-source scheduler like a managed instance of either Airflow or Dagster. This would not discontinue existing investments but would make them more scalable across the enterprise.
+
+The key benefit is transparent, end-to-end data lineage. Rather than layering SQL views that obscure business logic through nested abstractions, KDS data scientists advocate for consolidated, version-controlled transformation scripts that make all business rules explicit and traceable. Each pipeline becomes a single, well-documented artifact where transformations are centralized, commented, and free of hard-coded values—eliminating the archaeological work of tracing logic through multiple database layers.
+
+A built-in pipeline visualizer exposes these transparent end-to-end DAGs to accelerate data science learning and incident triage—cited by Caterpillar Digital executives as a key enabler of their data platform success.
+
+\paragraph{Azure Primitives as an Alternative Approach}
+In some use cases, Azure primitives (bare services) like Azure Container Apps, Azure Container App Jobs, Azure Functions, or Azure Queues would also be acceptable orchestration mechanisms. These services provide significant advantages:
+
+They allow traceable CI/CD pipelines where every deployment is version-controlled, tested, and auditable. The infrastructure-as-code approach means pipeline definitions live in Git repositories alongside the data transformation logic, providing complete transparency into what's running in production.
+
+These bare services also offer fine-grained control over compute resources, networking, and scaling policies—valuable when optimizing for specific performance or cost constraints that managed orchestration platforms may not accommodate.
+
+However, Azure primitives lack the built-in monitoring and DAG visualization that tools like Dagster or Airflow provide natively. To address this gap, we would need to build a pipeline visualizer—a tool that Caterpillar created for exactly this purpose. Their pipeline visualizer provides monitoring and DAG capabilities, enabling:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Visual representation of end-to-end data flows across distributed Azure services
+    \item Monitoring of pipeline execution status, duration, and resource consumption
+    \item Dependency tracking to understand upstream and downstream impacts
+    \item Failure analysis and debugging capabilities across service boundaries
+\end{itemize}
+
+The trade-off is clear: managed orchestrators (Dagster/Airflow) provide rich visualization and monitoring out-of-the-box but add abstraction layers. Azure primitives offer maximum control and CI/CD traceability but require custom tooling for observability. The choice depends on the specific use case, team capabilities, and operational requirements.
+
+\paragraph{API-First Data Access and Event-Driven Architecture}
+Building on years of successful API usage for machine learning models and Caterpillar's enterprise implementation, we adopt an API-first, event-driven architecture where source systems initiate pipelines through stable API contracts. FastAPI with Swagger documentation provides discoverability and standardized onboarding. This pattern enables continuous improvements without disrupting applications, provides centralized monitoring through Azure Application Insights, and increases pipeline velocity by moving initiation to the source system rather than requiring complex polling orchestration.
+
+\subsection{Iceberg Tables and Polaris Catalog}
+
+Extensibility is achieved by separating write-optimized ingest (Bronze) from read/serve-optimized tables (Silver/Gold) using Apache Iceberg and an open catalog (Polaris). This design enables schema evolution, time travel, ACID guarantees, and seamless interoperability with Snowflake (KDP) and other engines—while preserving performance and governance.
+
+\textbf{Bronze Layer: Write-Optimized Storage} — The Bronze layer is built for speed of writes by source systems. Data lands in hierarchical blob storage paths optimized for high-throughput ingestion.
+
+\textbf{Silver Layer: Iceberg Tables for API Serving} — The Silver layer uses Apache Iceberg tables with metadata folders and data folders organized by source. This layer is built for extensibility into Snowflake for technical audiences and is the layer that APIs read from to serve applications and machine learning models in production.
+
+\textbf{Gold Layer: Product-Modeled Data} — The Gold layer will be modeled by data architecture to meet the specifications of product management. This will be extensible by the business in Snowflake and catalogued by data architecture in Alation, the data catalog tool.
+
+\textbf{Polaris Catalog: Open Table Governance} — Polaris provides open, engine-agnostic governance of Iceberg tables in a Snowflake-hosted service, enabling consistent discovery, role-based access control (RBAC), and lifecycle management.
+
+\textbf{Snowflake Interoperability} — Iceberg tables are extensible with any other data in our Kiewit Data Platform (KDP), enabling cross-domain analytics and enterprise reporting without data duplication.
+
+\subsection{Data Integrity and Quality: Prism}
+
+Business-encoded logic ensures that Silver objects used by applications and machine learning models are high quality. This quality system is called Atlas Prism.
+
+\paragraph{Quality Data by Regression Analysis}
+Prism eliminates innocuous samples that no one knows are incorrect until they are plotted against a highly correlated secondary variable. Regression-based validation detects subtle anomalies by identifying samples that deviate from expected trends and thresholds, catching issues that simple range checks or null validation would miss.
+
+\paragraph{Chain of Evidence: Closed-Loop Correction}
+We have a need to eliminate a hung loop of feedback. Often managers will spot a single sample that is incorrect and tell someone to fix it while also telling another person that the data is incorrect. This creates divergent corrections and lost institutional knowledge.
+
+Prism implements a closed-loop system that allows structured correction of data with full traceability:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Triage}: Automatically classify regression-detected errors in source records
+    \item \textbf{Correct}: Apply automated fixes or route to appropriate teams with validation context
+    \item \textbf{Verify}: Re-run regression validation on corrected records and attach evidence
+    \item \textbf{Record}: Document the original finding, correction applied, approving authority, and verification data
+\end{itemize}
+
+This chain of evidence ensures every detected issue reaches resolution with full auditability, replacing informal error flagging with a structured workflow that captures institutional knowledge and prevents duplicate corrections.
+
+\section{Full-Stack Data Engineering}
+
+The velocity at which we can deliver high-value use cases depends on evenly yoking talented data engineers with very talented data scientists. This requires evolving our data engineering talent from specialists in closed systems (Azure Data Factory, JAMS) to full-stack engineers who can operate in modern, open architectures. Our data engineers are highly skilled within their domains, but the paradigm shift to support modern data science workflows—with rapid iteration, programmatic pipelines, custom business logic, and API-first patterns—requires new capabilities. The transition is challenging and costly, but essential for achieving iteration speed that matches our data science capabilities.
+
+\subsection{The New Requirement: Full-Stack Data Engineers}
+
+We're now asking data engineers to become more holistic by operating two fundamentally different types of infrastructure:
+
+\paragraph{APIs as Applications}
+Data engineers must now build and operate APIs—which are applications, not just data pipelines. This requires:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Application development skills (Python/FastAPI, containerization, API design)
+    \item Application operations (Azure Container Apps, monitoring, logging, error handling)
+    \item Performance optimization (caching, query optimization, concurrent request handling)
+    \item Security implementation (authentication, authorization, rate limiting)
+    \item Documentation and developer experience (Swagger/OpenAPI, versioning, deprecation strategies)
+\end{itemize}
+
+An API isn't just a data endpoint—it's a production application that requires software engineering discipline. Data engineers accustomed to configuring GUI-based ETL tools must now write, test, and maintain production code.
+
+\paragraph{Open-Source Schedulers}
+Similarly, adopting open-source schedulers like Dagster or Airflow requires a fundamentally different skill set than JAMS:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Infrastructure as code (defining pipelines programmatically in Python)
+    \item Version control and CI/CD integration
+    \item Custom operator development and plugin architecture
+    \item Distributed systems concepts (parallelism, backpressure, idempotency)
+    \item Open-source community engagement (understanding updates, contributing fixes)
+\end{itemize}
+
+These tools provide the transparency and programmability that data scientists need, but they demand that data engineers think like software engineers rather than pipeline configurators.
+
+\subsection{The Challenge and the Worthwhile Investment}
+
+Finding full-stack data engineers who bridge application development, infrastructure operations, and data architecture is challenging and expensive. Engineers who understand both traditional data engineering and modern software engineering are rare, and they command premium compensation. Alternatively, we can develop this talent internally through training programs, though this requires time, mentorship, and tolerance for the learning curve.
+
+Despite these challenges, this investment is essential. When data engineers and data scientists operate at similar levels of technical sophistication—when they speak the same language of APIs, version control, programmatic pipelines, and production operations—iteration speed increases dramatically. This even yoking transforms the relationship from sequential handoffs to parallel collaboration where both disciplines work together on shared problems with shared tools.
+
+The result is the high-velocity delivery that enables us to capitalize on the high-value use cases outlined in this document. Without full-stack data engineering talent, the sophisticated architecture described in Section 1 remains underutilized—powerful capabilities that can't be leveraged quickly enough to drive business impact.
+
+\section{Data Science Readiness}
+
+Data science capability gaps should be defined as either self-service gaps or KDS data science gaps—not portrayed as reasons why we haven't solved top use cases. The true reason we have not solved marquee use cases is either we are actively working on them with the business, or we lack the data and process to collect the data.
+
+To address questions about KDS data science capabilities, the team went through a rigorous 3-month technical evaluation with phData. The overwhelming conclusion: capability gaps are not present in KDS data science. The following table addresses each capability area systematically.
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{2.8cm}
+  >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Capability Area} & \textbf{KDS Current State and Assessment} \\
+\midrule
+
+\textbf{AI Workbench} &
+Three-pronged approach: (1) High-end MacBooks solve 90\% of use cases for model development and data exploration. (2) Local GPU infrastructure: 2$\times$A100 40GB (2021), 4$\times$A100 80GB (2023-2024), 8$\times$H100 (rented 2025), 16$\times$B200 (purchased 2025) provides cost-effective high-performance compute without sustained cloud costs. (3) Cloud elasticity via Modal or Azure services for workloads exceeding local capacity. Modal proved significantly more cost-efficient than 6-month provisioned Google engagement. \\
+\midrule
+
+\textbf{Vector Embedding \& Storage} &
+Implemented pgVector, an open-source PostgreSQL extension enabling efficient storage, indexing, and similarity search for vector embeddings directly in database. Supports high-dimensional data (ML embeddings, document/image vectors) alongside structured data without external vector databases. Leverages standard SQL tools for semantic search, recommendation systems, and AI-powered retrieval with seamless analytics pipeline integration. \\
+\midrule
+
+\textbf{Model Registry} &
+Kiewit lacks data velocity to justify solutions supporting sub-quarterly model retraining (very low or negative ROI). Current approach: models run in Azure container app APIs enabling rollback of model versions, training data, scoring, and inferences. Robust improvement from predominantly batch inferences (pre-2021). Provides sufficient version control and reproducibility for our model refresh cadence without enterprise registry overhead. Would leverage MLflow if higher velocity required. \\
+\midrule
+
+\textbf{Feature Store} &
+Solved problem. Data accessible in Snowflake and Azure data lake via Iceberg tables enabling zero-copy architecture. Features materialized as Iceberg tables, versioned through metadata, served through APIs to both training pipelines and production inference endpoints. Meets needs while maintaining consistency with broader data platform. \\
+\midrule
+
+\textbf{Batch Training \& Inference} &
+Core capability in production since 2017 (Watchdog model, PSI model). Orchestration via Dagster/Airflow provides robust scheduling and monitoring for periodic model retraining and bulk inference jobs. \\
+\midrule
+
+\textbf{Model Drift Monitoring} &
+Use cases and scoring are highly unique with minimal reusability across domains. Dashboard solutions and model documentation meet Kiewit's needs. Each model has specific business context, scoring criteria, and acceptable performance ranges. Domain-specific dashboards provide more meaningful monitoring aligned with business expectations than generic framework. \\
+\midrule
+
+\textbf{Real-Time Inference} &
+Production capability at 100,000+ inferences per month via Azure container app APIs. Provides low-latency inference with automatic scaling based on demand. API-first approach enables application consumption through stable, versioned interfaces. Azure Application Insights provides visibility into latency, error rates, and usage patterns. \\
+\midrule
+
+\textbf{Model Observability} &
+Models observable through prediction application visuals and dashboards created by data scientists, reviewed at weekly data science meetings. Peer review ensures continuous performance monitoring and rapid issue identification. Combined with Azure Application Insights telemetry, provides sufficient visibility into production model behavior. Leverages existing BI tools and application monitoring for context-rich observability connecting model performance to business outcomes. \\
+\midrule
+
+\textbf{Model Context} &
+Open-source tooling (Postgres, FastAPI) sufficient to enable high-value AI models. Philosophy: leverage proven, well-supported open-source tools rather than proprietary platforms. Provides flexibility, reduces vendor lock-in, ensures transferable technical skills across data engineering and data science community. Open to investigating compelling new open-source tools. \\
+\midrule
+
+\textbf{AI Evaluation \& Prompt Management} &
+Atlas Forge stores data labels for AI evaluation and tunes AI prompts (RAG). Proven valuable in: commodity management (20,000 tickets in 60 days), engineered equipment data extraction, tax invoice project. Provides structured workflow for labeling data, evaluating model outputs, iteratively improving prompts for LLM applications. Essential for document processing and information extraction use cases. \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{0.5em}
+\noindent\textbf{Table 1:} KDS data science capabilities assessment: comprehensive evaluation confirming technical readiness
+\vspace{1em}
+
+\subsection{Conclusion: Capabilities Are Not the Constraint}
+
+The phData evaluation confirmed that KDS data science has the technical capabilities required to solve high-value use cases. The constraints on delivering marquee use cases are not technical capability gaps within the data science team. Rather, they are:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Data availability and quality (addressed through platform investments in Section 1)
+    \item Data collection processes (addressed in Section 4)
+    \item Business engagement and prioritization (addressed in Section 5)
+    \item Data engineering velocity (addressed in Section 2)
+\end{itemize}
+
+With these systemic constraints addressed through the KIP platform, KDS data science is positioned to deliver the high-ROI use cases that justify the platform investment.
+
+\section{Data Acquisition Innovation}
+
+One of the most significant gaps between where we are today and the value we could ultimately realize as an enterprise is our limited ability to capture and digitize valuable data. The platform investments outlined in Section 1 address how we process, store, and serve data—but they cannot create value from data that was never captured in the first place.
+
+\subsection{The Current State: Data Loss at Multiple Stages}
+
+Today, much of our potentially valuable data falls into three categories:
+
+\textbf{Collected but effectively discarded}: Data stored locally on desktops or in SharePoint folders where it remains unstructured, unsearchable, and disconnected from analytics workflows. Examples include project photos, vendor correspondence, site inspection notes, and informal cost estimates that never make it into enterprise systems.
+
+\textbf{Collected inconsistently and never centralized}: Data that some projects capture meticulously while others ignore entirely. Equipment maintenance logs, quality inspection records, safety observations, and lessons learned fall into this category. Without standardized capture processes and centralized storage, this data cannot be aggregated for pattern analysis or predictive modeling.
+
+\textbf{Not captured at all}: Perhaps the most significant loss. Video from construction sites that could train computer vision models for progress tracking or safety monitoring. Verbal communications during vendor negotiations that contain pricing signals. Technical drawings and specifications that remain as PDFs rather than machine-readable structured data. Tribal knowledge about site conditions, equipment performance, or subcontractor reliability that exists only in people's heads.
+
+We are not innovative enough in how we capture data. As an organization, we remain too focused on data as neat rows and columns, insufficiently thoughtful about what is possible in today's technology landscape. This mindset limits our ability to leverage modern AI capabilities that excel at extracting value from unstructured data—images, video, audio, documents, and free-form text.
+
+\subsection{The Platform Cannot Compensate for Missing Data}
+
+To generate meaningful enterprise value, we need to innovate not only in how we process and analyze data, but in what data we capture and how we collect it. The current proposal effectively addresses the platform and infrastructure required to ingest, process, and surface data—but it does not yet address the upstream challenge of ensuring the right data exists in the ecosystem to begin with.
+
+Realizing the full value of a platform like this will require deliberate process redesign (with meaningful change management efforts) and targeted technology investments to capture data that is currently fragmented or uncollected. Without that, we risk optimizing the processing of an incomplete dataset rather than transforming the breadth and quality of data available to drive automation, insight, and risk reduction.
+
+The sophisticated Iceberg tables, API abstractions, and ML serving infrastructure described in Section 1 are necessary but not sufficient. They provide the engine, but we must also ensure we're gathering the fuel.
+
+\subsection{Strategic Data Acquisition: Picking the Right Partners}
+
+Kiewit needs to pick partners to massively accelerate data flowing into the KIP platform. These partnerships must focus on two critical capabilities:
+
+\paragraph{Data Collection at Source}
+Partners who provide tools and workflows that make data capture effortless for field personnel. Mobile applications that capture site conditions through photos and voice notes. IoT sensors that automatically log equipment performance. Document processing systems that extract structured data from PDFs, RFIs, and change orders. Video analytics that track progress without manual input.
+
+The key is removing friction from data capture. If collecting data requires extra work beyond normal operations, it won't happen consistently. Partners must embed data capture into existing workflows so that documenting work, communicating with teams, and managing projects naturally generates structured, analyzable data.
+
+\paragraph{Data Normalization within Our Architecture}
+Raw data collection is only the first step. Partners must also help normalize this data within Kiewit's data architecture—mapping unstructured inputs to the Bronze/Silver/Gold medallion structure, applying consistent schemas, and enriching with metadata that enables downstream analytics.
+
+This normalization cannot be an afterthought. Partners need to understand our data architecture and deliver data that lands cleanly in Bronze, ready for transformation to Silver Iceberg tables that serve both applications and ML models.
+
+\subsection{InEight: The Critical Data Partner}
+
+InEight has the majority of the data we need for high-value use cases:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Subcontracts and material contracts
+    \item Estimate files with detailed cost breakdowns
+    \item Quantity claiming and progress tracking
+    \item Scheduling relationships and critical path analysis
+    \item Design model viewer with 3D project representations
+\end{itemize}
+
+Notable exceptions are cost details, invoice documents, and CRM data, which reside in SAP modules.
+
+There is not nearly enough focus on moving InEight data into a data science accessible format. The goal is straightforward:
+
+\textbf{Structured data in Bronze}: Parquet files for tabular data (estimates, schedules, contracts) with hierarchical storage paths that preserve source system context.
+
+\textbf{Unstructured data in Bronze}: Documents (PDFs, drawings, specifications) stored with metadata that links them to related structured records.
+
+\textbf{Iceberg tables in Silver}: Structured tables that describe not only tabular data but also help relate unstructured data to structured data. For example, a Silver table that maps equipment specifications (unstructured PDF) to equipment records (structured data), enabling queries that span both.
+
+\textbf{Virtualization in Snowflake}: Silver Iceberg tables virtualized in Snowflake for business users who need SQL access without understanding cloud storage architecture.
+
+This integration pattern—Bronze for raw ingest, Silver Iceberg for analytics, Snowflake virtualization for accessibility—must become the standard approach for all major data partners. InEight is the test case that will prove this architecture at scale.
+
+\subsection{Expanding Data Modalities and Change Management}
+
+Beyond traditional enterprise systems, Kiewit must systematically capture data modalities that current processes ignore: \textbf{video from construction sites} for computer vision models tracking progress, safety, and equipment utilization; \textbf{unstructured quote data and vendor correspondence} containing market pricing and negotiation signals extractable by large language models; and \textbf{technical documents and specifications} enabling automated quantity takeoffs and compliance verification through Atlas Forge.
+
+Capturing new data modalities requires process changes with clear value propositions for data collectors, workflow integration minimizing additional steps, training and ongoing support, feedback loops demonstrating improvements, and executive sponsorship. Without this change management focus, data collection tools will be deployed but underutilized. The platform investments in Sections 1-3 create the capability to process diverse data at scale; Section 4 ensures that data exists to process in the first place.
+
+\section{Executive Accountability \& Technology Delivery Model}
+
+The technical capabilities outlined in Sections 1-3 and the data acquisition strategies in Section 4 create the foundation for high-value use cases. However, realizing enterprise-scale impact requires executive accountability and a clear technology delivery model. Without executive ownership and organizational alignment, data initiatives risk becoming technology projects rather than business transformations.
+
+\subsection{High-Impact Use Cases: Defining Bold Opportunities with Quantified Returns}
+
+The overall business case would benefit from defining a few bold, high-value use cases with clear, quantified returns. While the platform captures strong themes, the examples remain high-level, making it difficult to evaluate how the proposed platform would specifically enable measurable outcomes.
+
+Well-defined use cases help us understand not only the potential business value but also how much of that value is driven by the platform itself versus the additional process changes or data capture efforts required to realize it.
+
+Establishing 3-5 "big-rock" opportunities—potentially through upcoming data strategy work with external partners—would strengthen confidence that this investment will translate into measurable enterprise impact. These use cases should specify:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Current state baseline metrics (costs, time, error rates)
+    \item Target state performance enabled by the platform
+    \item Quantified financial impact (cost reduction, revenue increase, risk mitigation)
+    \item Data requirements and capture processes needed
+    \item Timeline to value realization
+    \item Organizational changes required for adoption
+\end{itemize}
+
+\paragraph{Example High-Value Use Cases from Notes}
+The following represent priority opportunities that justify platform investment:
+
+\textbf{Estimating and Takeoff Automation}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Quantity generation from design models
+    \item Automated takeoff reducing manual measurement time
+    \item Estimate cost modeling leveraging historical project data
+    \item Estimate and project risk modeling
+\end{itemize}
+
+\textbf{Procurement and Supply Chain Intelligence}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Engineered equipment specifications and price prediction
+    \item Subcontract contract specification and pricing capture
+    \item Supplier performance and evaluation
+    \item Supplier correspondence data capture for market intelligence
+    \item Price escalation modeling
+\end{itemize}
+
+\textbf{Self-Service Analytics and Data Democratization}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Self-service analytics enabling project teams to answer their own questions
+    \item Spreadsheet and localized data ingestion reducing data silos
+    \item Standardized data models across domains
+\end{itemize}
+
+Each of these use cases requires the platform capabilities described in Sections 1-4: API-first data access, event-driven pipelines, Iceberg table extensibility, data quality validation, and systematic data capture from InEight and other sources. Without the platform, these use cases remain intractable. With the platform, they become achievable.
+
+\subsection{Business-Led Workshops: Grounding Technology in Operational Pain Points}
+
+Building on the need for explicit use cases, we would benefit from a series of workshops led by a third party but focused on leaders and managers within the domain or business—not technologists.
+
+Initial use cases were primarily defined through a technical lens. Bringing in business operators will help surface the most impactful and aspirational ("BHAG" - Big Hairy Audacious Goal) opportunities grounded in real operational pain points.
+
+These sessions would:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item Define more explicit use cases with business sponsors who own the outcomes
+    \item Develop business cases quantifying ROI for each use case
+    \item Clarify how KIP is needed to enable specific use cases (connecting platform capability to business value)
+    \item Accelerate data strategy work by aligning technical capabilities with domain-level strategies
+    \item Build organizational buy-in by engaging business leaders early in the design process
+\end{itemize}
+
+The output from these workshops should be a portfolio of use cases prioritized by business impact, feasibility, and strategic alignment. Each use case should have an executive sponsor who champions adoption and holds teams accountable for delivering results.
+
+\subsection{The Caterpillar Model: Two Keys to Success}
+
+Kiewit visited Caterpillar and observed two critical success factors that Kiewit currently lacks:
+
+\paragraph{SVP Profit and Loss Accountability by Domain}
+Caterpillar assigns SVP-level executives P\&L accountability for each data domain. This is not day-to-day delivery management—it is executive presence distributed by domain to ensure business engagement and high ROI. These executives champion their domains, connect platform investments to business outcomes, and hold teams accountable for delivering measurable value.
+
+\paragraph{Big Goals That Are Easy to Explain}
+Caterpillar sets ambitious, clearly articulated goals that align the organization. Examples include "double revenue in 5 years." These big goals make it easy for teams to understand priorities and rally around shared objectives. Kiewit needs to adopt this approach—focusing domains on big, measurable goals that external and internal stakeholders can understand and support.
+
+\subsection{phData-Led Strategy Workshops: Accelerating Written Strategies}
+
+External engagement drives better business participation. Kiewit has seen stronger engagement from business staff when working with external parties like Palantir. phData could serve as a strategic partner to lead workshops that accelerate written domain strategies, similar to the Palantir engagement model.
+
+These workshops would bring together business leaders—not technologists—to define explicit use cases, quantify ROI, and align platform capabilities with operational pain points. The output would be a portfolio of prioritized use cases with executive sponsors who own adoption and results.
+
+\subsection{Current Organizational Model and Proposed Augmentation}
+
+Each core data domain needs a clear executive-level sponsor—ideally at the Executive Committee or Senior Vice President level—who owns and shapes the vision for that domain. This mirrors the Caterpillar model and ensures accountability, prioritization, and continuity of focus as the platform and data strategies evolve.
+
+\paragraph{The Current Organizational Model}
+KDS currently operates with a well-defined organizational structure:
+
+\textbf{Data Domain Managers}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Generation of roadmap for respective data domain
+    \item Partner with operations leadership to ensure products are built to directly improve operations and ensure adoption
+    \item Ensure standards for data architecture are met
+    \item Coordinate with KTG product owners on priorities
+    \item Establish and monitor data quality rules
+    \item Define master/certified data and ensure availability
+\end{itemize}
+
+\textbf{Data Sponsors}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Identification of datasets to be ingested and managed
+    \item Identification of data-related pain points
+    \item Feedback and input on data products
+\end{itemize}
+
+\textbf{Executive Council}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Approval of budget
+    \item Large priority approval
+    \item Selection of data sponsors
+\end{itemize}
+
+\textbf{Executive Committee}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Review overall trajectory
+    \item Select executive council
+\end{itemize}
+
+\paragraph{Proposed Augmentation}
+This structure would be augmented to ensure P\&L accountability and construction domain expertise at the highest levels. Specifically, executive leadership should include roles focused on:
+
+\textbf{Investment ROI Accountability}: Ensuring our investment has the highest ROI with P\&L responsibility. This role connects platform spending to business outcomes, challenging teams to demonstrate value and redirecting resources toward highest-impact use cases.
+
+\textbf{Construction Domain Expertise}: Deep construction operations knowledge to ensure platform capabilities align with field realities. This role bridges the gap between technical possibilities and operational constraints, ensuring solutions are practical and adoptable.
+
+This level of executive accountability and engagement is critical for sustained alignment and enterprise traction. As it stands, it's unclear whether executive sponsors exist over all of KIP or at the domain level. Regardless, this layer of executive ownership—particularly at the SVP/Executive Committee level—ensures that data initiatives receive the priority, resources, and organizational support required for success.
+
+Without this accountability, data platforms become IT projects rather than business transformations. With it, they become strategic enablers that executive leadership actively champions and whose success metrics align with corporate objectives.
+
+\subsection{Connecting Platform Investment to Business Value}
+
+The sections of this document demonstrate how technical capabilities, talent evolution, and data acquisition strategies must work together:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Section 1}: Platform fundamentals (APIs, event-driven, Iceberg, Prism) create the technical foundation
+    \item \textbf{Section 2}: Full-stack data engineering talent enables rapid iteration and collaboration with data science
+    \item \textbf{Section 3}: KDS data science capabilities are proven and ready to deliver value
+    \item \textbf{Section 4}: Data acquisition strategies ensure the platform has fuel to process
+    \item \textbf{Section 5}: Executive accountability and business-led use case definition connect technology to measurable business outcomes
+\end{itemize}
+
+\paragraph{High-Value Use Cases with Investment Requirements}
+The following table connects specific use cases to their key gaps, known capabilities, required investments, and estimated costs. This demonstrates how platform investments enable measurable business outcomes:
+
+\vspace{1em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{2.2cm}
+  >{\raggedright\arraybackslash}p{3.2cm}
+  >{\raggedright\arraybackslash}p{4.61cm}
+  >{\raggedright\arraybackslash}p{3.5cm}
+  >{\raggedright\arraybackslash}p{0.96cm}@{}}
+\toprule
+\textbf{Use Case} & \textbf{Key Gaps} & \textbf{Known Capabilities} & \textbf{Core Investment} & \textbf{Cost Estimate} \\
+\midrule
+
+\textbf{Quantity Generation} &
+Lack of design model data at scale. Lack of a model snapshot application. Lack of normalized data across model formats. &
+Atlas Forge for spatial labeling. LAND for infrastructure data normalization. &
+Design model ingestion and snapshotting software. Determine data gaps and invest in additional software development. &
+\$2,500,000 \\
+\midrule
+
+\textbf{Schedule Automation \& Optimization Engineering} &
+Lack of InEight schedule relationship data. Speed to market is hindered because all requests are reviewed individually resulting in data that is undiscovered and 4-12 months to receive data. &
+InEight has this data and several groups utilize the EAR, DAR, PAR data. We have the data science to build models to predict: activity duration, optimal ramp-up/plateau/ramp-down curves by discipline or lower. &
+InEight orchestration / observability / reverse engineer data platform pathways with n-cycle. Invest in enterprise scheduler like managed Dagster or Airflow. Invest in world class data engineering talent. &
+\$9,000,000 \\
+\midrule
+
+\textbf{Design Generation} &
+Lack of catalogued design drawings. Application to store non-model drawings. &
+Data scientists have been extracting design engineering drawings (KPD substations, OGC engineered equipment, etc.) for two years. Atlas Forge / Vault could enable storage and tagging of past drawings for AI training. &
+Continue to invest in Atlas Forge / Vault to capture and catalog design drawings. Currently partnering with KIE / KPD to store drawings. &
+\$150,000 \\
+\midrule
+
+\textbf{Supplier Cost Estimation \& Engineered Equipment} &
+Quoted data is unavailable. QCS process is excel / Sharepoint stored not stored with metadata. &
+Kiewit has invested with Palantir into Source360 which will begin to partially bring in quoted information which is semi-structured at best and unstructured in many cases. This will not just be the same level of detail but will have many contextual metadata fields as well. &
+Palantir Source 360 is \$1.5m per year. Continue to invest in custom application development to enable data storage of past purchased technical specifications and pricing from vendors that is locked up in SharePoint. &
+\\
+\midrule
+
+\textbf{Onsite Field Engineering \& Construction Management} &
+No video capture of project worksites. No standards for video data collection. &
+FieldAI has autonomous video capture capabilities and wants to partner with Kiewit. &
+Partnership for 50-250 robots autonomously capturing construction progress via LIDAR and video. &
+\$5,000,000 \\
+\midrule
+
+\textbf{Legacy Platform Drag (technology debt)} &
+We have monthly ORS breakdowns caused by complex scripts that have been migrated over a decade. &
+We have a great understanding of the business case to be fulfilled. &
+phData rebuilds JOR and cost report workloads into a modern data pipeline that is uniquely tuned. &
+\$3,000,000 \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{0.5em}
+\noindent\textbf{Table 2:} Use case investments connecting platform capabilities to business value
+\vspace{1em}
+
+\subsection{Technology Delivery Model: Operationalizing the Strategy}
+
+The proposed delivery model distributes responsibilities across four key functions:
+
+\textbf{(1) Strategy, PM, and Adoption (Colin)} — Platform strategy, roadmap development, project management, product requirements, adoption planning, and change management.
+
+\textbf{(2) P\&L Accountability (Jimmy/Jake)} — P\&L responsibility ensuring highest ROI, convening stakeholders, connecting platform investments to business outcomes, and resource allocation based on business value.
+
+\textbf{(3) Data Science and Engineering Solutions (Matt)} — Full-stack data engineers evenly yoked with data scientists for rapid iteration. Data science model development and deployment, ML infrastructure and APIs, data pipelines and orchestration, advanced analytics capabilities.
+
+\textbf{(4) Source System Integration (KTG)} — Integration with source systems (InEight, SAP), Bronze layer data ingestion from enterprise systems, infrastructure provisioning and operations.
+
+This model ensures clear accountability while enabling the collaboration described in Section 2. P\&L ownership focuses the organization on business value, strategy teams design for user needs, and data science/engineering teams work together on shared pipelines rather than sequential handoffs.
+
+\subsection{Investment Context and Scale}
+
+To contextualize the investment required, Kiewit spent approximately \$3.3 million with phData in 2024 alone migrating from Teradata to Snowflake (total multi-year spend less than \$7 million). Caterpillar reported spending \$200 million on their Helios platform. Kiewit operates at roughly 10\% of Caterpillar's data scale (5 billion records versus Caterpillar's 50 billion records), suggesting proportional investment requirements in the \$20-30 million range for a comprehensive platform transformation. The use cases outlined in Table 2 represent targeted investments totaling approximately \$19.65 million over two years, aligned with this scale-adjusted benchmark and focused on highest-ROI opportunities.
+
+The platform without data is an empty engine. Data without platform capabilities cannot be processed efficiently. Technical capabilities without executive sponsorship struggle for resources and adoption. Executive support without clear use cases lacks direction. Together, these five elements create the conditions for high-ROI use cases that justify the KIP platform investment and position Kiewit to compete on data-driven construction excellence.
+
+\subsection{Implementation Schedule}
+
+The following table outlines the phased implementation approach across eight quarters, prioritizing foundation and data acquisition before scaling analytics delivery. Critical milestones marked with $\star$ represent key capability achievements:
+
+\vspace{0.5em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{3.5cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}
+  >{\centering\arraybackslash}p{1.3cm}@{}}
+\toprule
+\textbf{Initiative} & \textbf{Q4 2025} & \textbf{Q1 2026} & \textbf{Q2 2026} & \textbf{Q3 2026} & \textbf{Q4 2026} & \textbf{Q1 2027} & \textbf{Q2 2027} & \textbf{Q3 2027} \\
+\midrule
+\textbf{Executive Accountability Structure} & \textbullet & \textbullet & & & & & & \\
+\midrule
+\textbf{Full-Stack Data Engineering Hiring/Training} & \textbullet & \textbullet & \textbullet & \textbullet & & & & \\
+\midrule
+\textbf{InEight Data Acquisition (InCycle)} & \textbullet & \textbullet & \textbullet & \textbullet & & & & \\
+\midrule
+\textbf{Pipeline Inventory \& Rationalization (36$\rightarrow$<10)} & \textbullet & \textbullet & $\star$ & & & & & \\
+\midrule
+\textbf{Iceberg Tables \& Polaris Catalog} & \textbullet & \textbullet & \textbullet & $\star$ & & & & \\
+\midrule
+\textbf{Dagster/Airflow Orchestration} & & & \textbullet & \textbullet & $\star$ & & & \\
+\midrule
+\textbf{Atlas Prism Data Quality} & & & \textbullet & \textbullet & & & & \\
+\midrule
+\textbf{Schedule Automation Use Case} & & & & \textbullet & \textbullet & $\star$ & & \\
+\midrule
+\textbf{Design Model Data Readiness (Universal Plant Viewer \& LAND Integration)} & & \textbullet & \textbullet & \textbullet & & & & \\
+\midrule
+\textbf{Unstructured Engineering Data Ingestion (Drawings, Specs, Designs)} & & \textbullet & \textbullet & \textbullet & \textbullet & & & \\
+\midrule
+\textbf{Quantity Generation Use Case} & & & & & \textbullet & \textbullet & \textbullet & \\
+\midrule
+\textbf{Supplier Cost Estimation (Source360)} & & & & & \textbullet & \textbullet & $\star$ & \\
+\midrule
+\textbf{FieldAI Video Capture Partnership} & & & & & \textbullet & \textbullet & & \\
+\midrule
+\textbf{Design Generation Scaling} & & & & & & \textbullet & \textbullet & \\
+\midrule
+\textbf{Legacy Platform Drag (phData)} & & & & & & & \textbullet & \textbullet \\
+\midrule
+\textbf{Self-Service Analytics Enablement} & & & & & & & \textbullet & \textbullet \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{0.5em}
+\noindent\textbf{Table 3:} Two-year implementation roadmap with critical milestones ($\star$): (1) Data in lake accessible via Snowflake (Q2 2026); (2) Simplified data storage and integrated architecture (Q3 2026); (3) Faster AI/ML development via orchestration (Q4 2026); (4) Schedule automation with InEight (Q1 2027); (5) Procurement cost estimating capability (Q2 2027)
+\vspace{1em}
+
+\end{document}

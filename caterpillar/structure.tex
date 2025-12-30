@@ -1,0 +1,152 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caterpillar Helios
+% Structure Specification File
+% Version 1.0 (2025)
+%
+% This file is based on the Wenneker Article template
+% Original template from: http://www.LaTeXTemplates.com
+%
+% Authors:
+% Frits Wenneker
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage[english]{babel} % English language hyphenation
+
+\usepackage{microtype} % Better typography
+
+\usepackage{amsmath,amsfonts,amsthm} % Math packages for equations
+
+\usepackage{tikz}
+\usetikzlibrary{positioning, calc, fit, arrows.meta}
+
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+
+\definecolor{CaterpillarYellow}{HTML}{FFD200}
+
+\usepackage[hang, small, labelfont=bf, up, textfont=it]{caption} % Custom captions under/above tables and figures
+
+\usepackage{array}
+
+\usepackage{tabularx}
+
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+\usepackage{graphicx} % Required for adding images
+
+\usepackage{enumitem} % Required for customising lists
+\setlist{noitemsep} % Remove spacing between bullet/numbered list elements
+
+\usepackage{sectsty} % Enables custom section titles
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands (Helvetica)
+
+%----------------------------------------------------------------------------------------
+%	MARGINS AND SPACING
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry} % Required for adjusting page dimensions
+
+\geometry{
+	top=1.0cm, % Top margin
+	bottom=1.0cm, % Bottom margin
+	left=1.5cm, % Left margin
+	right=1.5cm, % Right margin
+	includehead, % Include space for a header
+	includefoot, % Include space for a footer
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+\setlength{\columnsep}{7mm} % Column separation width
+
+%----------------------------------------------------------------------------------------
+%	FONTS
+%----------------------------------------------------------------------------------------
+
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+
+\usepackage{XCharter} % Use the XCharter font
+
+%----------------------------------------------------------------------------------------
+%	HEADERS AND FOOTERS
+%----------------------------------------------------------------------------------------
+
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+
+\renewcommand{\headrulewidth}{0.0pt} % No header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}} % Removes the section number from the header when \leftmark is used
+
+%\nouppercase\leftmark % Add this to one of the lines below if you want a section title in the header/footer
+
+% Headers
+\lhead{Caterpillar Inc.} % Left header
+\chead{} % Center header empty
+\rhead{\textit{Confidential}} % Right header
+
+% Footers
+\lfoot{Internal Use Only} % Left footer
+\cfoot{\textit{Caterpillar Helios Project}} % Center footer
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % Right footer
+
+\fancypagestyle{firstpage}{ % Page style for the first page with the title
+	\fancyhf{}
+	\rhead{\textit{Confidential}}
+	\lfoot{Internal Use Only}
+	\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}}
+	\renewcommand{\footrulewidth}{0.4pt} % Keep footer rule on first page
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling}
+
+\title{Caterpillar Helios: Next-Generation Construction Technology Platform\\[0.5ex]
+Advanced Analytics, Automation, and Digital Transformation Solutions}
+
+\author{%
+\textbf{Author:}\\[1ex]
+Matt Pappas\\
+Chief Data Officer, Kiewit Data Services\\[2ex]
+\textbf{Technical Leadership}\\
+Advanced Analytics $\bullet$ Machine Learning $\bullet$ IoT Systems
+}
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text (lettrine)
+\usepackage{fix-cm}	% Fixes the height of the lettrine
+
+\newcommand{\initial}[1]{ % Defines the command and style for the lettrine
+	\lettrine[lines=3,findent=4pt,nindent=0pt]{% Lettrine takes up 3 lines, the text to the right of it is indented 4pt and further indenting of lines 2+ is stopped
+		\color{Black}% Lettrine colour
+		{#1}% The letter
+	}{}%
+}
+
+\usepackage{xstring} % Required for string manipulation
+
+\newcommand{\lettrineabstract}[1]{
+	\StrLeft{#1}{1}[\firstletter] % Capture the first letter of the abstract for the lettrine
+	\initial{\firstletter}\textmd{\StrGobbleLeft{#1}{1}} % Print the abstract with the first letter as a lettrine and the rest in bold
+}
+
+%----------------------------------------------------------------------------------------

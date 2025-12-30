@@ -1,0 +1,456 @@
+\documentclass{article}
+\input{structure.tex}
+
+\usepackage{adjustbox, xcolor}
+\usepackage{comment}
+\usepackage{float}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{pgfgantt}
+\usetikzlibrary{positioning, arrows.meta, calc}
+
+\title{Kiewit Machine Learning and Data Planning Outline}
+\author{austin.anderson }
+\date{August 2025}
+
+\title{Reorganizing Data Science and Engineering Teams for Efficiency and Throughput}
+\author{Matt Pappas, Austin Anderson, Gayatri Kallepalle, Jack Bruck}
+\date{}
+
+\begin{document}
+\maketitle
+ 
+\section{Executive Summary}
+
+\begin{enumerate}[leftmargin=1.5em,label=\arabic*.]
+    \item \textbf{Could faster knowledge iteration make us more competitive?} \\
+    Distributed, app-specific or organizational specific data objects/databases have created knowledge silos. By unifying data flows, we can speed up the search for insights and enable faster, more confident iteration.  In some cases, a unified data pipeline is the only way to enforce business logic.
+
+    \item \textbf{What if we could confidently trace every model to its exact training dataset, with no blind spots?} \\
+    Today, there’s no reliable path from model outputs back to their source data. This isn’t a tooling problem—it is an organizational one, driven by fragmented data pipelines.  Each pipeline has code stored in different tools or services and no master orchestration between data science and enterprise data engineering.
+
+    \item \textbf{How can we introduce governance without slowing down innovation?} \\
+    Data science today operates almost entirely on peer review. With the right orchestration and standards, we can introduce observability and governance without adding friction.
+    
+    \item \textbf{Are we burning compute without benefit?} \\
+    Snowflake usage has grown unsustainably, with deeply nested views, repeated joins, and little optimization. We are likely paying significantly more than necessary. Early estimates suggest a potential 60\% reduction in compute cost through architectural changes~\cite{helios2025}.
+
+    \item \textbf{Is the disconnect between data engineering and data science holding us back?} \\
+    The current split causes duplication and tension. By aligning under a shared platform and process, we can reduce friction, increase reuse, and accelerate delivery.
+
+    \item \textbf{Why is our production velocity not keeping pace with our ambitions?} \\
+    Repeated reinvention and siloed infrastructure slow us down. Unifying on common tools, pipelines, and patterns could allow us to double or triple delivery speed.
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Current State Analysis}
+
+\subsection{Organizational Fragmentation Drives Data Architecture Fragmentation/Complexity}
+%\section*{Conway's Law in Data Architecture}
+
+\begin{figure}[htbp]
+  \centering
+  \adjustbox{max totalsize={\textwidth}{0.75\textheight}, center}{%
+  \begin{tikzpicture}[
+      node distance=1cm and 2cm, % Reduced space between nodes
+      org/.style = {rectangle, draw, rounded corners, align=center, minimum width=4cm, minimum height=1cm}, % Increased width
+      data/.style = {rectangle, draw, rounded corners, align=center, minimum width=4cm, minimum height=1cm}, % Increased width
+      arrow/.style = {->, thick}
+    ]
+
+    % Nodes for organizational structure
+    \node[org, fill=green!20] (org1) {Enterprise Data Engineering};
+    \node[org, fill=orange!20, right=of org1] (org2) {Business Intelligence};
+    \node[org, fill=blue!20, right=of org2] (org3) {Data Science Team};
+
+    % Nodes for data architecture
+    \node[data, fill=green!20, below=of org1] (data1) {ETL Pipeline \\ \small{Bespoke Snowflake Views \(\rightarrow\) Cubes}};
+    \node[data, fill=orange!20, below=of org2] (data2) {Reporting Pipeline \\ \small{Bespoke Views \(\rightarrow\) SSRS}};
+    \node[data, fill=blue!20, below=of org3, text width=4cm, inner sep=3pt] (data3)
+      {ML Model Pipeline\\[-2pt]
+       \scriptsize
+       \begin{tabular}{@{}c@{}}
+         MDM Apps $\to$ Encoded Logic \\
+         $\to$ Model Encodings \\
+         $\to$ ML Model
+       \end{tabular}};
+    % Arrows showing influence
+    \draw[arrow] (org1) -- (data1);
+    \draw[arrow] (org2) -- (data2);
+    \draw[arrow] (org3) -- (data3);
+
+    % Arrows showing lack of integration
+    \draw[arrow, dashed] (data1) -- (data2);
+    \draw[arrow, dashed] (data2) -- (data3);
+
+  \end{tikzpicture}
+  } % end adjust box
+  \caption{Conway's Law: Organizational Structure Influencing Data Architecture}
+  \label{fig:conways-law}
+\end{figure}
+
+Data science and data engineering work at Kiewit is currently distributed across multiple groups, including InEight, KTG, and KDS. Each team operates independently, with its own tools, development practices, and standards. As predicted by Conway’s Law, this organizational structure has shaped the systems themselves: data and the software that processes it are fragmented along team boundaries. Today, the KTG Data Engineering team processes the entire cost report dataset and then KDS Data Science maintains the Account Code Management App, Project Initiation, Model Data Editor App within Predictive Estimating, and entirely reprocesses the very same dataset.  This creates integration challenges, code accessibility challenges, and orchestration/timing challenges across the entire data ecosystem.  There is no single pane of glass to learn from our data as it's cleaned and prepared from source to target systems.
+
+This current structure creates friction, through unnecessary technological complexity driven by separation of data objects by organization, when tackling complex cross-cutting problems. Collaboration requires navigating multiple organizational layers, tools, and communication channels. As a result, teams tend to optimize locally—delivering isolated features—rather than combining forces on shared goals. This limits our ability to bring the full strength of our data science and engineering resources to bear on high-impact challenges.
+
+The separation of data from the software that transforms it presents further challenges for data science. Success in this space depends on fast, iterative understanding of the data. When data is siloed by application, simply discovering what exists—let alone how to access or interpret it—requires significant manual effort. Meanwhile, the software pipelines that shape this data often live in different systems or are owned by different teams, extending the time needed to build foundational understanding. These disconnects slow down iteration and delay the delivery of insight-generating models.
+
+\subsection{Lack of Observability and Governance}
+
+KDS has significantly expanded its machine learning efforts in recent years, delivering models that generate critical insights and inform high-stakes business decisions. But these models are not static. They evolve constantly—new models are developed, existing ones are retrained, and underlying data changes rapidly (we work millions of hours each month).
+Today, decisions around model development, promotion, and release are governed primarily by internal peer review within the data science team. While this process aims to be rigorous and data-driven, it lacks automated transparency of the data and it's creation date.  This isn't as big a problem until you are trying to synchronize: design drawings, labels on those drawings, and structured cost report data.  When these datasets are separately processed it's easy for them to be out of sync. Key details—such as the data used for training, the assumptions made, or how performance is evaluated—are difficult for those outside the immediate team to observe or audit.
+
+This limits shared visibility into how models work and why decisions are made. It also concentrates accountability among individual contributors. Although the current process has produced effective, high-performing models overall, there have been isolated cases where flawed assumptions or training data have impacted downstream systems.
+
+Improving observability—particularly around data lineage, model inputs, and promotion criteria—is essential. Doing so would enhance confidence in model performance, reduce risk, and enable broader organizational alignment and oversight.
+
+\subsection{Leaking Out Production Velocity}
+
+The overall production velocity of data science and engineering efforts within Kiewit are choked by the lack of clear observability across data transformations.  It would be nearly impossible, for an employee who started in the last 4 years, to know what systems are involved in managing our account code historical dataset. While feature velocity and developer efficiency can be measured quantitatively (and according to CAT Digital was critical in developing their data platforms~\cite{helios2025}), this assessment is based primarily on consistent feedback from both developers and leadership.
+A key bottleneck is the time spent on data discovery and understanding. Developers report that a significant portion of project timelines is consumed by identifying, accessing, and interpreting relevant data—leaving less time for core model development. The knowledge iteration loop is long and often manual, with limited support for discovering existing assets or understanding how they were built.
+
+Duplication of effort is another recurring issue. Data pipelines are frequently rebuilt across teams to meet deadlines or accommodate separate toolchains. These inefficiencies are amplified by the separation of teams, data, and code, making reuse and collaboration more difficult than necessary.
+
+Improving reuse, aligning teams on shared tools and processes, and reducing time-to-data understanding would unlock meaningful gains in delivery speed and capacity.
+
+\subsection{Current State Case Study}
+
+The process for how data flows to create our Cost Reports along with downstream applications was diagrammed as a case study to help illustrate challenges of our current approach. This flow is shown in figure \ref{fig:data-ownership-flow}. The progression of data steps through the chain is illustrated noting when data steps cross team boundaries, noted as horizontal dotted lines, as well as technology boundaries noted as changing colors step to step. Numbers of replications and frequency of schedule timing are also noted for some steps. This diagram helps to visually show the challenge of data lineage and traceability we face. If an issue arises high up stream at say step 3: Snowflake CORE silver, that issue would need to be communicated across two organizational boundaries and several technology changes to propagate down to machine learning model performance. The changing software and technology makes is particularly difficult to isolate and diagnose software issues relating to data both up and down the chain.
+
+\begin{figure}[H]
+
+    % ---------------------- Figure ------------------------------
+    \begin{center}
+    \adjustbox{max totalsize={\textwidth}{0.7\textheight}, center}{%
+    \begin{tikzpicture}[
+      node distance=1.15cm and 2.5cm,
+      row sep=0.8cm,
+      arr/.style={-{Latex[length=2mm]}, thick},
+      box/.style={
+        rectangle, draw, rounded corners,
+        minimum height=1.05cm,
+        text width=4.3cm, align=center, font=\small
+      },
+      ruler/.style={dotted, ultra thick},
+      label/.style={font=\bfseries\footnotesize, align=left}
+    ]
+    
+    % ------------------ MAIN PIPELINE (KTG) ------------------
+    \node[box, fill=red!20]               (n1)  {1. SAP Tables\\(23 total)};
+    \node[box, fill=blue!20, below=of n1] (n2)  {2. Snowflake REPL\\(23 total) — Bronze};
+    \node[box, fill=blue!20, below=of n2] (n3)  {3. Snowflake CORE\\(20 total) — Silver};
+    \node[box, fill=blue!20, below=of n3] (n4)  {4. Snowflake CORE Views\\(25 total)};
+    \node[box, fill=blue!20, below=of n4] (n5)  {5. Snowflake SEM\\(8 total) — Gold};
+    \node[box, fill=orange!20, below=of n5] (n6) {6. SQL Server → SSRS / OLAP};
+    
+    % ------------------ DATA-ENGINEERING (KDS) ------------------
+    \node[box, fill=green!20, right=of n5, xshift=3.0cm] (n6a)
+          {6a. Account Code Lineage App\\\scriptsize(ETL monthly)};
+    \node[box, fill=green!20, below=of n6a] (n7a)
+          {7a. Project Assembly List\\\scriptsize(ETL monthly)};
+    
+    % ------------------ DATA-SCIENCE (KDS) ------------------
+    \node[box, fill=white!20, below=of n7a]  (n8a)  {8a. Predictive Estimating\\\scriptsize(unscheduled)};
+    \node[box, fill=yellow!20, below=of n8a] (n9a)  {9a. Atlas Prism Validation};
+    \node[box, fill=yellow!20, below=of n9a] (n10a){10a. Atlas Forge GA Plot Plan};
+    \node[box, fill=yellow!20, below=of n10a](n11a){11a. Atlas Forge Label Groupings};
+    \node[box, fill=gray!20,  below=of n11a](n12a){12a. Business-Encoded Logic};
+    \node[box, fill=brown!20, below=of n12a](n13a){13a. ML Training Data};
+    \node[box, fill=brown!20, below=of n13a](n14a){14a. Production ML Model};
+    \node[box, fill=brown!20, below=of n14a](n15a){15a. Prior Model Versions};
+    
+    % ------------------ ARROWS ------------------
+    \draw[arr] (n1) -- (n2) -- (n3) -- (n4) -- (n5) -- (n6);
+    \draw[arr] (n5.east) -- (n6a.west);
+    \draw[arr] (n6a) -- (n7a) -- (n8a) -- (n9a) -- (n10a)
+               -- (n11a) -- (n12a) -- (n13a) -- (n14a) -- (n15a);
+    
+    % ------------------ OWNERSHIP RULERS ------------------
+    \coordinate (xR) at ($(n6a.east)+(1,0)$);   % anchor just right of flow
+    
+    % --- Ruler A : hand-off KTG → KDS Data Eng (level with 6a) ---
+    \coordinate (splitA) at (xR |- n6a);
+    \draw[ruler] (splitA) -- ++(2.4,0);
+    \node[label, anchor=south west] at ($(splitA)+(0,0.02)$) {KTG $\uparrow$};
+    \node[label, anchor=north west] at ($(splitA)+(0,-0.02)$) {KDS Data Eng $\downarrow$};
+    
+    % --- Ruler B : hand-off KDS Data Eng → KDS Data Science (just above 8a) ---
+    \coordinate (splitB) at ($(xR |- n8a)+(0,0.35)$);  % 0.35 cm above n8a
+    \draw[ruler] (splitB) -- ++(2.4,0);
+    \node[label, anchor=south west] at ($(splitB)+(0,0.02)$) {KDS Data Eng $\uparrow$};
+    \node[label, anchor=north west] at ($(splitB)+(0,-0.02)$) {KDS Data Science $\downarrow$};
+    
+    \end{tikzpicture}%
+    }% end adjustbox
+    \end{center}
+
+    %--- caption & label ---
+    \caption{End-to-end Cost Report data flow with ownership hand-offs
+        between KTG, KDS Data Engineering, and KDS Data Science. Colored boxes indicate different code, tooling, or data locations - essentially different technologies.}
+    \label{fig:data-ownership-flow}
+\end{figure}
+
+\section{Proposed Future State}
+
+\subsection{Unified Enterprise Data Platform}
+
+Many of the inefficiencies outlined in our current state stem from the organizational separation of teams, tools, and data. Our proposed solution is to unify these components under a shared enterprise data platform—bringing together people, software, and practices around a common vision.
+At the foundation is a centralized data lake, organized using medallion-tier architecture (bronze, silver, gold). This structure offers flexibility and cost-efficiency while promoting consistency. The platform will favor open-source and open-standard tools to support modularity, scalability, and long-term maintainability—avoiding unnecessary vendor lock-in.
+
+This lake will be paired with modern orchestration tools that treat data pipelines as software-defined assets. These assets are observable, versioned, and traceable—enabling clear data lineage, automated monitoring, and reproducible processing. Interdependencies between pipelines become easy to visualize and manage, and shared patterns can be reused across projects to reduce duplication. By embedding pipelines in a common software-defined framework, we gain traceability directly back to source code—dramatically reducing time spent on data discovery and debugging.
+
+The orchestration layer is designed to run on Kiewit’s on-premise high-performance compute (HPC) cluster, with the ability to scale to cloud compute when needed. This hybrid model maximizes cost-efficiency while preserving flexibility. Running on-prem allows us to control scheduling and performance with low latency and deterministic execution, while maintaining full ownership of sensitive data and infrastructure.
+
+To support this approach, KDS and KTG are actively collaborating on cluster governance. KTG is leading efforts on networking and hardware, while KDS focuses on access control, monitoring, and software integration. To ensure operational readiness, KDS has engaged an external expert in HPC management to define best practices for scheduling, performance monitoring, and seamless compute scaling. These processes are being established now to support both the upcoming cluster upgrade and the expansion of data science and engineering workloads.
+
+Together, a shared data lake and software-defined orchestration layer will provide end-to-end visibility across the data lifecycle—from ingestion through model training. This will enable stronger accountability, faster development cycles, and greater confidence in both the data and the insights it powers.
+
+\subsection{Organizational Alignment}
+
+To support the unified technology vision, we propose a corresponding alignment in governance and development practices. With improved observability and lineage tracking in place, accountability can be shared more effectively across teams and coordinated through structured oversight.
+At the center of this approach is a cross-functional architecture review board composed of key stakeholders. This board will provide strategic guidance and help ensure alignment across initiatives.
+
+Beneath it, a shared software development process will unify how data pipelines are designed, reviewed, and deployed. These pipelines—now software-defined assets—will serve as both the mechanism for data processing and the source of lineage and observability. By adopting modern, collaborative development practices, we can improve developer efficiency while maintaining high quality standards.
+
+Project management tooling will be integrated with these processes to create a clear thread from planning intake, through architecture review, to delivery of production data products. This structure ensures visibility, repeatability, and alignment from top-level strategy to hands-on execution.
+
+By pairing technology modernization with governance and process improvements, we create the foundation for a scalable, high-trust data ecosystem—one that enables faster delivery, clearer accountability, and stronger alignment across teams.
+
+In this future looking view, the data and ownership flows become much simpler. Following the pattern of the case study, a diagram for what flows would look like generally in this new proposed vision is shown in figure \ref{fig:proposed}. Data pipelines become much more traceable in this flow as common technology is utilized throughout with ownership and accountability provided by a review board. While this diagram shows that each step uses the same technology, it does not mean each step is the same. Rather, the proposed combination of flexible data lake storage along with a flexible and modern orchestration flow allows for heterogeneous compute and polyglot storage to be combined to allow developers to apply the right tools for their needs. Processing can be mapped to on-prem or cloud resources using tools and parallelism that fit the need of the application. Processing and storage is all assembled within a common code repository following a common framework which allows for maximum flexibility while still maintaining clean organization. 
+
+\begin{figure}[H]
+\centering
+\adjustbox{max totalsize={\textwidth}{0.5\textheight}, center}{%
+\begin{tikzpicture}[
+  node distance=1.1cm,
+  arr/.style={-{Latex[length=2mm]}, thick},
+  box/.style={
+    rectangle, draw, rounded corners,
+    minimum height=1.05cm,
+    text width=8.2cm, align=center, font=\small,
+    fill=yellow!20
+  },
+  ruler/.style={dotted, ultra thick},
+  owner/.style={font=\bfseries\footnotesize, align=center}
+]
+
+% ---- Linear flow (all light yellow) ----
+\node[box] (n1) {1. Raw data landing \\ \textit{(Data lake — Bronze)}};
+\node[box, below=of n1] (n2) {2. Data cleaning \\ \textit{(Data lake — Silver)}};
+\node[box, below=of n2] (n3) {3. Intermediate data product filtering \\ \textit{(Data lake — Silver)}};
+\node[box, below=of n3] (n4) {4. Data Validation \\ \textit{(Data lake — Silver)}};
+\node[box, below=of n4] (n5) {5. Model training data generation \\ \textit{(Data lake — Silver)}};
+\node[box, below=of n5] (n6) {6. Model training and evaluation \\ \textit{(Data lake — Silver)}};
+\node[box, below=of n6] (n7) {7. Model promotion to production \\ \textit{(Data lake — Gold)}};
+
+% ---- Flow arrows ----
+\draw[arr] (n1) -- (n2) -- (n3) -- (n4) -- (n5) -- (n6) -- (n7);
+
+% ---- Ownership ruler to the right (aligned with top of Step 1) ----
+% Right-side anchor a bit to the right of the boxes
+\coordinate (xR) at ($(n1.east)+(1.2,0)$);
+
+% Ruler at the top of step 1
+\coordinate (ownTop) at (xR |- n1.north); % exactly level with top edge of n1
+\draw[ruler] (ownTop) -- ++(3.0,0);       % dotted horizontal line
+% Label centered just below the ruler with a down arrow
+\node[owner, anchor=north] at ($(ownTop)+(1.5,-0.12)$) {Data Review Board $\downarrow$};
+
+\end{tikzpicture}%
+
+}% end adjustbox
+\caption{Generic data flow in the new proposal. Here, ownership falls under the data architecture review board of key data stakeholders. Data moves in and out of a polyglot enterprise data lake increasing in medallion levels. Step color again notes common technology usage.}
+\label{fig:proposed}
+\end{figure}
+
+\subsection{Pilot Plan}
+
+To demonstrate the proposed vision, we will launch a targeted pilot focused on three core areas: a prototype data lake, a modern orchestration layer, and the supporting development processes and organizational structure. These components will serve as a foundation we can build on over time. The pilot program will be built as a part of the current Atlas application maintained by KDS under the Atlas - Flow portion of the application.
+The data lake will be deployed on Azure Data Lake Storage Gen2 (ADLS Gen2), organized using a basic file-system hierarchy aligned to bronze, silver, and gold medallion tiers. Orchestration will be handled by Dagster, a modern tool for software-defined data pipelines. Dagster supports asset-based development with built-in observability, metadata, and lineage tracking through a browsable UI and GraphQL interface. Each asset can be annotated with ownership, documentation, and code traceability—enabling deep introspection, impact analysis, and reproducibility.
+
+Development will be managed through Azure DevOps using Git repositories, automated CI/CD pipelines, and a lightweight intake process via a linear project board. Pull requests will include required quality and compliance checks, helping enforce standards, spread best practices, and ensure team cohesion through clear and consistent review.
+
+The combination of Dagster and a unified data lake will help greatly reduce knowledge iteration by making it much easier to trace data to and from code. An example data pipeline in dagster is shown in figures \ref{fig:jlam_flow}. An engineering development version of the dagster UI is hosted on the Kiewit VPN and can be found here: \url{http://10.233.17.204/asset-groups/}. Note that this is an early version of the flow provided for visual reference and is under active development.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{jlam_flow.png}
+    \caption{High level view of a software defined pipeline in dagster.}
+    \label{fig:jlam_flow}
+\end{figure}
+
+\begin{comment}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{description_good.png}
+    \caption{Blocks in the chain represent assets and can embed information like the resources used to compute and store the data object, in this example ray for compute and psql for storage. The data can also be annotated with descriptions and metadata that live with the processing definition directly in code.}
+    \label{fig:description_good}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{catalog.png}
+    \caption{Assets are also tracked in the dagster catalog where metadata is visible along with further information like ownership.}
+    \label{fig:catalog}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{code_location.png}
+    \caption{Catalogs allow for traceability directly to code. This shows a local test that is still a work in progress while the demo will focus on cleaner traceability to source code in the cloud.}
+    \label{fig:code_location}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{code_azure.png}
+    \caption{By quickly tying data objects back to source code, data scientists can quickly build the critical knowledge required for development. Dagster allows a data object to be tied directly back to the line of code indicating author, timestamp, commit, pull request, and project ticket.}
+    \label{fig:code_azure}
+\end{figure}
+\end{comment}
+
+The pilot will focus on porting the Job Loss Avoidance Model (JLAM) pipeline. Bronze-tier source data will be ingested into the lake, with silver-tier intermediate products generated through cluster-based processing and tracked as observable assets. The trained model and performance metrics will be produced and tracked as gold-tier outputs, all cataloged within Dagster.
+
+A small team of KDS data scientists, supported by data engineering, will execute the port. The pilot is scheduled to go live by August 15, 2025, and will be accessible via the internally developed Atlas-Flow interface, which will serve as the entry point to the Dagster UI.
+
+The pilot program will be a starting point to evaluate the benefits and usability of selected tooling and approach. Next steps will include converting more pipelines and pushing further upstream in the data flows while actively engaging both data scientists and data engineers to solicit feedback that we in-take and refine in the development backlog plan for rapid iteration and improvement. This will ensure the tools and processes we select and build are serving the end users and actively addressing the issues they are meant to solve.
+
+\begin{comment}
+\section{How do we not re-create data silos and complex fragmented code bases?}
+
+We have lived Conway's law for the past 5 years and we can move much faster with integrated Data Engineering and Data Science Teams.  Those teams need to be organized under a singular leader to ensure Data Science (top of the food chain) and Data Engineering are integrated which will drive data integration and complexity reduction.  I would be remiss to not note that this could also save the company as high as 60\% savings, like Caterpillar Helios~\cite{helios2025}, as compared to continuing on with our current organization structure.  It is currently optimally effective to have product management, business analysts, and data architecture working within Data Strategy and reporting up through Dave Freeman.  Dave's operational experience and relationships are a catalyst to getting the right stakeholders and executive operational management engagement on data products.  Data science has been centralized within KDS since 2020 and predictive analytics merged in 2023.  All audits that have been done say that our data science program is near the top or at the top of any element of our data strategy.  Because of this and the opportunities in front of the business we need to combine data engineering under data science leadership.  
+
+\section{Organizational Structure} % - 
+
+% Figure
+\begin{figure}[H]
+\centering
+\adjustbox{max totalsize={\textwidth}{0.85\textheight}, center}{%
+\begin{tikzpicture}[
+  % One place to control box width and look:
+  box/.style={
+    rectangle, draw, rounded corners, align=center,
+    text width=36mm, minimum height=10mm, inner sep=3pt, font=\small
+  },
+  arrow/.style={->, thick}
+]
+
+% ===== Top row (aligned) =====
+\node[box, fill=yellow!20] (dave)  at (-6, 0) {KDS: Dave Freeman\\VP, Data \& Ops Finance};
+\node[box, fill=yellow!20] (chris) at ( 6, 0) {KTG: Chris Dill\\VP \& CIO};
+
+% ===== Second level under Dave =====
+\node[box, fill=blue!20]  (matt)  at (-8, -2.2) {Matt Pappas\\Chief Data Officer};
+\node[box, fill=green!20] (colin) at (-4, -2.2) {Colin Davis\\Director of Data Strategy};
+
+% ===== Third level under Matt =====
+\node[box, fill=blue!10] (ds) at (-16, -4.4) {Data Science};
+\node[box, fill=blue!10] (de) at ( -12, -4.4) {Data Engineering};
+\node[box, fill=blue!10] (ws) at ( -8, -4.4) {Web Services};
+
+% ===== Third level under Colin =====
+\node[box, fill=green!10] (dpm) at ( -4, -4.4) {Domain Product\\Management};
+\node[box, fill=green!10] (ba)  at ( 0, -4.4) {Business Analysts};
+\node[box, fill=green!10] (da)  at (  +4, -4.4) {Data Architects};
+
+% ===== Under Chris (KTG) =====
+\node[box, fill=blue!20] (asis) at (6, -2.2) {KTG: Org as-is, but Scott Huttmann to KDS};
+
+% ===== Arrows (straight) =====
+\draw[arrow] (dave)  -- (matt);
+\draw[arrow] (dave)  -- (colin);
+
+\draw[arrow] (matt)  -- (ds);
+\draw[arrow] (matt)  -- (de);
+\draw[arrow] (matt)  -- (ws);
+
+\draw[arrow] (colin) -- (dpm);
+\draw[arrow] (colin) -- (ba);
+\draw[arrow] (colin) -- (da);
+
+\draw[arrow] (chris) -- (asis);
+
+\end{tikzpicture}%
+}% end adjustbox
+\caption{Proposed org charts (KDS and KTG).}
+\label{fig:parallel-org-clean}
+\end{figure}
+
+\end{comment}
+
+
+\section{Domain Project Timeline}
+
+\begin{figure}[H]
+\centering
+
+% --- Define all complex styles cleanly BEFORE the chart begins ---
+\ganttset{
+    bar/.style={fill=blue!40}, % Set the bar color
+    bar height=0.7,           % Set the bar height
+    link type=-               % Use waterfall-style dependency lines
+}
+
+\begin{ganttchart}[
+    % --- Now, only simple layout and calendar options are needed here ---
+    y unit chart=0.7cm,
+    x unit=1cm,
+    vgrid, hgrid,
+    title height=1 % Required for the multi-row calendar
+]{1}{11}
+
+    % --- Manual Calendar Header ---
+    \gantttitle{2025}{9} 
+    \gantttitle{2026}{2} \\ 
+    \gantttitle{4}{1} \gantttitle{5}{1} \gantttitle{6}{1}
+    \gantttitle{7}{1} \gantttitle{8}{1} \gantttitle{9}{1}
+    \gantttitle{10}{1} \gantttitle{11}{1} \gantttitle{12}{1}
+    \gantttitle{1}{1} \gantttitle{2}{1} \\
+
+    % --- Tasks ---
+    \ganttbar{[HD] to Bronze Lake}{1}{5} \\
+    \ganttbar{[CRM] to Bronze Lake}{1}{5} \\
+    \ganttbar{Atlas Forge (Spatial Drawings) to Silver Lake}{5}{5} \\
+    \ganttbar{Atlas Prism (Validation) to Silver Lake}{6}{7} \\
+    \ganttbar{Data Architecture Assigns Gold Data Objects}{8}{8} \\
+    \ganttbar{Gold Objects Available in Snowflake}{9}{9} \\
+    \ganttbar{JLAM, MHF, Indicative ML Models Use Silver Lake}{5}{9} \\
+    \ganttbar{Integrate 3 Metadata Apps (PI, PA, AC) in Silver Lake}{8}{10} \\
+    \ganttbar{Estimating Domain Complete}{11}{11} \\
+    \ganttbar{Scheduling Domain Complete}{5}{11} \\
+    % --- Dependencies ---
+    \ganttlink{elem2}{elem3}
+    \ganttlink{elem3}{elem4}
+    \ganttlink{elem4}{elem5}
+
+
+\end{ganttchart}
+\caption{Project Timeline Overview}
+\end{figure}
+\section{Cost}
+
+
+The total cost of this initiative is projected to be fully recouped within 12 months of completion. This investment is particularly compelling as the cost is comparable to maintaining our current system, but with the added benefit of modernizing our capabilities instead of preserving an inefficient status quo.  A similar modernization effort at Caterpillar, known as Helios, provides a strong precedent for success. After completion, Caterpillar achieved a \textbf{60\% reduction} in their prior cost run rates~\cite{helios2025}, citing two primary drivers for the savings:
+        \begin{itemize}
+            \item \textbf{Efficiency Gains:} A significant reduction in duplicated data objects and the elimination of unnecessary computational workloads (e.g. layers of data table views).
+            \item \textbf{Technology Modernization:} A strategic shift from expensive, closed-source relational databases to high-velocity, open-source tooling running directly on their cloud-based enterprise data lake.
+        \end{itemize}
+\section{Team Prescription}
+
+
+The team needed to build this out must be multi-disciplinary.  We will need strong representation from Data Engineering, Data Science, Web Services, and Data Architecture.  This will leverage all people who are involved with the present state but most critically they will be priority aligned for success.  For history to not repeat itself there must be a shared understanding of how we create an event-driven (velocity), open-source (cost/extensibility), non-recursive (reduce complexity), and most importantly shared data ecosystem.  KDS would provide leadership from each team but it's critical that we have can trigger an event from the source and begin the workload in a shared data pipeline.  Historical means of doing business with data objects setup to mirror organizational structures and recursive batch processing must be pivoted to an integrated team approach.  \textbf{It is the opinion of the authors of this paper that Data Science should be the steering member of this partnership of groups and thus it reports through the same leader as Data Science.}
+
+\section{Why Now}
+
+Generative AI is advancing rapidly, opening new opportunities across the construction and engineering landscape. To stay competitive and capitalize on these capabilities, Kiewit must accelerate the pace at which data science efforts move from concept to production.
+
+Achieving this requires reducing the knowledge iteration cycle—shortening the time it takes to understand data, build solutions, and deploy value. A unified technology platform and organizational model will unlock the full potential of Kiewit's compute resources and technical talent, enabling faster, more focused execution on high-impact GenAI and machine learning initiatives.
+
+The opportunity is clear: act now to position Kiewit at the forefront of data-driven innovation.
+
+\printbibliography
+
+\end{document}
+

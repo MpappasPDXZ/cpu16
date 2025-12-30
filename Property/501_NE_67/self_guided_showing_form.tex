@@ -1,0 +1,269 @@
+\documentclass[11pt, letterpaper]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% Enable PDF form fields
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={Self-Guided Showing Agreement - 501 NE 67th Street},
+    pdfauthor={SM LLC},
+    colorlinks=false,
+    pdfborder={0 0 0}
+}
+
+% Form field formatting
+\def\LayoutTextField#1#2{#2}
+\def\LayoutChoiceField#1#2{#2}
+\def\LayoutCheckField#1#2{#2}
+
+% Colors
+\definecolor{headerblue}{RGB}{25, 55, 95}
+\definecolor{dividercolor}{RGB}{100, 100, 100}
+\definecolor{fieldbackground}{RGB}{245, 248, 250}
+
+% Clean font
+\usepackage{charter}
+
+% Custom commands for form fields
+\newcommand{\formfield}[2]{%
+    \TextField[name=#1, width=#2, height=12pt, bordercolor=dividercolor, backgroundcolor=fieldbackground, charsize=10pt]{}%
+}
+
+\newcommand{\formfieldmulti}[3]{%
+    \TextField[name=#1, width=#2, height=#3, multiline=true, bordercolor=dividercolor, backgroundcolor=fieldbackground, charsize=10pt]{}%
+}
+
+\newcommand{\formcheck}[1]{%
+    \CheckBox[name=#1, width=10pt, height=10pt, bordercolor=dividercolor]{}%
+}
+
+\newcommand{\divider}{%
+    \vspace{0.3em}%
+    {\color{dividercolor}\hrule height 0.5pt}%
+    \vspace{0.5em}%
+}
+
+\newcommand{\sectionheader}[1]{%
+    \vspace{0.8em}%
+    {\large\bfseries\color{headerblue}#1}%
+    \vspace{0.3em}%
+}
+
+\begin{document}
+
+\begin{Form}
+
+% Header
+\begin{center}
+{\LARGE\bfseries\color{headerblue}TEMPORARY ACCESS AND SELF-GUIDED SHOWING AGREEMENT}\\[1em]
+{\large Property Address: \textbf{501 NE 67th Street, Gladstone, MO 64118}}
+\end{center}
+
+\divider
+
+\sectionheader{PROSPECTIVE TENANT INFORMATION}
+
+\begin{tabular}{@{}p{4cm}p{11.5cm}@{}}
+Full Legal Name: & \formfield{fullname}{11.5cm} \\[0.8em]
+Current Address: & \formfield{address}{11.5cm} \\[0.8em]
+City: & \formfield{city}{4.5cm} \hfill State: \formfield{state}{1.5cm} \hfill ZIP: \formfield{zip}{2.5cm} \\[0.8em]
+Phone Number: & \formfield{phone}{11.5cm} \\[0.8em]
+Email Address: & \formfield{email}{11.5cm} \\[0.8em]
+Driver's License / ID \#: & \formfield{dlnumber}{11.5cm} \\[0.8em]
+Issuing State: & \formfield{dlstate}{3cm} \hfill Expiration Date: \formfield{dlexp}{4cm} \\[0.8em]
+Date of Birth: & \formfield{dob}{5cm} \\
+\end{tabular}
+
+\divider
+
+\sectionheader{ACKNOWLEDGMENTS AND AGREEMENTS}
+
+By signing this Temporary Access and Self-Guided Showing Agreement (``Agreement''), I, the undersigned Prospective Tenant, acknowledge and agree to the following terms and conditions:
+
+\textbf{1. PURPOSE OF ACCESS}\\
+I am requesting temporary access to the Property located at 501 NE 67th Street, Gladstone, MO 64118 (the ``Property'') for the sole purpose of conducting a self-guided viewing to evaluate the Property for potential rental.
+
+\textbf{2. TERM OF ACCESS}\\
+Access is granted for a single viewing on the following date and time only:
+
+\begin{tabular}{@{}p{4cm}p{11.5cm}@{}}
+Date of Showing: & \formfield{showingdate}{6cm} \\[0.8em]
+Scheduled Time: & From \formfield{starttime}{2.5cm} \formfield{startampm}{1.2cm} to \formfield{endtime}{2.5cm} \formfield{endampm}{1.2cm} \\
+\end{tabular}
+
+\vspace{0.3em}
+Access Code will expire at the scheduled end time and must not be shared with any third party.
+
+\textbf{3. IDENTIFICATION VERIFICATION}\\
+I agree to submit a clear photograph of my valid government-issued photo identification (driver's license or state ID) to the Landlord prior to receiving access to the Property. I understand that:
+\begin{enumerate}[label=\alph*), nosep, leftmargin=2em]
+    \item My ID photo will be securely stored by the Landlord for verification and security purposes;
+    \item My ID photo may be retained until successful completion of the showing and confirmation that the Property has been secured properly;
+    \item My ID information may be used to verify my identity and pursue any claims for damages if necessary;
+    \item A photograph of this signed Agreement will also be submitted as proof of my acknowledgment.
+\end{enumerate}
+
+\textbf{4. TEMPORARY ACCESS CODE}\\
+I understand that:
+\begin{enumerate}[label=\alph*), nosep, leftmargin=2em]
+    \item The temporary access code provided is for my exclusive use only;
+    \item I shall not share, distribute, or disclose the access code to any other person;
+    \item The access code is valid only for the date and time specified above;
+    \item Unauthorized use or sharing of the access code may result in legal action.
+\end{enumerate}
+
+\textbf{5. CONDUCT DURING SHOWING}\\
+During my access to the Property, I agree to:
+\begin{enumerate}[label=\alph*), nosep, leftmargin=2em]
+    \item Enter and exit only through designated doors;
+    \item Refrain from smoking, vaping, or consuming alcohol on the Property;
+    \item Not bring any pets onto the Property;
+    \item Not remove, damage, or alter any fixtures, appliances, or personal property;
+    \item Not open windows, adjust thermostats, or tamper with any systems unless necessary for safety;
+    \item Leave all doors locked upon departure;
+    \item Report any pre-existing damage or safety concerns to the Landlord immediately;
+    \item Conduct myself in a respectful and lawful manner at all times.
+\end{enumerate}
+
+\textbf{6. LIMITATION ON GUESTS}\\
+I may be accompanied by a maximum of two (2) adult guests. All guests must remain with me at all times during the showing. I am responsible for the conduct of any guests I bring onto the Property.
+
+\textbf{7. NO LANDLORD-TENANT RELATIONSHIP}\\
+I understand that this Agreement does not create a landlord-tenant relationship. No tenancy rights are conferred by this temporary access authorization. This Agreement is solely for the purpose of viewing the Property.
+
+\textbf{8. APPLICATION PROCESS}\\
+I understand that:
+\begin{enumerate}[label=\alph*), nosep, leftmargin=2em]
+    \item Completing a rental application is required for preliminary screening purposes;
+    \item There is no application fee charged by the Landlord unless I choose to proceed with a formal background/credit check;
+    \item The information provided in the application will be used solely for preliminary screening;
+    \item Submission of an application does not guarantee approval or availability of the Property.
+\end{enumerate}
+
+\divider
+
+\sectionheader{ASSUMPTION OF RISK, WAIVER, AND RELEASE OF LIABILITY}
+
+I, the undersigned Prospective Tenant, hereby acknowledge and agree to the following:
+
+\textbf{9. ASSUMPTION OF RISK}\\
+I understand that entering and viewing the Property involves certain inherent risks, including but not limited to:
+\begin{enumerate}[label=\alph*), nosep, leftmargin=2em]
+    \item Trip and fall hazards, including stairs, uneven surfaces, and floor transitions;
+    \item Potential exposure to dust, allergens, mold, or other environmental conditions;
+    \item Unfamiliarity with the layout, exits, and features of the Property;
+    \item Possible encounters with pests or wildlife;
+    \item Risks associated with vacant or unoccupied properties.
+\end{enumerate}
+I voluntarily assume all risks, known and unknown, associated with entering and viewing the Property.
+
+\textbf{10. WAIVER AND RELEASE OF LIABILITY}\\
+To the fullest extent permitted by law, I hereby release, waive, discharge, and covenant not to sue the Property Owner, Landlord, property management company, their agents, employees, officers, directors, successors, and assigns (collectively, the ``Released Parties'') from any and all claims, demands, damages, costs, expenses, actions, and causes of action, whether in law or equity, arising out of or related to any loss, damage, or injury, including death, that may be sustained by me or my guests, or any damage to property, while viewing the Property or as a result of this Agreement.
+
+\textbf{11. INDEMNIFICATION}\\
+I agree to indemnify, defend, and hold harmless the Released Parties from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorney's fees) arising out of or related to:
+\begin{enumerate}[label=\alph*), nosep, leftmargin=2em]
+    \item My access to or use of the Property;
+    \item Any breach of this Agreement by me or my guests;
+    \item Any injury, death, or property damage caused by me or my guests;
+    \item Any misrepresentation or fraud by me in connection with this Agreement.
+\end{enumerate}
+
+\textbf{12. DAMAGE TO PROPERTY}\\
+I agree to pay for any damage to the Property caused by me or my guests during the showing. I authorize the Landlord to use my identification information to pursue any claims for damages if necessary.
+
+\divider
+
+\sectionheader{REPRESENTATIONS AND WARRANTIES}
+
+I represent and warrant that:
+
+\textbf{13.} I am at least 18 years of age and legally competent to enter into this Agreement.
+
+\textbf{14.} The information I have provided is true, accurate, and complete.
+
+\textbf{15.} I have not been convicted of a violent felony or any crime involving theft, burglary, or trespass.
+
+\textbf{16.} I am genuinely interested in renting the Property and am not accessing it for any unlawful purpose.
+
+\textbf{17.} I have read this entire Agreement, understand its contents, and agree to be bound by its terms.
+
+\divider
+
+\sectionheader{GOVERNING LAW}
+
+This Agreement shall be governed by and construed in accordance with the laws of the State of Missouri. Any dispute arising out of or related to this Agreement shall be resolved in the courts of Clay County, Missouri.
+
+\divider
+
+\sectionheader{EMERGENCY CONTACT INFORMATION}
+
+In case of emergency during the showing, contact:
+
+\begin{tabular}{@{}p{5cm}p{10.5cm}@{}}
+Landlord/Property Manager: & \formfield{emergencycontact}{10.5cm} \\[0.8em]
+Phone: & \formfield{emergencyphone}{10.5cm} \\[0.8em]
+\end{tabular}
+
+Local Emergency Services: \textbf{911}
+
+\divider
+
+\sectionheader{ACKNOWLEDGMENT AND SIGNATURE}
+
+{\small\bfseries I HAVE READ THIS ENTIRE AGREEMENT AND FULLY UNDERSTAND ITS TERMS. I ACKNOWLEDGE THAT I AM VOLUNTARILY GIVING UP SUBSTANTIAL LEGAL RIGHTS, INCLUDING THE RIGHT TO SUE. I AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.}
+
+\vspace{0.3em}
+{\small\bfseries I UNDERSTAND THAT BY SIGNING BELOW, I AM AFFIRMING THAT ALL INFORMATION PROVIDED IS TRUE AND CORRECT, AND THAT I AGREE TO COMPLY WITH ALL TERMS AND CONDITIONS SET FORTH HEREIN.}
+
+\vspace{1em}
+
+\begin{tabular}{@{}p{5cm}p{10.5cm}@{}}
+Prospective Tenant Signature: & \formfield{tenantsig}{10.5cm} \\[1em]
+Printed Name: & \formfield{tenantname}{10.5cm} \\[1em]
+Date: & \formfield{tenantdate}{4cm} \hfill Time: \formfield{tenanttime}{4cm} \\
+\end{tabular}
+
+\divider
+
+\sectionheader{FOR LANDLORD USE ONLY}
+
+\vspace{0.5em}
+
+\begin{tabular}{@{}p{0.6cm}p{14.9cm}@{}}
+\formcheck{idreceived} & Government-issued ID photo received and verified \\[0.5em]
+\formcheck{agreementphoto} & Copy of signed Agreement photographed/retained \\[0.5em]
+\formcheck{applicationprovided} & Application provided to Prospective Tenant \\[0.5em]
+\formcheck{codeissued} & Temporary access code issued: \formfield{accesscode}{6cm} \\[0.5em]
+\formcheck{timeconfirmed} & Scheduled showing time confirmed: \formfield{confirmedtime}{6cm} \\
+\end{tabular}
+
+\vspace{1em}
+
+\begin{tabular}{@{}p{5cm}p{10.5cm}@{}}
+Landlord/Agent Signature: & \formfield{landlordsig}{10.5cm} \\[1em]
+Date: & \formfield{landlorddate}{4cm} \hfill Time: \formfield{landlordtime}{4cm} \\
+\end{tabular}
+
+\divider
+
+\textbf{ID PHOTO RECEIVED:} \formcheck{photoidyes} Yes \hspace{1em} \formcheck{photoidno} No
+
+\vspace{0.5em}
+\textbf{NOTES:}\\
+\formfieldmulti{notes}{15.5cm}{2.5cm}
+
+\vspace{1em}
+
+{\small\color{dividercolor}\textit{This document is for informational purposes only and does not constitute legal advice. Consult with a licensed attorney for legal counsel specific to your situation.}}
+
+\end{Form}
+
+\end{document}
+

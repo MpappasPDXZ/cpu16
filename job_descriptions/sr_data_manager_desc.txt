@@ -1,0 +1,182 @@
+I want to build a job description like:
+
+Data Analyst
+Location:  Lone Tree, CO, US Omaha, NE, US Lenexa, KS, US
+Requisition ID: 178551 
+
+Job Level: Mid Level 
+
+Home District/Group: DHO Kiewit Data Services 
+
+Department: Data Services 
+
+Market: Corporate Home Office 
+
+Employment Type: Full Time 
+
+Position Overview
+We are seeking a data-driven product and analytics professional who thrives at the intersection of data, technology, and business operations. This role combines data analysis and project coordination with product management responsibilities — ensuring that our data tools and analytics products are adopted, refined, and continuously improved.
+
+ 
+
+As a Data Analyst, you will:
+
+Manage and support major data initiatives and tools within your domain.
+Partner with technical and business teams to drive adoption and usability.
+Lead product and project efforts from requirement gathering through rollout and measurement.
+You’ll partner closely with the Data Strategy Domain Manager to:
+
+Drive adoption and continuous improvement of data products.
+Assess and enhance model inputs, data quality, and performance.
+Build analytics and metrics to guide both operational decisions and product evolution.
+Ensure alignment between business needs, technical development, and delivery timelines.
+ 
+
+This position is ideal for someone with a strong technical foundation in SQL, Python, Snowflake, and BI platforms, along with an interest in project coordination, stakeholder engagement, and data-driven product strategy.
+
+District Overview
+Kiewit Data Services’ (KDS) mission is to make Kiewit the premier data-driven organization in our industry. To accomplish this, our projects and districts need to have the right quality of data and the right level of analysis available to them at the right time. KDS is a cross functional organization with employees that have expertise in data, technology, support, and operations backgrounds. Our core functions are data Quality, Governance, Enablement, Analytics and Data Science. We are intent on delivering a world class user experience to Kiewit employees and believe in the power of analytics to aid us in this mission.
+
+Location
+This role is available for candidates to work from one of our office locations in Omaha, NE, Lone Tree, CO or Lenexa, KS. This is not remote opportunity and will require regular in office attendance. 
+
+Responsibilities
+Stakeholder Support & Product Enablement:
+
+Serve as the primary point of contact for your domain’s data tools and products.
+Provide structured, consistent support to users and product stakeholders.
+Translate business needs into technical requirements and clear action plans.
+Maintain user feedback channels and translate insights into backlog items or improvement stories.
+ 
+
+Data Fluency & Technical Support:
+
+Understand how tools and models work: key inputs, assumptions, and outputs.
+Use SQL, Snowflake, or Python to conduct data validation, monitor usage, and investigate user issues.
+Partner with Data Products and Engineering teams to resolve tool issues or data discrepancies.
+Contribute to the release testing and validation prior to deployments.
+ 
+
+Roadmap & Communication:
+
+Maintain adoption and support documentation.
+Support project scoping, timeline planning, and resource coordination for data products.
+Help track rollout milestones and identify areas for re-engagement or retraining.
+Build transparency around progress, risks and upcoming releases.
+Communicate updates clearly to business stakeholders.
+ 
+
+Launch & Adoption Support:
+
+Coordinate rollout and hypercare for new or updated tools.
+Develop user-facing resources such as release notes, how-to guides, and short videos.
+Organize and deliver training sessions to build user confidence and tool fluency.
+Qualifications
+Bachelor's degree in Data Analytics, Construction Management, Engineering, or related field.
+Familiarity with construction or engineering processes and tools.
+Working knowledge of SQL and at least one of: Python, Snowflake, Power BI, or Sigma Computing.
+Excellent communication skills – able to translate between technical and non-technical audiences.
+Attention to detail is a must, especially in a fast-paced development environment.
+Proven ability to support digital tool adoption and explain technical concepts to non-technical users.
+ Other Requirements:
+•    Regular, reliable attendance
+•    Work productively and meet deadlines timely
+•    Communicate and interact effectively and professionally with supervisors, employees, and others individually or in a team environment
+•    Perform work safely and effectively. Understand and follow oral and written instructions, including warning signs, equipment use, and other policies.
+•    Work during normal operating hours to organize and complete work within given deadlines. Work overtime and weekends as required.
+
+ 
+
+Base Compensation: $85,000/yr - $100,000/yr 
+(Actual compensation is subject to variation due to such factors as education, experience, skillset, and/or location)
+
+This posting will be active from: 11/18/2025  - 02/14/2026  
+
+We offer our fulltime staff employees a comprehensive benefits package that’s among the best in our industry, including top-tier medical, dental and vision plans covering eligible employees and dependents, voluntary wellness and employee assistance programs, life insurance, disability, retirement plans with matching, and generous paid time off.
+
+Equal Opportunity Employer, including disability and protected veteran status.
+
+
+BUT I want the description to be something this resume would apply for and I want the description to be for a Sr. Data Manager (Sr. Data Engineering Manager is included in this job title):
+Edward Smith
+Owings Mills, MD | 301-997-6360 | edward.ralph.smith@gmail.com
+Summary
+Highly accomplished and results-driven data engineering and cloud architecture professional
+with 10+ years of experience designing, building, and managing large-scale, high-performance
+distributed data processing systems and more than 20 years of software development
+experience. Proven ability to lead teams in the development and implementation of
+cutting-edge technologies, including AWS, Python, Kubernetes, and various big data tools.
+Expertise in Linux, Git, and Agile development methodologies. Passionate about leveraging
+data to drive innovation and solve complex business challenges. Seeking a role as a technical
+lead for a software engineering team.
+Technical Skills
+●
+●
+●
+●
+●
+●
+●
+AI-Enabled Development: JetBrains UI, Claude, ChatGPT4o
+Cloud Computing: AWS (Infrastructure and App development), Terraform, Pulumi
+Programming Languages: Python, BASH, SQL, others
+Containerization/OS: Kubernetes, Docker, Linux
+Databases: Relational (PostgreSQL, MySQL, Oracle, Snowflake), NoSQL (MongoDB,
+Redis)
+DevOps: Git, CI/CD, Jenkins, GitLab CI, AWS CodePipeline/CodeBuild
+Other: Networking, Security
+Professional Experience
+Principal Cloud Engineer | Space Telescope Science Institute | Remote | JUN 2025 - Present
+●
+●
+●
+Cloud Center of Excellence liaison to the MAST Digital Archive team which processes
+and stores space telescope observation data and makes it available to the public at
+https://archive.stsci.edu/
+Responsible for proposing and implementing cloud infrastructure solutions for MAST and
+other teams at the Institute
+Led the adoption of the AWS Cloud Development Kit which automated the deployment
+of cloud resources, eliminating the click-ops required for the previous Cloudformation
+solution
+Cloud Engineering Lead | Forterra | Remote | AUG 2022 - JAN 2025
+●
+●
+Led the design, implementation, and management of cloud infrastructure using
+Terraform, ensuring scalability, security, and cost-effectiveness.
+Built and deployed a new Kubernetes cluster (EKS) leveraging Metaflow, Argo, and
+Karpenter for enhanced container orchestration and workflow management.
+●
+Developed and maintained cloud-based applications using Python, AWS services, and
+Kubernetes, contributing to improved business agility and efficiency.
+Senior Data Engineer | Univ. of MD Medical System | Remote | DEC 2021 - AUG 2022
+●
+●
+●
+Led a team of 6 data engineers in the development and implementation of data solutions
+for medical research.
+Built and maintained an ELT pipeline from EPIC Clarity to OHDSI OMOP CDM (an open
+source medical data interchange model), ensuring HIPAA compliance and data integrity.
+Provided technical guidance and mentorship to team members, fostering a culture of
+collaboration and innovation.
+Data Engineer | Multi Media LLC | Remote | JAN 2021 - DEC 2021
+●
+●
+Managed the enterprise ELT process for a large video streaming service, processing
+over 1 TB of clickstream and log data per hour from New Relic and PostgreSQL into
+Snowflake.
+Developed a high-throughput, public-facing data API using AWS, Python, Terraform,
+Snowflake, and PostgreSQL, serving hundreds of requests per second.
+Software Engineer/Architect/Manager | Cisco Systems Inc | Remote | 2011 - DEC 2020
+●
+●
+●
+Led the development team for Cisco's Product Security Incident Response Team
+(PSIRT), utilizing Python, Django, PostgreSQL, Oracle, and ServiceNow.
+Developed a global DNS monitoring application using Hadoop MapReduce and Apache
+Hive, enabling proactive identification of security threats.
+Built a custom Security Information and Event Management (SIEM) system for
+distributed environments using Hadoop, Hive, Kafka, MongoDB, and Storm.
+Education
+University of Central Florida | Orlando, FL | DEC 1999
+
+Bachelor of Science in Computer Science and Liberal Studies

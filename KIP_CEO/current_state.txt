@@ -1,0 +1,90 @@
+Opportunity Definition:
+Kiewit has made tremendous (arguably industry leading) progress in the organization’s digital journey over the last 15 years
+Consolidated back-office systems (SAP, GEP, etc)
+The most robust Project Lifecycle Management suite in the industry (InEight)
+Good data foundation, with significant innovation driven by a 6+ year data organization
+We find ourselves at the next inflection point, both from a technical and a business perspective
+The mainstream availability of emerging technologies like AI, GPU’s, automation and orchestration technologies, etc., but a data strategy and infrastructure that is only partially prepared to take advantage of those advances
+Explosive growth in our business, with human capital looming as the barrier to further growth
+Kiewit is uniquely positioned to leapfrog our competition, and maximize shareholder return, through the smart application of data and emerging technology – if we get focused and act
+
+Scope includes:
+Provide KDS the operational data lake with data orchestration capabilities to expedite the completion of key automations now and into the future
+Unlock unstructured operational data including (SharePoint, Excel, and Engineering Model data)
+Provide Kiewit with a more scalable and stable ODS solution that feeds COR / DOR / ORS / JOR and Cost Report
+Provide Kiewit with an AI Agent that can answer user questions across all applications
+Provide Kiewit with a gold level reporting level similar to the CAT Helios project
+Opportunity to upgrade data engineering talent through the process with a modern data platform
+Outcomes include operational staff improvements and back-office reductions, through Automations of, Takeoffs, Estimating, Scheduling, Work Planning, and Shared Servies 
+Cost and Schedule is estimated at $40M spread over 2026-2027
+All costs will be validated and detailed plans reviewed before spend occurs for each workstream
+
+KIP Priorities:
+Access: Evaluate process for provisioning dataset access and azure service setup and look for automation opportunities.  Focus on tier 1 data domains to start.
+Planning: Implement lineage and monitoring / prioritize lineage gaps through workshops with 3rd party, Jimmy/Jake, and document what we’re going to do for each data domain.  We know we need estimate files, 3rd party contracts, quantities, scheduling – start those immediately and then workshop the rest.
+New Data: Begin to kickoff building net new data ingestion tasks (may be an application needed like a model normalization application or P6 schedule certification and ingestion application)
+Eliminate Duplication: Catalog & determine an attack plan to reduce duplication of Kiewit data objects.  Start to use a medallion lake architecture and then snowflake.
+Orchestration: Develop a robust orchestration tool and engine:-monitoring/validation, scheduling, code reverse engineering, & CI/CD pipeline (organizational code promotion will require approvers across current company boundaries)
+Pipeline Health (inventory) Custom App: Automate data validation with ERP / project systems // build a pipeline health application. stack (airflow, dagster, azure data factory, informatica)
+FinOps Model: metadata catalog, data modeling efforts, and continuous cost optimization through reducing duplication and looking at development patterns
+Decommission ODS & Optimize ORS: ODS decommission, cost report optimization, JOR optimization
+Improve Data Accuracy: Build a centralized data science team with the core objective of improving and fixing data as it’s ingested into KIP.  This would feed a continuous data improvement loop.  Today we are binary data quality.
+Self-service business intelligence: Today we are SSRS and Power BI with our goal being to modernize our certified reports like CRM opportunity results into a modern BI tool and reduce centrally completed BI reports & associated overhead.
+
+
+Document Sections:
+**Page 1-Why now and Who?  
+Opportunity defniition from new_ceo_summary.tex - should be the starting point
+KIP program structure:
+Macholtz / Nolan have executive investment oversight of Construction Operations and Shared Services 
+Dill / Freeman have executive program oversight of Kiewit Technology Group / Kiewit Data Services.  Dill has oversight of technical solution composition (tech. stack)
+Pappas / Davis have technical program and technology stack development oversight / Davis has strategy of data domain planning and integration (architecture)
+
+**Page 2-What is KIP
+Scope Includes (wheel diagram with 3 sections below):
+Section 1: Primary Objectives of Data Platform Capabilities:
+Access: Evaluate process for provisioning dataset access and azure service setup and look for automation opportunities.  Focus on tier 1 data domains to start.
+Planning: Implement lineage and monitoring / prioritize lineage gaps through workshops with 3rd party, Jimmy/Jake, and document what we’re going to do for each data domain.  We know we need estimate files, 3rd party contracts, quantities, scheduling – start those immediately and then workshop the rest.
+Eliminate Duplication: Catalog & determine an attack plan to reduce duplication of Kiewit data objects.  Start to use a medallion lake architecture and then snowflake.
+Orchestration: Develop a robust orchestration tool and engine:-monitoring/validation, scheduling, code reverse engineering, & CI/CD pipeline (organizational code promotion will require approvers across current company boundaries)
+Pipeline Health (inventory) Custom App: Automate data validation with ERP / project systems // build a pipeline health application. stack (airflow, dagster, azure data factory, informatica)
+FinOps Model: metadata catalog, data modeling efforts, and continuous cost optimization through reducing duplication and looking at development patterns
+Decommission ODS & Optimize ORS: ODS decommission, cost report optimization, JOR optimizationPl
+Self-service business intelligence: Today we are SSRS and Power BI with our goal being to modernize our certified reports like CRM opportunity results into a modern BI tool and reduce centrally completed BI reports & associated overhead.
+
+Section 2: Intelligence 
+-Improve Data Quality through Atlas Prism integration: Build a centralized data science team with the core objective of improving and fixing data as it’s ingested into KIP.  This would feed a continuous data improvement loop.  Today we are binary data quality.
+-Develop AI Agents for Search & Generation (content summarization) over KIP 
+-Develop ingestion engine with Atlas Vault integration
+
+Section 3: Automations
+-New Data: Begin to kickoff building net new data ingestion tasks (may be an application needed like a model normalization application or P6 schedule certification and ingestion application)
+-Maximize Nvidia hardware investment: Kiewit has invested $2.5m in hardware in 2025 alone and Atlas will be built on the high performance compute cluster that costed $2.5m
+
+**Page 4: What will KIP cost?  I want a data table that has main buckets, capabilities delivered, and cost 
+-Software: Enterprise orchestration like Airflow through Astronmer or hybrid Dagster (runs on Azure but is managed)
+-New data: Palantir (Look for strategic datasets like Source360 (procurement quote process that we are currently investing with them), FieldAI (LIDAR 3D Spatial Scans & Video Capture with object detection (computer vision)), 
+-data engineering staff augmentation: phDdata for SAP data and InEight integrated datasets (cost report, ORS, overhead model).  Incycle for InEight data landing in Lake.  Palantir
+-permanent data engineering staff additions
+
+**Page 5: Schedule of KIP
+-Primary Objectives of Data Platform Capabilities - 12 months
+-Intelligence - Continuous 24 months
+-Automation - Ongoing but ramping up with continued investment in data scientists (direct hire)
+
+**Page 6: Current strategic actions taken
+-Incycle is beginning to move InEight data
+-Internal resources are creating an inventory of pipelines and objects so that we can consolidate 
+-High performance cluster is now turned on (16 node NVIDIA B200 instance)
+-Reconciled plan
+
+painpoints:
+1-Access to data (documents and structured data) within the Kiewit medallion storage systems is controlled by a separate data engineering group within Kiewit.  Post replication from source we need to make key operational data discoverable (model quantities, component claiming, scheduling, etc. (not social security numbers).  Usage of tables like how Palantir stores data (they use iceberg table technology), makes data not only in the data lake but also in our data warehouse (Snowflake).  This makes data more discoverable.
+2-Broad availability of data: Design model data for most design build projects is neither ingested nor normalized, scheduling relationship data from InEight is not available, custom-built systems (LAND, KADE, ADAPT, etc.) need to integrate into KIP.  We may also have to partner with Palantir or others to get software applications that ingest key data sources like Source360 at a greater velocity.
+3-Orchestration is a critical capability that will allow us to connect pipelines together & monitor the health of data movements.  Each arrow is a large volume of code that requires care and feeding.  Code is owned by organizations.  Data science is dependent on open-source tools like Airflow and Dagster and we need more holistic software engineering in our data engineers tool belt.  We need to enable reverse engineering of datasets to mostly eliminate data scientists from duplicating datasets.  We also need to stop enterprise redundancy with currently 36 Snowflake databases plus an on-premises ODS with many more.
+
+
+
+4-We need to not only augment with external companies like phData or InCycle but also build our internal data engineering skillsets up in a single organization with joint priorities shared by data science and data engineering.  Not all data engineers in one organization but key domains only.
+
+

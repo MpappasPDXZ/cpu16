@@ -1,0 +1,599 @@
+KIP Use Cases - Full Inventory (Validated)
+
+================================================================================
+CONSTRUCTION USE CASES (C1-C25)
+================================================================================
+
+C1: Apply AI agent to construction documents
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Enable conversational interaction with project documents to get answers more quickly and automate document-related workflows. Expands the footprint of people who are able to get work done without having to make requests to SMEs or specialists.
+    Possible Solution: Develop an AI Agent, accessed through a new web and mobile UI, that uses document intelligence to interact with the project documents uploaded into InEight Document. The Agent can answer questions, anticipate issues based on document content, and initiate actions inside the system (e.g., send an RFI and include this content).
+
+C2: Apply AI agent to construction project controls data
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Enable conversational interaction with project controls data to get answers more quickly and initiate actions in the system. Expands the footprint of people who are able to get work done without having to make requests to SMEs or specialists.
+    Possible Solution: Develop an AI Agent, accessed through a new web and mobile UI, that interacts with a new data lake containing project controls data. This data can be from InEight and other sources. The Agent can answer questions, anticipate issues, make suggestions, and complete actions inside source InEight systems (e.g., make a budget move, fill in missing account codes, etc.).
+
+C3: Provide Engineering & Procurement Status of the Project
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Medium
+    Company Effort: Medium
+    Expected Outcome: Enable conversational interaction with engineering/design data resident in models to get answers more quickly, get visual context through the model, and initiate actions in the system. Expands the footprint of people who are able to get work done without having to make requests to SMEs or specialists.
+    Possible Solution: The AI Agent can be asked to display the status through the model or report of components and systems.
+
+C4: Estimate Takeoff
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Opportunity to create a Takeoff Shared Service and automate the takeoff process through the Model and 2D drawings.
+    Possible Solution: Opportunity to create a Takeoff Shared Service and automate the takeoff process through the Model and 2D drawings.
+
+C5: Estimate Creation
+    C-E-P-SS Connection: —
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: From the takeoff shared service the estimating teams could generate an estimate through InEight Estimate.
+    Possible Solution: From the takeoff shared service the estimating teams could generate an estimate through InEight Estimate.
+
+C6: Estimate Conformance
+    C-E-P-SS Connection: —
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: Dramatically shorten estimate conformance timelines using AI to learn from prior conformance routines to auto-complete actions such as roll-ups and splits, account code assignments, resource normalization, and other time consuming tasks.
+    Possible Solution: Estimate conformance could be automated through standard account codes and business line structure.
+
+C7: Project Schedule Creation
+    C-E-P-SS Connection: —
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Dramatically reduce time required to create preliminary construction schedules by intelligently leveraging information in the current estimate and historical schedules to auto create WBS/activities, durations, logic relationships, and more.
+    Possible Solution: From the estimate or estimate conformance a schedule could be generated based on past projects and standard account codes.
+
+C8: Project Risk Creation and Monitoring
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Medium
+    Expected Outcome: Identify risks earlier in the project lifecycle by intelligently leveraging information in the current estimate and historical schedules to auto create a risk register.
+    Possible Solution: At estimate time a risk register could be generated based on standard account codes and applied against the generated estimate and schedule.
+
+C9: Change order management
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Large
+    Company Effort: Medium
+    Expected Outcome: Simplify and shorten the work required to support an issue/change order by automating "what if?" scenarios and summarizing related information that is otherwise manual and time consuming to gather.
+    Possible Solution: Perform a "what if?" analysis relative to cost and schedule to support an issue/change order (e.g., what will the cost and schedule impact be if the foundation work has to pause for 5 days?).
+
+C10: Project Takeoff Feed to Plan & Procurement
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Medium
+    Company Effort: Large
+    Expected Outcome: Eliminate redundant takeoff effort and risk of errors by providing a single source of quantity take off data connected from estimating through procurement and work planning.
+    Possible Solution: The takeoff shared service team would be utilized and populate plan automatically based on discipline, and business line rules.
+
+C11: Resource management
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Identify and predict potential resource shortages and opportunities for larger volume/reduced cost procurement across projects.
+    Possible Solution: Provide a cross-project view of resource requirements for active and upcoming projects.
+
+C12: Project Quantity Overrun Tracking
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Medium
+    Expected Outcome: Create more accurate quantity expectations for projects by continually learning from previous projects and tracking where quantity busts are most likely to occur.
+    Possible Solution: Takeoffs would be automatically compared and stored in Design for future use.
+
+C13: Work Package Creation
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: A shared service could complete the initial plans based on project needs through automation.
+    Possible Solution: A shared service could complete the initial plans based on project needs through automation.
+
+C14: Model Visualization and Usage Standards
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Medium
+    Company Effort: Medium
+    Expected Outcome: Standards need to be established on how the model is used throughout the organization.
+    Possible Solution: Standards need to be established on how the model is used throughout the organization.
+
+C15: Safety and quality management
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Medium
+    Expected Outcome: Identify likely quality and safety issues for upcoming work by continually learning from previous projects and tracking where such as issues are most likely to occur.
+    Possible Solution: Anticipate and predict safety hazards and quality issues from work packs.
+
+C16: Safety management
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Medium
+    Expected Outcome: Speed up communication timelines and reduce risk of safety issues by automatically sending alerts based on analysis of uploaded jobsite photos.
+    Possible Solution: Use AI/computer vision to detect issues/hazards from uploaded photos and send notifications.
+
+C17: Compliance Form Creation
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Eliminate manual effort required to create safety forms associated with an upcoming work plan.
+    Possible Solution: InEight needs to automate the creation of Compliance forms for Web and mobile based work plans based on past patterns.
+
+C18: Completion Form Creation
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Eliminate manual effort required to create quality checklists associated with an upcoming work plan.
+    Possible Solution: InEight needs to automate the creation of Completion forms for Web and mobile based on past patterns, types of work, components, and plans.
+
+C19: Short Interval Planning Creation
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Medium
+    Company Effort: Large
+    Expected Outcome: Save time by auto creating short interval planning steps aligned to current schedules and work plans.
+    Possible Solution: Based on previous projects schedule activities, and work plans an automated short interval plan could be generated.
+
+C20: Quantity Claiming
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Small
+    Company Effort: Small
+    Expected Outcome: Simplify and shorten the process to claim component quantities through a visual, model-driven process.
+    Possible Solution: Quantities could be claimed from the Model rather than in the field claiming.
+
+C21: Auto progress schedule from component claiming (SCH-PLAN integration)
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Large
+    Risk Reduction Impact: Medium
+    Company Effort: Large
+    Expected Outcome: Eliminate/minimize the time it takes to separately progress the CPM schedule by intelligently deriving progress from component claiming.
+    Possible Solution: Update % complete status of schedule activities based on component claiming and rules of credit.
+
+C22: Project Billings
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Faster billing-to-payment turn-around, and lower admin cost relative to billings preparation by automating the preparation and calculations for project billings based on contract terms, billable rates, allowed fees/markups, etc.
+    Possible Solution: Kiewit should standardize on InEight Billings and provide requirements to satisfy its needs.
+
+C23: Project Month End Status Report
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: Automate the process required to produce a month end status report with flexibility to adjust content on a project by project basis.
+    Possible Solution: This needs automation and focus.
+
+C24: Program vs Project Needs
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: Enable information to flow from projects to programs in an automated fashion to eliminate manual effort required to summarize project level information and re-enter at the program level.
+    Possible Solution: InEight needs to build out the project relationship to programs through the tools Estimate / Schedule / Project Controls / Document.
+
+C25: Technology Training
+    C-E-P-SS Connection: —
+    Shared Service: 1
+    Apply Automation: —
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: A review of all training material should be conducted a recommended training approach should be adopted by KU.
+    Possible Solution: A review of all training material should be conducted a recommended training approach should be adopted by KU.
+
+
+================================================================================
+ENGINEERING USE CASES (E1-E8)
+================================================================================
+
+E1: Add Engineering Data to the AI Agent
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Medium
+    Company Effort: Medium
+    Expected Outcome: Enable conversational interaction with engineering data (model metadata) to get answers more quickly and automate workflows with the design data context.
+    Possible Solution: Engineering could utilize the construction AI Agent described in C1.
+
+E2: Construction and Procurement Model Exports
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: An agreement needs to be made between construction engineering and procurement as to what is expected from the design model. A shared service could be created to move design models into the model viewer or automation created to do this.
+    Possible Solution: An agreement needs to be made between construction engineering and procurement as to what is expected from the design model. A shared service could be created to move design models into the model viewer or automation created to do this.
+
+E3: Time Collection and Billings
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Large
+    Risk Reduction Impact: Medium
+    Company Effort: Large
+    Expected Outcome: Standardized use of InEight Billings across both construction and engineering will lead to faster billing-to-payment turn-around, and lower admin cost relative to billings preparation.
+    Possible Solution: KTG needs to allow Engineering time to charge to projects as needed, then adopt InEight Time Center / Billings.
+
+E4: Estimate Creation
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: AI-assisted, parameter-driven estimating can enable faster estimate creation times and support.
+    Possible Solution: Engineering estimates should be automated based on parametric estimating.
+
+E5: Design Scope Item Creation
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Streamline estimating, scheduling, and construction workflows by auto-deriving scope from models and engineering data.
+    Possible Solution: Design scope creation should be made available based on scope to automate.
+
+E6: Design Quantity Overrun Risk Analysis
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Proactive, AI-assisted identification of scopes with high likelihood of quantity busts will reduce risk and enable alignment of expectations across stakeholders regarding project costs and timelines.
+    Possible Solution: The AI should provide an estimate of Design Overruns on previous projects.
+
+E7: Schedule Creation
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Dramatically reduce time required to create preliminary engineering schedules by intelligently leveraging information in the current estimate and historical engineering schedules to auto create WBS/activities, durations, logic relationships, and more.
+    Possible Solution: A design schedule should be created from the estimate.
+
+E8: Technology Training
+    C-E-P-SS Connection: —
+    Shared Service: 1
+    Apply Automation: —
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Small
+    Expected Outcome: A review of all training material should be conducted a recommended training approach should be adopted by KU.
+    Possible Solution: A review of all training material should be conducted a recommended training approach should be adopted by KU.
+
+
+================================================================================
+PROCUREMENT USE CASES (P1-P11)
+================================================================================
+
+P1: Add Procurement Information to the AI Agent
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Medium
+    Company Effort: Medium
+    Expected Outcome: Enable conversational interaction with procurement data to get answers more quickly and automate workflows.
+    Possible Solution: Procurement could utilize the construction AI Agent described in C1.
+
+P2: Takeoff
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Opportunity to create a Takeoff Shared Service and automate the takeoff process through the Model and 2D drawings.
+    Possible Solution: Opportunity to create a Takeoff Shared Service and automate the takeoff process through the Model and 2D drawings.
+
+P3: Estimating
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: From the takeoff Shared service the estimating teams could generate an estimate through InEight Estimate.
+    Possible Solution: From the takeoff shared service the estimating teams could generate an estimate through InEight Estimate.
+
+P4: Schedule
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: Dramatically reduce time required to create procurement schedules by intelligently leveraging information in the current estimate and historical schedules to auto create WBS/activities, durations, logic relationships, and more.
+    Possible Solution: From the estimate or estimate conformance a schedule could be generated based on past projects and standard account codes.
+
+P5: Vendor Selection
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: AI-assisted vendor selection will reduce the time required for vendor qualification and selection, and lead to better cost-performance outcomes related to sub/vendor scopes.
+    Possible Solution: A custom built application can be created to standardize vendor selection based on Kiewit history. Or we can partner with a vendor and apply KDS to build models for this solution.
+
+P6: Vendor Status
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Large
+    Company Effort: Small
+    Expected Outcome: Minimize potential for sub/vendor loss through proactive, AI-assisted identification of risks associated with sub/vendor scopes.
+    Possible Solution: Vendor status should be an AI Agent capability.
+
+P7: Contract Management
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Medium
+    Company Effort: Medium
+    Expected Outcome: Generative AI can reduce contract creation times by auto-creating contract documents from related documentation such as scope documents, standard terms, sub/vendor correspondence and communication, and previous contracts with similar scopes.
+    Possible Solution: Auto creation of contracts. Upload a contract document and mine relevant data from it.
+
+P8: Vendor Selection (Performance-based)
+    C-E-P-SS Connection: —
+    Shared Service: —
+    Apply Automation: —
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Large
+    Company Effort: Medium
+    Expected Outcome: Better sub/vendor performance and cost outcomes through better selection based on past history, current scope and project characteristics.
+    Possible Solution: Sub/vendor performance predictor at time of selection.
+
+P9: Material Visibility
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Large
+    Company Effort: Large
+    Expected Outcome: An AI agent can serve to standardize material coding and proactively enforce the standards, which in turn will enable more real time communication of material status.
+    Possible Solution: Standard material codes need to be established and pushed through the organization then a custom application needs to be built (or utilize the AI agent).
+
+P10: Field Material Management
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Medium
+    Company Effort: Small
+    Expected Outcome: Continue to roll out Intelliwave through the company or build a custom application.
+    Possible Solution: Continue to roll out Intelliwave through the company or build a custom application.
+
+P11: Technology Training
+    C-E-P-SS Connection: —
+    Shared Service: 1
+    Apply Automation: —
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Small
+    Expected Outcome: A review of all training material should be conducted a recommended training approach should be adopted by KU.
+    Possible Solution: A review of all training material should be conducted a recommended training approach should be adopted by KU.
+
+
+================================================================================
+SHARED SERVICES USE CASES (SS1-SS5)
+================================================================================
+
+SS1: Add Shared Service Information to the AI Agent
+    C-E-P-SS Connection: 1
+    Shared Service: —
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: Jimmy to investigate all shared service opportunities.
+    Possible Solution: Jimmy to investigate all shared service opportunities.
+
+SS2: Equipment Group Opportunities
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Large
+    Expected Outcome: Jimmy to investigate all shared service opportunities.
+    Possible Solution: Jimmy to investigate all shared service opportunities.
+
+SS3: Human Resources Opportunities
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Medium
+    Risk Reduction Impact: Small
+    Company Effort: Large
+    Expected Outcome: Jimmy to investigate all shared service opportunities.
+    Possible Solution: Jimmy to investigate all shared service opportunities.
+
+SS4: Accounting / Finance Opportunities
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Small
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: Jimmy to investigate all shared service opportunities.
+    Possible Solution: Jimmy to investigate all shared service opportunities.
+
+SS5: KSS Opportunities
+    C-E-P-SS Connection: 1
+    Shared Service: 1
+    Apply Automation: 1
+    Productivity Improvement: Large
+    Risk Reduction Impact: Small
+    Company Effort: Medium
+    Expected Outcome: Jimmy to investigate all shared service opportunities.
+    Possible Solution: Jimmy to investigate all shared service opportunities.
+
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+
+Total Use Cases: 49
+    Construction: 25 (C1-C25)
+    Engineering: 8 (E1-E8)
+    Procurement: 11 (P1-P11)
+    Shared Services: 5 (SS1-SS5)
+
+--------------------------------------------------------------------------------
+USE CASES WITH C-E-P-SS CONNECTION (Cross-functional impact)
+--------------------------------------------------------------------------------
+C3, C4, C8, C10, C12, C13, C14, C20, C22, C23
+E1, E2, E3, E4, E5, E6, E7
+P1, P2, P3, P4, P5, P6, P9, P10
+SS1, SS2, SS3, SS4, SS5
+
+Total with Connection: 29 of 49 (59%)
+
+--------------------------------------------------------------------------------
+USE CASES FLAGGED FOR SHARED SERVICE
+--------------------------------------------------------------------------------
+C4, C5, C6, C7, C8, C10, C12, C13, C14, C25
+E2, E8
+P2, P3, P4, P5, P6, P11
+SS2, SS3, SS4, SS5
+
+Total with Shared Service: 22 of 49 (45%)
+
+--------------------------------------------------------------------------------
+USE CASES FLAGGED FOR AUTOMATION
+--------------------------------------------------------------------------------
+C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C12, C13, C17, C18, C19
+E1, E2, E4, E5, E6, E7
+P1, P2, P3, P4, P5, P6, P9, P10
+SS1, SS2, SS3, SS4, SS5
+
+Total with Automation: 33 of 49 (67%)
+
+--------------------------------------------------------------------------------
+HIGH-IMPACT USE CASES (Large Productivity + Large Risk Reduction)
+--------------------------------------------------------------------------------
+C1: Apply AI agent to construction documents
+C2: Apply AI agent to construction project controls data
+C4: Estimate Takeoff
+C5: Estimate Creation
+C7: Project Schedule Creation
+C8: Project Risk Creation and Monitoring
+C13: Work Package Creation
+C15: Safety and quality management
+E2: Construction and Procurement Model Exports
+
+--------------------------------------------------------------------------------
+CHRONOLOGICALLY FOUNDATIONAL (Design Model / Takeoff / Quantity)
+--------------------------------------------------------------------------------
+C4: Estimate Takeoff — FOUNDATION
+C10: Project Takeoff Feed to Plan & Procurement — FOUNDATION
+C12: Project Quantity Overrun Tracking — FOUNDATION
+C14: Model Visualization and Usage Standards — FOUNDATION
+E2: Construction and Procurement Model Exports — FOUNDATION
+P2: Takeoff — FOUNDATION
+
+These 6 use cases form the upstream foundation. All other use cases 
+(estimates, schedules, work packages, procurement) depend on this data.
+
+--------------------------------------------------------------------------------
+CHRONOLOGICAL DEPENDENCY CHAIN
+--------------------------------------------------------------------------------
+
+TIER 1 - DESIGN MODEL & TAKEOFF (Must be first)
+    C4, C10, C12, C14, E2, P2
+
+TIER 2 - ESTIMATES (Depends on Tier 1)
+    C5, C6, E4, P3
+
+TIER 3 - SCHEDULES & PROCUREMENT (Depends on Tier 2)
+    C7, C8, E7, P4, P5
+
+TIER 4 - WORK PLANNING & EXECUTION (Depends on Tier 3)
+    C13, C19, C21
+
+TIER 5 - OPERATIONS & MONITORING (Can run parallel after Tier 1)
+    C9, C11, C15, C16, C17, C18, C20, C22, C23, E3, P6, P7, P8, P9, P10
+
+CROSS-CUTTING (Foundation agnostic)
+    C1, C2, C3, C24, C25, E1, E5, E6, E8, P1, P11, SS1-SS5

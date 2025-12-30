@@ -1,0 +1,439 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wenneker Article
+% LaTeX Template
+% Version 2.0 (28/2/17)
+%
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Vel (vel@LaTeXTemplates.com)
+% Frits Wenneker
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt, a4paper]{article} % 10pt font size (11 and 12 also possible), A4 paper (letterpaper for US letter) and two column layout (remove for one column)
+
+\input{structure.tex} % Specifies the document structure and loads requires packages
+
+\input{matrix.tex}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Rethinking Sensitivity}
+\author{Matt Pappas, Jack Bruck, and Graham Droge}
+\newcommand{\theothertitle}{Improved Methods for Quantifying Cost Uncertainty}
+\newcommand{\thereviewer}{Jay Steinmetz, Steve Purto, John Willard, Justin Terminella, Allyson Crowl}
+\newcommand{\theexecutive}{Chad Jessen, Tyler Nordquist, Kevin Needham, Eric Gutierrez}
+\newcommand{\theinstitution}{Kiewit Data Services}
+
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	DAVE FREEMAN'S TABLE
+%----------------------------------------------------------------------------------------
+\begin{center}
+
+    \vspace{0.5em}
+
+    {\LARGE \bfseries \MakeUppercase{Executive Abstract} \par}
+
+    \vspace{0.25em}
+
+    {\small Sensitivity Analysis Process Comparison}
+
+    \vspace{0.25em}
+
+    {\small \emph{Kiewit Data Services}}
+
+    \vspace{0.5em}
+    
+\end{center}
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash\relax}p{2.5cm}
+  X 
+  X
+@{}}
+\toprule
+\textbf{Process} & \textbf{Prior State} & \textbf{Proposed State} \\
+\midrule
+
+\textbf{Comparable Selection} &
+\vspace*{-\topsep}\vspace{\parskip}
+\begin{itemize}[leftmargin=*, nosep]
+  \item Human selects comparable projects manually.
+  \item Localized data storage of key elements like DDG.
+  \item Manual download and Excel dumping of benchmarking data.
+\end{itemize}
+\vspace*{-\topsep}\vspace{\parskip}
+&
+\vspace*{-\topsep}\vspace{\parskip}
+\begin{itemize}[leftmargin=*, nosep]
+  \item Machine automated and user-selected comparables side-by-side for bookends.
+  \item Encoded business rules via Atlas Prism data collection process (Synthesizes spatial data, engineering specification like plant layout, and cost report data).
+\end{itemize} 
+\vspace*{-\topsep}\vspace{\parskip}\\
+
+\midrule
+
+\textbf{Bookend Analysis} &
+\vspace*{-\topsep}\vspace{\parskip}
+\begin{itemize}[leftmargin=*, nosep]
+  \item Parent account code comparison creates variation.
+  \item Uses basic statistics (min, max, median, avg).
+  \item Quantity growth from estimate to execution is a user-calculated percentage.
+\end{itemize} 
+\vspace*{-\topsep}\vspace{\parskip}&
+\vspace*{-\topsep}\vspace{\parskip}
+\begin{itemize}[leftmargin=*, nosep]
+  \item Recommendation engine takes parent account code relative difficulty and recommends terminal account code hours and quantity.
+  \item Machine learning provides bookends by account code vs just discipline.
+  \item Total quantity ranges calculated using quantity ratios of past samples and simulating (e.g., pipe supports / AG pipe ratio).
+  \item Subject matter experts drive ratios (e.g., pipe supports / AG pipe) for ML simulation. Machine learning validates and recommends ratios used in calculating total quantity.
+  \item Simulates actual account codes for accurate ranges.
+\end{itemize} 
+\vspace*{-\topsep}\vspace{\parskip}\\
+
+\midrule
+
+\textbf{Sensitivity Analysis} &
+\vspace*{-\topsep}\vspace{\parskip}
+\begin{itemize}[leftmargin=*, nosep]
+  \item Relies on human inputs at a low level of fidelity (e.g., discipline-level DDG and parent MHF).
+  \item Treats risks in isolation, ignoring compounding effects of error within each cost driver simulation.
+  \item Relies on the estimator to justify data, probability calculation methods, and evenly weights past projects ignoring mathematical similarity.
+\end{itemize} 
+\vspace*{-\topsep}\vspace{\parskip}&
+\vspace*{-\topsep}\vspace{\parskip}
+\begin{itemize}[leftmargin=*, nosep]
+  \item Simulates the full account code tree for exact scope coverage.
+  \item Automatically calculates how related risks impact each other and how costs move together across the entire estimate account code tree, enabling more realistic Monte Carlo Simulation.
+  \item Creates a transparent "evidence chain" from simulation back to source data, fully auditable in Atlas Prism.
+  \item Delivers a full cost distribution (P-values), enabling risk-based bid strategies.
+\end{itemize} 
+\vspace*{-\topsep}\vspace{\parskip}\\
+
+\end{tabularx}
+\end{table}
+
+\thispagestyle{empty}
+
+\newpage
+
+% Front page.
+\begin{center}
+    \noindent\rule{\linewidth}{2pt} % Top rule
+
+    \vspace{0.5em}
+
+    {\LARGE \bfseries \MakeUppercase{\thetitle} \par}
+
+    \vspace{0.25em}
+
+    {\small \theothertitle}
+
+    \vspace{0.5em}
+    
+    \noindent\rule{\linewidth}{2pt} % Bottom rule
+
+    \vspace{0.5em}
+
+    \begin{tabular}{@{} ll @{}}
+        \textbf{Author(s):}    & \theauthor \\ [6pt]
+        \textbf{Reviewer(s):}  & \thereviewer \\ [6pt]
+        \textbf{Executive(s):} & \theexecutive \\ [6pt]
+        \textbf{Date:}         & \thedate
+    \end{tabular}
+
+    \vspace{0.5em}
+
+    \noindent\rule{\linewidth}{2pt} % Bottom rule
+\end{center}
+
+\setcounter{page}{1}
+\thispagestyle{firstpage}
+
+%----------------------------------------------------------------------------------------
+%	WRITTEN ABSTRACT
+%----------------------------------------------------------------------------------------
+
+
+\lettrineabstract{Kiewit’s current bookends and sensitivity processes provides directional insight into cost uncertainty but relies on judgment‐based selection of comparable projects and spreadsheet averages that mask granular risk. This paper proposes replacing that subjectivity with a single, enterprise-level engine based on graph-informed matrix factorization—a proven recommendation-system technique adapted to construction estimating. By analyzing Kiewit's full database of past cost, the model intelligently identifies the most relevant comparable work, fills data gaps with statistically sound estimates, and outputs fully correlated probability distributions for quantities, labor, support, and equipment costs. The result is a transparent, repeatable risk curve (e.g. $P_{50}$, $P_{75}$, $P_{90}$) that leadership can map directly to funding and bid-strategy thresholds, delivering firmer contingency decisions without disrupting established workflows.}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Current Practices for Quantifying Cost Uncertainty}
+
+Kiewit's estimating process currently relies on Monte Carlo simulations with relatively simplistic inputs to calculate uncertainty ranges. This approach, termed \emph{bookends}, compares new project estimates against historical projects to quantify expected ranges for key metrics such as quantities, labor productivity, buyout, and a slew of other ratio-driven metrics. Although this framework is directionally sound, the way it is executed severely limits the insight into the full scope of cost uncertainty on an estimate.
+
+\subsection*{Current Methodology}
+
+\begin{itemize}
+  \item \textbf{Manual project selection}. Estimators hand-select "look-alike" projects based upon experience and judgment.
+  \item \textbf{Compute summary statistics}. Excel workbooks compute min, average, and max values for desired quantity ratios, man-hour factors, and unit rates.
+  \item \textbf{Assign comparable weights}. Various percentages of each selected job are carried, or \emph{plugged}, for a given metric. These weights are manually adjusted based upon perceived similarities to the estimate. 
+\end{itemize}
+
+
+\subsection*{Observed Limitations}
+
+\begin{enumerate}
+  \item \textbf{Sampling bias}.  Hand-picking comparable projects causes the generated statistics tend to reflect the underlying bias of the estimating team. This bias leads to an over-reliance on projects the team is most familiar with, and not necessarily the most \emph{similar} work, and is further amplified when selecting plug percentages. 
+  \item \textbf{Scope dilution}.  Comparisons are often done at high account-code levels, masking material and complexity differences. Without many terminal-level comparable projects for each account code, estimators cannot produce valid summary distributions.
+  \item \textbf{Shallow risk propagation}. Our current approach only shifts a few top-line inputs, so risk doesn’t flow through the full chain of dependent quantities and rates. This first-order view misses compounding effects and understates true cost volatility. Well-defined distributions in the bookends phase are key to unlocking deeper, system-wide sensitivity.
+\end{enumerate}
+
+\bigskip
+
+To move beyond subjective cost ranges and toward a truly reliable risk-management tool, Kiewit can make three key upgrades. First, comparable jobs should be driven first by data, not judgment, to ensure bids across the company consistently select the most relevant historical work. Second, we should model input metrics at the granularity that they are actually tracked, preserving important material and method distinctions. Third, we should adopt a comprehensive multi-variable sensitivity system fully understand the cascading effects of uncertainty in our bids. Together, these steps will give leadership clearer visibility into risk, more consistent bid logic across districts, and better control over contingency strategy.
+
+%--------------------------------------------------------------------
+\section{Data-Driven Selection of Comparable Projects}
+
+\subsection*{Why Estimating is Like a Recommendation System}
+
+\begin{table}[h]
+\centering
+\small                       % optional: slightly reduce font size
+\setlength{\tabcolsep}{6pt}  % tighten column padding if needed
+\renewcommand{\arraystretch}{1.15}
+
+\begin{tabularx}{\textwidth}{
+    @{}
+        >{\raggedright\arraybackslash\bfseries}l
+        >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X
+    @{}
+}
+
+\toprule
+Recommender concept & Kiewit context & Example \\ 
+\midrule
+Users & Projects & IPP Repowering 2x2x1 \\[2pt]
+Items & Metrics & Man-hour Factor for AG SB Carbon Steel Piping \\[2pt]
+Interactions / Ratings & Historical values observed for those metrics & 5.14 hr / lf \\ 
+\bottomrule
+\end{tabularx}
+
+\caption{Mapping generic recommender terminology to Kiewit’s estimating data}
+\label{tab:rec_mapping}
+\end{table}
+
+Modern technology companies no longer display every available option to every customer. Two practical issues drive this design choice:
+
+\begin{enumerate}
+  \item \textbf{Extreme sparsity}. With thousands of users and tens of thousands of items, any single customer has interacted with only a small fraction of the catalog.
+  \item \textbf{Partial overlap}. Even when two customers are \emph{highly} similar, they often have few shared interactions with certain items, leaving valuable user–item pairs completely blank.  Sophisticated engines therefore model the missing entries—in a process termed \emph{matrix completion}—rather than discarding the information gap.
+\end{enumerate}
+
+Recommendation engines mine these sparse interaction records, infer hidden patterns of similarity, and estimate the unobserved values so that (i) each user can be reliably compared to other users and (ii) downstream analytics have a strong understanding of each user-item pair, \emph{even if the user has never seen the item}.
+
+Estimating departments face a remarkably similar problem of scale and sparsity. Kiewit’s past cost data consists of thousands of projects and tens of thousands of granular metrics (account code quantities, man-hour factors, tooling costs, etc.). Two projects may be very similar in terms of installation complexity or environmental challenges, yet share few observed metrics at the terminal account-code level--a direct parallel to the "partial overlap" issue.  Manually selecting comparables under such conditions becomes subjective, inconsistent, and unsustainable; a data-driven recommendation framework can fill these gaps with robust statistics.
+
+\subsection*{Operational Overview}
+
+\def\csize{0.25cm}
+\def\nrows{20}
+\def\ncols{16}
+\def\nlate{5}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[>=Latex]
+        % you probably already have this somewhere
+        % \def\csize{3mm}
+
+        % --- R: historical matrix (16 × 10, 85 % zeros) --------------------
+        \coordinate (origin) at (0,0);
+        \begin{scope}[shift={(origin)}, x=\csize, y=\csize]
+          \DrawSparseMatrix{\nrows}{\ncols}{0.85}
+            [Metrics]
+            [Projects]  % edit to whatever “row” means
+        \end{scope}
+        \node[below=2pt] at ($(origin)+(0.5*\ncols*\csize,-\csize)$)
+              {\scriptsize Historical matrix};
+
+        % --- ≈ symbol ------------------------------------------------------
+        \pgfmathsetmacro{\widthR}{\ncols*\csize}
+        \node (approx) at ($(origin)+(\widthR+7mm,0.8*\csize)$) {\Large$\approx$};
+        
+        % --- W: 16 × 3 dense ----------------------------------------------
+        \coordinate (Worig) at ($(approx.east)+(7mm, -0.8*\csize)$);
+        \begin{scope}[shift={(Worig)}, x=\csize, y=\csize]
+          \DrawSparseMatrix{\nrows}{\nlate}{0}
+            [$k$]
+            [Projects]
+        \end{scope}
+        \node[below=2pt] at ($(Worig)+(0.5*\nlate*\csize,-\csize)$)
+              {\scriptsize Project factors};
+
+        % --- × symbol ------------------------------------------------------
+        \pgfmathsetmacro{\widthW}{\nlate*\csize}
+        \node (times) at ($(Worig)+(\widthW+7mm,0.8*\csize)$) {\Large$\times$};
+
+        % --- Xᵀ: 3 × 10 dense ----------------------------------------------
+        \coordinate (XTorig) at ($(times.east)+(7mm,-0.8*\csize)$);
+        \begin{scope}[shift={(XTorig)}, x=\csize, y=\csize]
+          \DrawSparseMatrix{\nlate}{\ncols}{0}
+            [Metrics]
+            [$k$]
+        \end{scope}
+        \node[below=2pt] at ($(XTorig)+(0.5*\ncols*\csize,-\csize)$)
+              {\scriptsize Metric factors};
+
+        % --- Graph example. ------------------------------------------------
+        \coordinate (Gorig) at ($(XTorig)+(0.5*\ncols*\csize,0.6*\csize*\nrows)-(7*0.5*\csize,0)$);
+        \begin{scope}[shift={(Gorig)}, x=0.5*\csize, y=0.5*\csize]
+            \foreach \i in {0,...,13}
+                \foreach \j in {0,...,13}{
+                  % example random sim value
+                  \pgfmathsetmacro\k{int(rnd*100)}
+                  \fill[gray!\k] (1 + \j,14-\i) rectangle ++(1,1);
+                }
+            \draw (1, 1) rectangle (15, 15);
+          \foreach \i in {0,...,13}
+            \foreach \j in {0,...,13}{
+              % example random sim value
+              \pgfmathsetmacro\k{int(rnd*100)}
+              \fill[gray!\k] (\j,13-\i) rectangle ++(1,1);
+            }
+          \draw (0,0) rectangle (14, 14);
+            \node[
+              anchor=north,            % attach the top of the box at (5,-2)
+              font=\scriptsize,        % tiny text
+              text width=\csize*\ncols,          % wrap lines at 5cm
+              align=center             % center each line
+            ] at (7,-1) {
+              Similarity graphs
+            };
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Factorizing historical data into project and metric features. Similarity graphs incorporate domain knowledge to ensure similar projects and similar metrics are near each other in the learned latent space. The latent space has $k$ factors which control how much variance the system can capture.}
+    \label{fig:mf_dynamic}
+\end{figure}
+\begin{enumerate}
+  \item \textbf{Build the historical matrix.}  
+        Construct a sparse table in which each \emph{row} represents a past project and each \emph{column} represents a specific metric (e.g.\ man-hours per foot of pipe, scaffolding hours per modified craft man-hour, terminations per foot of cable). Because no project involves every work activity, the vast majority of cells are empty. In practice, we would build a single table per problem--quantities, labor rates, equipment pricing, etc.
+
+  \item \textbf{Extract latent themes.}  
+        Our algorithm factorizes this matrix into a low-dimensional representation that captures recurring project "themes" such as \emph{large civil concrete with restricted site access} or \emph{pipe-intensive industrial modules}. Projects sharing a theme are positioned near one another in the latent space, allowing the model to recognize similarity even when direct metric overlap is limited.
+
+  \item \textbf{Incorporate domain knowledge through graphs.}  
+        Two lightweight graphs provide additional structure:
+        \begin{itemize}
+          \item A \emph{project graph} connects jobs that share obvious
+                characteristics—market \& sub-market, geographic region, craft mix,
+                project scale, and general account code structure.
+          \item A \emph{metric graph} connects metrics that commonly
+                occur together or are near each other in the account code tree.
+        \end{itemize}
+        These graphs act as soft constraints, ensuring that related projects and metrics remain close in the latent space and stabilizing the model where data are sparse. Subject-matter experts can directly influence the algorithm at this layer.
+
+  \item \textbf{Estimate the missing entries.}  
+        With themes and graph links in place, our algorithm infers the unobserved project–metric pairs--for example, the expected man-hour factor for a AG SB Copper piping on IPP Re-powering--and directly quantifies its own uncertainty.
+
+  \item \textbf{Apply to current estimates.}  
+        Using the same information feeding our graphs, we can compute estimate-project similarity across our entire database of past cost. During bookend simulations the model then provides a weighted shortlist of the most relevant historical projects, enhancing hand-selection with a transparent, repeatable process. \emph{Our method enables full, statistically valid comparable coverage of every estimate at a terminal-level}.
+\end{enumerate}
+
+\subsection*{Distinct Advantages}
+
+\begin{itemize}
+    \item \textbf{Eliminates subjective sampling}.  
+          Project similarity is calculated with a repeatable algorithm—the same inputs, the same rules—regardless of district or estimator, removing unintentional local bias.
+    \item \textbf{Maintains terminal-level fidelity}.  
+          Analyses are performed at the account code where work is actually executed, so the installation rates of 4-inch PVC piping are never conflated with those of 24-inch stainless steel.
+    \item \textbf{Yields full probability distributions}.  
+          Each metric is returned as a statistically sound curve (\emph{e.g.}\ P\textsubscript{10}, P\textsubscript{50}, P\textsubscript{90}), replacing point estimates or simple min–max ranges with risk distributions that can be used in true Monte-Carlo simulations.
+    \item \textbf{Propagates risk consistently}.  
+          Metrics that move together in history remain correlated in simulation draws, so compounded effects travel through the cost structure without manual wiring of dependencies.
+\end{itemize}
+
+\bigskip
+
+\noindent\emph{Our framework turns our historical data into a clear, data-driven, mathematically sound method of performing bookends and sensitivity analysis.}
+
+%--------------------------------------------------------------------
+\section{Unified Modeling Across Risk Groups}
+
+Treating all cost drivers with a single recommendation framework creates one coherent risk engine in place of several disconnected methods. Table \ref{tab:metric_overview} summarizes how each metric category is mapped into our system.
+
+\begin{table}[h]
+\small
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{5pt}
+
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash\bfseries}p{3.0cm}%
+                                   >{\raggedright\arraybackslash}p{3.0cm}%
+                                   >{\raggedright\arraybackslash}p{3.0cm}%
+                                   >{\raggedright\arraybackslash}X@{}}
+\toprule
+Metric category & Example & How it's built & Supporting data for similarity graph \\
+\midrule
+Quantities & Cubic-yards of slab on grade concrete & Quantity of account code $j$ on project $i$ & Market, complexity measures such as configuration, plot plans, auxiliary systems, and plant output \\[0.8ex]
+
+Labor productivity & Man-hours per foot of AG SB PVC pipe & Man-hour factor of account code $j$ on project $i$ & Job complexity based on market, environmental factors, quantity make-up \\[0.8ex]
+
+Direct-labor support & Scaffolding man-hours / modified craft man-hours & Value of support ratio $j$ on project $i$ & Project district, market, region, quantity / equipment make-up \\ [0.8ex]
+
+Equipment rates & Historically escalated \$ / megawatt for a GE 7HA.02 CTG & Unit rate of buyout item $j$ on project $i$ & Output efficiency, plant configuration, job location \\
+\bottomrule
+\end{tabularx}
+
+\caption{How a recommender-style engine would be implemented for various metric categories}
+\label{tab:metric_overview}
+\end{table}
+
+\subsection*{End-to-End Risk Simulation}
+
+\begin{enumerate}
+  \item \textbf{Generate a latent project profile}.
+        Using the similarity graphs described earlier, our algorithm positions the new estimate in the same latent space as the historical archive. The resulting vector summarizes overall scope, account code structure, market data, and complexity measures in a single numerical signature.
+  \item \textbf{Simultaneously simulate all cost drivers}.
+        From that signature, the model draws correlated predictions for quantities, productivity, support ratios, and equipment pricing.  Each prediction is returned as a full probability curve, not a single point.
+  \item \textbf{Translate metrics into cost line items}.
+        The simulated metrics will feed the standard estimate structure, which through a structured process can be turned into a full terminal-item breakdown of cost distributions.
+  \item \textbf{Roll up to a project-level distribution}.
+        Thousands of such draws produce a total project cost density function (e.g. $P_{50}$, $P_{75}$, $P_{90}$).
+\end{enumerate}
+
+The cumulative curve produced by the unified engine yields a clear cost profile—for example,
+$P_{50}= \$500\,\text{M}$,\;
+$P_{75}= \$580\,\text{M}$,\;
+$P_{90}= \$650\,\text{M}$. 
+Management can map these directly to policy thresholds (\emph{e.g.}\ bid at $P_{55}$ for conventional work, $P_{60}$ for mega-projects, $P_{75}$ for new and emerging markets), confident that the underlying statistics are consistent, comprehensive, and based on the full depth of Kiewit’s historical data.
+
+\bigskip
+\noindent\emph{In short, a single engine re-uses existing estimating
+inputs, augments them with objective analytics, and delivers a
+decision-ready view of cost risk—without disrupting established workflows.}
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\printbibliography[title={Bibliography}] % Print the bibliography, section title in curly brackets
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

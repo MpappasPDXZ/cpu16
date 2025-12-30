@@ -1,0 +1,407 @@
+\documentclass[11pt, letterpaper]{article}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% Clean sans-serif font
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Accent color
+\definecolor{accent}{RGB}{51, 65, 85}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Response to Palantir CY2026 Proposal}}\\[0.5em]
+{\color{accent}\small Kiewit Data \& Analytics | December 16, 2025}\\[0.3em]
+{\small Matt Pappas | For review by Dave Freeman and Colin Davis}
+\end{center}
+
+\vspace{1em}
+
+\section*{Executive Summary}
+
+The proposed Palantir engagement (\$15M--\$30M) presents strategic risk in its current form. Eight areas of feedback require resolution before proceeding:
+
+\vspace{0.3em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c p{0.88\textwidth}@{}}
+\toprule
+\textbf{\#} & \textbf{Feedback} \\
+\midrule
+1 & \textbf{Scoping must establish ROI before commitment.} The proposal enumerates use cases without articulating business cases. Outcomes are not clearly defined, success criteria are unclear, and there is no credible sense of scope, timeline, or value realization. Previous engagements (Source360, TRACE) were scoped with clear ROI---this proposal is not. \\
+\midrule
+2 & \textbf{Design model ingestion is chronologically first.} All downstream use cases (estimates, procurement, schedules, work plans) depend on normalized quantity data from design models. Building downstream capabilities before upstream data is mature creates compounding rework risk. \textit{A well-sequenced \$10M engagement focused on this foundation will deliver more value than a poorly-sequenced \$30M engagement---and will cost less in rework.} \\
+\midrule
+3 & \textbf{Commercial terms lack clarity.} The one-year structure provides no visibility into long-term licensing costs, and profit-sharing discussions from CEO-level conversations are not reflected in the proposal. We need pricing certainty for at least 2--3 years to evaluate total cost of ownership. \\
+\midrule
+4 & \textbf{Ontology investment creates lock-in.} Deeper investment in the Palantir ontology increases switching costs and reduces future optionality. The more data, systems, and institutional knowledge we embed, the stickier the platform becomes. This tradeoff must be explicitly acknowledged. \\
+\midrule
+5 & \textbf{Agents for the sake of agents is not value.} Value is what work agents can do autonomously. We can't just pay for agents. We have to tie agents to workstreams. We are paying for a foundational Foundry build---integration work, logic creation, and workflows that deliver tangible capabilities. What we cannot pay for: upgrading Foundry with new Kiewit data as a billable task. The data is virtualized from Kiewit systems. We pay for logic and integration that creates value, not for data ingestion that merely populates the platform. Billable work must produce executable workflows, not just data visibility. \\
+\midrule
+6 & \textbf{Scaling from 4 to 15 FDEs will dilute value.} Per Brooks's Law, communication overhead scales quadratically with team size. New FDEs without domain knowledge consume experienced engineers' time rather than adding capacity. \\
+\midrule
+7 & \textbf{Key opportunities are missing and priorities are misaligned.} Kiewit has identified 49 use cases across Construction (25), Engineering (8), Procurement (11), and Shared Services (5). The Palantir proposal does not reflect this analysis. Notable gaps include: Engineered Equipment Repository, GEP replacement (\$2M+ annual offset), Safety/Quality Management, and Time Collection/Billings. More critically, the proposal does not respect the dependency structure: \textbf{6 foundational use cases} must be completed before \textbf{4 estimate use cases}, which must precede \textbf{5 schedule/procurement use cases}, which in turn must precede \textbf{3 execution use cases}. The proposal treats these as parallel options rather than a sequenced build. Building any of the 12 downstream use cases before the 6 foundational ones are mature guarantees compounding rework. \\
+\midrule
+8 & \textbf{Kiewit support staff and integration model is unproven.} Palantir requires approximately 2.5 Kiewit support staff per FDE to integrate data and operationalize workflows. With 4 FDEs today, we have not yet demonstrated that Kiewit ML Engineers can own the modeling work---Palantir has done it. Before scaling to 15 FDEs, we must: (a) ramp up Kiewit's support capacity, (b) prove that Palantir data integrates cleanly into KIP, and (c) establish precedent that Kiewit builds and maintains the models. Scaling FDEs without scaling integration capability creates a platform we cannot sustain independently. Moreover, with record revenue, there is limited evidence we have the business capacity to support Palantir efficiently---early indicators suggest we could already improve their efficiency by being more timely in our responses. \\
+\bottomrule
+\end{tabular}
+}
+\renewcommand{\arraystretch}{1.0}
+
+\vspace{1em}
+
+\section*{Palantir Use Case Walkdown}
+
+The proposal includes seven workstreams. Below is an assessment of each, with emphasis on chronological sequencing and timing based on the digital construction lifecycle framework.
+
+\vspace{0.5em}
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{2.7cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{1.2cm} @{}}
+\toprule
+\textbf{Workstream} & \textbf{Scope} & \textbf{Assessment} & \textbf{Recommendation} & \textbf{When} \\
+\midrule
+\textbf{Design Model Ingestion} (Centralized Takeoff + Estimate 360) & PDF/drawing extraction, 3D model extraction, standardization, material ontology, takeoff-to-InEight mapping & \textbf{This is the chronological starting point.} Design model ingestion is foundational infrastructure for normalizing engineering data across modeling tools. All 12 downstream use cases depend on this. Compounding rework risk if built after downstream capabilities. & Prioritize as Tier 1 foundation. Fully vet normalization and master data mapping before any downstream work. Scope to ROI with clear InEight integration plan. & \textbf{2026} \\
+\midrule
+\textbf{Kiewit Core Ontology + AI Agents} & Core ontology development, construction, engineering, procurement ontologies, conversational agents, small automations & Ontology work has merit as foundational. AI agents lack clear ROI and scope. Tension: high-value tasks carry too much risk for autonomy; low-risk tasks deliver limited value. & Proceed with ontology (acknowledge lock-in tradeoff). Defer agents until scoped to measurable outcomes. Reframe as AI assistants supporting human decision-makers. & \textbf{TBD} \\
+\midrule
+\textbf{Scheduling} & Construction schedule, engineering schedule, procurement schedule, integrated master schedule & Multiple components with different dependencies. Procurement Schedule has high synergy with Source360. Construction/Engineering schedules depend on quantities (Tier 1) and estimates (Tier 2). Risk creation requires schedules to exist first. Equipment scheduling could be high-value (\$1B+ spend). & Proceed with Procurement Schedule as Source360 extension (2027). Defer construction/engineering scheduling until Tier 1+2 proven (2027-2028). Do not build risk registers until schedules are mature. & \textbf{2027-2028} \\
+\midrule
+\textbf{Execution} & Takeoff to work planning, work package generation, short interval planning & Tier 4---end of chronological chain. Requires all upstream tiers (quantities, estimates, schedules). Highest-risk, highest-rework scenario if built prematurely. Any upstream change cascades through three dependency layers. & Defer entirely until Tier 1, 2, and 3 are proven and stable. Building prematurely creates 3x rework (once per tier change). & \textbf{2028+} \\
+\midrule
+\textbf{Resource Management} & Category management, cost procurement, project digital cockpit (PDC) & Cross-cutting capability that aggregates data from other systems. Value depends entirely on quality of upstream data. & Low priority. Focus on foundational data capabilities first. Revisit after Tier 1 demonstrates value. & \textbf{TBD} \\
+\midrule
+\textbf{Vendor Performance} & Vendor recommendation, vendor health analytics & Extension of Source360's supplier visibility. Natural add-on if Source360 delivers value. & Defer until Source360 complete. Scope as follow-on with clear ROI tied to procurement savings or risk reduction. & \textbf{2027-2028} \\
+\bottomrule
+\end{tabularx}
+}
+
+\newpage
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{2.7cm} >{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{1.2cm} @{}}
+\toprule
+\multicolumn{5}{@{}l}{\textbf{Notable Gaps in Proposal}} \\
+\midrule
+\textbf{Engineered Equipment Repository} & Equipment data and engineering equipment repository & Missing from proposal. Given \$1B+ annual equipment spend and interconnected nature across projects, this is compelling. Question: is Palantir the right solution or should this be scoped separately? & Evaluate systematically. Scope with clear ROI before platform decision. & \textbf{TBD} \\
+\midrule
+\textbf{GEP Replacement} & Replace or offset GEP functionality & No discussion of GEP consolidation. Already replicate some workloads into Source360. Pay \$2M+ annually for GEP. & Evaluate as cost-offset opportunity. Could represent meaningful savings and strategic consolidation. & \textbf{TBD} \\
+\midrule
+\textbf{Quality Management Automation} & Automated quality checklist creation, quality issue prediction from work packages & Omitted despite large engineering time-saving potential. Automating quality checklist creation eliminates manual effort. Proactive quality issue identification from historical project data prevents rework and reduces inspection burden. Critical for scaling revenue without proportional headcount growth. & Evaluate as engineering efficiency multiplier. Automate quality checklists (C18) and predict quality issues from work packages (C15) to reduce manual documentation and rework cycles. & \textbf{2027-2028+} \\
+\midrule
+\textbf{Time Collection \& Billings} & Engineering time collection, billings standardization (E3) & Missing. Large engineering productivity improvement. Standardizing InEight Billings leads to faster billing-to-payment turnaround and lower admin costs---critical for scaling revenue without scaling back-office headcount. & Prioritize for engineering efficiency. Faster billing cycles and reduced administrative burden directly support revenue growth without proportional staff increases. & \textbf{2028+} \\
+\midrule
+\textbf{Engineering Efficiency Gaps} & AI agents for documents/data (C1, C2, E1), parametric estimating (E4, E7), automated checklists (C18, C19) & Multiple high-impact engineering efficiency use cases omitted. AI agents expand workforce capability without adding headcount. Parametric estimating and schedule automation reduce engineering hours per project. Automated checklist generation eliminates manual documentation. These capabilities are essential for scaling revenue without proportional engineering staff growth. & Prioritize engineering efficiency multipliers. C1/C2/E1 enable junior staff to perform senior-level work. E4/E7 reduce estimate and schedule creation time by 50\%+. C18/C19 eliminate repetitive documentation tasks. & \textbf{2027-2028} \\
+\midrule
+\textbf{Business-Led Domain Strategy} & Business leader accountability for use case outcomes, cross-functional domain strategy & Counting use cases brainstormed by InEight and technologists is not a suitable replacement for domain strategy. Use cases must be driven by business leaders who are accountable for results. Technology-driven enumeration without business ownership leads to solutions searching for problems rather than business outcomes driving technology investment. & Require business leader sponsorship for each workstream. Establish clear accountability structure where domain leaders (Construction, Engineering, Procurement executives) own use case definition, success criteria, and ROI validation before technology build begins. & \textbf{2026} \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{1em}
+
+\section*{The Chronological Imperative}
+
+The fundamental issue with this proposal is sequencing. The use cases are presented as a menu of options, but they are not independent. They form a dependency chain:
+
+\begin{center}
+\textbf{Design Model} $\rightarrow$ \textbf{Quantities} $\rightarrow$ \textbf{Estimates/Procurement} $\rightarrow$ \textbf{Schedules} $\rightarrow$ \textbf{Work Plans}
+\end{center}
+
+\textbf{Design model ingestion is not just another use case---it is the foundation.} Every improvement we make to quantity extraction, normalization, or master data mapping will propagate downstream. If we build estimate, procurement, scheduling, or execution capabilities before the upstream data model is stable, we will rebuild them.
+
+Kiewit's internal use case analysis identifies this explicitly as a four-tier dependency structure:
+
+\textbf{Tier 1 (Foundation):} 6 use cases covering design model ingestion, takeoff automation, quantity normalization, and visualization standards. All downstream capabilities depend on this data.
+
+\textbf{Tier 2 (Estimates):} 4 use cases covering estimate creation and conformance across construction, engineering, and procurement. These consume Tier 1 quantity data.
+
+\textbf{Tier 3 (Schedules \& Procurement):} 5 use cases covering schedule creation, risk analysis, and vendor selection. These depend on Tier 2 estimates and Tier 1 quantities.
+
+\textbf{Tier 4 (Execution):} 3 use cases covering work package creation, short interval planning, and schedule auto-progress. These require all upstream tiers to function.
+
+This is not theoretical. It is how construction projects work:
+\begin{itemize}
+    \item You cannot procure materials without knowing quantities (Tier 1 feeds Tier 3).
+    \item You cannot schedule work without knowing what you are building (Tier 1 feeds Tier 3).
+    \item You cannot generate work packages without knowing scope, schedule, and resources (Tiers 1--3 feed Tier 4).
+    \item You cannot create estimates without normalized takeoff data (Tier 1 feeds Tier 2).
+\end{itemize}
+
+\textbf{The rework multiplier:} Every use case built on unstable upstream data will need rework. If we build 4 estimate use cases before Tier 1 is stable, we rework 4 capabilities. If we then build 5 schedule use cases, we rework 9 capabilities (5 schedules + 4 estimates). If we then build 3 execution capabilities, we rework 12 capabilities (3 execution + 5 schedules + 4 estimates). The cost of building out of sequence compounds quadratically.
+
+The proposal's willingness to run these workstreams in parallel (or worse, to build downstream before upstream) suggests insufficient understanding of these dependencies.
+
+\vspace{1em}
+
+\section*{Historical Lesson: The Source360 Precedent}
+
+A direct parallel exists with procurement. Early in discussions, there was interest in a ``rebates use case.'' If we had agreed to a \$3M ``procurement use case'' upfront, we would have ended up with a low-value rebates workflow.
+
+Instead, we deeply scoped the problem first, which led to Source360---a high-value, enterprise-critical solution.
+
+\textbf{This proposal lacks that same rigor.} The sequence must be:
+\begin{enumerate}
+    \item Clearly define the use case
+    \item Scope effort, timeline, and outcomes
+    \item Estimate value and ROI
+    \item \textit{Then} evaluate whether Palantir is the right investment
+\end{enumerate}
+
+We should not invest \$15M--\$30M without well-defined use cases that we have agreed make sense to build within Palantir.
+
+\vspace{1em}
+
+\section*{Pricing and Commercial Concerns}
+
+\textbf{Profit sharing absent:} In discussions between Alex Karp and our CEO, profit sharing was referenced as part of the partnership model. This proposal does not reflect that in any way. We need clarity on whether profit sharing is still on the table and, if not, why it was removed.
+
+\textbf{Long-term licensing unclear:} The proposal is scoped as a one-year engagement focused on building workflows. What is unclear---and critical to evaluation---is the ongoing licensing cost post-build. We need pricing certainty for at least 2 years, ideally 3+, at a favorable rate. Without long-term licensing clarity, it is impossible to evaluate total cost of ownership or ROI.
+
+\textbf{Price escalation risk:} This contract structure opens Kiewit's checkbook to price escalations beyond Year 1. Previously, we operated under a 3-year deal that provided cost predictability. Even that arrangement raised concerns---objectives from Source360 and TRACE were at risk of being converted to net new costs rather than fulfilled under the original agreement.
+
+\textbf{Free scoping is ending:} We have been getting scoping at no cost because Palantir engineers on the account remain tied to Source360 and TRACE delivery. As those projects conclude, this benefit disappears. Any new workstream should be scoped to ROI before we commit budget.
+
+\textbf{FDE scaling:} The proposal contemplates scaling from 4 FDEs to 15 FDEs---a 275\% increase. Per Fred Brooks (\textit{The Mythical Man-Month}): ``Adding manpower to a late software project makes it later.'' Communication overhead scales quadratically---a 4-person team has 6 channels; a 15-person team has 105. New FDEs without Kiewit domain knowledge will consume experienced engineers' time for onboarding rather than adding delivery capacity.
+
+\vspace{1em}
+
+\section*{What Software Development Literature Tells Us}
+
+Scaling from \$3M to \$30M without rigorous sequential planning violates decades of accumulated wisdom about how complex systems are built. One insight from each foundational text:
+
+\begin{itemize}
+    \item \textbf{The Mythical Man-Month} (Brooks): \textit{``Adding manpower to a late software project makes it later.''} Communication overhead scales quadratically. A 10x budget increase does not produce 10x output---it produces coordination collapse if sequencing is ignored.
+    
+    \item \textbf{The Pragmatic Programmer} (Hunt \& Thomas): \textit{``Broken windows invite further decay.''} Skipping ROI scoping on the first workstream signals that rigor is optional. Every subsequent workstream will inherit that neglect.
+    
+    \item \textbf{Clean Code} (Martin): \textit{``Most software cost is maintenance, not initial development.''} Systems built without conceptual integrity are expensive to maintain. Building seven workstreams in parallel without a unified data foundation guarantees integration debt.
+    
+    \item \textbf{Designing Data-Intensive Applications} (Kleppmann): \textit{``Every architectural decision involves trade-offs among reliability, scalability, and maintainability.''} The proposal does not articulate these trade-offs---it assumes all three can be maximized simultaneously.
+    
+    \item \textbf{Test-Driven Development} (Beck): \textit{``Make the smallest possible change to move from failing to passing.''} The proposal is not small steps---it is a \$30M leap. Small steps would mean scoping one workstream, delivering it, measuring ROI, then deciding whether to proceed.
+    
+    \item \textbf{Accelerate} (Forsgren, Humble \& Kim): \textit{``Elite performers are distinguished by deployment frequency, lead time, change failure rate, and recovery time---not headcount.''} Scaling from 4 to 15 FDEs optimizes for the wrong metric.
+    
+    \item \textbf{Digital Construction Lifecycle}: \textit{``The cost of building out of sequence is compounding rework.''} Every downstream system that depends on an immature upstream system inherits its instability. Estimate, scheduling, and execution capabilities built before quantity data is stable will be rebuilt.
+\end{itemize}
+
+The collective message: \textbf{discipline beats dollars}. A well-sequenced \$10M engagement will deliver more value than a poorly-sequenced \$30M engagement---and will cost less in rework.
+
+\vspace{1em}
+
+\section*{Recommendation}
+
+\begin{enumerate}
+    \item \textbf{Require ROI-level scoping} for each workstream before budget commitment, following the precedent set by Source360 and TRACE.
+    \item \textbf{Clarify commercial terms:} Obtain 2--3 year pricing certainty and confirm whether profit-sharing remains part of the partnership model.
+    \item \textbf{Prioritize design model ingestion} (Centralized Takeoff + Estimate 360 integration) as the chronological foundation. Fully vet normalization and master data mapping before downstream work begins.
+    \item \textbf{Extend Source360} with Procurement Scheduling---this is high-synergy, low-risk work that builds on existing investment.
+    \item \textbf{Evaluate GEP consolidation} as a cost-offset opportunity (\$2M+ annual spend).
+    \item \textbf{Reframe agents as assistants:} Focus AI efforts on supporting human decision-makers in high-stakes contexts rather than autonomous agents for low-value tasks.
+    \item \textbf{Defer Execution, Resource Management, and autonomous agents} until upstream data capabilities are proven.
+    \item \textbf{Reject the immediate ramp to 15 FDEs.} Scale incrementally (add 2--3 per quarter) as workstreams are scoped, approved, and delivered.
+\end{enumerate}
+
+\vspace{0.5em}
+
+\textit{The goal is not to spend less with Palantir. The goal is to ensure every dollar generates measurable return---and to avoid the compounding cost of rework from building out of sequence.}
+
+\textbf{The cost of building out of sequence:} If Tier 1 requires \$3M and 6 months to build, but we build Tiers 2--4 in parallel (\$12M, 18 months), then discover Tier 1 was wrong, we do not pay \$3M to fix Tier 1---we pay \$12M+ to rework everything downstream. A well-sequenced \$10M engagement that builds Tier 1, validates it, then builds Tier 2 will deliver more value than a poorly-sequenced \$30M engagement that builds all four tiers simultaneously and discovers the foundation was wrong after \$20M is spent.
+
+\vspace{1em}
+
+\begin{center}
+\large\textbf{Discipline beats dollars.}\\[0.3em]
+\normalsize A well-sequenced \$10M engagement will deliver more value than a poorly-sequenced \$30M engagement---and will cost less in rework.
+\end{center}
+
+\newpage
+
+\appendix
+
+\section*{Appendix: Kiewit Use Case Inventory (49 Use Cases)}
+
+This appendix provides the complete inventory of use cases referenced throughout this document. Use cases are organized by functional area with productivity and risk reduction impacts.
+
+\subsection*{Construction Use Cases (C1--C25)}
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{1.3cm} >{\raggedright\arraybackslash}p{1.3cm} X @{}}
+\toprule
+\textbf{ID} & \textbf{Use Case} & \textbf{Prod.} & \textbf{Risk} & \textbf{Expected Outcome} \\
+\midrule
+C1 & Apply AI agent to construction documents & Large & Large & Enable conversational interaction with project documents to get answers quickly and automate workflows. Expands footprint of people who can work without SME requests. \\
+\midrule
+C2 & Apply AI agent to construction project controls data & Large & Large & Enable conversational interaction with project controls data. Expands footprint of people who can work without SME requests. \\
+\midrule
+C3 & Provide Engineering \& Procurement Status & Small & Medium & Enable conversational interaction with engineering/design data in models to get answers quickly. \\
+\midrule
+C4 & Estimate Takeoff & Large & Large & Create Takeoff Shared Service and automate takeoff process through Model and 2D drawings. \\
+\midrule
+C5 & Estimate Creation & Large & Large & From takeoff shared service, estimating teams generate estimate through InEight Estimate. \\
+\midrule
+C6 & Estimate Conformance & Small & Small & Dramatically shorten estimate conformance timelines using AI to auto-complete roll-ups, splits, account codes, resource normalization. \\
+\midrule
+C7 & Project Schedule Creation & Large & Large & Dramatically reduce time to create preliminary construction schedules by leveraging current estimate and historical schedules. \\
+\midrule
+C8 & Project Risk Creation and Monitoring & Large & Large & Identify risks earlier by leveraging current estimate and historical schedules to auto create risk register. \\
+\midrule
+C9 & Change order management & Small & Large & Simplify and shorten work to support issue/change order by automating "what if?" scenarios. \\
+\midrule
+C10 & Project Takeoff Feed to Plan \& Procurement & Large & Medium & Eliminate redundant takeoff effort by providing single source of quantity takeoff data connected from estimating through procurement and work planning. \\
+\midrule
+C11 & Resource management & Medium & Large & Identify and predict potential resource shortages and opportunities for larger volume/reduced cost procurement across projects. \\
+\midrule
+C12 & Project Quantity Overrun Tracking & Medium & Large & Create more accurate quantity expectations by continually learning from previous projects. \\
+\midrule
+C13 & Work Package Creation & Large & Large & Shared service could complete initial plans based on project needs through automation. \\
+\midrule
+C14 & Model Visualization and Usage Standards & Medium & Medium & Establish standards on how model is used throughout organization. \\
+\midrule
+C15 & Safety and quality management & Large & Large & Identify likely quality and safety issues for upcoming work by learning from previous projects. \\
+\midrule
+C16 & Safety management & Medium & Large & Speed up communication and reduce risk by automatically sending alerts from uploaded jobsite photos. \\
+\midrule
+C17 & Compliance Form Creation & Small & Large & Eliminate manual effort to create safety forms associated with upcoming work plan. \\
+\midrule
+C18 & Completion Form Creation & Small & Large & Eliminate manual effort to create quality checklists associated with upcoming work plan. \\
+\midrule
+C19 & Short Interval Planning Creation & Large & Medium & Save time by auto creating short interval planning steps aligned to schedules and work plans. \\
+\midrule
+C20 & Quantity Claiming & Medium & Small & Simplify and shorten process to claim component quantities through visual, model-driven process. \\
+\midrule
+C21 & Auto progress schedule from component claiming & Large & Medium & Eliminate/minimize time to separately progress CPM schedule by deriving progress from component claiming. \\
+\midrule
+C22 & Project Billings & Medium & Large & Faster billing-to-payment turn-around and lower admin cost by automating preparation based on contract terms. \\
+\midrule
+C23 & Project Month End Status Report & Medium & Small & Automate process to produce month end status report with flexibility to adjust content. \\
+\midrule
+C24 & Program vs Project Needs & Small & Small & Enable information flow from projects to programs to eliminate manual re-entry effort. \\
+\midrule
+C25 & Technology Training & Small & Small & Review training material and adopt recommended training approach. \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{1em}
+
+\subsection*{Engineering Use Cases (E1--E8)}
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{1.3cm} >{\raggedright\arraybackslash}p{1.3cm} X @{}}
+\toprule
+\textbf{ID} & \textbf{Use Case} & \textbf{Prod.} & \textbf{Risk} & \textbf{Expected Outcome} \\
+\midrule
+E1 & Add Engineering Data to AI Agent & Medium & Medium & Enable conversational interaction with engineering data (model metadata) to get answers quickly and automate workflows. \\
+\midrule
+E2 & Construction and Procurement Model Exports & Large & Large & Agreement on design model expectations. Shared service to move design models into model viewer or automation. \\
+\midrule
+E3 & Time Collection and Billings & Large & Medium & Standardized InEight Billings leads to faster billing-to-payment turn-around and lower admin cost. \\
+\midrule
+E4 & Estimate Creation & Medium & Large & AI-assisted, parameter-driven estimating enables faster estimate creation times. \\
+\midrule
+E5 & Design Scope Item Creation & Small & Large & Streamline estimating, scheduling, and construction workflows by auto-deriving scope from models. \\
+\midrule
+E6 & Design Quantity Overrun Risk Analysis & Medium & Large & Proactive AI-assisted identification of scopes with high likelihood of quantity busts. \\
+\midrule
+E7 & Schedule Creation & Medium & Large & Dramatically reduce time to create preliminary engineering schedules by leveraging current estimate and historical schedules. \\
+\midrule
+E8 & Technology Training & Small & Small & Review training material and adopt recommended training approach. \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{1em}
+
+\subsection*{Procurement Use Cases (P1--P11)}
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{1.3cm} >{\raggedright\arraybackslash}p{1.3cm} X @{}}
+\toprule
+\textbf{ID} & \textbf{Use Case} & \textbf{Prod.} & \textbf{Risk} & \textbf{Expected Outcome} \\
+\midrule
+P1 & Add Procurement Information to AI Agent & Medium & Medium & Enable conversational interaction with procurement data to get answers quickly and automate workflows. \\
+\midrule
+P2 & Takeoff & Medium & Large & Create Takeoff Shared Service and automate takeoff process through Model and 2D drawings. \\
+\midrule
+P3 & Estimating & Medium & Large & From takeoff shared service, estimating teams generate estimate through InEight Estimate. \\
+\midrule
+P4 & Schedule & Medium & Large & Dramatically reduce time to create procurement schedules by leveraging current estimate and historical schedules. \\
+\midrule
+P5 & Vendor Selection & Medium & Large & AI-assisted vendor selection reduces time for vendor qualification and leads to better cost-performance outcomes. \\
+\midrule
+P6 & Vendor Status & Small & Large & Minimize potential for sub/vendor loss through proactive AI-assisted identification of risks. \\
+\midrule
+P7 & Contract Management & Medium & Medium & Generative AI reduces contract creation times by auto-creating documents from related documentation. \\
+\midrule
+P8 & Vendor Selection (Performance-based) & Medium & Large & Better sub/vendor performance and cost outcomes through selection based on past history. \\
+\midrule
+P9 & Material Visibility & Small & Large & AI agent standardizes material coding and enables real-time communication of material status. \\
+\midrule
+P10 & Field Material Management & Small & Medium & Continue Intelliwave rollout or build custom application. \\
+\midrule
+P11 & Technology Training & Small & Small & Review training material and adopt recommended training approach. \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{1em}
+
+\subsection*{Shared Services Use Cases (SS1--SS5)}
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{} >{\raggedright\arraybackslash}p{0.9cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{1.3cm} >{\raggedright\arraybackslash}p{1.3cm} X @{}}
+\toprule
+\textbf{ID} & \textbf{Use Case} & \textbf{Prod.} & \textbf{Risk} & \textbf{Expected Outcome} \\
+\midrule
+SS1 & Add Shared Service Information to AI Agent & Small & Small & Investigate all shared service opportunities. \\
+\midrule
+SS2 & Equipment Group Opportunities & Small & Small & Investigate shared service opportunities for equipment data and engineering equipment repository. \\
+\midrule
+SS3 & Human Resources Opportunities & Medium & Small & Investigate shared service opportunities for HR. \\
+\midrule
+SS4 & Accounting / Finance Opportunities & Small & Small & Investigate shared service opportunities for accounting and finance. \\
+\midrule
+SS5 & KSS Opportunities & Large & Small & Investigate shared service opportunities for KSS. \\
+\bottomrule
+\end{tabularx}
+}
+
+\vspace{1em}
+
+\subsection*{Use Case Summary Statistics}
+
+\textbf{Total Use Cases:} 49 (Construction: 25, Engineering: 8, Procurement: 11, Shared Services: 5)
+
+\textbf{High-Impact Use Cases:} 29 use cases with cross-functional connection (59\%)
+
+\textbf{Shared Service Opportunities:} 22 use cases flagged for shared service model (45\%)
+
+\textbf{Automation Candidates:} 33 use cases flagged for automation (67\%)
+
+\textbf{Chronological Dependency Structure:}
+\begin{itemize}
+    \item \textbf{Tier 1 (Foundation):} 6 use cases (C4, C10, C12, C14, E2, P2) -- design model ingestion, takeoff, quantity normalization
+    \item \textbf{Tier 2 (Estimates):} 4 use cases (C5, C6, E4, P3) -- estimate creation and conformance
+    \item \textbf{Tier 3 (Schedules \& Procurement):} 5 use cases (C7, C8, E7, P4, P5) -- schedule creation, risk, vendor selection
+    \item \textbf{Tier 4 (Execution):} 3 use cases (C13, C19, C21) -- work packages, short interval planning, auto-progress
+\end{itemize}
+
+\end{document}
