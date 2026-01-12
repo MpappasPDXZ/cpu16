@@ -1,0 +1,997 @@
+\documentclass[10pt, a4paper]{article}
+
+\setlength{\headheight}{15pt}
+
+% Suppress showhyphens redefinition warning
+\usepackage{silence}
+\WarningFilter{latex}{Command \showhyphens has changed.}
+
+\usepackage{float}
+\usepackage[table]{xcolor}
+
+\input{structure.tex}
+
+\title{Schedule Analytics Web App Requirements}
+\author{Matt Pappas}
+\date{\today}
+
+\begin{document}
+
+\pagestyle{plain}
+\renewcommand{\thepage}{\arabic{page}}
+\thispagestyle{plain}
+
+%----------------------------------------------------------------------------------------
+% TITLE
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Schedule Analytics Web App: Front-End Requirements}} \\[0.05em]
+    {\footnotesize Feature specifications for schedule extraction, visualization, and lineage tracking}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.1em}
+
+%----------------------------------------------------------------------------------------
+% TWO-COLUMN LAYOUT - PAGE 1
+%----------------------------------------------------------------------------------------
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+    
+    % Job Schedule Report (JSR)
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{1. Job Schedule Report (JSR)}};
+    \end{tikzpicture}
+    
+    \vspace{0.1em}
+    
+    {\footnotesize
+    The JSR is a \textbf{schedule version comparison} tool that analyzes project schedules against baselines and prior periods, integrated with financial metadata.
+    
+    \vspace{0.15em}
+    
+    \textbf{Schedule Comparison (Core Function):}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \textbf{Current Period} vs \textbf{Current Baseline} (primary comparison)
+        \item \textbf{Prior Period} for trend analysis
+        \item Generates KPIs from schedule variances
+    \end{itemize}
+    
+    \vspace{0.15em}
+    
+    \textbf{Integrated Metadata:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \textbf{JOR:} Job Operations Report (Contract Value, Total Cost)
+        \item \textbf{Cost Report:} Labor hours, earned values, forecasts
+        \item \textbf{CRM:} Project/opportunity information
+    \end{itemize}
+    }
+    
+    \vspace{0.3em}
+    
+    % Key Performance Indicators
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Key Performance Indicators}};
+    \end{tikzpicture}
+    
+    \vspace{0.1em}
+    
+    {\footnotesize
+    \textbf{Schedule Quality \& Planning:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \textbf{Quality Score:} Activities, Hard Constraints, Missing Logic, Invalid Dates
+        \item \textbf{Planning Score:} BL/CM Remaining, T4 metrics, Compression
+        \item \textbf{Float Analysis:} Schedule slack assessment
+    \end{itemize}
+    
+    \vspace{0.15em}
+    \textbf{JTD Performance (from Cost Report):}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item CR Spent vs Earned vs Plan
+        \item SPI (Schedule Performance Index)
+        \item \% Complete, Earned/Spent ratio
+    \end{itemize}
+    \textit{\scriptsize Account codes 30.06 + 50-87 (direct); 20, 30, 30.12, 88 (indirect)}
+    
+    \vspace{0.15em}
+    \textbf{Total Performance:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item CR CE (Current Estimate), CR FC (Forecast)
+        \item CE/FC ratio, BL/CM comparison
+    \end{itemize}
+    }
+
+    \vspace{0.3em}
+
+    % Extraction Workflow
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Extraction Workflow}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{1. Financial Extraction (Prerequisite):}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Extracts data from Snowflake (Cost Report, JOR, CRM).
+        \item Updates \texttt{metadata\_extract\_status = 2} (Financial Complete).
+        \item Schedule extraction cannot proceed until financial data is ready.
+    \end{itemize}
+    
+    \vspace{0.1em}
+    \textbf{2. User Request (Frontend):}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item User triggers extraction via UI.
+        \item Creates submission record: \texttt{submission\_status = 0} (Pending).
+    \end{itemize}
+
+    \vspace{0.1em}
+    \textbf{3. Schedule Extraction (Worker):}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Picks up pending requests.
+        \item Extracts P6 data (Activity, Calendar, Resource, Relationship).
+        \item Calculates SHA256 hashes for each service.
+        \item \textbf{Reconciliation:} Compares hashes with previous version. If changed, creates new version; otherwise, reuses version ID.
+    \end{itemize}
+    }
+    
+    \vspace{0.3em}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+    
+    % Publishers
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{2. Schedule Publishers}};
+    \end{tikzpicture}
+    
+    \vspace{0.1em}
+    
+    {\footnotesize
+    The system supports both \textbf{Weekly} and \textbf{Monthly} schedule publishers. Unlike the JSR (3 versions), the publishers and other schedules are built to compare \textbf{four} versions:
+    
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Current Period
+        \item Previous Period
+        \item Current Baseline
+        \item Original Baseline
+    \end{itemize}
+    }
+    
+    \vspace{0.3em}
+    
+    % Schedule Lineage
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{3. Schedule Lineage}};
+    \end{tikzpicture}
+    
+    \vspace{0.1em}
+    
+    {\footnotesize
+    \textbf{Goal:} Massively re-use and track schedule changes.
+    
+    \vspace{0.15em}
+    
+    \textbf{Features:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Collects current\_schedule lineage at a project level.
+        \item Enables time series analysis of WHEN a schedule was built (using \texttt{fiscal\_year\_month\_no}).
+        \item Tracks IF there are changes between versions.
+        \item Maintains complete lineage for each \texttt{project\_number} by version.
+        \item Captures at least a monthly snapshot from the JSR.
+    \end{itemize}
+    }
+    
+    \vspace{0.3em}
+
+    % Data Schema
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Data Schema \& Status}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{Key Tables:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \texttt{p6\_extraction\_submissions}: Source of truth for requests.
+        \item \texttt{p6\_schedule\_id\_versions}: Tracks extracted versions and file hashes.
+        \item \texttt{p6\_extraction\_logs}: Statistics and error tracking.
+    \end{itemize}
+
+    \vspace{0.1em}
+    \textbf{Status Flow:}
+    0 (Pending) $\rightarrow$ 1 (Extracting) $\rightarrow$ 2 (Complete) $\rightarrow$ 9 (Error).
+    }
+
+    \vspace{0.3em}
+    
+    % Strategic Summary
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{System Architecture Summary}};
+    \end{tikzpicture}
+    
+    \vspace{0.1em}
+    
+    {\footnotesize
+    The new architecture unifies the queue system for JSR, Publishers, and Lineage, transitioning from an "Active SAP Project only" system to a comprehensive "Job Code" system. This allows for seamless ingestion of Estimates and Y-Past data alongside active projects, facilitating robust historical analysis and precise change tracking across schedule lifecycles.
+    }
+    
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 2: DATA FLOW & PIPELINE ARCHITECTURE
+%----------------------------------------------------------------------------------------
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Data Flow \& Pipeline Architecture}} \\[0.05em]
+    {\footnotesize Frontend Controls, Status Codes, and System Integration}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+% Database Schema DAG with Frontend Integration
+\begin{center}
+\begin{tikzpicture}[
+    maintable/.style={draw, fill=black!5, rounded corners=3pt, text width=5.2cm, align=left, font=\tiny, inner sep=4pt},
+    reftable/.style={draw, fill=black!15, rounded corners=3pt, text width=2.6cm, align=left, font=\tiny, inner sep=3pt},
+    frontend/.style={draw, fill=blue!15, rounded corners=5pt, text width=2.2cm, align=center, font=\tiny\bfseries, inner sep=4pt},
+    arrow/.style={->, >=Latex, thick, black!60},
+    fkarrow/.style={->, >=Latex, black!40},
+    readarrow/.style={->, >=Latex, thick, blue!60},
+    writearrow/.style={->, >=Latex, thick, green!50!black},
+    fklabel/.style={font=\tiny\itshape, fill=white, inner sep=1pt},
+    rwlabel/.style={font=\tiny\bfseries, fill=white, inner sep=1pt}
+]
+    % FRONTEND (left side)
+    \node[frontend] (frontend) at (-5.5,0.5) {
+        Web Frontend\\[3pt]
+        \rule{\linewidth}{0.4pt}\\[2pt]
+        \normalfont\tiny
+        JSR App\\
+        Schedule\\
+        Dashboard
+    };
+    
+    % Main Table - p6_extraction_submissions (center)
+    \node[maintable] (submissions) at (0,0) {
+        \textbf{sch.p6\_extraction\_submissions} \\[2pt]
+        \rule{\linewidth}{0.4pt}\vspace{2pt}
+        id (PK), job\_code \\
+        schedule\_shortname \\
+        submitted\_fiscal\_year\_month\_no \\
+        schedule\_type, submission\_status \\
+        financial\_snapshot\_at \\
+        record\_origin \\
+        created\_at, updated\_at \\
+        schedule\_id \\
+        \textbf{version\_id} (FK) \\
+        submitted\_fiscal\_month\_week\_no \\
+        schedule\_change \\
+        \textbf{database\_instance\_id} (FK) \\
+        metadata\_extract\_status \\
+        dagster\_run\_id \\
+        user\_extraction\_requested
+    };
+    
+    % p6_databases (top right) - Reference table
+    \node[reftable] (databases) at (5,2.2) {
+        \textbf{p6\_databases} \\[2pt]
+        \rule{\linewidth}{0.4pt}\vspace{2pt}
+        database\_instance\_id \\
+        database\_name \\[2pt]
+        \textit{Reference table}
+    };
+    
+    % p6_schedule_id_versions (right) - Version tracking
+    \node[reftable] (versions) at (5,-0.3) {
+        \textbf{p6\_schedule\_id\_versions} \\[2pt]
+        \rule{\linewidth}{0.4pt}\vspace{2pt}
+        version\_id (PK) \\
+        version\_number \\
+        output\_dir\_url \\
+        file\_hashes \\[2pt]
+        \textit{Version tracking}
+    };
+    
+    % p6_extraction_logs (bottom) - Stats
+    \node[reftable] (logs) at (-1.5,-3.2) {
+        \textbf{p6\_extraction\_logs} \\[2pt]
+        \rule{\linewidth}{0.4pt}\vspace{2pt}
+        submission\_id (FK) \\
+        duration\_seconds \\
+        is\_last, is\_error \\[2pt]
+        \textit{Extraction stats}
+    };
+    
+    % p6_schedule_id_cache (bottom right) - Frontend ONLY consumer
+    \node[reftable, fill=blue!10] (cache) at (5,-2.8) {
+        \textbf{p6\_schedule\_id\_cache} \\[2pt]
+        \rule{\linewidth}{0.4pt}\vspace{2pt}
+        schedule\_shortname \\
+        schedule\_id \\
+        database\_instance\_id \\[2pt]
+        \textit{Frontend only}\\
+        \textit{(nightly refresh)}
+    };
+    
+    % FK Arrows (gray, thinner) - actual database relationships
+    \draw[fkarrow] (submissions.east) ++(0,0.3cm) -- node[fklabel, above, pos=0.5] {\tiny version\_id} (versions.west);
+    \draw[fkarrow] (submissions.north east) -- node[fklabel, above, pos=0.4] {\tiny db\_instance\_id} (databases.south west);
+    \draw[fkarrow] (logs.north) -- node[fklabel, right, pos=0.5] {\tiny submission\_id} (submissions.south);
+    % Note: cache has NO FK to submissions - frontend only
+    
+    % Frontend READ arrows (blue)
+    \draw[readarrow] (frontend.east) -- node[rwlabel, above, pos=0.4] {READ} (submissions.west);
+    \draw[readarrow] (frontend.south) |- node[rwlabel, below, pos=0.25] {READ stats} (logs.west);
+    \draw[readarrow, bend left=25] (frontend.north east) to node[rwlabel, above, pos=0.6] {READ} (versions.north west);
+    
+    % Cache is ONLY used by frontend (exclusive consumer)
+    \draw[readarrow, bend right=20] (frontend.south east) to node[rwlabel, right, pos=0.4] {LOOKUP} (cache.north west);
+    
+    % Frontend WRITE arrow (green)
+    \draw[writearrow] (frontend.east) ++(0,-0.3cm) -- node[rwlabel, below, pos=0.4] {WRITE} (submissions.west) ++(0,-0.3cm);
+    
+    % Legend
+    \node[font=\tiny, anchor=north west] at (-6.5,-4) {
+        \textcolor{green!50!black}{$\rightarrow$ WRITE:} Create submission, set status=0\\
+        \textcolor{blue!60}{$\rightarrow$ READ:} Display status, versions, stats\\
+        \textcolor{blue!60}{$\rightarrow$ LOOKUP:} Cache (frontend exclusive)
+    };
+    
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3em}
+
+% Dagster Asset Lineage
+\begin{center}
+\includegraphics[width=0.98\linewidth]{dagster_short_and_wide.png}
+\end{center}
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{Dagster Asset Lineage:} Snowflake sources $\rightarrow$ jsr\_financials + p6\_service\_extraction $\rightarrow$ jsr\_analytics\par}
+
+\vspace{0.2em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+    % Frontend Controlled Inputs
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Frontend Controlled Inputs}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    When a user requests an extraction via the web app, specific fields in \texttt{sch.p6\_extraction\_submissions} must be set.
+    
+    \vspace{0.15em}
+    \textbf{Required Business Keys:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \texttt{job\_code} (Project Number)
+        \item \texttt{schedule\_shortname}
+        \item \texttt{submitted\_fiscal\_year\_month\_no} (YYYYMM)
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{Control Flags:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \texttt{user\_extraction\_requested}: Set to \textbf{True} (indicates manual request).
+        \item \texttt{record\_origin}: Set to \textbf{"web"} (distinguishes from automated).
+        \item \texttt{submission\_status}: Set to \textbf{0} (Pending) to trigger processing.
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{Optional Inputs:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \texttt{schedule\_id} \& \texttt{database\_instance\_id}: Optional. If NULL, the backend attempts to look them up.
+    \end{itemize}
+    }
+
+    \vspace{0.3em}
+
+    % Pipeline Controlled Fields
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Pipeline Controlled (Do Not Edit)}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    The following are managed exclusively by the backend:
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \texttt{version\_id} / \texttt{version\_number} (FK)
+        \item \texttt{schedule\_change} (Result of reconciliation)
+        \item \texttt{metadata\_extract\_status} (Financial status)
+        \item \texttt{dagster\_run\_id}
+    \end{itemize}
+    }
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+    % Status Codes
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Pipeline Status Architecture}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    The system uses two independent status fields.
+    
+    \vspace{0.15em}
+    \textbf{1. Financial Status (\texttt{metadata\_extract\_status})}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \textbf{Binary State:} 0/NULL (Incomplete) vs. 2 (Complete).
+        \item \textbf{Prerequisite:} Must be \textbf{2} for schedule extraction to begin.
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{2. Pipeline Status (\texttt{submission\_status})}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Tracks the progression through extraction stages.
+        \item \textbf{Pattern:} Odd = In Progress (Animated), Even = Complete.
+    \end{itemize}
+    }
+
+    \vspace{0.2em}
+    
+    % Status Table
+    {\footnotesize
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{@{}lXl@{}}
+    \rowcolor{black!10}
+    \textbf{Code} & \textbf{Stage} & \textbf{State} \\
+    \rowcolor{white}
+    0 & Pending & Ready \\
+    \rowcolor{black!5}
+    1 & P6 Extracting & \textbf{In Progress} \\
+    \rowcolor{white}
+    2 & P6 Extracted & Complete \\
+    \rowcolor{black!5}
+    3 & Aggregating & \textbf{In Progress} \\
+    \rowcolor{white}
+    4 & Aggregated & Complete \\
+    \rowcolor{black!5}
+    5 & Writing Iceberg & \textbf{In Progress} \\
+    \rowcolor{white}
+    6 & Complete & Final \\
+    \rowcolor{black!5}
+    9 & Error & Failed \\
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1.0}
+    }
+
+    \vspace{0.3em}
+
+    % Status Transitions
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Status Transitions}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{Re-Extraction Logic:}
+    To re-run a schedule, the frontend resets \texttt{submission\_status} to \textbf{0}.
+    
+    \vspace{0.15em}
+    \textbf{Visualizer Mapping:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \textbf{Blue Pulse:} Status 1, 3, 5 (Active)
+        \item \textbf{Green Check:} Status 2, 4, 6 (Completed Stages)
+        \item \textbf{Red X:} Status 9 (Error)
+    \end{itemize}
+    }
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 3: JSR CHANGES - CURRENT APPLICATION
+%----------------------------------------------------------------------------------------
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{JSR Changes: Current Application}} \\[0.05em]
+    {\footnotesize Existing workflow and user interface overview}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+% Row 1: Projects/Opportunities and Submissions
+\begin{center}
+\begin{tabular}{@{}cc@{}}
+\includegraphics[width=0.48\linewidth]{frontend_01_new_schedule_selection.png} &
+\includegraphics[width=0.48\linewidth]{frontend_02_schedule_submissions.png} \\
+{\scriptsize \textbf{(1) Projects/Opportunities:} Browse projects, filter by type/area} &
+{\scriptsize \textbf{(2) Submissions:} Manage schedule extractions by fiscal period} \\
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+
+% Row 2: Search and Analytics
+\begin{center}
+\begin{tabular}{@{}cc@{}}
+\includegraphics[width=0.48\linewidth]{frontend_03_find_job_for_jsr.png} &
+\includegraphics[width=0.48\linewidth]{frontend_04_jsr_for_job_report_1_of_2.png} \\
+{\scriptsize \textbf{(3) Analytics Search:} Filter by project number (e.g., 103440)} &
+{\scriptsize \textbf{(4) Labor Resource Plan:} Monthly Earn, CR Spent, Forecast, BL Plan} \\
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+
+% Row 3: KPIs
+\begin{center}
+\includegraphics[width=0.75\linewidth]{frontend_05_jsr_for_job_report_2_of_2.png}
+\end{center}
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{(5) Key Performance Indicators:} Quality, Planning, Float, JTD Performance, Total Performance\par}
+
+\vspace{0.5em}
+
+% Three Elements Summary
+{\footnotesize
+\begin{tikzpicture}
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{JSR Three Core Elements}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\begin{tabular}[t]{@{}p{0.32\textwidth}@{\hspace{0.01\textwidth}}p{0.32\textwidth}@{\hspace{0.01\textwidth}}p{0.32\textwidth}@{}}
+\textbf{1. Metadata} & \textbf{2. Job Schedules} & \textbf{3. Metrics/KPIs} \\
+\begin{itemize}[leftmargin=0.8em, itemsep=0em, topsep=0em]
+    \item JOR (Job Operations Report)
+    \item Cost Report
+    \item CRM Data
+\end{itemize}
+&
+\begin{itemize}[leftmargin=0.8em, itemsep=0em, topsep=0em]
+    \item Current Period vs. Current Baseline
+    \item Prior Period comparison
+    \item Schedule version tracking
+\end{itemize}
+&
+\begin{itemize}[leftmargin=0.8em, itemsep=0em, topsep=0em]
+    \item Quality, Planning, Float scores
+    \item JTD Performance (CR Spent, Earned, SPI)
+    \item Total Performance (CE/FC ratio)
+\end{itemize}
+\\
+\end{tabular}
+}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 4: JSR CHANGES - PERFORMANCE IMPROVEMENTS
+%----------------------------------------------------------------------------------------
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{JSR Changes: Performance Improvements}} \\[0.05em]
+    {\footnotesize New pipeline architecture and data flow optimizations}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.5em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+    % Performance Comparison
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Performance Comparison}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabularx}{\linewidth}{@{}Xrr@{}}
+    \rowcolor{black!10}
+    \textbf{Stage} & \textbf{Current} & \textbf{New} \\
+    \rowcolor{white}
+    P6 Schedule Extraction & $\sim$60 min & \textbf{17 sec} \\
+    \rowcolor{black!5}
+    Parquet Aggregation & -- & \textbf{3 sec} \\
+    \rowcolor{white}
+    Iceberg Write & -- & 15 min batch \\
+    \rowcolor{black!5}
+    \textbf{Total per Schedule} & \textbf{$\sim$1 hour} & \textbf{$\sim$20 sec} \\
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1.0}
+    
+    \vspace{0.2em}
+    \textit{Note: Iceberg write is batched and \textbf{not required} for JSR app to display results.}
+    }
+
+    \vspace{0.4em}
+
+    % Key Architecture Changes
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Key Architecture Changes}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{1. Direct Parquet Read (No Iceberg Dependency)}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item JSR app reads from \textbf{aggregated parquet files} immediately after extraction.
+        \item No waiting for Iceberg write to complete.
+        \item Status 4 (Aggregated) is sufficient for JSR display.
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{2. Batched Iceberg Writes}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Iceberg writes batched in \textbf{15-minute intervals}.
+        \item Prevents small file proliferation.
+        \item Analytics/downstream consumers use Iceberg.
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{3. Optimal CDC Strategy}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Tables use \textbf{CDC (Change Data Capture)} to Iceberg when feasible.
+        \item Falls back to \textbf{batch writes} if CDC would create too many small files.
+        \item Balances real-time updates with storage efficiency.
+    \end{itemize}
+    }
+
+    \vspace{0.4em}
+
+    % Speedup Factor
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=center] {\textbf{$\sim$180x Faster Extraction}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \centering
+    From \textbf{$\sim$1 hour} to \textbf{$\sim$20 seconds} per schedule.\\
+    Enables real-time schedule analysis and on-demand extractions.
+    }
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+    % New Data Flow
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{New Data Flow Architecture}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{Extraction Pipeline:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=0em]
+        \item \textbf{Financial Extraction} (Snowflake $\rightarrow$ Parquet)
+        \item \textbf{P6 Extraction} (API $\rightarrow$ Bronze Parquet) -- \textbf{17s avg}
+        \item \textbf{Aggregation} (Bronze $\rightarrow$ Silver Parquet) -- \textbf{3s}
+        \item \textbf{Iceberg Write} (Silver $\rightarrow$ Iceberg) -- \textbf{Batched 15min}
+    \end{enumerate}
+
+    \vspace{0.15em}
+    \textbf{JSR App Data Source:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Reads from \texttt{silver/jsr\_aggregation/} parquet files.
+        \item Available at \texttt{submission\_status = 4} (Aggregated).
+        \item Does \textbf{NOT} wait for Iceberg (status 6).
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{Downstream Analytics:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item BI tools, dashboards read from Iceberg tables.
+        \item Data available after batched write completes.
+        \item Full SQL query capability via Iceberg catalog.
+    \end{itemize}
+    }
+
+    \vspace{0.4em}
+
+    % Benefits List
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Performance Benefits}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \begin{itemize}[leftmargin=1em, itemsep=0.1em]
+        \item[\checkmark] \textbf{Real-time feedback:} Users see results in $\sim$20 seconds.
+        \item[\checkmark] \textbf{On-demand extraction:} No batch window constraints.
+        \item[\checkmark] \textbf{Reduced API load:} SHA256 reconciliation skips unchanged schedules.
+        \item[\checkmark] \textbf{Storage efficient:} Batched Iceberg writes prevent small files.
+        \item[\checkmark] \textbf{Version tracking:} Complete lineage via \texttt{p6\_schedule\_id\_versions}.
+        \item[\checkmark] \textbf{Parallel processing:} Multiple schedules can extract concurrently.
+        \item[\checkmark] \textbf{Decoupled layers:} JSR app independent of Iceberg write latency.
+    \end{itemize}
+    }
+
+    \vspace{0.4em}
+
+    % Data Layering
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Data Layering Strategy}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\linewidth}{@{}lXl@{}}
+    \rowcolor{black!10}
+    \textbf{Layer} & \textbf{Format} & \textbf{Consumer} \\
+    \rowcolor{white}
+    Bronze & Parquet (raw) & Pipeline \\
+    \rowcolor{black!5}
+    Silver & Parquet (agg) & \textbf{JSR App} \\
+    \rowcolor{white}
+    Gold & Iceberg & BI/Analytics \\
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1.0}
+    }
+
+\end{tabular}
+}
+
+\vspace{0.3em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 5: BRONZE LAYER STORAGE & VERSIONING
+%----------------------------------------------------------------------------------------
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Bronze Layer Storage \& Versioning}} \\[0.05em]
+    {\footnotesize Azure Blob Storage structure for financial metadata and P6 schedule extractions}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+% Financial Metadata Screenshot
+\begin{center}
+\includegraphics[width=0.95\linewidth]{bronze_metadata_jsr=financial.png}
+\end{center}
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{Financial Metadata:} \texttt{bronze/jsr\_financials/V3/fiscal\_year\_month\_no=\{YYYYMM\}/project\_number=\{job\_code\}/data.parquet}\par}
+
+\vspace{0.4em}
+
+% P6 Schedule Extraction Screenshot
+\begin{center}
+\includegraphics[width=0.95\linewidth]{bronze_schedule_extraction.png}
+\end{center}
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{P6 Schedule Extraction:} \texttt{bronze/p6/V3/job\_code=\{job\_code\}/sch\_id=\{schedule\_id\}/\{version\}/\{service\}.parquet}\par}
+
+\vspace{0.5em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+    % Directory Structure
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Bronze Directory Structure}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{1. Financial Metadata (JSR Financials):}
+    \begin{verbatim}
+bronze/jsr_financials/V3/
+  fiscal_year_month_no=202512/
+    project_number=103440/
+      data.parquet
+    \end{verbatim}
+    \vspace{-0.5em}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Partitioned by fiscal month, then project.
+        \item Single \texttt{data.parquet} per project/month.
+        \item Contains JOR, Cost Report, CRM data.
+    \end{itemize}
+
+    \vspace{0.15em}
+    \textbf{2. P6 Schedule Extraction:}
+    \begin{verbatim}
+bronze/p6/V3/
+  job_code=103440/
+    sch_id=191090/
+      1/  <-- version number
+        activity.parquet
+        calendar.parquet
+        relationship.parquet
+        resource.parquet
+        spread.parquet
+    \end{verbatim}
+    \vspace{-0.5em}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item Partitioned by job\_code, then schedule\_id.
+        \item Version folder increments on change.
+        \item 5 service files per extraction.
+    \end{itemize}
+    }
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+    % Versioning Logic
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Version Increment Logic}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{SHA256 Hash Comparison:}
+    \begin{enumerate}[leftmargin=1.2em, itemsep=0em]
+        \item Extract P6 data into memory.
+        \item Calculate SHA256 hash for each service parquet.
+        \item Compare with hashes in \texttt{p6\_schedule\_id\_versions}.
+        \item If \textbf{ANY} hash differs $\rightarrow$ increment version.
+        \item If \textbf{ALL} hashes match $\rightarrow$ reuse existing version.
+    \end{enumerate}
+
+    \vspace{0.15em}
+    \textbf{Version Record Created:}
+    \begin{itemize}[leftmargin=1em, itemsep=0em]
+        \item \texttt{version\_number}: 1, 2, 3...
+        \item \texttt{output\_dir\_url}: Full blob path
+        \item \texttt{service\_*\_file\_hash}: SHA256 per service
+        \item \texttt{service\_*\_row\_count}: Metadata
+    \end{itemize}
+    }
+
+    \vspace{0.3em}
+
+    % Service Files
+    \begin{tikzpicture}
+        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{P6 Service Files}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{@{}lXr@{}}
+    \rowcolor{black!10}
+    \textbf{File} & \textbf{P6 Service} & \textbf{Size} \\
+    \rowcolor{white}
+    activity.parquet & ActivityService & 120 KiB \\
+    \rowcolor{black!5}
+    calendar.parquet & CalendarService & 13 KiB \\
+    \rowcolor{white}
+    relationship.parquet & RelationshipService & 181 KiB \\
+    \rowcolor{black!5}
+    resource.parquet & ResourceAssignmentService & 39 KiB \\
+    \rowcolor{white}
+    spread.parquet & ResourceSpreadService & 54 KiB \\
+    \end{tabularx}
+    \renewcommand{\arraystretch}{1.0}
+    }
+
+    \vspace{0.3em}
+
+    % Reconciliation Example
+    \begin{tikzpicture}
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Reconciliation Example}};
+    \end{tikzpicture}
+
+    \vspace{0.1em}
+
+    {\footnotesize
+    \textbf{Scenario:} Re-extract schedule 191090
+    
+    \vspace{0.1em}
+    Previous (v1): activity=\texttt{abc...}, resource=\texttt{xyz...}\\
+    Current: activity=\texttt{abc...}, resource=\texttt{NEW!}
+    
+    \vspace{0.1em}
+    \textbf{Result:} New version created (v2)\\
+    \texttt{schedule\_change = true}\\
+    Files written to \texttt{.../sch\_id=191090/2/}
+    }
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\end{document}
