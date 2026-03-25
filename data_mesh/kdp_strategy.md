@@ -2,13 +2,13 @@
 
 **To:** Dave Freeman, Colin Davis  
 **From:** Matt Pappas, CDO  
-**Date:** February 2026
+**Date:** 3/25/2026
 
 ---
 
 ## The Problem
 
-KDS cannot deliver data science or data products at the velocity Kiewit needs. The root cause is structural:
+KDS cannot deliver data science or data products at the velocity Kiewit needs. The root cause is organization structure:
 
 | Issue | Impact |
 |-------|--------|
@@ -23,9 +23,7 @@ This is not a technology problem. It is an organizational design problem.
 
 ## The Industry Benchmark
 
-Gartner predicts **80% of data and analytics governance initiatives will fail by 2027** due to "center-out, command-and-control" approaches that operate reactively rather than strategically. The fix: link data capabilities directly to business outcomes and distribute ownership to domain teams.
-
-*Source: [Gartner, Feb 2024](https://www.gartner.com/en/newsroom/press-releases/2024-02-28-gartner-predicts-80-percent-of-data-and-analytics-governance-initiatives-will-fail-by-2027)*
+Gartner predicts **80% of data and analytics governance initiatives will fail by 2027** due to "center-out, command-and-control" approaches that operate reactively rather than strategically. The fix: link data capabilities directly to business outcomes and distribute ownership to domain teams.  This is the data mesh concept we have been talking about since KIP inception.
 
 Standard organizational models for data teams:
 1. Embedded in operating divisions
