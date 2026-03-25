@@ -40,11 +40,35 @@ The gap is not technology—it's **a missing service layer** between platform ow
 
 We propose assigning a **DE CSM** to each major data science initiative. The DE CSM does not own the platform or the source data. Instead, they ensure:
 
-| Responsibility | Platform Owner | DE CSM Role |
-|----------------|----------------|-------------|
-| Storage (Bronze/Silver/Gold) | KTG | Hydration, monitoring in Dagster+, architecture artifacts |
-| Data In/Out | KTG / InEight | Pipelines that move data to/from KDP 2.0 |
-| FinOps | KTG | Review workloads, flag cost optimization opportunities |
+**DE CSM Owns (High-Value Work):**
+
+| Responsibility | DE CSM Role |
+|----------------|-------------|
+| Data Structures | Design and maintain Bronze/Silver/Gold schemas, Iceberg tables, data models |
+| Pipeline Development | Build Dagster DAGs, data movement in/out, orchestration logic |
+| Monitoring & Observability | Pipeline health, data quality alerts, lineage tracking in Dagster+ |
+| Domain Coordination | Translate DS requirements into data products, prioritize with Data Domain Strategy |
+| Architecture Artifacts | Document data flows, maintain source-to-target mappings |
+
+**DE CSM Delegates via Ticket (Low-Value Work):**
+
+| Request | Submit Ticket To | SLA Expectation |
+|---------|------------------|-----------------|
+| Infrastructure Provisioning | KTG Platform Team | Azure resources provisioned per spec |
+| User Access Administration | KTG IAM | Routine access granted via self-service or ticket |
+| Security Patching | KTG Security | Platform patched; DE CSM notified of downtime |
+| Network Configuration | KTG Networking | Firewall rules, VNet peering per DE CSM spec |
+| Cost Reporting | KTG FinOps | Monthly cost reports provided to DE CSM |
+
+**DE CSM Coordinates (Shared Accountability):**
+
+| Responsibility | Coordination Partner | How |
+|----------------|---------------------|-----|
+| Data Architecture Standards | Data Architecture (KDS) | DE CSM implements standards set by architecture team |
+| Domain Prioritization | Data Domain Strategy (Colin Davis) | DE CSM executes priorities; Strategy sets roadmap |
+| Security Reviews | KTG Security | KTG reviews; DE CSM implements controls in pipelines |
+| Source System Access | InEight / SAP owners | DE CSM requests API access; source owners grant |
+| Data Governance | KTG + KDS Governance | Shared policies; DE CSM enforces in data layer |
 
 The DE CSM reports to Ed Smith (KDS Data Engineering), who has administrative alignment with KTG on Databricks, AKS, and Snowflake.
 
@@ -115,6 +139,7 @@ The DE CSM ensures:
 | **CIO / KTG** | "Multi-cloud increases risk" | GCP is limited to closed-source model AI (approved Nov 2024). Core data stays in Azure. |
 | **InEight President** | "KDS is replicating our data" | InEight is the system of record. KDP 2.0 lands InEight data to enable analytics—not to compete. |
 | **InEight President** | "Who owns the truth?" | InEight owns source data. KDS owns derived analytics. Lineage is tracked in Dagster+. |
+| **InEight President** | "We could build this cheaper in InEight." | KDS builds capabilities that span multiple source systems (InEight + SAP + engineering models + Palantir). InEight Intelligence is the right home for InEight-only analytics; KDS handles cross-system integration that no single product team should own. |
 
 ---
 
