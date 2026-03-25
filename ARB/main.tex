@@ -1,0 +1,1112 @@
+\documentclass[10pt, a4paper]{article}
+
+\setlength{\headheight}{15pt}
+
+% Suppress showhyphens redefinition warning
+\usepackage{silence}
+\WarningFilter{latex}{Comdata domain manager mand \showhyphens has changed.}
+
+\usepackage{float}
+\usepackage[table]{xcolor}
+
+\input{structure.tex}
+
+\title{ARB Technology Recommendation}
+\author{Architecture Review Board}
+\date{\today}
+
+\begin{document}
+
+\pagestyle{fancy}
+\renewcommand{\thepage}{\arabic{page}}
+\thispagestyle{fancy}
+
+%----------------------------------------------------------------------------------------
+% PAGE 1: TITLE & EXECUTIVE SUMMARY
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Architecture Review Board: Technology Landscape \& Recommendations}} \\[0.05em]
+    {\footnotesize Kiewit Intelligence Platform (KIP) --- Prepared for the Chief Information Officer}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.1em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% ARB Overview
+\begin{tikzpicture}
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Architecture Review Board}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Formed:} November 2025
+
+\vspace{0.1em}
+
+\textbf{Members:} Matt Pappas, Edward Smith, Karen Manhart, Matt Malatek, Scott Huttmann
+
+\vspace{0.1em}
+
+\textbf{Charter:} Research and proof-of-concept technologies within the Kiewit data platform, with scope extending to web applications and machine learning systems.
+}
+
+\vspace{0.3em}
+
+% Strategic Objectives
+\begin{tikzpicture}
+    \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Strategic Objectives}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\begin{enumerate}[leftmargin=1.2em, itemsep=0.1em]
+    \item \textbf{Pipeline Efficiency:} Simplify data pipelines to obtain more usage from fewer data assets
+    \item \textbf{Reduce Complexity:} Implement orchestration (Dagster) and publish/subscribe messaging to eliminate redundancy
+    \item \textbf{Single Work Group:} Unify data architect, data engineering manager, data scientist, and data domain strategy manager roles---avoiding data pipeline duplication \& complexity across organizations
+    \item \textbf{AI Speed-to-Market:} Leverage data lake distributed parallelization for high-compute agentic workloads
+    \item \textbf{All Data Types:} Unify structured data (rows/columns) with unstructured data (documents, models, schedules) in a single pipeline
+\end{enumerate}
+}
+
+\vspace{0.3em}
+
+% Technology Decisions
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{ARB Agreed Upon}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\rowcolor{black!10}
+\textbf{Domain} & \textbf{Technology} \\
+\rowcolor{white}
+Orchestrator & \textbf{Dagster+} (hybrid: GKE primary, AKS secondary) \\
+\rowcolor{black!5}
+Transform & \textbf{dbt Core} (embedded within Dagster) \\
+\rowcolor{white}
+Compute & \textbf{AKS Node Pools}, Snowflake, Databricks (eval) \\
+\rowcolor{black!5}
+Storage Format & \textbf{Apache Iceberg} on Azure Data Lake Storage \\
+\rowcolor{white}
+Code Repository & \textbf{GitHub} \\
+\rowcolor{black!5}
+Data Warehouse & \textbf{Snowflake} (Gold virtualization + self-service) \\
+\rowcolor{white}
+BI Tools & Omni, Sigma, Power BI \\
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+}
+
+\vspace{0.3em}
+
+% Pending Research
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{ARB Pending Research}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{@{}p{2.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.5cm}@{}}
+\rowcolor{black!10}
+\textbf{Domain} & \textbf{Options} & \textbf{Status} \\
+\rowcolor{white}
+Event Data Stream & Data streaming (Confluent Kafka) vs. Message queue (Azure Event Grid) & Met with Confluent on 1/16/2026; awaiting NDA/pricing \\
+\rowcolor{black!5}
+Catalog (Azure) & Unity Catalog (Databricks) & Research phase \\
+\rowcolor{white}
+Catalog (GCP) & BigLake + BigQuery & Used for isolated Data Science estimating workloads for last quarter \\
+\rowcolor{black!5}
+Compute (Azure) & Databricks vs. Trino (self-managed) & Benchmarking \\
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% KIP Platform Layers
+\begin{tikzpicture}
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{KIP Platform Architecture}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{1. Events (Pub/Sub):} Message bus for event-driven architecture
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Two Aspects:} Message queuing (Azure Event Grid) vs. data streaming (where data is the message)
+    \item \textbf{Recommendation:} Confluent Kafka (Apache Kafka-based streaming + messaging)
+    \item \textbf{Alternative:} Azure Event Hub (streaming) + Event Grid (messaging)
+    \item \textbf{Confluent advantage:} Flink integration, catalog connectors, avoids hyperscaler lock-in
+    \item \textbf{Status:} Met with Confluent on January 16, 2026; awaiting NDA signature and pricing
+    \item \textbf{Implementation:} Confluent recommended vendor 'Improving' for expertise in large data streaming applications
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{2. Orchestrator (Dagster+):} Central hub of KIP
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Hosting:} GKE installed, while we continue to research AKS in parallel for secondary deployment
+    \item 2-year contract with token rollover; awaiting NDA (01.06)
+    \item Hybrid model: Dagster+ on GKE, Azure, and on-prem cluster
+    \item Assets shared across ecosystem (single pane of glass)
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{3. Code Management:} GitHub $\rightarrow$ Dagster environment
+
+\vspace{0.15em}
+
+\textbf{4. Compute:} Kubernetes compute pools (standard)
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item GCP: BigQuery (distributed compute over Iceberg)
+    \item Azure: Databricks or Trino (self-managed)---Microsoft lacks native Iceberg compute
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{5. Storage:} Iceberg medallion architecture
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Bronze:} Raw parquet (virtualized to Snowflake via catalog)
+    \item \textbf{Silver Product:} Iceberg + parquet (API endpoints may read directly)
+    \item \textbf{Silver Domain:} Topically-organized Iceberg tables
+    \item \textbf{Gold:} Iceberg tables for analytics
+    \item \textbf{Self-Service:} Snowflake (business units create tables, join to governed KIP data)
+    \item \textbf{Note:} This is an executive summary but actual medallion will have more layers.
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{6. Data Science Services:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Closed-source models, vector databases
+    \item BigLake catalog, BigQuery (where it makes sense to use)
+    \item GCP preferred for AI model synergy with the data science data structures
+    \item GCP has been used for the past few years for Gemini models due to the performance and efficiency.
+    \item Modal is used for model inference in some cases to reduce complexity of model development and deployment.
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Key Constraint
+\begin{tikzpicture}
+    \node[fill=kiporange!30, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Key Constraint: Catalog Selection}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+KIP requires a catalog to create Iceberg tables. Azure lacks native S3 compatibility (native to AWS/GCP), creating friction.
+
+\vspace{0.1em}
+
+\textbf{Dual-Path Strategy:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Azure:} Unity Catalog (Databricks)---unifies Iceberg + Delta Lake
+    \item \textbf{GCP:} BigLake---strong performance, synergy with KDS Data Science
+\end{itemize}
+
+\vspace{0.1em}
+
+\textit{Not a final decision; provides path forward for both hyperscalers.}
+}
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 2: TECHNOLOGY LANDSCAPE
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Technology Landscape \& Component Selection}} \\[0.05em]
+    {\footnotesize Detailed technology evaluation with concerns and next steps}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+% Technology Landscape Image
+\begin{center}
+    \includegraphics[width=0.98\linewidth]{technology_landscape.png}
+\end{center}
+
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{Figure 1:} ARB Technology Landscape \par}
+
+\vspace{0.3em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Distributed Event Stream
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{1. Distributed Event Stream} \hfill \textit{Research Phase}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Recommendation:} Confluent Kafka (preferred)
+
+\textbf{Alternative:} Azure Event Grid (message queuing) or Azure Event Hub (data streaming)
+
+\vspace{0.1em}
+
+\textbf{Two Aspects:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Message Queuing:} Azure Event Grid (notification-based)
+    \item \textbf{Data Streaming:} Data is the message (Confluent Kafka)
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Status:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Met with Confluent on January 16, 2026
+    \item Awaiting NDA signature and pricing from Confluent
+    \item Confluent recommended vendor 'Improving' for implementation expertise
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Data Asset Orchestrator
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{2. Data Asset Orchestrator} \hfill \textit{Agreed}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Selection:} Dagster+ (hybrid deployment)
+
+\vspace{0.1em}
+
+\textbf{Hosting Strategy:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Primary:} GKE (Google Kubernetes Engine)---installed in 1 day
+    \item \textbf{Secondary:} AKS (Azure Kubernetes Services)---organizational workflow delayed us 1 month.
+    \item \textbf{Note:} Orchestrator location should be co-located with compute.  we will have a hybrid model with at least one hyperscaler and one on-prem cluster.
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Contract:} 2-year with token rollover; awaiting NDA done, POC done, pricing back, awaiting contract execution.
+
+\vspace{0.1em}
+
+\textbf{Key Benefit:} Single pane of glass across GKE, Azure, and on-prem cluster with shared assets.  Most companies of our size are hybrid deployment.
+}
+
+\vspace{0.3em}
+
+% Transform
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{3. Transform} \hfill \textit{Agreed}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Selection:} dbt Core (embedded within Dagster)
+
+\vspace{0.1em}
+
+\textbf{Concerns:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item dbt is not the data modeling tool
+    \item Should bi-directionally sync to ER design (Erwin)
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Next Steps:} Build data model in dbt from Erwin tool
+}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Compute
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{4. Compute} \hfill \textit{Agreed (with research)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Selection:} AKS Node Pools (standard), Snowflake
+
+\vspace{0.1em}
+
+\textbf{Cloud-Specific Compute:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{GCP:} BigQuery provides distributed compute over Iceberg
+    \item \textbf{Azure:} Microsoft only supports Delta Lake natively; Iceberg requires Databricks or self-managed Trino
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Concerns:} Databricks compute evaluation for non-document workloads
+
+\textbf{Next Steps:} John Lavoi to complete AKS setup
+}
+
+\vspace{0.3em}
+
+% Data Storage & Format
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{5. Data Storage \& Format} \hfill \textit{Agreed (with research)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Selection:} Apache Iceberg on Azure Data Lake Storage (ADLS)
+
+\vspace{0.1em}
+
+\textbf{Catalog Research (Critical Path):}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Unity Catalog (Azure):} Unifies Iceberg + Delta Lake; S3 incompatibility is friction
+    \item \textbf{BigLake (GCP):} Strong performance; synergy with Data Science
+    \item \textbf{Rejected:} Polaris (unperformant), Nessie, Gravitino, Lakekeeper (requires management)
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Concerns:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Security model (resolved)
+    \item Horizon Benchmark / Unity Benchmark (pending)
+\end{itemize}
+
+\textbf{Next Steps:} Evaluate ADLS failover and contingency
+}
+
+\vspace{0.3em}
+
+% Code Repository
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{6. Code Repository} \hfill \textit{Agreed}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Selection:} GitHub
+
+\textbf{Integration:} Direct deployment to Dagster environment
+}
+
+\vspace{0.3em}
+
+% Data Warehouse / BI
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{7. Data Warehouse / BI} \hfill \textit{Agreed}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Selection:} Snowflake (hosted on Azure)
+
+\textbf{BI Tools:} Omni, Sigma, Power BI
+
+\vspace{0.1em}
+
+\textbf{Role:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Gold layer virtualization (Iceberg $\rightarrow$ Snowflake)
+    \item Self-service for business units
+    \item Join user-created tables to governed KIP data
+\end{itemize}
+}
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 3: APPLICATION ARCHITECTURE EXAMPLE
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Reference Architecture: Application Integration}} \\[0.05em]
+    {\footnotesize Illustrative example using the Scheduling Application}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+% Application Architecture Image
+\begin{center}
+    \includegraphics[width=0.95\linewidth]{app_kip.png}
+\end{center}
+
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{Figure 2:} Application-to-Lake Integration Pattern --- Blue (Azure), Orange (Data Pipeline)\par}
+
+\vspace{0.3em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Application Layer
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Application Layer (Azure)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Components:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Frontend:} NextJS / React container
+    \item \textbf{Backend:} FastAPI container
+    \item \textbf{Database:} PostgreSQL (app-structured data)
+    \item \textbf{Storage:} Azure Blob (app files, schedule files)
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Interaction Pattern:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item High-volume ETL (e.g., P6 schedule extraction) $\rightarrow$ Dagster
+    \item Simple user value storage $\rightarrow$ PostgreSQL (direct)
+    \item FastAPI validates datasets from parquet or PostgreSQL
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Event Layer
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Event Layer (Pub/Sub)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Flow:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=0em]
+    \item Application publishes event to Event Hub
+    \item Dagster sensor detects event
+    \item Dagster orchestrates pipeline to medallion structure
+\end{enumerate}
+
+\vspace{0.1em}
+
+\textbf{Research:} Event Grid (notification) vs. Kafka Queue (data in message)
+}
+
+\vspace{0.3em}
+
+% Dagster Hub
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Dagster: The Hub}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textit{``Dagster is the hub and everything else is the spokes of KIP.''}
+
+\vspace{0.1em}
+
+\textbf{Responsibilities:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Orchestrate all data movement
+    \item Execute dbt transformations
+    \item Monitor pipeline health
+    \item Provide single pane of glass across environments
+\end{itemize}
+}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Medallion Lake
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Medallion Structure Lake}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Storage Layers:}
+
+\vspace{0.1em}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\rowcolor{black!10}
+\textbf{Layer} & \textbf{Format} & \textbf{Access} \\
+\rowcolor{white}
+Bronze & Parquet (raw) & Pipeline only \\
+\rowcolor{black!5}
+Bronze & Iceberg & Virtualized to SF \\
+\rowcolor{white}
+Silver Product & Iceberg + Parquet & API endpoints \\
+\rowcolor{black!5}
+Silver Domain & Iceberg & Topical access \\
+\rowcolor{white}
+Gold Product & Iceberg & BI / Analytics \\
+\rowcolor{black!5}
+Gold Domain & Iceberg & BI / Analytics \\
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+
+\vspace{0.1em}
+
+\textbf{Catalog:} Routes queries to physical storage
+
+\textbf{Transform:} dbt (embedded in Dagster) for Bronze $\rightarrow$ Silver $\rightarrow$ Gold
+}
+
+\vspace{0.3em}
+
+% Hosting Principle
+\begin{tikzpicture}
+    \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Hosting Principle}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textit{``Where we host Kubernetes should be coupled with the lake storage system (parquet $\rightarrow$ Iceberg \& unstructured data).''}
+
+\vspace{0.1em}
+
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Compute close to storage reduces latency
+    \item Azure hosts primary lake (ADLS)
+    \item GCP hosts Data Science workloads (BigQuery, BigLake)
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Snowflake Integration
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Snowflake (Consumption)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Role:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Virtualize Gold Iceberg tables
+    \item Self-service BI for business units
+    \item Join governed KIP data with user tables
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Note:} Polaris catalog (Snowflake-acquired, June 2024) has been unperformant and not integrated with corporate Snowflake instance.
+}
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 4: PENDING RESEARCH & NEXT STEPS
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Pending Research \& Next Steps}} \\[0.05em]
+    {\footnotesize Action items, timelines, and decision criteria}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Critical Path Items
+\begin{tikzpicture}
+    \node[fill=kiporange!30, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Critical Path: Catalog Selection}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+The catalog is the \textbf{single most critical pending decision}. Without a catalog, KIP cannot create or manage Iceberg tables at scale.
+
+\vspace{0.15em}
+
+\textbf{Azure Path: Unity Catalog (Databricks)}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Pros:} Unifies Iceberg + Delta Lake; managed service
+    \item \textbf{Cons:} S3 bucket compatibility not native to Azure
+    \item \textbf{Status:} Entering research phase
+    \item \textbf{Owner:} TBD
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{GCP Path: BigLake + BigQuery}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Pros:} Strong performance; synergy with KDS Data Science
+    \item \textbf{Cons:} Multi-cloud complexity
+    \item \textbf{Status:} Research complete; performance validated
+    \item \textbf{Owner:} Data Science team
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{Not Preferred for Medallion Structure:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Polaris (Snowflake): Currently in use; slow but acceptable for some workloads; not preferred for medallion structure
+    \item Nessie, Gravitino: Require self-management
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{Note:} Lakekeeper is a performant self-managed option on Azure (not rejected, but requires self-management)
+}
+
+\vspace{0.3em}
+
+% Data Stream Research
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Research Item: Data Stream}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Decision:} Confluent Kafka (data is the message)
+
+\vspace{0.1em}
+
+\textbf{Status:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Met with Confluent on January 16, 2026
+    \item Awaiting NDA signature and pricing from Confluent
+    \item Confluent recommended vendor 'Improving' for implementation expertise
+    \item \textbf{Owner:} Matt Malatek
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Message Queueing Research
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Research Item: Message Queueing}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Decision:} Azure Event Grid (notification-based)
+
+\vspace{0.1em}
+
+\textbf{Status:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Research phase
+    \item \textbf{Owner:} TBD
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Compute Research
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Research Item: Azure Compute over Iceberg}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Challenge:} Microsoft provides native tooling for Delta Lake only; Iceberg requires third-party compute.
+
+\vspace{0.1em}
+
+\textbf{Options:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Databricks:} Managed; integrates with Unity Catalog
+    \item \textbf{Trino:} Open-source; self-managed
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Status:} Benchmarking (Horizon, Unity)
+
+\textbf{Owner:} TBD
+}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Immediate Next Steps
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Immediate Next Steps}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}Xlr@{}}
+\rowcolor{black!10}
+\textbf{Action} & \textbf{Owner} & \textbf{Target} \\
+\rowcolor{white}
+Execute Dagster NDA & ARB & 01.06 \\
+\rowcolor{black!5}
+Complete AKS setup & John Lavoi & TBD \\
+\rowcolor{white}
+Confluent meetings & Matt Malatek & This week \\
+\rowcolor{black!5}
+Build dbt model from Erwin & Data Eng & TBD \\
+\rowcolor{white}
+ADLS failover contingency & Infra & TBD \\
+\rowcolor{black!5}
+Unity Catalog POC & Data Eng & Q1 2026 \\
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+}
+
+\vspace{0.3em}
+
+% Decision Criteria
+\begin{tikzpicture}
+    \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Decision Criteria}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Catalog Selection:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Performance (query latency, throughput)
+    \item Managed vs. self-managed operational burden
+    \item Multi-cloud support (Azure + GCP)
+    \item Integration with existing Snowflake instance
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{Event Stream Selection:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Cost (licensing vs. Azure-native)
+    \item Message size and throughput requirements
+    \item Integration with Dagster sensors
+    \item Operational complexity
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% Summary
+\begin{tikzpicture}
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{ARB Recommendation Summary}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+The Architecture Review Board recommends proceeding with:
+
+\vspace{0.1em}
+
+\begin{itemize}[leftmargin=1em, itemsep=0.1em]
+    \item[\checkmark] \textbf{Dagster+} as the central orchestrator (hybrid GKE/AKS)
+    \item[\checkmark] \textbf{dbt Core} embedded within Dagster for transformations
+    \item[\checkmark] \textbf{Apache Iceberg} on ADLS as the table format
+    \item[\checkmark] \textbf{Snowflake} for Gold virtualization and self-service
+    \item[\checkmark] \textbf{GitHub} for code management
+\end{itemize}
+
+\vspace{0.15em}
+
+\textbf{Pending decisions requiring CIO visibility:}
+\begin{itemize}[leftmargin=1em, itemsep=0.1em]
+    \item[$\circ$] Catalog: Unity (Azure) vs. BigLake (GCP) dual-path strategy
+    \item[$\circ$] Event Stream: Confluent Kafka vs. Azure Event Grid
+    \item[$\circ$] Compute: Databricks vs. Trino for Azure Iceberg queries
+\end{itemize}
+
+\vspace{0.15em}
+
+\textit{The ARB will continue to evaluate pending items and provide updates as research concludes.}
+}
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% APPENDIX A: FULL PLATFORM ARCHITECTURE
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Appendix A: Full Platform Architecture}} \\[0.05em]
+    {\footnotesize End-to-end data flow from enterprise systems to consumers}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.3em}
+
+% Source to Targets Image
+\begin{center}
+    \includegraphics[width=0.98\linewidth]{source_to_targets.png}
+\end{center}
+
+\vspace{-0.2em}
+{\centering\scriptsize \textbf{Figure A1:} KIP Full Platform Architecture --- Sources, Orchestration, Lake, and Consumers\par}
+
+\vspace{0.3em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Data Sources
+\begin{tikzpicture}
+    \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Data Sources}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Enterprise Systems:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{KDS Custom:} Primavera P6, Other custom apps
+    \item \textbf{InEight:} InEightCloud, InEightPremODS
+    \item \textbf{Palantir:} Source360, TRACE
+    \item \textbf{ERP:} SAP
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Ingestion Patterns:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Pull:} Scheduled extraction (APIs, databases)
+    \item \textbf{Push Events:} Real-time event-driven ingestion
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% KIP-up Layer
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{KIP-up (Orchestration Layer)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Components:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Sensors/Jobs:} Dagster-managed extraction and transformation
+    \item \textbf{Kafka Partitions:} Event streaming (Confluent)
+    \item \textbf{Kafka Connect:} Source/sink connectors
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Flow:}
+\begin{enumerate}[leftmargin=1.2em, itemsep=0em]
+    \item Push files $\rightarrow$ Blob storage $\rightarrow$ Sensor triggers
+    \item Push events $\rightarrow$ Kafka $\rightarrow$ Dagster jobs
+    \item Orchestrator writes to Datalake
+\end{enumerate}
+}
+
+\vspace{0.3em}
+
+% Datalake
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Datalake (Medallion Architecture)}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{Query Engine:} Trino (open-source, self-managed for Azure)
+
+\vspace{0.1em}
+
+\textbf{Layers:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item \textbf{Bronze:} Files (parquet) + Tables (Iceberg)
+    \item \textbf{Silver:} Tables (Iceberg)---product \& domain
+    \item \textbf{Gold:} Tables (Iceberg)---analytics-ready
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Hosting:} 3x-Azure Databricks, GCP (for Data Science synergy)
+}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% DataLake Consumers
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{DataLake Consumers}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\textbf{KIP Data Science:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Direct lake access for ML workloads
+    \item GCP BigQuery for distributed compute
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{KIP Processing Unit (1--3 min refresh):}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Silver Sensors / dbt Jobs
+    \item Gold Sensors / dbt Jobs
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Snowflake:}
+\begin{itemize}[leftmargin=1em, itemsep=0em]
+    \item Native Tables (materialized)
+    \item External Tables (virtualized Iceberg)
+\end{itemize}
+}
+
+\vspace{0.3em}
+
+% User Types
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{User Types}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\rowcolor{black!10}
+\textbf{User} & \textbf{Access Pattern} \\
+\rowcolor{white}
+Snowflake User & SQL via Snowflake (native + external tables) \\
+\rowcolor{black!5}
+App User & KIP External/Native Apps (via App Process) \\
+\rowcolor{white}
+KIP User & Direct lake access (Data Science, Engineering) \\
+\end{tabularx}
+\renewcommand{\arraystretch}{1.0}
+}
+
+\vspace{0.3em}
+
+\end{tabular}
+}
+
+\vspace{0.2em}
+
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\end{document}

@@ -1,0 +1,179 @@
+# - I want to write a job description that is like a software engineer but also more tilted towards data engineering.  like sr_data_manager_final.txt but also has some elements of software_engineering_manager.txt both of these files are in this directory.
+
+Research the Palantir platform and write a job description that is a full stack data engineer and front end software engineer whom is particularly experienced with leading teams on the client side to support palantir developments - done by palantir FDE's.
+# write it below here vvvv
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Sr. Data Engineer - Palantir Integration   ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Position Overview
+We are seeking a Sr. Data Engineer to lead Kiewit's technical integration with the Palantir platform, serving as the primary client-side engineering counterpart to Palantir's Forward Deployed Engineers (FDEs). This role combines full-stack data engineering, front-end application development, and technical team leadership—ensuring Palantir-built workflows are integrated into Kiewit's data ecosystem and operationalized for long-term sustainability.
+
+Kiewit is one of North America's largest and most respected construction and engineering organizations. We are building the Kiewit Intelligence Platform (KIP) to transform how we estimate, plan, and execute billion-dollar projects. Palantir Foundry and AIP are strategic components of this platform, and this role will lead the engineering effort to maximize value from that investment.
+
+You will be the technical bridge between Palantir FDEs and Kiewit's Data Engineering and Data Science teams—ensuring that solutions built in Foundry integrate cleanly with KIP, that Kiewit staff can maintain and extend Palantir workflows, and that we build rather than buy our way into platform lock-in.
+
+Responsibilities
+
+Palantir Integration & Technical Leadership:
+•	Serve as primary technical counterpart to Palantir FDEs for all integration work
+•	Lead client-side engineering team (3-5 engineers) supporting Palantir developments
+•	Translate Palantir-built ontologies and workflows into sustainable, Kiewit-maintained capabilities
+•	Architect data flows between Palantir Foundry and KIP (Azure Data Lake, Snowflake, Iceberg tables)
+•	Ensure Palantir data assets integrate into Kiewit's lineage tracking, data catalog, and governance frameworks
+•	Evaluate build-vs-buy decisions and ensure Kiewit retains optionality in platform choices
+
+Full-Stack Data Engineering:
+•	Build and optimize data pipelines feeding Palantir Foundry from SAP, InEight, Primavera, and custom systems
+•	Develop PySpark/Spark transformations within Foundry Pipeline Builder and Code Workbook
+•	Design and implement data models in Palantir Ontology aligned with Kiewit's master data standards
+•	Ensure data quality, validation, and monitoring for all Palantir-integrated pipelines
+•	Partner with Data Engineering team to maintain bi-directional data flows between Foundry and KIP
+
+Front-End Application Development:
+•	Build and extend Palantir applications using TypeScript, React, and the Ontology SDK (OSDK)
+•	Develop custom UI components for construction workflows (estimating, scheduling, procurement)
+•	Integrate Palantir AIP capabilities (AI agents, LLM-powered features) into production applications
+•	Create data visualizations and dashboards within Foundry Workshop and Quiver
+•	Ensure applications meet Kiewit UX standards and are accessible to field and office users
+
+Team Leadership & Knowledge Transfer:
+•	Lead and mentor Kiewit engineers working alongside Palantir FDEs
+•	Establish best practices for Palantir development, testing, and deployment within Kiewit
+•	Document integrations, workflows, and runbooks to ensure Kiewit can operate independently
+•	Drive knowledge transfer so Kiewit staff—not Palantir—own the models and business logic
+•	Present technical progress and integration roadmaps to leadership
+
+Qualifications
+
+Required:
+•	Bachelor's degree in Computer Science, Engineering, Data Science, or related field
+•	7+ years of experience in data engineering, software development, or platform integration
+•	3+ years of experience leading technical teams or cross-functional engineering efforts
+•	Strong proficiency in Python, SQL, and PySpark/Spark
+•	Production experience with TypeScript and React (or similar modern front-end frameworks)
+•	Experience integrating enterprise data platforms with third-party SaaS or PaaS solutions
+•	Background in ETL/ELT pipelines, data modeling, and data quality frameworks
+•	Excellent communication skills—able to translate between vendor engineers and internal teams
+•	Self-directed with ability to drive ambiguous projects to completion
+
+Preferred:
+•	Direct experience with Palantir Foundry, AIP, or Ontology development
+•	Experience working alongside Forward Deployed Engineers or similar vendor integration models
+•	Familiarity with construction, engineering, or manufacturing data domains
+•	Experience with Azure cloud services (Data Lake, AKS, Functions, Data Factory)
+•	Background in Snowflake, Iceberg/Delta Lake, or modern lakehouse architectures
+•	Knowledge of data governance, lineage tracking, and metadata management (Alation, Collibra)
+•	Experience with orchestration platforms (Dagster, Airflow, Prefect)
+•	Exposure to LLMs, RAG patterns, and AI agent development
+
+Technical Environment:
+•	Palantir: Foundry, AIP, Ontology SDK, Pipeline Builder, Code Workbook, Workshop
+•	Data: Azure Data Lake, Snowflake, Iceberg tables, Polaris catalog
+•	Languages: Python, SQL, PySpark, TypeScript, React
+•	Infrastructure: Kubernetes, Docker, Terraform, Azure DevOps
+•	Source Systems: SAP, InEight, Primavera P6, engineering models (BIM/CAD)
+
+What Sets This Role Apart:
+•	Strategic influence: Shape how Kiewit integrates a $15M-$30M platform investment
+•	Technical breadth: Full stack from data pipelines to production UI
+•	Leadership opportunity: Build and lead the client-side integration team
+•	Platform impact: Ensure Palantir delivers value without creating unsustainable lock-in
+•	Scale: 17,000+ employees, projects across North America, $25B+ revenue trajectory
+
+Location
+This role is available for candidates to work remotely or from one of our office locations in Omaha, NE, Lone Tree, CO or Lenexa, KS.
+
+Base Compensation: $140,000/yr - $175,000/yr
+(Actual compensation is subject to variation due to such factors as education, experience, skillset, and/or location)
+
+We offer our fulltime staff employees a comprehensive benefits package that's among the best in our industry, including top-tier medical, dental and vision plans covering eligible employees and dependents, voluntary wellness and employee assistance programs, life insurance, disability, retirement plans with matching, and generous paid time off.
+
+Equal Opportunity Employer, including disability and protected veteran status.
+
+
+
+#-------------------------------------------
+# Palantir Job Description: Present
+#-------------------------------------------
+Position Overview
+The Palantir Manager will lead and grow Kiewit's Palantir development capability, combining hands-on technical expertise with strong team leadership and executive communication skills. This role is responsible for designing, building, and maintaining enterprise-grade applications within Palantir Foundry—including data pipelines, back-end logic, and front-end user experiences that enable AI-powered products across Kiewit.
+
+We are seeking an IT leader with strong cloud platform experience who can translate complex technical capabilities into business value. The ideal candidate brings a proven track record of building teams, managing data infrastructure, and working with executives to drive strategic technology initiatives. Direct Palantir Foundry experience is preferred, but candidates with deep Azure, Snowflake, or comparable enterprise data platform experience will be strongly considered.
+
+You will work across multiple high-value Generative AI initiatives built on Palantir Foundry and its Ontology, bringing advanced AI capabilities into daily business workflows spanning procurement, engineering, and operations.
+
+District Overview
+At Kiewit, we design and build the critical infrastructure that powers communities and drives progress across North America. From power generation and industrial facilities to major transportation projects, our work shapes how people live and connect. Within Kiewit Data Services (KDS), we are leading the transformation of data, analytics, and AI power decision-making across our business. 
+
+ 
+
+Our Palantir development team housed within our Kiewit Data Services team plays a central role in this mission, building and maintaining enterprise-grade data and AI applications that deliver measurable business impact. If you thrive on solving complex problems, collaborating across disciplines, and developing high-value, production-ready software, we invite you to join us. 
+
+Location
+This is a fully remote opportunity. 
+
+Responsibilities
+As a Palantir Developer, you'll operate like a technical product owner: building solutions, setting strategy with stakeholders, and ensuring your work delivers measurable business value. 
+
+ 
+
+Full-Stack Palantir Development 
+
+Design, build, and maintain full-stack solutions in Palantir Foundry, including data pipelines, back-end logic, and front-end user interfaces. 
+Develop robust and reusable components within Foundry’s Ontology framework to support data-driven and AI-enabled applications. 
+Build, test, and deploy scalable code using Palantir tools such as Code Workbooks, Object Types, Action Builders, and AIP integrations. 
+Generative AI Application Development 
+
+Contribute to the design and delivery of multiple Generative AI–enabled applications, leveraging Palantir Foundry and the Ontology to support intelligent decision-making across the enterprise.
+Collaborate with data architects and engineers to ensure the proper data structures, pipelines, and integrations are in place to support these products. 
+Cross-Functional Collaboration 
+
+Work closely with key executive business stakeholders, the Data Strategy team, and the Foundational Data Management team to design and execute Palantir-enabled solutions that drive measurable business outcomes. 
+Partner directly with Palantir engineers to ensure best practices, scalability, and alignment with enterprise platform standards. 
+Engage in continuous dialogue with business users to gather feedback, refine functionality, and deliver improvements that enhance adoption and value. 
+Product Lifecycle & Continuous Improvement 
+
+Develop new product features and enhancements that improve user experience and functionality. 
+Maintain and iterate on existing Palantir applications, ensuring reliability, performance, and scalability over time. 
+Contribute to internal documentation, code reviews, and knowledge-sharing sessions to build a culture of technical excellence. 
+Team Leadership & Executive Communication
+
+Lead and manage a growing team of Palantir developers, setting direction and modeling technical excellence
+Build strong working relationships across the organization—with executives, peers, and direct reports
+Present technical strategies, progress, and roadmaps to executives, engineers, and data leaders
+Support team growth through coaching, valuable feedback, and clear task assignment
+Balance data, intuition, and stakeholder input when making decisions
+Align team efforts with business priorities and drive operational excellence
+Ensure data governance, security, and compliance standards are met across all Palantir applications
+Qualifications
+Bachelor's degree in Computer Science, Data Analytics, Engineering, IT Management, or related field.
+5+ years of experience in IT management, cloud platforms, or enterprise data infrastructure (Palantir Foundry experience preferred but not required).
+Strong coding proficiency in Python, SQL, and JavaScript/TypeScript, with experience in building and managing ETL pipelines.
+Strong understanding of data modeling, ontology design, and API integrations.
+Demonstrated experience building solutions with LLMs or GenAI technologies.
+Contributions to AI/ML projects beyond feature engineering (model evaluation, problem decomposition, etc.)
+Ability to translate business needs into technical solutions and communicate effectively with both technical and non-technical audiences.
+Demonstrated ability to deliver in collaborative, fast-paced environments with multiple concurrent initiatives. #LI-MD1
+Other Requirements:
+•    Regular, reliable attendance
+•    Work productively and meet deadlines timely
+•    Communicate and interact effectively and professionally with supervisors, employees, and others individually or in a team environment
+•    Perform work safely and effectively. Understand and follow oral and written instructions, including warning signs, equipment use, and other policies.
+•    Work during normal operating hours to organize and complete work within given deadlines. Work overtime and weekends as required.
+
+
+Base Compensation: $137,000/yr - $144,000/yr
+
+(Actual compensation is subject to variation due to such factors as education, experience, skillset, and/or location)
+
+We offer our fulltime staff employees a comprehensive benefits package that’s among the best in our industry, including top-tier medical, dental and vision plans covering eligible employees and dependents, voluntary wellness and employee assistance programs, life insurance, disability, retirement plans with matching, and generous paid time off.
+
+Equal Opportunity Employer, including disability and protected veteran status.
+
+#-------------------------------------------
+# Best applicant
+#-------------------------------------------
+
+best candidate so far: https://www.linkedin.com/in/scott-emmanuel-530169134/

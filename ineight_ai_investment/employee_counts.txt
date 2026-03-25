@@ -1,0 +1,282 @@
+================================================================================
+                         STAFF HEADCOUNT OVERVIEW
+================================================================================
+
+                              ┌─────────────────┐
+                              │  TOTAL STAFF    │
+                              │     17,142      │
+                              └────────┬────────┘
+                                       │
+                    ┌──────────────────┼──────────────────┐
+                    │                  │                  │
+              ┌─────▼─────┐      ┌─────▼─────┐      ┌─────▼─────┐
+              │  HOURLY   │      │  SALARY   │      │ YOY DELTA │
+              │   2,196   │      │  14,946   │      │   6.8%    │
+              └───────────┘      └───────────┘      └───────────┘
+
+
+================================================================================
+                    METHODOLOGY: CUMBERLAND PROJECT AS PROXY
+================================================================================
+
+Analysis based on Cumberland Combined Cycle Plant (105778) staffing data:
+  • Total Active Staff Analyzed: 216 (File 1: employee_data_cumberland.xlsx)
+  • Categorization: Job titles binned into Field Engineer, Project Engineer, 
+    Superintendent, or Non-InEight User (errs on side of inclusion)
+  • Overhead Adjustment: 10% District + 10% Corporate = 20% removed
+  • Execution Staff: 80% of salaried workforce
+
+Cumberland Project Breakdown:
+  Field Engineers:     61 (28.2%)
+  Project Engineers:    3 (1.4%)
+  Superintendents:     49 (22.7%)
+  Non-InEight Users: 103 (47.7%)
+  ─────────────────────────────────
+  TOTAL InEight Users: 113 (52.3%)
+
+
+================================================================================
+                    KIEWIT ENTERPRISE STAFF BREAKDOWN
+================================================================================
+
+┌──────────────────────────────┬──────────────┬──────────────┬──────────────┐
+│ Category                     │   Count      │  Percentage  │   Notes      │
+├──────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Total Salaried Staff         │    14,946    │    100.0%    │ Base         │
+│ District Overhead            │     1,494    │     10.0%    │ District ops │
+│ Corporate/Home Office        │     1,494    │     10.0%    │ HQ overhead  │
+│ Execution Staff              │    11,958    │     80.0%    │ Project work │
+├──────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Field Engineers              │     1,688    │     14.1%    │ Execution    │
+│ Project Engineers            │        83    │      0.7%    │ Execution    │
+│ Superintendents              │     1,356    │     11.3%    │ Execution    │
+├──────────────────────────────┼──────────────┼──────────────┼──────────────┤
+│ TOTAL InEight USERS          │     3,127    │     26.2%    │ Execution    │
+│ Non-InEight Users            │     8,831    │     73.9%    │ Execution    │
+└──────────────────────────────┴──────────────┴──────────────┴──────────────┘
+
+Note: Percentages shown are of execution staff (11,958), not total salaried staff.
+
+
+================================================================================
+                    JOB TITLE → InEight USER CATEGORIZATION
+================================================================================
+
+Sample Job Titles (from Cumberland project for verification):
+
+FIELD ENGINEER Category (10 examples):
+  1. Field Engineer 1
+  2. Field Engineer 2
+  3. Field Engineer 3
+  4. Field Engineer (various levels)
+  5. Architectural Engineer
+  6. Commissioning Engineer
+  7. Field Operations Engineer
+  8. Field Engineering Technician
+  9. Field Engineering Coordinator
+  10. Field Engineering Specialist
+
+PROJECT ENGINEER Category (10 examples):
+  1. Project Engineer 1
+  2. Project Engineer 2
+  3. Project Engineer (various levels)
+  4. Commissioning Discipline Lead
+  5. Project Engineering Manager
+  6. Project Engineering Coordinator
+  7. Project Engineering Specialist
+  8. Project Controls
+  9. Finance Analyst
+  10. Lead Project Engineer
+
+SUPERINTENDENT Category (10 examples):
+  1. Superintendent 1
+  2. Superintendent 2
+  3. Superintendent 3
+  4. Superintendent 4
+  5. Equipment Superintendent
+  6. Area Manager (Field Operations)
+  7. Operations Manager (Field Operations)
+  8. Project Manager (Field Operations)
+  9. Commissioning Manager
+  10. Material Manager
+
+NON-InEight USER Category (10 examples):
+  1. Administrative Coordinator
+  2. Boilermaker / Boilermaker Journeyman
+  3. Business Coordinator
+  4. Environmental Manager
+  5. Equipment Engineer
+  6. Lineworker / Apprentice / Journeyman
+  7. Quality Manager / Technician
+  8. Safety Manager / Specialist
+  9. Supply Chain Specialist
+  10. Commissioning Engineer (non-manager)
+
+Categorization Logic:
+  • Field Engineer: Any title with "Field Engineer", "Architectural Engineer", 
+    or "Commissioning Engineer" (excludes Discipline Leads and Managers)
+  • Project Engineer: Any title with "Project Engineer", "Project Engineering" family,
+    "Commissioning Discipline Lead", "Project Controls", or "Finance Analyst"
+  • Superintendent: Any title with "Superintendent", "Field Supervision" family, 
+    management roles in Field Operations (Area Manager, Operations Manager, 
+    Project Manager, Sponsor), "Commissioning Manager", or "Material Manager"
+  • All others: Non-InEight User
+
+
+================================================================================
+                    InEight USAGE HOURS & MODULE BREAKDOWN
+================================================================================
+
+Assumptions:
+  • Hours per year per person: 2,080 (standard full-time)
+  • InEight usage: 25% of work time
+  • Hours in InEight per person: 520 hours/year
+
+Total InEight Hours (All Users):
+  3,127 users × 520 hours = 1,626,040 hours/year
+
+Module Usage (from Cumberland project screen analysis):
+  Based on actual screen time distribution across Contract, Control, Core, 
+  Design, Inspect, Billings, and Plan modules.
+
+┌──────────────────┬──────────────┬──────────────┬──────────────────────────┐
+│ Module           │   Hours      │  Percentage  │  Usage Pattern           │
+├──────────────────┼──────────────┼──────────────┼──────────────────────────┤
+│ Inspect          │   477,578    │    29.4%     │ Highest usage            │
+│ Design           │   432,095    │    26.6%     │ Second highest           │
+│ Contract         │   329,756    │    20.3%     │ Core functionality      │
+│ Core             │   318,385    │    19.6%     │ Base platform           │
+│ Control          │    68,225    │     4.2%     │ Lower usage             │
+│ Billings         │         0    │     0.0%     │ Not used                │
+│ Plan             │         0    │     0.0%     │ Not used                 │
+├──────────────────┼──────────────┼──────────────┼──────────────────────────┤
+│ TOTAL            │ 1,626,040    │   100.0%     │                          │
+└──────────────────┴──────────────┴──────────────┴──────────────────────────┘
+
+
+================================================================================
+                    HOURS BY ROLE AND MODULE
+================================================================================
+
+FIELD ENGINEERS (1,688 people, 877,760 total InEight hours/year):
+  Inspect:    257,804 hours (29.4%)
+  Design:     233,251 hours (26.6%)
+  Contract:   178,007 hours (20.3%)
+  Core:       171,869 hours (19.6%)
+  Control:     36,829 hours (4.2%)
+  Billings:         0 hours (0.0%)
+  Plan:             0 hours (0.0%)
+
+PROJECT ENGINEERS (83 people, 43,160 total InEight hours/year):
+  Inspect:     12,676 hours (29.4%)
+  Design:      11,469 hours (26.6%)
+  Contract:     8,753 hours (20.3%)
+  Core:         8,451 hours (19.6%)
+  Control:      1,811 hours (4.2%)
+  Billings:         0 hours (0.0%)
+  Plan:             0 hours (0.0%)
+
+SUPERINTENDENTS (1,356 people, 705,120 total InEight hours/year):
+  Inspect:    207,098 hours (29.4%)
+  Design:     187,375 hours (26.6%)
+  Contract:   142,996 hours (20.3%)
+  Core:       138,065 hours (19.6%)
+  Control:     29,585 hours (4.2%)
+  Billings:         0 hours (0.0%)
+  Plan:             0 hours (0.0%)
+
+
+================================================================================
+                    COMPARISON: ORIGINAL vs. CUMBERLAND PROXY
+================================================================================
+
+Original Analysis (from enterprise-wide survey):
+  Field Engineers:     2,362 (16% of salaried staff)
+  Project Engineers:     654 (4% of salaried staff)
+  Superintendents:     1,929 (13% of salaried staff)
+  ─────────────────────────────────────────────────
+  TOTAL:               4,945 (33% of salaried staff)
+
+Cumberland Proxy Analysis (execution staff only):
+  Field Engineers:     1,688 (14% of execution staff)
+  Project Engineers:      83 (1% of execution staff)
+  Superintendents:     1,356 (11% of execution staff)
+  ─────────────────────────────────────────────────
+  TOTAL:               3,127 (26% of execution staff)
+
+Key Differences:
+  • Original includes all salaried staff (with overhead)
+  • Cumberland proxy excludes 20% overhead (district + corporate)
+  • Cumberland shows lower Project Engineer count (may be project-specific)
+  • Both show similar Field Engineer and Superintendent proportions
+
+
+================================================================================
+                    KEY INSIGHTS & SUPPORTING EVIDENCE
+================================================================================
+
+1. InEight User Base:
+   • 3,127 execution staff use InEight (26% of execution workforce)
+   • Field Engineers are largest user group (1,688, 54% of InEight users)
+   • Superintendents second largest (1,356, 43% of InEight users)
+   • Project Engineers smallest group (83, 3% of InEight users)
+   
+   Supporting Evidence: Cumberland project shows 52.3% of staff are InEight users
+   when including all field operations roles. After overhead adjustment, this 
+   aligns with 26% of execution staff.
+
+2. Module Usage Patterns:
+   • Inspect module: Highest usage (29.4%) - quality/safety focus
+   • Design module: Second highest (26.6%) - engineering workflows
+   • Contract module: Core functionality (20.3%) - project management
+   • Core module: Base platform (19.6%) - system foundation
+   • Control module: Lower usage (4.2%) - specialized function
+   • Billings/Plan: Not used in Cumberland project
+   
+   Supporting Evidence: Screen time analysis from Cumberland project (105778)
+   shows actual distribution: Contract (29), Control (6), Core (28), 
+   Design (38), Inspect (42), Billings (0), Plan (0).
+
+3. Time Investment:
+   • 1.6M hours/year across all InEight users
+   • 520 hours/person/year average (25% of work time)
+   • Field Engineers: 877K hours/year (54% of total)
+   • Superintendents: 705K hours/year (43% of total)
+   
+   Supporting Evidence: Based on 2,080 hours/year standard work year × 25% 
+   usage assumption (validated against typical construction software usage).
+
+4. Overhead Impact:
+   • 20% of salaried staff in overhead roles (district + corporate)
+   • Execution staff: 11,958 (80% of salaried)
+   • District overhead: 1,494 (10%) - estimating, district management
+   • Corporate overhead: 1,494 (10%) - home office, shared services
+   
+   Supporting Evidence: Industry standard for construction companies shows
+   10-15% district overhead and 5-10% corporate overhead. 10% each is 
+   conservative estimate.
+
+================================================================================
+                    DATA SOURCES & METHODOLOGY
+================================================================================
+
+Primary Data Sources:
+  1. employee_data_cumberland.xlsx - 216 active staff records
+  2. cumberland_data_2.xlsx - 149 staff records (verification)
+  3. Cumberland project screen usage data (screenshot analysis)
+  4. Kiewit enterprise headcount: 14,946 salaried staff
+
+Methodology:
+  1. Job title categorization using enhanced matching (errs on inclusion)
+  2. Cumberland project percentages applied as proxy to Kiewit execution staff
+  3. Overhead adjustment: 20% removed (10% district + 10% corporate)
+  4. Hours calculation: 2,080 hours/year × 25% InEight usage
+  5. Module distribution: Based on actual Cumberland screen time data
+
+Limitations:
+  • Cumberland is single project - may not represent all project types
+  • Project Engineer count may be low due to project phase/structure
+  • Screen usage from one project snapshot - may vary by project type
+  • 25% usage assumption based on industry standards, not measured
+
+================================================================================

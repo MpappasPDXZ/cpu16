@@ -1,0 +1,61 @@
+Ed,
+
+I wanted to recap our discussion this morning. I firmly believe you are the right person to enhance the performance of the data engineering team and ensure that you and your team are an integral part of the data science products that ultimately drive our success. I am 100% invested in your career at Kiewit and want to see data engineering become a powerhouse organization within KDS.
+
+Below are your priorities, organized into tiers. When conflicts arise, Priority A work comes first.
+
+================================================================================
+PRIORITY A — Core Data Engineering Mission
+================================================================================
+
+1. Enable Data Science
+We need to both stabilize the on-premises tools (Trino, the cluster, Dagster/Dagster+ on-prem) and improve usability of GCP to serve as the backend for marquee domains such as Estimating and Scheduling. By linking to Estimating, Vault will become the data backbone for the estimate review package (large implications to the business), serving as a comprehensive data system for collecting data not in SAP and InEight. We will need a robust plan to build out Vault because data engineering will need to sustain the lake ecosystem underpinning it. Let's schedule time with Desiree Rue jointly so you can ask questions and understand what has been verbally promised to the business (Chad, Kevin Needham, Freeman, etc.).
+
+2. Iceberg & the KDS Data Lake
+The goal with Iceberg is to allow compute where you want to compute and make all structured data extensible in Snowflake. Iceberg is newer technology to Kiewit—in some applications we will connect a front end through an API to Iceberg directly, and in other cases we will use CDC (Change Data Capture) from a traditional database. This becomes clear when application entity diagrams are drawn out (source-to-target mappings or DAGs—Directed Acyclic Graphs) and reviewed. To date I have let data science work without impediment because I did not have a qualified reviewer of the data engineering. I would like to spend time each week talking about data architecture and educating on how the data works in the business.
+
+3. Scheduling as Lakehouse Prototype
+Scheduling serves as our pilot for implementing lakehouse architecture. While this architecture is not yet mature, I want to partner with you to either create a new model or refine your own vision. Historically, scheduling data has been a persistent challenge at KDS—however, we are now able to consistently link job code, data date, and schedule ID/database instance ID, making progress possible. We have discussed issues in scheduling leadership at length, and I appreciate your feedback. Looking forward, I am energized by the possibilities. My goal is to establish a pub/sub model for scheduling data so we can support the broad, distributed audience for it in Snowflake. There is extensive, localized schedule analysis within the company that we will be able to enable and scale. 
+
+We are also boosting our data science resources for scheduling—Zach Swanson is joining Graham, and Amanda Vanderwal will lead additional focus on this domain.
+
+================================================================================
+PRIORITY B — Business Commitments & Legacy Systems
+================================================================================
+
+4. Custom Billings (April 2026 Go-Live)
+The objective is to build a data tool to support $20B+ in reimbursable contract backlog. This is a non-DS objective given to KDS because of my familiarity with billing construction clients. It's a great way for you to get to know construction job costs. The team has a late April 2026 go-live date. The objective is to meet go-live and then turn this over to a care-and-feeding team that I estimate will never go away. I have told Dave Freeman that a custom billings team would require centralized overhead of $250k-$500k per year and was told to proceed. The two primary projects using the tool out of the gate are Homer City (largest power plant project ever) and Vantage (largest data center project ever).
+
+5. 400+ Legacy Scripts
+Our on-premises .bat / Windows Task Scheduler process for ETL execution is on a bad technology stack. The challenge: these scripts are largely supporting non-core, low-ROI workloads—but walking away creates reputational damage to KDS DE, which could trigger discussions around building things in KDS at all or with additional KTG governance.
+
+Here's how we'll handle this: These scripts are Priority B. When escalations come from leadership, loop me in—I'll handle the executive communication while your team resolves the issue. Your job is to modernize the stack, not to be on-call for legacy systems. This can be an opportunity to upskill the DE team into new technologies, or we can hire someone dedicated to care-and-feeding who would report to you. The goal is to minimally distract your top talent while ensuring all DE work moves to a modern technology stack.
+
+================================================================================
+PRIORITY C — Organizational & Coordination
+================================================================================
+
+6. Team Roster & Organizational Design
+Identify individuals who can fill key roles in estimating and scheduling domains. Invest in finding additional resources to join your team. I would like to ideate with you on organizational chart versions that support the domains within KDS. Here is a link to a domain organizational chart I built this morning: [INSERT LINK]
+
+7. Multi-Cloud & IT Security Coordination
+The IT security team will have a steady eye on what we build outside of the Azure/Snowflake ecosystems. Keep in mind: we started down the Google path with KTG leadership in November 2024, predated by about a year of GCP POC work and Modal usage. Chris and Corby Dill understand KDS intends to be a multi-cloud data science organization—they simply want to do it sparingly. When you need roadblocks cleared with KTG leadership, let me know and I will bring the business case to them.
+
+8. KIP (Kiewit Intelligence Platform) / KDP 2.0 (Kiewit Data Platform)
+The mission is two-fold:
+• Continue to make KDS the most advanced data and technology arm of Kiewit. Make data engineering a root cause for success, not a dilemma.
+• Offer solutions to me and I will shield your time from long discussions without clear leadership. I appreciate that people perceive me to be the quarterback of the ARB (Architecture Review Board), but I cannot make decisions fully on my own.
+
+I would like to increase our 1:1 time from 30 minutes to 60 minutes per week (or two 30-minute sessions). Going forward, verify with me any investment of your time into KDP 2.0 before committing.
+
+================================================================================
+WHAT YOU ARE ACCOUNTABLE FOR
+================================================================================
+
+I want to be explicit: you are not responsible for the success of KIP. You are to be laser focused on improving data engineering within KDS. To the extent that KDS takes over domains on behalf of Kiewit, then the roadmaps intertwine—but today that is not a given.
+
+The matrix data architecture board may ask you to set up services for Dagster+, Confluent, etc., but those objectives are secondary to your role leading KDS Data Engineering. Your performance will be reviewed on the success of KDS Data Engineering.
+
+I am 100% invested in your success. Let's build something great.
+
+Matt

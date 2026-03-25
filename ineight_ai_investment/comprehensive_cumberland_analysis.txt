@@ -1,0 +1,27 @@
+================================================================================
+COMPREHENSIVE CUMBERLAND PROJECT ANALYSIS
+================================================================================
+
+KIEWIT ENTERPRISE ESTIMATION:
+  Total Salaried Staff: 14,946
+  District Overhead (10%): 1,494
+  Corporate Overhead (10%): 1,494
+  Execution Staff (80%): 11,956
+
+InEight Users:
+  Field Engineers: 1,688 (14.1%)
+  Project Engineers: 83 (0.7%)
+  Superintendents: 1,356 (11.3%)
+  TOTAL: 3,127 (26.2%)
+
+Total InEight Hours: 1,626,040 hours/year
+  (Based on 2080 hours/year × 25% usage)
+
+Hours by Screen:
+  Contract: 329,756 hours (20.3%)
+  Control: 68,225 hours (4.2%)
+  Core: 318,385 hours (19.6%)
+  Design: 432,095 hours (26.6%)
+  Inspect: 477,578 hours (29.4%)
+  Billings: 0 hours (0.0%)
+  Plan: 0 hours (0.0%)

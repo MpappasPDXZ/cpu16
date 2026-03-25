@@ -1,0 +1,35 @@
+
+# ================================
+# =    Last memo (01.15.2026):   =
+# ================================
+
+Team,
+I want to share some important updates regarding our Data Engineering team.
+Gayatri has accepted a new role within Kiewit Technology Group. Over the years, she has been instrumental in developing critical data sources that contribute to Kiewit's success. In her new role, she will maintain oversight of many of these key data assets - ensuring continuity while pursuing new challenges. Please join me in congratulating her on this well-deserved opportunity.
+As part of our continued evolution, the KDS Data Engineering team will now report to Ed Smith. Ed is a seasoned data professional with deep experience in defense startups, including robotics work alongside several of our data science leaders. Most recently, he joined us from an AI startup where he built best-of-breed systems for processing high-volume, high-velocity workloads at the edge with a sharp focus on model efficiency and execution speed.
+Our team's Kiewit experience combined with Ed's expertise in high-performance data systems positions us well for what's ahead: building the foundational pipelines that will power high-ROI AI systems across the enterprise.
+I'm also pleased to announce that Nick Weindel will be joining the Data Engineering team. Nick's career has been defined by consistently seeking out challenges and stepping up to meet them. He most recently contributed to the Predictive Estimating build-out and previously served as the Omaha Hub Leader, where he mentored several employees who continue to thrive today. Nick is one of KDS's most tenured employees, and his experience and leadership will be invaluable as we grow. In Q1 of this year, Samantha Hughes will be joining KDS and once again working alongside our data scientists to take predictive estimating to the next level. Samantha most recently worked with our data science team on KTG’s commodity management web application, which has been very successful since the collaboration with our data science team resulted in an improved generative AI ticketing data extraction module. She will be a senior leader reporting to Eric Sornson and has a long track record working with our data scientists even before her time at Kiewit.
+These changes position us to manage more complex data systems - achieving higher velocity, greater scale, and simpler integration across the enterprise. We are at a critical time where we need to evolve and harden our technology landscape to support modern data lakes and compute needs so that we can enable AI workloads and these changes improve our ability to do that.  Over the coming weeks, Ed and Nick will meet individually with each team member to learn about your work, understand your goals, and discuss how we'll continue driving value for Kiewit together.
+Thank you for your continued dedication.
+
+# ================================
+# =    this topic                =
+# ================================
+
+Today we are doing a reduction in force for Catherine Bogacz and Cathy Nakayenga Weber.
+
+Catherine Bogacz: Started with KDS as a Sr. Data Analyst in May of 2021 where she was predominately focused on data quality.
+Cathy Nakayenga Weber: Started with KDS in May of 2025 as a Data Analyst 2.
+
+We are laying off both employees today (02.02.2026).  Their skillsets do not align with the full stack data engineering skillset we are looking for within our data engineering group.  Please generate communication like above that is intended for broad employee consumption.
+
+Updating the memo to reference KIP as our direction, note KTG's re-alignment, and add that Sudeer Lingala now reports to Noel Dinesh Arokiaraj in KTG.
+Sudeer has worked for KDS for 4 and a half years.  Catherine has worked for Kiewit for almost 8 years.  Cathy has worked for Kiewit for just over half a year.
+Cathy and Catherine's positions were eliminated after searching for alternative positions for them within the company.  
+
+1.“Is this it, or is there more change?”: Answer: There are no additional data engineering positional changes planned at this point.
+2.“Who’s doing their work?”: Answer: SAP HANA migration and data quality rules will be handled by someone on the team but handled in an improved data engineering pipeline.
+3.“What does ‘full stack data engineering’ mean for me?” Answer: work with your manager within your 1:1's to ensure you are meeting the objectives and growing with the company.
+4."Where are we at with Organizational Structure?" Answer: we are putting Nick Weindel directly in charge of Catherine's responsibilities to ensure work transition, this does not mean that this will go without a hitch and we recognize some issues will occur in these circumstances.
+
+

@@ -1,0 +1,23 @@
+InEight software is a modular, integrated project controls platform for complex capital projects. The specific modules you listed—Inspect, Design, Plan, Contract, Core, Control, and Billings—each serve distinct functions, and their usage varies significantly among field engineers, project engineers, and superintendents, particularly on a power plant construction project. 
+InEight Modules Breakdown
+Core (Platform): This is the foundation module, acting as the central storage and management hub for all master data, including user management, roles, permissions, project settings, and application integrations. All other modules rely on this core for consistent, connected data, but it is not a functional module for daily construction tasks itself.
+Design: Used for managing engineering scope, deliverables, and quantity forecasting during the design phase of EPC projects. It helps link design changes and quantities to the budget and schedule. This module brings designers, engineers, and contractors together to mitigate risk before construction.
+Plan: Enables work packaging (breaking down large scopes into manageable tasks), crew planning, daily reporting, and quantity tracking/claiming. It helps communicate work to be performed to field crews.
+Contract: Centralizes all contract information, including creation, supplier selection, budgets, payments, accruals, scope, and change order management. It manages workflows for RFIs, submittals, and other construction documentation.
+Control: Focuses on comprehensive project management, budgeting, forecasting costs, managing budget versions, tracking progress (earned value management), and calculating job costs/variances. It integrates with ERP and field data to provide real-time financial visibility.
+Inspect: A mobile-enabled quality and safety management tool for repeatable field inspections, checklists, test plans, and logging issues. It facilitates the creation of a fully auditable history for quality management and project closeout.
+Billings: Manages the process of client invoicing based on completed work or agreed-upon rates (e.g., cost-plus billing), integrating project cost and progress data to generate accurate reports and invoices. 
+Job Title Usage Breakdown on a Power Plant Project
+Below is an approximate percentage breakdown of module usage for each role in a power plant construction scenario, reflecting the specific responsibilities of each position. 
+Module 	Field Engineer (FE)	Project Engineer (PE)	Superintendent (Supt.)	Rationale
+Inspect	~40%	~25%	~10%	FEs are heavily involved in daily quality/safety inspections and logging issues; PEs review and manage the associated documentation and workflows; Supts oversee that inspections occur.
+Design	~5%	~50%	~5%	PEs deal extensively with design documentation, quantities, and ensuring constructability; FEs interact with models/drawings for reference; Supts rarely need direct input beyond general planning needs.
+Plan	~25%	~15%	~40%	Supts and FEs create daily/weekly work plans and track quantities in the field; PEs use it to ensure plans align with the overall project budget and schedule.
+Contract	~10%	~45%	~10%	PEs are the primary managers of contracts, submittals, RFIs, and change orders; FEs/Supts log issues that may lead to a change order.
+Control	~5%	~10%	~25%	Supts use control data to monitor progress against budgets and forecasts; PEs provide input but core cost management is often a dedicated role; FEs have minimal direct use.
+Billings	~0%	~5%	~5%	This is primarily an office function (project controls/accounting). PEs/Supts may provide sign-off on progress used for billing, but rarely use the module directly.
+Core (Platform)	~15%	~0%	~5%	FEs and Supts use core functionality via mobile apps for data entry, while PEs use the web platform. The use is integrated into other modules.
+Key Role-Based Interactions:
+A project engineer is the primary user for managing design information and contract documentation, including processing quantities and change orders.
+A field engineer frequently uses Inspect for quality control and works with the superintendent in Plan to track daily progress and quantities.
+A superintendent is heavily focused on the Plan module for daily execution and crew management, and uses Control data to ensure field productivity aligns with the project budget. 

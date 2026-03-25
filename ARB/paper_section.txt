@@ -1,0 +1,35 @@
+I wnat to toutline the technical infrastructure of the Kiewit Intelligence Platform with a paper that the CIO and other Executives have requested.
+This group is comprised of: Matt Pappas, Edward Smith, Karen Manhart, Matt Malatek, Scott Huttmann
+The ARB was formed in November 2025 and it is not January 14, 2026.  The goal of the ARB was to research and proof of concept technologies.  
+The boundaries of the ARB are within the Kiewit data platform but have extenuating circumstances to Kiewit web applications and machine learning systems.
+
+The primary objectives of KIP are to:
+1-Improve the efficiency of and simplify our data pipelines to obtain more usage of less data assets 
+2-Reduce the complexity with the implementation of an orchestrator (Dagster) and a publish / subscribe or messaging system.  
+3-Have a single topically comprised work group that has the key members (not necessarily in one organization) but certainly not two organizations with two of these roles: data architect, data engineering manager, data scientist, data domain manager.  This is of paramount importance because these are the groups that will create and consume the pipelines created centrally with governance or they will create new pipelines and continue to grow our complexity, latency, and redundancy.
+4-Enable faster speed to market of AI solutions.  A data lake offers distributed parallelization,,unmatched by MPP databases which were prominent until about 2019, which is critical for high compute agentic workloads.  
+5-Not just structured data (rows and columns) but all data (documents, model files, schedule files, etc.) will be in a single pipeline which will increase the availability of our largest data sources which are unstructured.
+
+The primary components of the Kiewit Intelligence Platform are chronologically this:
+1-Events: Message Bus / Kafka Queue or event grid.  
+   status: looking into event grid and Kafka queue.  Question is do you want the message to be data or a message?
+2-Orchestrator: We are recommending Dagster and I have documents on Dagster to explain how it compares to Airflow managed by Astronomer.  
+   status: we have are requesting a contract to ultimately be executed.  We have been given a quote for 2 years where the tokens rollover.  We have spent several weeks and up to about a month trying to implement this on Azure Kubernetes Services and Dagster was installed in GCP on GKE within a day.  So, the strategy is to host Dagster (mostly irrelevant) on GKE and then work on additionally turning on Dagster on AKS.  Ultimately we are pursuing a hybrid model where we will have Dagster+ on GKE, Azure, and our on-prem cluster.  Assets are shared throughout the ecosystem providing a single pane of glass into the entire KIP ecosystem.
+3-Code Management: Github will predominately go directly into the Dagster environment.
+3-Compute: We are recommending kubernetes compute pools as the standard.
+4-Storage: We are recommending iceberg table medallion storage alongside unstructured data in azure blobs and in GCP where Azure lacks tooling/capabilities.  This will have 4 layers:
+   1-bronze (raw parquet)
+   v___v___v__: virtualized into Snowflake via a database catalog
+   2-silver product (iceberg and parquet if necessary for speed reasons but the must have iceberg too).  API endpoints may directly read from silver product tables in some cases.
+   3-silver domain (topically orientated iceberg tables)
+   4-gold iceberg 
+   5-self-service in Snowflake (business units can create tables in a user friendly interface in Snowflake and can tie their data to robust KIP governed data with the virtualizations of iceberg tables)
+5-Data Science services including: closed source models, model storage solutions (vector databases), iceberg efficient ETL's, BigLake catalog, and BigQuery will be used by exception to improve the economic value produced by data science.  
+
+Illustrative example of an application (scheduling application) feeding the lake.
+1-The service will have: front end container (NextJs / React), backend container (FastAPI), Blob Storage (lake), and PostgreSQL database.  The application will predominately interact with Dagster for high volume ETL (moving schedules out of P6 but not simple user value storage from the frontend).  Then the FastAPI backend will allow the user to validate datasets coming from parquet or Postgresql.  
+2-Pub/sub or eventing: we are embarking upon using event grid but more research is going into Kafka queue.  The app would pub into this pub/sub system and let Dagster know that we're ready to event the data to the medallion structure (iceberg)
+3-Dagster is the hub and everything else is the spokes of Kiewit Intelligence Platform (KIP)
+4-Where we host kubernetes should be coupled with the lake storage system (parquet --> iceberg & unstructured data all with logic encoded)
+5-Then we use the database catalog, which azure presently lacks as compared to AWS Glue Data Catalog or GCP offers BigLake.  These are both out of the box managed iceberg data catalogs.  Polaris is the Snowflake catalog and it has been unperformant and not at all integrated with our corporate instance of Snowflake even though Snowflake acquired the Polaris catalog in June of 2024.  We are now researching databricks's unity catalog to have a hosted catalog.  We have also explored several other open-source catalogues: Nessie, Gravitino & Lakekeeper being the successive order we tried.  Lakekeeper is performant but ultimately requires management.
+

@@ -1,0 +1,37 @@
+Team,
+I want to share important updates regarding our Data Engineering team.
+Gayatri has accepted a new role in Kiewit Technology Group. She has been a crucial KDS team member over the years, leading development of critical data sources contributing to Kiewit’s success. I am confident she will continue making significant impacts for Kiewit in her new role where she will maintain oversight of many of these key data sources. Please join me in congratulating her on this opportunity.
+The KDS Data Engineering group is being asked to manage more complex data movement systems to obtain higher velocity, size, or simplicity of a holistic and shared source to data science system data pipeline.  Many have rightfully commented that not all changes were necessary to date because the improvements were not worth the change management, took longer to develop, or come at a higher price.  However, I would caution against only thinking about only today and not where we’re going.  We are preparing a pathway for high ROI AI systems and putting an organizational structure in place with experience in building these high-performance data systems.
+As part of this change, the KDS Data Engineering team will report to Ed Smith. Ed is a seasoned data professional with a wealth of experience in defense startups including robotics where he shared experience with many of our data science leaders in KDS.  Ed most recently joined us from an AI startup with a sharp focus on AI model efficiency and execution speed.  Ed has completed the build out of best of best of breed systems for processing high volume and high velocity workloads at the edge.  This experience coupled with a team ready to support him with their Kiewit experience is how we will continue to improve.  
+To that regard, I’m pleased to announce Nick Weindel will be joining the Data Engineering team. His career has been exemplary; Nick has been consistently seeking out challenges and will be joining us after his stint in web development.  Nick most recently contributed to the predictive estimating build out and is one KDS’s most tenured employees with previous leadership responsibilities as the Omaha hub leader where he mentored several employees who are also following in his footsteps.  
+These changes are designed to create new opportunities for collaboration and career growth within our evolving data engineering structure. Over the coming weeks, Nick and Ed will be meeting individually with each team member to get to know them better, learn more about the work/assets, and how we will continue driving value for Kiewit together.
+Thank you for your continued dedication and contributions to Kiewit.
+Best regards,
+Matt
+
+I want to share some important updates regarding our Data Engineering team.
+Gayatri has accepted a new role within Kiewit Technology Group. Over the years, she has been instrumental in developing critical data sources that contribute to Kiewit's success. In her new role, she will maintain oversight of many of these key data assets—ensuring continuity while pursuing new challenges. Please join me in congratulating her on this well-deserved opportunity.
+As part of our continued evolution, the KDS Data Engineering team will now report to Ed Smith. Ed is a seasoned data professional with deep experience in defense startups, including robotics work alongside several of our data science leaders. Most recently, he joined us from an AI startup where he built best-of-breed systems for processing high-volume, high-velocity workloads at the edge—with a sharp focus on model efficiency and execution speed.
+Our team's Kiewit experience combined with Ed's expertise in high-performance data systems positions us well for what's ahead: building the foundational pipelines that will power high-ROI AI systems across the enterprise.
+I'm also pleased to announce that Nick Weindel will be joining the Data Engineering team. Nick's career has been defined by consistently seeking out challenges and stepping up to meet them. He most recently contributed to the Predictive Estimating build-out and previously served as the Omaha Hub Leader, where he mentored several employees who continue to thrive today. Nick is one of KDS's most tenured employees, and his experience and leadership will be invaluable as we grow.
+These changes position us to manage more complex data systems—achieving higher velocity, greater scale, and simpler integration across the enterprise. Over the coming weeks, Ed and Nick will meet individually with each team member to learn about your work, understand your goals, and discuss how we'll continue driving value for Kiewit together.
+Thank you for your continued dedication.
+Matt
+
+###
+another email
+###
+Justin and I have been discussing how to best execute data engineering on the Kiewit Data Platform (KDP). To move forward effectively, we need to sequence data sources by domain and build data models for each vertical. Currently, we are not doing this—and progress has been slow as a result.
+
+The present state of KDP includes nearly 30 Snowflake databases with significant sprawl: limited data models at scale, duplication, and fragmented ownership. While there are horizontal dependencies across pipelines, the higher priority is proper build-out of data models and pipelines within each domain.
+
+To be effective, a Domain Engineering Manager must:
+- Understand the source systems within their domain
+- Manage and monitor their pipelines end-to-end
+- Enable downstream consumers to provide feedback not just via tickets, but through code—pull requests, observability, and data quality checks
+
+This is fundamentally different from how we have operated for the past 15 years, which produced the sprawl. The key is deep domain expertise at Kiewit combined with daily collaboration with consumers to integrate workloads.
+
+**Request:** We recommend hiring three Data Engineering Managers who can utilize the ARB-recommended tools and own their respective domains. I am seeking your approval to open these three requisitions.
+
+Happy to discuss any element of this.

@@ -1,0 +1,75 @@
+================================================================================
+SCIENTIFIC HOURS ALLOCATION - InEight MODULES BY ROLE
+================================================================================
+
+ROLE-BASED MODULE USAGE PERCENTAGES:
+--------------------------------------------------------------------------------
+
+Field Engineer:
+  Inspect     :  40.0%
+  Plan        :  25.0%
+  Core        :  15.0%
+  Contract    :  10.0%
+  Design      :   5.0%
+  Control     :   5.0%
+  Billings    :   0.0%
+
+Project Engineer:
+  Design      :  50.0%
+  Contract    :  40.0%
+  Plan        :   5.0%
+  Control     :   5.0%
+  Inspect     :   0.0%
+  Billings    :   0.0%
+  Core        :   0.0%
+
+Superintendent:
+  Plan        :  40.0%
+  Control     :  25.0%
+  Contract    :  10.0%
+  Inspect     :  10.0%
+  Design      :   5.0%
+  Core        :   5.0%
+  Billings    :   5.0%
+
+
+HOURS BY ROLE AND MODULE:
+--------------------------------------------------------------------------------
+
+Field Engineer (1,688 users, 877,760 hours):
+  Inspect     :    351,104 hours ( 40.0%)
+  Plan        :    219,440 hours ( 25.0%)
+  Core        :    131,664 hours ( 15.0%)
+  Contract    :     87,776 hours ( 10.0%)
+  Design      :     43,888 hours (  5.0%)
+  Control     :     43,888 hours (  5.0%)
+  Billings    :          0 hours (  0.0%)
+
+Project Engineer (83 users, 43,160 hours):
+  Design      :     21,580 hours ( 50.0%)
+  Contract    :     17,264 hours ( 40.0%)
+  Plan        :      2,158 hours (  5.0%)
+  Control     :      2,158 hours (  5.0%)
+  Inspect     :          0 hours (  0.0%)
+  Billings    :          0 hours (  0.0%)
+  Core        :          0 hours (  0.0%)
+
+Superintendent (1,356 users, 705,120 hours):
+  Plan        :    282,048 hours ( 40.0%)
+  Control     :    176,280 hours ( 25.0%)
+  Contract    :     70,512 hours ( 10.0%)
+  Inspect     :     70,512 hours ( 10.0%)
+  Design      :     35,256 hours (  5.0%)
+  Core        :     35,256 hours (  5.0%)
+  Billings    :     35,256 hours (  5.0%)
+
+
+TOTAL HOURS BY MODULE:
+--------------------------------------------------------------------------------
+  Plan        :    503,646 hours ( 31.0%)
+  Inspect     :    421,616 hours ( 25.9%)
+  Control     :    222,326 hours ( 13.7%)
+  Contract    :    175,552 hours ( 10.8%)
+  Core        :    166,920 hours ( 10.3%)
+  Design      :    100,724 hours (  6.2%)
+  Billings    :     35,256 hours (  2.2%)

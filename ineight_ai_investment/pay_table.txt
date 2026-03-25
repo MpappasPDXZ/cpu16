@@ -1,0 +1,18 @@
+Role 	Estimated Average Hourly Rate	Annual Salary (Hourly Rate x 2080)	Burden Hourly Rate (48% of Hourly Rate)	All-in $/Work Hour
+Field Engineer	$38.74 - $48.97	$80,586 - $101,851	$18.60 - $23.51	$57.34 - $72.48
+Project Engineer	$46.17 - $60.04	$96,039 - $124,890	$22.16 - $28.82	$68.33 - $88.86
+Superintendent	$50.96 - $68.47	$105,990 - $142,419	$24.46 - $32.87	$75.42 - $101.34
+
+General Estimates (Highly Variable):
+Project Engineer:
+Computer: 70-80% (InEight for budgets, schedules, RFIs, submittals, reports).
+Non-Computer: 20-30% (Site walks, meetings, vendor coordination).
+Why: Heavily involved in documentation, cost control, and planning within the system.
+Field Engineer:
+Computer: 50-60% (Daily reports, progress photos, updating schedules in InEight, materials tracking).
+Non-Computer: 40-50% (On-site inspections, coordinating trades, resolving field issues).
+Why: Bridging office planning and field execution, using InEight for reporting and field data capture.
+Superintendent:
+Computer: 20-40% (Reviewing daily reports, checking progress photos, safety checks via tablet/PC).
+Non-Computer: 60-80% (Managing crews, site logistics, safety enforcement, quality control).
+Why: Primarily managing people and physical work; uses software for oversight and data, not daily creation. 

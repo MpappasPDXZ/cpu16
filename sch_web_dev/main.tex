@@ -227,7 +227,15 @@
     \vspace{0.1em}
     
     {\footnotesize
-    The new architecture unifies the queue system for JSR, Publishers, and Lineage, transitioning from an "Active SAP Project only" system to a comprehensive "Job Code" system. This allows for seamless ingestion of Estimates and Y-Past data alongside active projects, facilitating robust historical analysis and precise change tracking across schedule lifecycles.
+    \begin{itemize}[leftmargin=1em, itemsep=0em, topsep=0em]
+        \item \textbf{Massive Performance:} Dagster runs parallel workstreams per project and per schedule; API serves from parquet.
+        \item \textbf{Linear Storage:} Bronze $\rightarrow$ Silver path with versions in filename (no back-and-forth); CDC to Iceberg.
+        \item \textbf{Version Control:} SHA256 hash detects changes---even on re-extraction requests.
+        \item \textbf{Version Selection:} Users select any version for comparison; enables custom lineage compilations.
+        \item \textbf{Unified Queue:} JSR, Publishers, and Lineage share processing infrastructure.
+        \item \textbf{Job Code System:} Expanded from Active SAP only to Estimates + Y-Past + Active projects.
+        \item \textbf{Full Monitoring:} Observability built into Dagster (pipeline) and NextJS/React app (user-facing).
+    \end{itemize}
     }
     
 
@@ -259,119 +267,102 @@
     \noindent\rule{\linewidth}{1.5pt}
 \end{center}
 
-\vspace{0.3em}
+\vspace{0.5em}
 
 % Database Schema DAG with Frontend Integration
+{\scriptsize
 \begin{center}
-\begin{tikzpicture}[
-    maintable/.style={draw, fill=black!5, rounded corners=3pt, text width=5.2cm, align=left, font=\tiny, inner sep=4pt},
-    reftable/.style={draw, fill=black!15, rounded corners=3pt, text width=2.6cm, align=left, font=\tiny, inner sep=3pt},
-    frontend/.style={draw, fill=blue!15, rounded corners=5pt, text width=2.2cm, align=center, font=\tiny\bfseries, inner sep=4pt},
-    arrow/.style={->, >=Latex, thick, black!60},
-    fkarrow/.style={->, >=Latex, black!40},
-    readarrow/.style={->, >=Latex, thick, blue!60},
-    writearrow/.style={->, >=Latex, thick, green!50!black},
-    fklabel/.style={font=\tiny\itshape, fill=white, inner sep=1pt},
-    rwlabel/.style={font=\tiny\bfseries, fill=white, inner sep=1pt}
-]
-    % FRONTEND (left side)
-    \node[frontend] (frontend) at (-5.5,0.5) {
-        Web Frontend\\[3pt]
-        \rule{\linewidth}{0.4pt}\\[2pt]
-        \normalfont\tiny
-        JSR App\\
-        Schedule\\
-        Dashboard
-    };
-    
-    % Main Table - p6_extraction_submissions (center)
-    \node[maintable] (submissions) at (0,0) {
-        \textbf{sch.p6\_extraction\_submissions} \\[2pt]
-        \rule{\linewidth}{0.4pt}\vspace{2pt}
-        id (PK), job\_code \\
-        schedule\_shortname \\
-        submitted\_fiscal\_year\_month\_no \\
-        schedule\_type, submission\_status \\
-        financial\_snapshot\_at \\
-        record\_origin \\
-        created\_at, updated\_at \\
-        schedule\_id \\
-        \textbf{version\_id} (FK) \\
-        submitted\_fiscal\_month\_week\_no \\
-        schedule\_change \\
-        \textbf{database\_instance\_id} (FK) \\
-        metadata\_extract\_status \\
-        dagster\_run\_id \\
-        user\_extraction\_requested
-    };
-    
-    % p6_databases (top right) - Reference table
-    \node[reftable] (databases) at (5,2.2) {
-        \textbf{p6\_databases} \\[2pt]
-        \rule{\linewidth}{0.4pt}\vspace{2pt}
-        database\_instance\_id \\
-        database\_name \\[2pt]
-        \textit{Reference table}
-    };
-    
-    % p6_schedule_id_versions (right) - Version tracking
-    \node[reftable] (versions) at (5,-0.3) {
-        \textbf{p6\_schedule\_id\_versions} \\[2pt]
-        \rule{\linewidth}{0.4pt}\vspace{2pt}
-        version\_id (PK) \\
-        version\_number \\
-        output\_dir\_url \\
-        file\_hashes \\[2pt]
-        \textit{Version tracking}
-    };
-    
-    % p6_extraction_logs (bottom) - Stats
-    \node[reftable] (logs) at (-1.5,-3.2) {
-        \textbf{p6\_extraction\_logs} \\[2pt]
-        \rule{\linewidth}{0.4pt}\vspace{2pt}
-        submission\_id (FK) \\
-        duration\_seconds \\
-        is\_last, is\_error \\[2pt]
-        \textit{Extraction stats}
-    };
-    
-    % p6_schedule_id_cache (bottom right) - Frontend ONLY consumer
-    \node[reftable, fill=blue!10] (cache) at (5,-2.8) {
-        \textbf{p6\_schedule\_id\_cache} \\[2pt]
-        \rule{\linewidth}{0.4pt}\vspace{2pt}
-        schedule\_shortname \\
-        schedule\_id \\
-        database\_instance\_id \\[2pt]
-        \textit{Frontend only}\\
-        \textit{(nightly refresh)}
-    };
-    
-    % FK Arrows (gray, thinner) - actual database relationships
-    \draw[fkarrow] (submissions.east) ++(0,0.3cm) -- node[fklabel, above, pos=0.5] {\tiny version\_id} (versions.west);
-    \draw[fkarrow] (submissions.north east) -- node[fklabel, above, pos=0.4] {\tiny db\_instance\_id} (databases.south west);
-    \draw[fkarrow] (logs.north) -- node[fklabel, right, pos=0.5] {\tiny submission\_id} (submissions.south);
-    % Note: cache has NO FK to submissions - frontend only
-    
-    % Frontend READ arrows (blue)
-    \draw[readarrow] (frontend.east) -- node[rwlabel, above, pos=0.4] {READ} (submissions.west);
-    \draw[readarrow] (frontend.south) |- node[rwlabel, below, pos=0.25] {READ stats} (logs.west);
-    \draw[readarrow, bend left=25] (frontend.north east) to node[rwlabel, above, pos=0.6] {READ} (versions.north west);
-    
-    % Cache is ONLY used by frontend (exclusive consumer)
-    \draw[readarrow, bend right=20] (frontend.south east) to node[rwlabel, right, pos=0.4] {LOOKUP} (cache.north west);
-    
-    % Frontend WRITE arrow (green)
-    \draw[writearrow] (frontend.east) ++(0,-0.3cm) -- node[rwlabel, below, pos=0.4] {WRITE} (submissions.west) ++(0,-0.3cm);
-    
-    % Legend
-    \node[font=\tiny, anchor=north west] at (-6.5,-4) {
-        \textcolor{green!50!black}{$\rightarrow$ WRITE:} Create submission, set status=0\\
-        \textcolor{blue!60}{$\rightarrow$ READ:} Display status, versions, stats\\
-        \textcolor{blue!60}{$\rightarrow$ LOOKUP:} Cache (frontend exclusive)
-    };
-    
+\begin{tabular}{@{}l@{\hspace{0.5cm}}c@{\hspace{0.5cm}}l@{}}
+% Row 1: Frontend, Main Table
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+\node[draw, fill=blue!15, rounded corners, text width=2.8cm, align=center, inner sep=4pt] {
+\textbf{Web Frontend}\\
+\rule{2.6cm}{0.3pt}\\
+JSR App\\
+Dashboard
+};
 \end{tikzpicture}
+&
+$\xrightarrow[\text{WRITE}]{\text{READ}}$
+&
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+\node[draw, fill=black!5, rounded corners, text width=7.2cm, align=left, inner sep=4pt] {
+\textbf{p6\_extraction\_submissions}\\
+\rule{7cm}{0.3pt}\\
+id, job\_code, schedule\_shortname\\
+submitted\_fiscal\_year\_month\_no\\
+schedule\_type, submission\_status\\
+record\_origin, schedule\_id\\
+\textbf{version\_id} (FK), \textbf{db\_instance\_id} (FK)\\
+schedule\_change, metadata\_extract\_status\\
+user\_extraction\_requested
+};
+\end{tikzpicture}
+\\[0.5em]
+& & $\downarrow$ FK \\[0.3em]
+\end{tabular}
+
+\vspace{0.3em}
+
+% Row 2: Related Tables - arrows ABOVE boxes
+\begin{tabular}{cccc}
+\textcolor{blue}{$\uparrow$ LOOKUP} & $\uparrow$ FK & $\uparrow$ FK & $\uparrow$ FK \\
+\scriptsize\textit{(frontend only)} & \multicolumn{3}{c}{\scriptsize\textit{(from submissions table)}} \\[0.2em]
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+\node[draw, fill=blue!10, rounded corners, text width=2.8cm, align=left, inner sep=4pt] {
+\textbf{p6\_schedule\_id\_cache}\\
+\rule{2.6cm}{0.3pt}\\
+schedule\_shortname\\
+schedule\_id\\
+database\_instance\_id\\[2pt]
+\textit{\scriptsize Frontend only}\\
+\textit{\scriptsize (nightly refresh)}
+};
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+\node[draw, fill=black!15, rounded corners, text width=2.6cm, align=left, inner sep=4pt] {
+\textbf{p6\_extraction\_logs}\\
+\rule{2.4cm}{0.3pt}\\
+submission\_id (FK)\\
+duration\_seconds\\
+is\_last, is\_error\\[2pt]
+\textit{\scriptsize Extraction stats}
+};
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+\node[draw, fill=black!15, rounded corners, text width=3cm, align=left, inner sep=4pt] {
+\textbf{p6\_schedule\_id\_versions}\\
+\rule{2.8cm}{0.3pt}\\
+version\_id (PK)\\
+version\_number\\
+output\_dir\_url\\
+file\_hashes\\[2pt]
+\textit{\scriptsize Version tracking}
+};
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+\node[draw, fill=black!15, rounded corners, text width=2.6cm, align=left, inner sep=4pt] {
+\textbf{p6\_databases}\\
+\rule{2.4cm}{0.3pt}\\
+database\_instance\_id\\
+database\_name\\[2pt]
+\textit{\scriptsize Reference table}
+};
+\end{tikzpicture}
+\\
+\end{tabular}
 \end{center}
+
+\vspace{0.2em}
+
+\begin{center}
+\textcolor{green!50!black}{$\rightarrow$ \textbf{WRITE:}} Create submission, status=0 \quad
+\textcolor{blue}{$\rightarrow$ \textbf{READ:}} Display status, stats
+\end{center}
+}
 
 \vspace{0.3em}
 
@@ -527,10 +518,6 @@
 
 \vspace{0.2em}
 
-\begin{center}
-    \noindent\rule{\linewidth}{1.5pt}
-\end{center}
-
 \newpage
 
 %----------------------------------------------------------------------------------------
@@ -540,58 +527,58 @@
 \begin{center}
     \noindent\rule{\linewidth}{1.5pt}
     
-    \vspace{0.05em}
+    \vspace{0.02em}
     
-    {\large \textbf{JSR Changes: Current Application}} \\[0.05em]
+    {\large \textbf{JSR Changes: Current Application}} \\[0.02em]
     {\footnotesize Existing workflow and user interface overview}
     
-    \vspace{0.05em}
+    \vspace{0.02em}
     
     \noindent\rule{\linewidth}{1.5pt}
 \end{center}
 
-\vspace{0.3em}
+\vspace{0.1em}
 
 % Row 1: Projects/Opportunities and Submissions
 \begin{center}
 \begin{tabular}{@{}cc@{}}
-\includegraphics[width=0.48\linewidth]{frontend_01_new_schedule_selection.png} &
-\includegraphics[width=0.48\linewidth]{frontend_02_schedule_submissions.png} \\
-{\scriptsize \textbf{(1) Projects/Opportunities:} Browse projects, filter by type/area} &
-{\scriptsize \textbf{(2) Submissions:} Manage schedule extractions by fiscal period} \\
+\includegraphics[width=0.38\linewidth]{frontend_01_new_schedule_selection.png} &
+\includegraphics[width=0.38\linewidth]{frontend_02_schedule_submissions.png} \\
+{\tiny \textbf{(1) Projects/Opportunities:} Browse projects, filter by type/area} &
+{\tiny \textbf{(2) Submissions:} Manage schedule extractions by fiscal period} \\
 \end{tabular}
 \end{center}
 
-\vspace{0.3em}
+\vspace{0.1em}
 
 % Row 2: Search and Analytics
 \begin{center}
 \begin{tabular}{@{}cc@{}}
-\includegraphics[width=0.48\linewidth]{frontend_03_find_job_for_jsr.png} &
-\includegraphics[width=0.48\linewidth]{frontend_04_jsr_for_job_report_1_of_2.png} \\
-{\scriptsize \textbf{(3) Analytics Search:} Filter by project number (e.g., 103440)} &
-{\scriptsize \textbf{(4) Labor Resource Plan:} Monthly Earn, CR Spent, Forecast, BL Plan} \\
+\includegraphics[width=0.38\linewidth]{frontend_03_find_job_for_jsr.png} &
+\includegraphics[width=0.38\linewidth]{frontend_04_jsr_for_job_report_1_of_2.png} \\
+{\tiny \textbf{(3) Analytics Search:} Filter by project number (e.g., 103440)} &
+{\tiny \textbf{(4) Labor Resource Plan:} Monthly Earn, CR Spent, Forecast, BL Plan} \\
 \end{tabular}
 \end{center}
 
-\vspace{0.3em}
+\vspace{0.1em}
 
 % Row 3: KPIs
 \begin{center}
-\includegraphics[width=0.75\linewidth]{frontend_05_jsr_for_job_report_2_of_2.png}
+\includegraphics[width=0.60\linewidth]{frontend_05_jsr_for_job_report_2_of_2.png}
 \end{center}
-\vspace{-0.2em}
-{\centering\scriptsize \textbf{(5) Key Performance Indicators:} Quality, Planning, Float, JTD Performance, Total Performance\par}
+\vspace{-0.3em}
+{\centering\tiny \textbf{(5) Key Performance Indicators:} Quality, Planning, Float, JTD Performance, Total Performance\par}
 
-\vspace{0.5em}
+\vspace{0.2em}
 
 % Three Elements Summary
 {\footnotesize
 \begin{tikzpicture}
-    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{JSR Three Core Elements}};
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{JSR Three Core Elements}};
 \end{tikzpicture}
 
-\vspace{0.1em}
+\vspace{0.05em}
 
 \begin{tabular}[t]{@{}p{0.32\textwidth}@{\hspace{0.01\textwidth}}p{0.32\textwidth}@{\hspace{0.01\textwidth}}p{0.32\textwidth}@{}}
 \textbf{1. Metadata} & \textbf{2. Job Schedules} & \textbf{3. Metrics/KPIs} \\
@@ -616,30 +603,32 @@
 \end{tabular}
 }
 
+\vspace{0.1em}
+
 \begin{center}
     \noindent\rule{\linewidth}{1.5pt}
 \end{center}
 
-\newpage
+\vspace{0.1em}
 
 %----------------------------------------------------------------------------------------
-% PAGE 4: JSR CHANGES - PERFORMANCE IMPROVEMENTS
+% PAGE 4: JSR CHANGES (PERFORMANCE & VERSIONING)
 %----------------------------------------------------------------------------------------
 
 \begin{center}
     \noindent\rule{\linewidth}{1.5pt}
     
-    \vspace{0.05em}
+    \vspace{0.02em}
     
-    {\large \textbf{JSR Changes: Performance Improvements}} \\[0.05em]
-    {\footnotesize New pipeline architecture and data flow optimizations}
+    {\large \textbf{JSR Changes (Performance \& Versioning)}} \\[0.02em]
+    {\footnotesize New pipeline architecture, data flow optimizations, and storage structure}
     
-    \vspace{0.05em}
+    \vspace{0.02em}
     
     \noindent\rule{\linewidth}{1.5pt}
 \end{center}
 
-\vspace{0.5em}
+\vspace{0.1em}
 
 {\footnotesize
 \begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
@@ -655,7 +644,7 @@
     \vspace{0.1em}
 
     {\footnotesize
-    \renewcommand{\arraystretch}{1.3}
+    \renewcommand{\arraystretch}{1.15}
     \begin{tabularx}{\linewidth}{@{}Xrr@{}}
     \rowcolor{black!10}
     \textbf{Stage} & \textbf{Current} & \textbf{New} \\
@@ -670,18 +659,18 @@
     \end{tabularx}
     \renewcommand{\arraystretch}{1.0}
     
-    \vspace{0.2em}
+    \vspace{0.1em}
     \textit{Note: Iceberg write is batched and \textbf{not required} for JSR app to display results.}
     }
 
-    \vspace{0.4em}
+    \vspace{0.2em}
 
     % Key Architecture Changes
     \begin{tikzpicture}
-        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Key Architecture Changes}};
+        \node[fill=black!10, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{Key Architecture Changes}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
     \textbf{1. Direct Parquet Read (No Iceberg Dependency)}
@@ -691,7 +680,7 @@
         \item Status 4 (Aggregated) is sufficient for JSR display.
     \end{itemize}
 
-    \vspace{0.15em}
+    \vspace{0.1em}
     \textbf{2. Batched Iceberg Writes}
     \begin{itemize}[leftmargin=1em, itemsep=0em]
         \item Iceberg writes batched in \textbf{15-minute intervals}.
@@ -699,7 +688,7 @@
         \item Analytics/downstream consumers use Iceberg.
     \end{itemize}
 
-    \vspace{0.15em}
+    \vspace{0.1em}
     \textbf{3. Optimal CDC Strategy}
     \begin{itemize}[leftmargin=1em, itemsep=0em]
         \item Tables use \textbf{CDC (Change Data Capture)} to Iceberg when feasible.
@@ -708,14 +697,14 @@
     \end{itemize}
     }
 
-    \vspace{0.4em}
+    \vspace{0.2em}
 
     % Speedup Factor
     \begin{tikzpicture}
-        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=center] {\textbf{$\sim$180x Faster Extraction}};
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=center] {\textbf{$\sim$180x Faster Extraction}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
     \centering
@@ -730,10 +719,10 @@
 
     % New Data Flow
     \begin{tikzpicture}
-        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{New Data Flow Architecture}};
+        \node[fill=black!10, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{New Data Flow Architecture}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
     \textbf{Extraction Pipeline:}
@@ -744,7 +733,7 @@
         \item \textbf{Iceberg Write} (Silver $\rightarrow$ Iceberg) -- \textbf{Batched 15min}
     \end{enumerate}
 
-    \vspace{0.15em}
+    \vspace{0.1em}
     \textbf{JSR App Data Source:}
     \begin{itemize}[leftmargin=1em, itemsep=0em]
         \item Reads from \texttt{silver/jsr\_aggregation/} parquet files.
@@ -752,7 +741,7 @@
         \item Does \textbf{NOT} wait for Iceberg (status 6).
     \end{itemize}
 
-    \vspace{0.15em}
+    \vspace{0.1em}
     \textbf{Downstream Analytics:}
     \begin{itemize}[leftmargin=1em, itemsep=0em]
         \item BI tools, dashboards read from Iceberg tables.
@@ -761,17 +750,17 @@
     \end{itemize}
     }
 
-    \vspace{0.4em}
+    \vspace{0.2em}
 
     % Benefits List
     \begin{tikzpicture}
-        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Performance Benefits}};
+        \node[fill=black!10, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{Performance Benefits}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
-    \begin{itemize}[leftmargin=1em, itemsep=0.1em]
+    \begin{itemize}[leftmargin=1em, itemsep=0.05em]
         \item[\checkmark] \textbf{Real-time feedback:} Users see results in $\sim$20 seconds.
         \item[\checkmark] \textbf{On-demand extraction:} No batch window constraints.
         \item[\checkmark] \textbf{Reduced API load:} SHA256 reconciliation skips unchanged schedules.
@@ -782,17 +771,17 @@
     \end{itemize}
     }
 
-    \vspace{0.4em}
+    \vspace{0.2em}
 
     % Data Layering
     \begin{tikzpicture}
-        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Data Layering Strategy}};
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{Data Layering Strategy}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
-    \renewcommand{\arraystretch}{1.2}
+    \renewcommand{\arraystretch}{1.1}
     \begin{tabularx}{\linewidth}{@{}lXl@{}}
     \rowcolor{black!10}
     \textbf{Layer} & \textbf{Format} & \textbf{Consumer} \\
@@ -811,48 +800,30 @@
 
 \vspace{0.3em}
 
-\begin{center}
-    \noindent\rule{\linewidth}{1.5pt}
-\end{center}
+% SUBSECTION: BRONZE LAYER STORAGE & VERSIONING
+\begin{tikzpicture}
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Bronze Layer Storage \& Versioning}};
+\end{tikzpicture}
 
-\newpage
-
-%----------------------------------------------------------------------------------------
-% PAGE 5: BRONZE LAYER STORAGE & VERSIONING
-%----------------------------------------------------------------------------------------
-
-\begin{center}
-    \noindent\rule{\linewidth}{1.5pt}
-    
-    \vspace{0.05em}
-    
-    {\large \textbf{Bronze Layer Storage \& Versioning}} \\[0.05em]
-    {\footnotesize Azure Blob Storage structure for financial metadata and P6 schedule extractions}
-    
-    \vspace{0.05em}
-    
-    \noindent\rule{\linewidth}{1.5pt}
-\end{center}
-
-\vspace{0.3em}
+\vspace{0.2em}
 
 % Financial Metadata Screenshot
 \begin{center}
-\includegraphics[width=0.95\linewidth]{bronze_metadata_jsr=financial.png}
+\includegraphics[width=0.85\linewidth]{bronze_metadata_jsr=financial.png}
 \end{center}
-\vspace{-0.2em}
+\vspace{-0.3em}
 {\centering\scriptsize \textbf{Financial Metadata:} \texttt{bronze/jsr\_financials/V3/fiscal\_year\_month\_no=\{YYYYMM\}/project\_number=\{job\_code\}/data.parquet}\par}
 
-\vspace{0.4em}
+\vspace{0.3em}
 
 % P6 Schedule Extraction Screenshot
 \begin{center}
-\includegraphics[width=0.95\linewidth]{bronze_schedule_extraction.png}
+\includegraphics[width=0.85\linewidth]{bronze_schedule_extraction.png}
 \end{center}
-\vspace{-0.2em}
+\vspace{-0.3em}
 {\centering\scriptsize \textbf{P6 Schedule Extraction:} \texttt{bronze/p6/V3/job\_code=\{job\_code\}/sch\_id=\{schedule\_id\}/\{version\}/\{service\}.parquet}\par}
 
-\vspace{0.5em}
+\vspace{0.2em}
 
 {\footnotesize
 \begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
@@ -862,10 +833,10 @@
 
     % Directory Structure
     \begin{tikzpicture}
-        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Bronze Directory Structure}};
+        \node[fill=black!10, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{Bronze Directory Structure}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
     \textbf{1. Financial Metadata (JSR Financials):}
@@ -882,7 +853,7 @@ bronze/jsr_financials/V3/
         \item Contains JOR, Cost Report, CRM data.
     \end{itemize}
 
-    \vspace{0.15em}
+    \vspace{0.1em}
     \textbf{2. P6 Schedule Extraction:}
     \begin{verbatim}
 bronze/p6/V3/
@@ -910,10 +881,10 @@ bronze/p6/V3/
 
     % Versioning Logic
     \begin{tikzpicture}
-        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Version Increment Logic}};
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{Version Increment Logic}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
     \textbf{SHA256 Hash Comparison:}
@@ -925,7 +896,7 @@ bronze/p6/V3/
         \item If \textbf{ALL} hashes match $\rightarrow$ reuse existing version.
     \end{enumerate}
 
-    \vspace{0.15em}
+    \vspace{0.1em}
     \textbf{Version Record Created:}
     \begin{itemize}[leftmargin=1em, itemsep=0em]
         \item \texttt{version\_number}: 1, 2, 3...
@@ -935,17 +906,11 @@ bronze/p6/V3/
     \end{itemize}
     }
 
-    \vspace{0.3em}
+    \vspace{0.2em}
 
-    % Service Files
-    \begin{tikzpicture}
-        \node[fill=black!10, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{P6 Service Files}};
-    \end{tikzpicture}
-
-    \vspace{0.1em}
-
+    % Service Files Table
     {\footnotesize
-    \renewcommand{\arraystretch}{1.15}
+    \renewcommand{\arraystretch}{1.1}
     \begin{tabularx}{\linewidth}{@{}lXr@{}}
     \rowcolor{black!10}
     \textbf{File} & \textbf{P6 Service} & \textbf{Size} \\
@@ -963,23 +928,23 @@ bronze/p6/V3/
     \renewcommand{\arraystretch}{1.0}
     }
 
-    \vspace{0.3em}
+    \vspace{0.2em}
 
     % Reconciliation Example
     \begin{tikzpicture}
-        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Reconciliation Example}};
+        \node[fill=black!80, text=white, rounded corners=3pt, inner sep=2pt, text width=\linewidth-6pt, align=left] {\textbf{Reconciliation Example}};
     \end{tikzpicture}
 
-    \vspace{0.1em}
+    \vspace{0.05em}
 
     {\footnotesize
     \textbf{Scenario:} Re-extract schedule 191090
     
-    \vspace{0.1em}
+    \vspace{0.05em}
     Previous (v1): activity=\texttt{abc...}, resource=\texttt{xyz...}\\
     Current: activity=\texttt{abc...}, resource=\texttt{NEW!}
     
-    \vspace{0.1em}
+    \vspace{0.05em}
     \textbf{Result:} New version created (v2)\\
     \texttt{schedule\_change = true}\\
     Files written to \texttt{.../sch\_id=191090/2/}
@@ -988,10 +953,67 @@ bronze/p6/V3/
 \end{tabular}
 }
 
+\vspace{0.3em}
+
+% P6 API Services Section
+\begin{tikzpicture}
+    \node[fill=black!80, text=white, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{P6 API Services \& Extracted Fields}};
+\end{tikzpicture}
+
 \vspace{0.2em}
 
-\begin{center}
-    \noindent\rule{\linewidth}{1.5pt}
-\end{center}
+{\scriptsize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+\textbf{1. ActivityService} (20 cols)\\
+{\tiny
+PROJECT\_SCHEDULE\_ACTIVITY\_ID, PROJECT\_SCHEDULE\_ID, PROJECT\_SCHEDULE\_CALENDAR\_ID, ACTIVITY\_STATUS\_DESCRIPTION, ACTIVITY\_TASK\_TYPE\_NAME, PRIMARY\_TASK\_CONSTRAINT\_TYPE, ACTUAL\_START\_DATE, ACTUAL\_END\_DATE, EARLY\_START\_DATE, LATE\_START\_DATE, EARLY\_END\_DATE, LATE\_END\_DATE, REMAINING\_END\_DATE, DATA\_DATE, LAST\_UPDATED\_DATE, TOTAL\_FLOAT\_HOUR\_COUNT, ACTIVITY\_ACTUAL\_TOTAL\_UNITS, ACTIVITY\_AT\_COMPLETION\_TOTAL\_UNITS, ACTIVITY\_PLANNED\_TOTAL\_UNITS, ACTIVITY\_REMAINING\_TOTAL\_UNITS
+}
+
+\vspace{0.15em}
+\textbf{2. CalendarService} (6 cols)\\
+{\tiny
+PROJECT\_SCHEDULE\_CALENDAR\_ID, PROJECT\_SCHEDULE\_ID, HOUR\_IN\_DAY\_COUNT, HOUR\_IN\_WEEK\_COUNT, HOUR\_IN\_MONTH\_COUNT, LAST\_UPDATED\_DATE
+}
+
+\vspace{0.15em}
+\textbf{3. ResourceAssignmentService} (8 cols)\\
+{\tiny
+PROJECT\_SCHEDULE\_ACTIVITY\_RESOURCE\_ID, PROJECT\_SCHEDULE\_ACTIVITY\_ID, PROJECT\_SCHEDULE\_ID, ACTIVITY\_ID, ACTIVITY\_NAME, RESOURCE\_TYPE\_NAME, ACTUAL\_START\_DATE, LAST\_UPDATED\_DATE
+}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+\textbf{4. ResourceAssignmentSpreadService} (7 cols)\\
+{\tiny
+PROJECT\_SCHEDULE\_ACTIVITY\_RESOURCE\_ID, PROJECT\_SCHEDULE\_ID, START\_DATE, END\_DATE, ACTUAL\_UNIT\_COUNT, REMAINING\_UNIT\_COUNT, REMAINING\_LATE\_UNIT\_COUNT
+}
+
+\vspace{0.15em}
+\textbf{5. RelationshipService} (5 cols)\\
+{\tiny
+PROJECT\_SCHEDULE\_ACTIVITY\_ID, PREDECESSOR\_PROJECT\_SCHEDULE\_ACTIVITY\_ID, PROJECT\_SCHEDULE\_ID, TIME\_LAG\_HOUR\_COUNT, LAST\_UPDATED\_DATE
+}
+
+\vspace{0.25em}
+\textbf{Output Files:}\\
+{\tiny
+\texttt{activity.parquet}, \texttt{calendar.parquet}, \texttt{resource.parquet}, \texttt{spread.parquet}, \texttt{relationship.parquet}
+}
+
+\vspace{0.15em}
+\textbf{Total:} 46 columns across 5 services
+
+\\
+\end{tabular}
+}
+
+\vspace{0.1em}
 
 \end{document}

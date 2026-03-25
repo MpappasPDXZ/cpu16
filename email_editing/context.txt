@@ -1,0 +1,66 @@
+I am firing Sergio Reyes Cabrejas.  He has worked for KDS for 2.5 years.  Sergio is being let go for performance.  His last day is 02-09-2026.  I need to draft a memo to the department.  This comes on the back of LATEX/ed_smith & LATEX/memos.  I want this to be succinct.  This is not a global reoganization.  This is a single member of data science that has not met expectations.  Here is the underlying decision criteria:
+1-mid summer met with Jack Bruck and Graham Droge and learned that Sergio spent a lot of time reading the spanish news.  I confronted his manager William Wetzel to ensure Sergio accomplishes impactful business objectives.  Sergio had been delegated some problematic projects but had never found a good solution and was a liability not an asset.
+3-Will Wetzel quit in October 2025 and then I had Sergio report to me.  
+4-Had Sergio draft a plan of what he was going to accomplish in the area of scheduling.
+5-Sergio did not meet 4 deliverable items by the date and still has some outstanding.
+6-none of the data science leaders would take sergio and I cannot have an entry level data scientist report to me (Chief Data Officer).  They didn't want a problem.
+7-Sergio did a shit job in scheduling for november month end.  His ETL broke and I resassigned it to Gayatri who then quit KDS.  January I had my "A" team build the ETL and it's kicking ass and taking names.  The product team now defines it as "Wicked Fast".  Projects were waiting hours and now they're waiting 4 minutes.
+8-Scheduling domain has two groups in charge: strategy is william wironen, data engineering is nick weindel, and data science is graham droge.  we are asking amanda vanderwal to focus on scheduling after years of great work in procurement.  We are also bringing in Zach Swanson whom will accept a job offer this week.  Zach, Amanda, and Graham will be a force to be reckoned with in scheduling.
+
+draft the memo below:
+
+---
+
+Team,
+
+Effective today, Sergio Reyes Cabrejas is leaving KDS. 
+
+Scheduling remains a priority domain with strong leadership in place: William Wironen (strategy), Nick Weindel (data engineering), and Graham Droge (data science). Amanda Vanderwal is joining the scheduling effort, and we expect to add Zach Swanson this month. The team has momentum and I'm confident in where we're headed.
+
+This is not part of a broader reorganization.
+
+Matt
+
+
+draft 2:
+Effective today, Sergio Reyes Cabrejas is leaving KDS. 
+
+Scheduling remains a priority domain with strong leadership in place: William Wironen, Oscar Alvarez (strategy), Quinn Siner (scheduling subject matter expertise). Nick Weindel (data engineering), and Graham Droge (data science). Amanda Vanderwal is joining the scheduling effort, and we expect to add Zach Swanson this month to Graham Droge’s team. The scheduling team has momentum, and I'm confident in where we're headed.
+
+
+This is not part of a broader reorganization.
+
+draft 3:
+Effective today, Sergio Reyes Cabrejas is leaving KDS. 
+
+Sergio was most recently focused on scheduling and scheduling remains a priority domain with strong leadership in place: William Wironen, Oscar Alvarez (strategy), Quinn Siner (scheduling subject matter expertise). Nick Weindel (data engineering), and Graham Droge (data science). Amanda Vanderwal is joining the scheduling effort, and we expect to add Zach Swanson this month to Graham Droge’s team. The scheduling team has momentum, and I'm confident in where we're headed.
+
+This is not part of a broader reorganization.
+
+draft 4:
+Team,
+
+Effective today, Sergio Reyes Cabrejas is leaving KDS. 
+
+Sergio was most recently focused on scheduling. The domain remains a priority with strong leadership in place: William Wironen and Oscar Alvarez (strategy), Quinn Siner (subject matter expertise), Nick Weindel (data engineering), and Graham Droge (data science). Amanda Vanderwal is joining the scheduling effort, and we expect to add Zach Swanson this month to Graham's team. The scheduling team has momentum, and I'm confident in where we're headed.
+
+This is not part of a broader reorganization.
+
+Matt
+
+draft 5:
+Effective today, Sergio Reyes Cabrejas is leaving KDS. 
+
+Sergio was most recently focused on scheduling. The domain remains a priority with strong leadership in place: William Wironen and Oscar Alvarez (strategy), Quinn Siner (subject matter expertise), Nick Weindel (data engineering), and Graham Droge (data science). Amanda Vanderwal has recently also worked on the scheduling effort, and we expect to add Zach Swanson this month to Graham's team. The scheduling team has momentum, and I'm confident in where we're headed.
+
+This is not part of a broader reorganization and there is no broader planned data science reorganization.
+
+draft 6:
+
+Effective today, Sergio Reyes Cabrejas is leaving KDS. 
+
+Sergio was most recently focused on scheduling. The domain remains a priority with strong leadership in place: William Wironen and Oscar Alvarez (strategy), Quinn Siner (subject matter expertise), Nick Weindel (data engineering), and Graham Droge (data science). Amanda Vanderwal has recently joined the scheduling effort, and we expect to add Zach Swanson this month to Graham's team. The scheduling team has momentum, and I'm confident in where we're headed.
+
+This is not part of a broader reorganization and there are no additional data science changes planned.
+
+Matt

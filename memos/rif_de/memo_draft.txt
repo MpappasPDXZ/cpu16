@@ -1,0 +1,20 @@
+# ================================
+# =    RIF memo draft (02.02.2026) =
+# ================================
+
+Team,
+I want to share an update regarding our Data Engineering team.
+
+Effective today, Catherine Bogacz and Cathy Nakayenga Weber are leaving KDS. 
+Catherine joined KDS over 5 years ago as a Sr. Data Analyst and has been with Kiewit for almost eight years; she added value in the early days of KDS, with a focus on data quality. 
+Cathy joined in May 2025 as a Data Analyst 2 and has been with Kiewit for just over half a year. 
+Their positions were eliminated after we searched for alternative positions for them within the company. 
+We thank them both for their contributions and wish them well in their next steps.
+
+As we continue to evolve the Data Engineering organization, we are aligning the team around a full stack data engineering skillset that supports where we're going: the Kiewit Intelligence Program (KIP) and the foundational pipelines and modern data infrastructure we need to power AI and analytics across the enterprise.
+Kiewit Technology Group (KTG) has also re-aligned their organization around this important company effort. 
+As part of that, Sudeer Lingala—who has been with KDS for four and a half years—is now working for Noel Dinesh Arokiaraj in KTG. 
+This change on our team is part of that broader alignment.  
+
+Please join me in wishing Catherine and Cathy the best. Thank you for your continued dedication.   
+

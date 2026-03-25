@@ -1,0 +1,115 @@
+Here is my software engineer job hierarchy:
+
+1 - Software Engineer 1
+2 - Software Engineer 2
+3 - Senior Engineer 
+then two tracts: manager | technical
+4 - Engineering Manager | Staff Engineer
+5 - Senior Engineering Manager | Senior Staff Engineer
+6 - Director | Principal Engineer
+
+I want to hire someone into prepare a senior staff engineer role.  Here is an example of a staff engineer position:
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Senior Engineer            ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Position Overview
+We are looking to hire a Software Engineer focused on building web application for Kiewit’s data services products. 
+Kiewit is one of North America’s largest and most respected construction and engineering organizations.  Kiewit Data Services strives to become the premier data-driven organization in our industry.
+Do you have a passion for leveraging data to help solve interesting business problems? At Kiewit, we believe analytics can help to create an exceptional experience for our most valued resource – our people.
+At Kiewit, the scale of our operations is huge. Our construction and engineering projects span across the United States, Canada and Mexico, improving and connecting communities with every initiative.  We depend on our high-performing operations support professionals — they’re the glue that holds multiple areas of the business together and the catalysts that make things happen. We hire only the most driven people, and we offer them diverse career opportunities, strong leadership and mentorship, rewarding, collaborative work, and responsibility they won’t find just anywhere. We’re always pushing new limits. You can too.    
+Responsibilities
+•	Develop interactive web applications
+•	Collaborate with product teams and business stakeholders to gather and interpret user requirements
+•	Iterate and improve team software systems and processes
+•	Monitor and stay informed on latest web development community technologies
+•	Produce well-documented code which is easy to understand/maintain
+•	Mentor others and invest in growing the team’s skillset
+•	Manage code repositories, work with IT operation teams to configure infrastructure and deploy applications
+
+Qualifications
+•	Bachelor’s degree in computer science or similar technology degree or equivalent work experience
+•	3+ years of demonstrated software development experience
+•	Strong track record of successfully executing complex projects and/or projects involving multiple disciplines.
+•	Experience collaborating with senior managers to understand drivers of success and departmental goals
+•	Strong customer management skills; ability to manage more than one client
+•	Strong analytical, problem-solving, and communication skills (verbal and written)
+•	Proven ability to self-direct work efforts and lead others
+•	Strong interpersonal, written, and verbal communication skills
+•	Team player with the ability to work independently to meet deadlines, goals and objectives
+•	Strong organization, time management, and attention to detail
+
+Ideal experience includes
+•	Experience with Python, Django, React, Azure SQL, and Snowflake
+•	Experience with Azure platform, Azure Functions and REST API services
+•	Experience building data visualizations using charting libraries such as or similar to Plotly, Chart.js, D3.js
+•	Has developed applications utilizing a CSS frameworks /UI component library such as Bootstrap, MUI, Tailwind CSS, or similar
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Specifics of the staff engineer role ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- direclty involved with building generative AI capabilities into our software systems involved with making estimating predictions.  
+- Systems are built in NextJS / React and backend is FastAPI calling Iceberg tables managed in Google.  We have extensive on-premises capabilities as well and role will need to work with our MLOps team and Data Engineering team.
+- Also the role will work very closely with data science to deliver next generation ai capabilities where the business can use them most.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ write out the job description below ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Staff Engineer - AI/ML     ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Position Overview
+We are seeking a Staff Engineer to lead the technical development of generative AI capabilities within Kiewit's estimating and construction software systems. This role sits at the intersection of modern web development, machine learning infrastructure, and business-critical applications.
+
+Kiewit is one of North America's largest and most respected construction and engineering organizations. Kiewit Data Services is building the next generation of AI-powered tools that will transform how we estimate, plan, and execute billion-dollar projects. This is not research - this is production AI that will directly impact project outcomes.
+
+You will be the technical leader bridging our Data Science, MLOps, and Data Engineering teams to deliver AI capabilities where the business needs them most. If you want to build AI systems that matter at massive scale, this is the role.
+
+Responsibilities
+•	Architect and build generative AI features into production estimating software
+•	Co-Design and support end-to-end ML pipelines from data ingestion through model serving
+•	Lead technical decisions across NextJS/React frontend and FastAPI backend systems
+•	Build and optimize integrations with Iceberg data lakehouse (Google Cloud / Microsoft Azure)
+•	Collaborate with MLOps team on model deployment, monitoring, and lifecycle management
+•	Partner with Data Engineering to ensure reliable, performant data pipelines
+•	Work directly with Data Science to translate models into production-ready features
+•	Bridge on-premises infrastructure with cloud-native AI workloads
+•	Mentor engineers and establish AI/ML development best practices
+•	Drive technical roadmap for AI capabilities across the platform
+
+Qualifications
+•	Bachelor's degree in Computer Science, Engineering, or equivalent experience
+•	5+ years of software development experience, with 4+ years focused on ML/AI systems
+•	Proven track record of shipping AI/ML features to production at scale
+•	Strong system design skills - ability to architect across frontend, backend, and data layers
+•	Experience leading technical initiatives across multiple teams
+•	Excellent communication skills - can translate between Data Science and Engineering
+•	Self-directed with ability to drive ambiguous projects to completion
+•	Strong mentorship mindset - invested in growing team capabilities
+
+Required Technical Experience
+•	Production experience with Python, FastAPI, and modern async patterns
+•	Frontend development with NextJS/React
+•	Working with large-scale data systems (Iceberg, Snowflake, or similar lakehouse)
+•	Cloud platforms (Google Cloud preferred, Azure experience valued)
+•	ML model serving and inference optimization
+•	API design for ML-powered features
+
+Preferred Experience
+•	Experience with LLMs/generative AI in production (RAG, fine-tuning, prompt engineering)
+•	Familiarity with ML orchestration tools (Dagster, Airflow, Kubeflow)
+•	Kubernetes and containerized ML workloads
+•	Construction, engineering, or estimating domain knowledge
+•	Experience with on-premises/hybrid cloud architectures
+•	Data visualization libraries (Plotly, D3.js, AG-Grid Charts) and data grid components (AG-Grid)
+
+What Sets This Role Apart
+•	Direct impact: Your AI features will influence decisions on projects worth billions
+•	Full stack AI: Own the complete path from model to user experience
+•	Technical leadership: Shape how Kiewit builds AI for the next decade
+•	Cross-functional influence: Work across Data Science, MLOps, and Engineering
+•	Scale: 17,000+ employees, projects across North America

@@ -1,0 +1,132 @@
+================================================================================
+KIEWIT InEight SOFTWARE - MARKET CAP ANALYSIS
+================================================================================
+
+EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+Total Annual Market Value of InEight Usage: $122,686,067
+Range: $106,460,032 - $138,912,103
+Note: Pay rates increased by 15% from original estimates
+
+This represents the total annual cost of staff time spent using InEight software
+across Kiewit's enterprise. Any efficiency improvements that reduce InEight usage
+time would directly save this amount proportionally.
+
+METHODOLOGY
+--------------------------------------------------------------------------------
+1. User Base: 3,127 InEight users (from Cumberland proxy analysis)
+   - Field Engineers: 1,688 (54%)
+   - Project Engineers: 83 (3%)
+   - Superintendents: 1,356 (43%)
+
+2. Hours Calculation:
+   - Each person works 2,080 hours/year
+   - Each person spends 25% of work time in InEight
+   - Total InEight hours: 1,626,040 hours/year
+
+3. Cost Calculation:
+   - Used all-in hourly rates (includes 48% burden)
+   - Field Engineer: $57.34 - $72.48/hour (15% increase)
+   - Project Engineer: $68.33 - $88.86/hour (15% increase)
+   - Superintendent: $75.42 - $101.34/hour (15% increase)
+
+4. Module Allocation:
+   - Based on validated InEight software documentation
+   - Allocated hours by role to specific modules
+   - All percentages sum to 100% for each role
+
+COST BREAKDOWN BY ROLE
+--------------------------------------------------------------------------------
+Field Engineer (1,688 users, 877,760 hours):
+  Annual Cost: $56,975,402
+  Range: $50,330,758 - $63,620,045
+  Per User: $33,752/year
+  Per Hour: $64.90/hour (average)
+
+Project Engineer (83 users, 43,160 hours):
+  Annual Cost: $3,392,160
+  Range: $2,949,123 - $3,835,198
+  Per User: $40,869/year
+  Per Hour: $78.60/hour (average)
+
+Superintendent (1,356 users, 705,120 hours):
+  Annual Cost: $62,318,506
+  Range: $53,180,150 - $71,456,861
+  Per User: $45,957/year
+  Per Hour: $88.38/hour (average)
+
+COST BREAKDOWN BY MODULE
+--------------------------------------------------------------------------------
+Plan Module: $39,340,861 (32.1% of total)
+  - 503,646 hours
+  - Highest cost module
+  - Primary users: Superintendents (40%), Field Engineers (25%)
+
+Inspect Module: $29,022,011 (23.7% of total)
+  - 421,616 hours
+  - Second highest cost module
+  - Primary users: Field Engineers (40% of their time)
+
+Control Module: $18,598,004 (15.2% of total)
+  - 222,326 hours
+  - Primary users: Superintendents (25% of their time)
+
+Contract Module: $13,286,255 (10.8% of total)
+  - 175,552 hours
+  - Primary users: Project Engineers (40% of their time)
+
+Core Module: $11,662,236 (9.5% of total)
+  - 166,920 hours
+  - Base platform usage across all roles
+
+Design Module: $7,660,775 (6.2% of total)
+  - 100,724 hours
+  - Primary users: Project Engineers (50% of their time)
+
+Billings Module: $3,115,925 (2.5% of total)
+  - 35,256 hours
+  - Minimal usage, primarily Superintendents (5%)
+
+EFFICIENCY GAIN SCENARIOS
+--------------------------------------------------------------------------------
+If InEight AI improvements reduce usage time by:
+  - 5% efficiency:  Save $6,134,303/year
+  - 10% efficiency: Save $12,268,607/year
+  - 15% efficiency: Save $18,402,910/year
+  - 20% efficiency: Save $24,537,213/year
+  - 25% efficiency: Save $30,671,517/year
+
+VALIDATION CHECKS
+--------------------------------------------------------------------------------
+✓ Total hours calculation: 1,626,040 hours
+✓ Module percentages sum to 100% for each role
+✓ Cost calculations use validated all-in rates
+✓ Module hours sum to total InEight hours
+✓ All calculations use dictionary lookups for consistency
+
+KEY INSIGHTS
+--------------------------------------------------------------------------------
+1. Superintendents represent the highest cost ($62.3M) despite being fewer
+   in number than Field Engineers, due to higher hourly rates.
+
+2. Plan module is the highest value target ($39.3M) for efficiency improvements,
+   representing 32% of total cost.
+
+3. Field Engineers use the most hours (877,760) but at lower rates, resulting
+   in $57.0M total cost.
+
+4. Project Engineers, though small in number (83), have the highest per-user
+   cost ($40,869/user) due to high hourly rates and heavy software usage.
+
+5. The total market cap of $122.7M (with 15% salary increase) represents 
+   significant opportunity for AI-driven efficiency gains.
+
+DATA SOURCES
+--------------------------------------------------------------------------------
+- Pay rates: pay_table.txt
+- User counts: Cumberland proxy analysis (employee_counts.txt)
+- Module allocation: InEight background documentation (ineight_background.txt)
+- Hours assumption: 2,080 hours/year, 25% in InEight
+
+================================================================================
+

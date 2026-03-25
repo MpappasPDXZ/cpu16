@@ -1,0 +1,22 @@
+================================================================================
+KIEWIT InEight USER ESTIMATION
+Using Cumberland Project as Proxy
+================================================================================
+
+CUMBERLAND PROJECT BREAKDOWN:
+  Total Active Staff: 216
+  Field Engineers: 48 (22.2%)
+  Project Engineers: 3 (1.4%)
+  Superintendents: 49 (22.7%)
+  TOTAL InEight Users: 100 (46.3%)
+
+KIEWIT ENTERPRISE ESTIMATION:
+  Total Non-Hourly Staff: 14,946
+  Less 10% Overhead: 1,495
+  Execution Staff: 13,451
+
+InEight Users (Execution Staff Only):
+  Field Engineers: 2,989
+  Project Engineers: 186
+  Superintendents: 3,051
+  TOTAL: 6,227
