@@ -1,0 +1,176 @@
+Matthew.Malatek
+0 minutes 40 seconds0:40
+Matthew.Malatek 0 minutes 40 seconds
+OK.
+
+Karen.Manhart
+0 minutes 40 seconds0:40
+Karen.Manhart 0 minutes 40 seconds
+Mm.
+Karen.Manhart 0 minutes 43 seconds
+Mm.
+Karen.Manhart 0 minutes 46 seconds
+Mm.
+
+Matthew.Malatek
+0 minutes 48 seconds0:48
+Matthew.Malatek 0 minutes 48 seconds
+Sh.
+Matthew.Malatek 0 minutes 52 seconds
+So they're all pushed in the same mesh, but there's no central hub that they have to go to.
+
+Ed.Smith
+0 minutes 57 seconds0:57
+Ed.Smith 0 minutes 57 seconds
+So there's no central storage. There's not one Q at data lake. There's eight Q at data lakes.
+
+Matthew.Malatek
+0 minutes 58 seconds0:58
+Matthew.Malatek 0 minutes 58 seconds
+Yeah.
+Matthew.Malatek 1 minute 2 seconds
+Yep.
+
+Karen.Manhart
+1 minute 5 seconds1:05
+Karen.Manhart 1 minute 5 seconds
+So I I.
+
+Ed.Smith
+1 minute 5 seconds1:05
+Ed.Smith 1 minute 5 seconds
+I I feel like that there's the standardization can be too poor. You know that how do we know that some other team is gonna comply is gonna keep their data lake compatible with the way the enterprise is using it?
+
+Matthew.Malatek
+58 minutes 16 seconds58:16
+Matthew.Malatek 58 minutes 16 seconds
+And then for conformance, I I'm gonna push heavily for active conformance through our CICD pipeline.
+
+Matt.Pappas
+58 minutes 16 seconds58:16
+Matt.Pappas 58 minutes 16 seconds
+OK.
+
+Matthew.Malatek
+58 minutes 25 seconds58:25
+Matthew.Malatek 58 minutes 25 seconds
+We don't let it get there and then go check to see if it's right. We make sure it fails before it even gets there.
+
+Matt.Pappas
+58 minutes 32 seconds58:32
+Matt.Pappas 58 minutes 32 seconds
+But if you have an embedded engineer, they work for someone on this call.
+Matt.Pappas 58 minutes 38 seconds
+So.
+
+Scott.Huttmann
+58 minutes 38 seconds58:38
+Scott.Huttmann 58 minutes 38 seconds
+Yes, yes.
+
+Matt.Pappas
+58 minutes 39 seconds58:39
+Matt.Pappas 58 minutes 39 seconds
+You gotta combine the the organ, the strategy. I mean, you just can't. You're not gonna get anywhere because they'll circumvent those tickets. We're super good at it.
+
+Karen.Manhart
+58 minutes 43 seconds58:43
+Karen.Manhart 58 minutes 43 seconds
+E.
+Karen.Manhart 58 minutes 45 seconds
+Yeah, probably at probably at key with that is probably a true statement. So I'll retract my, I'll retract my previous statement.
+
+Matthew.Malatek
+58 minutes 51 seconds58:51
+Matthew.Malatek 58 minutes 51 seconds
+What do you mean the the circumvent?
+
+Matt.Pappas
+58 minutes 51 seconds58:51
+Matt.Pappas 58 minutes 51 seconds
+Yeah, because we don't fire anybody for bucking the system. We don't fire anybody for bucking the system. We like courage it. It's like your anarchist awesome. We all hate it.
+
+Karen.Manhart
+58 minutes 59 seconds58:59
+Karen.Manhart 58 minutes 59 seconds
+Just let her do it.
+
+Matthew.Malatek
+59 minutes 1 second59:01
+Matthew.Malatek 59 minutes 1 second
+No.
+Matthew.Malatek 59 minutes 3 seconds
+I'm not talking about firing anyone. Their build will just fail if it doesn't conform. That's what I'm pushing for.
+
+Karen.Manhart
+59 minutes 7 seconds59:07
+Karen.Manhart 59 minutes 7 seconds
+Yeah, yeah.
+Karen.Manhart 59 minutes 11 seconds
+Mhm.
+
+Scott.Huttmann
+59 minutes 11 seconds59:11
+Scott.Huttmann 59 minutes 11 seconds
+Got it.
+
+Matt.Pappas
+59 minutes 13 seconds59:13
+Matt.Pappas 59 minutes 13 seconds
+All right, 10-4, um.
+
+Scott.Huttmann
+59 minutes 13 seconds59:13
+Scott.Huttmann 59 minutes 13 seconds
+How do you guys see me laughing? Did you see Colin's posts?
+
+Karen.Manhart
+59 minutes 13 seconds59:13
+Karen.Manhart 59 minutes 13 seconds
+Um.
+Karen.Manhart 59 minutes 16 seconds
+Yeah.
+
+Matt.Pappas
+59 minutes 16 seconds59:16
+Matt.Pappas 59 minutes 16 seconds
+Ha uh.
+
+Scott.Huttmann
+59 minutes 17 seconds59:17
+Scott.Huttmann 59 minutes 17 seconds
+He's like, I need some context on the Nick Pelegi photo.
+
+Karen.Manhart
+59 minutes 27 seconds59:27
+Karen.Manhart 59 minutes 27 seconds
+Oh, that's funny.
+
+Scott.Huttmann
+59 minutes 27 seconds59:27
+Scott.Huttmann 59 minutes 27 seconds
+That is so funny.
+
+Matthew.Malatek
+59 minutes 30 seconds59:30
+Matthew.Malatek 59 minutes 30 seconds
+He he is a new father, so I'll get he looks, he looks tired and beat up so.
+
+Matt.Pappas
+59 minutes 35 seconds59:35
+Matt.Pappas 59 minutes 35 seconds
+I don't give a crap. Wear a collared shirt.
+
+Matthew.Malatek
+59 minutes 36 seconds59:36
+Matthew.Malatek 59 minutes 36 seconds
+I know you don't. I'm trying to give the dude a benefit of doubt.
+
+Scott.Huttmann
+59 minutes 40 seconds59:40
+Scott.Huttmann 59 minutes 40 seconds
+Oh.
+Scott.Huttmann 59 minutes 43 seconds
+I love it.
+
+Matt.Pappas stopped transcription

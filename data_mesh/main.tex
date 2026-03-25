@@ -1,0 +1,521 @@
+\documentclass[10pt, a4paper]{article}
+
+\setlength{\headheight}{15pt}
+
+% Suppress showhyphens redefinition warning
+\usepackage{silence}
+\WarningFilter{latex}{Command \showhyphens has changed.}
+
+\usepackage{float}
+\usepackage[table]{xcolor}
+
+\input{structure.tex}
+
+\title{Data Engineering Management Strategy}
+\author{Kiewit Data Platform}
+\date{\today}
+
+\begin{document}
+
+\pagestyle{fancy}
+\renewcommand{\thepage}{\arabic{page}}
+\thispagestyle{fancy}
+
+%----------------------------------------------------------------------------------------
+% PAGE 1: SECTION 1 & 2
+%----------------------------------------------------------------------------------------
+\begin{center}
+    \noindent\rule{\linewidth}{1.5pt}
+    
+    \vspace{0.05em}
+    
+    {\large \textbf{Data Engineering Management Strategy \& Domain Ownership}} \\[0.05em]
+    {\footnotesize Kiewit Intelligence Platform (KIP) --- Eliminating Central Overlap}
+    
+    \vspace{0.05em}
+    
+    \noindent\rule{\linewidth}{1.5pt}
+\end{center}
+
+\vspace{0.15em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Section 1: Data Engineering Organizational Models
+\begin{tikzpicture}
+    \node[fill=kipgray!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Data Engineering Organizational Models}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\textbf{1. Centralized Model}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Single data engineering team serves entire organization
+    \item \textit{Common approach in industry}
+    \item Centralized control, potential bottleneck
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{2. Decentralized / Data Mesh}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Domain teams own their data engineering
+    \item \textit{Growing trend in large enterprises}
+    \item High autonomy, requires strong governance
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{3. Hub-and-Spoke Model}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Central platform team + embedded domain engineers
+    \item \textit{Balanced approach for large organizations}
+    \item Shared infrastructure with domain ownership
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{4. Dualistic Centralized Model}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Two overlapping central data engineering teams
+    \item \textit{Very rare organizational structure}
+    \item \textbf{Current Kiewit state:} KDS and KTG maintain overlapping teams that collaborate
+    \item Key differences: KTG has source data access; KDS has more business knowledge and closer proximity to downstream consumers. KDS has more data gravity in certain domains due to advanced data science workloads
+    \item Orchestration tools: KDS uses open-source Dagster to orchestrate; KTG uses Jams
+    \item Technology platforms: KDS uses Google (GCP) for closed-source model data science projects (e.g., Tax, contract document extraction for Kiewit Pays indices). Access to best-of-breed technology drives KDS data science to operate across GCP, on-prem (high performance compute), and still predominantly Azure
+    \item Results: Duplicate pipelines, inconsistent tooling, slower velocity, coordination overhead
+\end{itemize}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Section 3: Recommendation: Hub-and-Spoke Model
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Recommendation: Hub-and-Spoke Model}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+The Hub-and-Spoke model balances enterprise-wide governance with domain agility, eliminating the dualistic overlap while leveraging each organization's strengths.
+
+\vspace{0.1em}
+
+\textbf{Structure:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item \textbf{Hub (KIP):} Central platform team sets global standards, provides infrastructure (Dagster orchestration, Confluent Kafka, Iceberg catalog)
+    \item \textbf{Spoke:} Embedded domain data engineers report to Data Review Board (DRB) leadership within each domain
+    \item \textbf{Governance:} Federated approach---central technical standards enforced automatically, local domain ownership maintained
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Embedded Engineers:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Domain data engineers are embedded within each domain (Estimating, Engineering, Procurement, Project Controls, Shared Services)
+    \item Report to Data Review Board leadership (not central hub)
+    \item Maintain domain expertise and business knowledge
+    \item Build pipelines using shared KIP infrastructure
+    \item Each team establishes relationship with Data Architecture
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Data Review Board (DRB):}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Domain-level governance body within each spoke
+    \item Embedded engineers report to DRB leadership
+    \item Ensures domain-specific requirements and priorities
+    \item Coordinates with central hub (KIP) for standards compliance
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Key Advantages:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Eliminates dualistic overlap and redundancy
+    \item Single ownership per domain
+    \item Technical enforcement (CI/CD) prevents non-conforming work
+    \item Maintains domain expertise and organizational culture
+    \item Improved velocity through better tooling and less bureaucracy provided by the corporate ticket system (ServiceNow)
+    \item Aligns with KIP's \$40M investment (2026--2027)
+\end{itemize}
+
+\end{tabular}
+}
+
+\vspace{0.3em}
+
+% Proforma Model for a Domain
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\textwidth-6pt, align=left] {\textbf{Proforma Model: Domain Structure Example}};
+\end{tikzpicture}
+
+\vspace{0.15em}
+
+{\footnotesize
+\begin{center}
+\begin{tabularx}{0.9\textwidth}{@{}lX@{}}
+\rowcolor{black!10}
+\textbf{Component} & \textbf{Details} \\
+\rowcolor{white}
+\textbf{DOMAIN:} & \textbf{PROJECT CONTROLS} \\
+\rowcolor{kipgray!10}
+\textbf{DRB MEMBER:} & \textbf{ED SMITH} \\
+\rowcolor{white}
+\textbf{EMBEDDED ENGINEER:} & \textbf{NICK WEINDEL} \\
+\rowcolor{kipgray!10}
+\textbf{KEY ARTIFACTS:} & Pipeline architecture, data models, source-to-target mappings, Kafka topic organization, Dagster asset definitions, test plans, deployment documentation, data quality rules, lineage documentation \\
+\rowcolor{white}
+\textbf{DRB MEETING CADENCE:} & Meets monthly for 2 hours, reviews platform as a whole. Cadence reduces as integration matures \\
+\end{tabularx}
+\end{center}
+}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 2: SECTION 2
+%----------------------------------------------------------------------------------------
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\textwidth-6pt, align=left] {\textbf{Data Review Board \& Embedded Domain Data Engineer Roles}};
+\end{tikzpicture}
+
+\vspace{0.2em}
+
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Data Review Board Roles
+\begin{tikzpicture}
+    \node[fill=kipblue!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Data Review Board (DRB) Roles}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\textbf{Governance \& Standards:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Publishes KIP Data Standard document
+    \item Establishes data domains and ownership
+    \item Defines data quality standards
+    \item Defines Gold Layer data definitions
+    \item Manages Enterprise Data Catalog changes
+    \item Governs data definitions, security, access, quality rules
+    \item Establishes metadata and lineage requirements
+    \item Sets tooling standards and observability requirements
+    \item Manages FinOps and cost optimization
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Strategic Leadership:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Provides domain-level strategy and priorities
+    \item Coordinates with central KIP hub (ARB) for technology standards
+    \item Manages embedded data engineering teams
+    \item Ensures domain requirements are met
+    \item Balances domain autonomy with enterprise standards
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Process Orchestration:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Defines core objectives, key results, required capabilities
+    \item Envisions data \& AI product solutions
+    \item Builds and commits to roadmap
+    \item Scopes work packages and requirements
+    \item Manages test cases and user acceptance
+    \item Coordinates deployment and stakeholder engagement
+\end{itemize}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Embedded Domain Data Engineer Roles
+\begin{tikzpicture}
+    \node[fill=kiporange!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Embedded Domain Data Engineer Roles}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\textbf{Pipeline Development:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Designs pipeline architecture aligned with domain needs
+    \item Builds data pipelines using Dagster orchestration
+    \item Implements Confluent Kafka topics for event streaming
+    \item Creates async consumption patterns via pub/sub
+    \item Builds pipelines in dev, tests, and supports go-live
+    \item Provides ongoing maintenance and support
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Data Modeling (Active vs. Passive):}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item \textbf{Current State:} Kiewit has no actively built data model---it's passive (not maintained)
+    \item \textbf{New Approach:} Embedded engineers will build and maintain active data models
+    \item Creates data models aligned to Kiewit Bus Data Model
+    \item Designs source-to-target mappings
+    \item Ensures data reconciliation across domains
+    \item Maintains data architecture, discovery, profiling
+    \item Delivers initial DDL definitions and updates
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Async Consumption \& Pub/Sub:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Implements event-driven architecture via Confluent Kafka
+    \item Enables async consumption patterns for rapid velocity
+    \item Publishes data events to Kafka topics
+    \item Subscribes to relevant topics for cross-domain consumption
+    \item Decouples systems for independent scaling and deployment
+    \item Enables real-time data streaming alongside batch processing
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Rapid Velocity Enablement:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Pub/sub patterns eliminate tight coupling between systems
+    \item Event-driven architecture enables parallel development
+    \item Async consumption allows downstream systems to consume at their own pace
+    \item Reduces coordination overhead through decoupled architecture
+    \item Enables faster iteration and deployment cycles
+\end{itemize}
+
+\end{tabular}
+}
+
+\vspace{0.3em}
+
+% Active Data Modeling and Async Consumption side by side
+{\footnotesize
+\begin{tabular}[t]{@{}p{0.48\textwidth}@{\hspace{0.02\textwidth}}p{0.48\textwidth}@{}}
+% LEFT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Active Data Modeling
+\begin{tikzpicture}
+    \node[fill=kipgray!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Active Data Modeling: Building Maintainable Data Models}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\textbf{Current State (Passive):}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Kiewit currently has no actively built data model
+    \item Existing models are passive---not maintained or updated
+    \item Models become stale and misaligned with reality
+    \item No systematic approach to data model evolution
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{New Approach (Active):}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Embedded domain data engineers will build and actively maintain data models
+    \item Models evolve with business requirements and source system changes
+    \item Continuous alignment with Kiewit Bus Data Model
+    \item Source-to-target mappings updated as systems change
+    \item Data profiling and discovery inform model updates
+    \item Models stored in version control (Git) alongside pipeline code
+    \item DDL definitions generated and maintained programmatically
+    \item Models validated through CI/CD pipeline conformance checks
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Benefits of Active Data Modeling:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Models remain current and aligned with source systems
+    \item Reduces data quality issues from schema drift
+    \item Enables better data discovery and understanding
+    \item Supports automated lineage tracking
+    \item Facilitates cross-domain data reconciliation
+    \item Enables proactive impact analysis for source system changes
+\end{itemize}
+
+&
+% RIGHT COLUMN
+\vspace{0pt}
+\raggedright
+
+% Async Consumption & Pub/Sub
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\linewidth-6pt, align=left] {\textbf{Async Consumption \& Pub/Sub: Enabling Rapid Velocity}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+\textbf{Event-Driven Architecture:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Confluent Kafka enables event-driven architecture across domains
+    \item Data events published to Kafka topics as they occur
+    \item Multiple consumers can subscribe to same topic independently
+    \item Systems decoupled---producers and consumers evolve independently
+    \item Real-time streaming alongside batch processing capabilities
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Async Consumption Patterns:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Downstream systems consume data asynchronously at their own pace
+    \item No blocking---systems don't wait for each other
+    \item Enables parallel development and deployment
+    \item Reduces coordination overhead between teams
+    \item Supports both real-time and batch consumption patterns
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Rapid Velocity Benefits:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Faster time-to-market for new features and integrations
+    \item Independent scaling of producers and consumers
+    \item Reduced deployment dependencies
+    \item Easier rollback and recovery (event replay)
+    \item Better fault tolerance (systems continue operating if one fails)
+    \item Enables microservices architecture patterns
+\end{itemize}
+
+\vspace{0.1em}
+
+\textbf{Implementation:}
+\begin{itemize}[leftmargin=1em, itemsep=0.05em]
+    \item Embedded engineers design Kafka topic organization per domain
+    \item Topics organized by domain, data type, and consumption pattern
+    \item Schema registry ensures compatibility across consumers
+    \item Monitoring and alerting on topic health and lag
+    \item Integration with Dagster for orchestrated event processing
+    \item Documentation of topic purposes and consumer contracts
+\end{itemize}
+
+\end{tabular}
+}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% PAGE 3: SECTION 4
+%----------------------------------------------------------------------------------------
+\begin{tikzpicture}
+    \node[fill=kipgreen!20, rounded corners=3pt, inner sep=3pt, text width=\textwidth-6pt, align=left] {\textbf{Technology Transformation: Jams \& Snowflake to Dagster/Kafka/Open-Tables}};
+\end{tikzpicture}
+
+\vspace{0.1em}
+
+{\footnotesize
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Orchestration \& Workflow Management:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Dagster vs. Jams:} Declarative asset-based orchestration vs. imperative job scheduling
+    \item \textbf{Asset Lineage:} Automatic dependency tracking and visualization vs. manual dependency management
+    \item \textbf{Parallel Execution:} Native parallel workstreams for single projects and schedules vs. sequential job execution
+    \item \textbf{Monitoring \& Observability:} Built-in monitoring, alerting, and execution tracking vs. limited visibility
+    \item \textbf{CI/CD Integration:} Active conformance through CI/CD pipelines---builds fail before non-conforming work reaches production
+    \item \textbf{Code-as-Configuration:} Pipelines defined in code with version control vs. GUI-based configuration
+    \item \textbf{Testability:} Unit testing, integration testing, and test environments vs. production-only testing
+    \item \textbf{Error Handling:} Sophisticated retry logic, failure notifications, and recovery strategies
+    \item \textbf{Resource Management:} Dynamic resource allocation and optimization vs. static resource assignment
+\end{itemize}
+
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Event Streaming \& Async Consumption:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Confluent Kafka:} Enterprise-grade event streaming platform vs. batch-only processing
+    \item \textbf{Real-time Data:} Stream processing for real-time analytics vs. batch-only workflows
+    \item \textbf{Pub/Sub Patterns:} Asynchronous consumption enabling rapid velocity and decoupled systems
+    \item \textbf{Event-Driven Architecture:} Event-driven pipelines vs. schedule-driven only
+    \item \textbf{Multiple Consumers:} Same data stream consumed by multiple downstream systems without duplication
+    \item \textbf{Replay Capability:} Ability to replay events for reprocessing and recovery
+    \item \textbf{Schema Evolution:} Schema registry for evolving data structures vs. rigid schemas
+    \item \textbf{Exactly-Once Semantics:} Guaranteed message delivery and processing
+    \item \textbf{Partitioning \& Scaling:} Horizontal scaling through topic partitioning
+    \item \textbf{Integration Ecosystem:} Rich connector ecosystem for source and sink systems
+\end{itemize}
+
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Data Storage \& Table Formats:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Iceberg Open-Table Format:} Open, vendor-neutral table format vs. proprietary formats
+    \item \textbf{Time Travel:} Query historical versions of data for auditing and recovery
+    \item \textbf{Schema Evolution:} Add, remove, or modify columns without rewriting data
+    \item \textbf{Partition Evolution:} Change partitioning strategy without data migration
+    \item \textbf{ACID Transactions:} Guaranteed consistency for concurrent reads and writes
+    \item \textbf{Metadata Management:} Rich metadata stored with data for better query optimization
+    \item \textbf{Multi-Engine Support:} Same table accessible from Spark, Trino, BigQuery, Snowflake, etc.
+    \item \textbf{Extensibility to Snowflake:} Iceberg tables made extensible into Snowflake for hybrid cloud analytics
+    \item \textbf{Version Control:} Built-in versioning and snapshot capabilities
+    \item \textbf{Performance:} Columnar storage, predicate pushdown, and file-level pruning
+\end{itemize}
+
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Data Lake Architecture:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Bronze/Silver/Gold Medallion:} Structured data layering with clear promotion paths
+    \item \textbf{Unstructured Data:} Support for documents, models, schedules alongside structured data
+    \item \textbf{Versioning:} File-level versioning in bronze layer (e.g., \texttt{/p6/V3/job\_code=XXX/sch\_id=YYY/version/service.parquet})
+    \item \textbf{Partitioning:} Intelligent partitioning by fiscal year/month, project, schedule ID, etc.
+    \item \textbf{Direct Parquet Access:} Applications can read parquet directly for fast analytics (e.g., JSR app)
+    \item \textbf{CDC Strategy:} Change Data Capture for incremental updates vs. full reloads
+    \item \textbf{Batched Writes:} Optimized batch writes to Iceberg (15-minute increments) to avoid small files
+    \item \textbf{Data Discovery:} Metadata and lineage enable data discovery and understanding
+\end{itemize}
+
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Performance \& Velocity Improvements:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Extraction Speed:} P6 extraction reduced from \textasciitilde1 hour to 17 seconds average (180x improvement)
+    \item \textbf{Aggregation Speed:} Aggregation reduced to 3 seconds
+    \item \textbf{Application Performance:} JSR app pulls from parquet directly---much faster than blob storage
+    \item \textbf{Parallel Processing:} Dagster enables parallel workstreams for single projects and parallel schedule processing
+    \item \textbf{Async Consumption:} Pub/sub enables rapid velocity through decoupled, event-driven systems
+    \item \textbf{Reduced Latency:} Real-time streaming vs. batch-only processing reduces time-to-insight
+    \item \textbf{Optimized Storage:} Better file organization and partitioning reduces query times
+\end{itemize}
+
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Governance \& Compliance:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Active Conformance:} CI/CD pipeline enforces standards automatically vs. manual compliance checks
+    \item \textbf{Automated Quality Checks:} Data quality rules enforced in pipeline vs. post-hoc validation
+    \item \textbf{Lineage Tracking:} Automatic lineage capture for compliance and impact analysis
+    \item \textbf{Catalog Integration:} Kiewit Data Catalog (Alation) integration for data discovery
+    \item \textbf{Security:} RBAC, encryption, and audit logging built into platform
+    \item \textbf{FinOps:} Cost monitoring and optimization capabilities
+\end{itemize}
+
+\vspace{0.15em}
+
+\hspace{1em}\textbf{Developer Experience:}
+\begin{itemize}[leftmargin=2.5em, itemsep=0.05em]
+    \item \textbf{Modern Stack:} NextJS/React, FastAPI backend vs. legacy technologies
+    \item \textbf{Code Review:} Git-based workflows with pull requests vs. ticket-based changes
+    \item \textbf{Local Development:} Developers can run pipelines locally for testing
+    \item \textbf{Documentation:} Self-documenting pipelines through Dagster UI
+    \item \textbf{Debugging:} Rich debugging tools and execution logs
+    \item \textbf{Rapid Iteration:} Faster development cycles through modern tooling
+\end{itemize}
+}
+
+\end{document}

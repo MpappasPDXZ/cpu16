@@ -1,0 +1,217 @@
+==================================
+=        ED SMITH                =
+==================================
+
+ed's discussion theme: - Concern about ensuring teams maintain compatibility with enterprise standards
+
+
+[[KIP]] Governance
+[[KIP ARB]]
+    Publishes KIP Technology Standard document which establishes:
+        1-Technical requirements for publishing data to KIP
+        2-Security requirements
+        3-Interoperability requirements
+        4-Proposes, Reviews, Approves changes to KIP architecture/tooling
+[[KIP DRB]]
+    Publishes KIP Data Standard document which establishes:
+        1-Data Domains
+        2-Data Quality Standards
+        3-Gold Layer Data Definitions
+        4-Proposes, Reviews Approves changes to Enterprise Data Catalog
+Bronze: New Data Sources.  Changed Data Sources (i.e. source system upgrades or business process changes that affect data)
+Silver: Promotion of silver-quality assets from Bronze
+Gold: DRB defines the Gold Layer
+
+
+    sub roles within KIP DRB:
+    [[KIP Ops]]
+        Manages and Monitors KIP Infrastructure
+        Performs Security Audits/Monitoring
+        Produces Usage Reports, Cost Reports
+        Proposes improvements to ARB/DRB
+    [[KIP DE]]
+        Implements the decisions of the ARB
+        Implements the Gold Layer asset ETLs
+        Assists Domain DE as directed
+        Proposes improvements to ARB/DRB
+    [[KIP Quality]]
+        Defines data quality standards with DRB approval
+        Monitors data quality and system performance
+        Proposes improvements to ARB/DRB
+    [[KIP Support]]
+        Triage and Level 1 ticket response
+        Escalates Level 2+ tickets to appropriate teams
+        Manages and Monitors the Kiewit Data Catalog (alation)
+        Manages KIP Documentation and Communications
+        Proposes improvements to ARB/DRB
+
+[[KIP Data Domain Work Groups]]
+    These teams will either by KDS or KTG and will operate across Kiewit to build data-producing systems
+    Each Kiewit Domain may one or more teams responsible for publishing data to KIP.
+    Each team will establish a liaison relationship with a KIP DE Member
+Proposes improvements to ARB/DRB
+    The owners of data-producing systems fall into one of these categories:
+    Independent Data Producers
+    Operate their own systems to produce data for KIP and ETL directly
+    Their DE team liasons with KIP Ops DE
+Tenant Data Producers
+    Use KIP infrastructure to produce data for KIP and ETL within KIP
+    Their DE team liasons with KIP Ops DE
+Managed Data Producers
+    KIP Ops DE coordinates the ETL of these assets into KIP
+    Their DE team doesn't have the bandwidth/experience to publish to KIP
+
+
+==================================
+=         MATT MALATEK           =
+==================================
+
+main discussion theme: Matthew Malatek advocates for "active conformance" through CI/CD pipelines
+
+hub governance THROUGH DRB sub groups (topics to be addressed)
+    Data definitions
+    Security & access
+    Data quality rules
+    Metadata & lineage
+    Tooling standards
+    Observability
+    FinOPS
+
+==================================
+=       KAREN MANHART            =
+==================================
+
+Domain Workgroup Roles, Process, & Deliverables Summary
+
+PROCESS STAGES: Strategy → Design → Build → Test → Go-Live & Adoption
+
+1. STAKEHOLDERS
+   Function: Provide business expertise and input; receive adoption outcomes
+   Deliverables:
+   - Business Case / Success Metrics
+   - Adoption
+
+2. DATA DOMAIN STRATEGY MANAGER
+   Function: Orchestrates the entire process from strategy through deployment
+   - Defines core objectives, key results, and required capabilities
+   - Envisions data & AI product solutions
+   - Builds and commits to roadmap
+   - Scopes work packages and requirements
+   - Manages test cases and user acceptance
+   - Coordinates deployment and stakeholder engagement
+   Deliverables:
+   - Objectives, Key Results, Required Capabilities
+   - Roadmap
+   - Scope & Prioritized Initiatives
+   - Test Cases
+   - Kiewit Data Catalog Curation
+   - Deployment & Stakeholder Engagement
+
+3. FOUNDATIONAL DATA MANAGEMENT (DATA ARCHITECTURE)
+   Function: Manages data architecture, discovery, profiling, modeling, and mapping
+   - Assesses current state and identifies gaps (data architecture, discovery, profiling, enablement plan)
+   - Performs detailed data profiling
+   - Designs data models and creates source-to-target mappings
+   Deliverables:
+   - Data Architecture
+   - Data Analysis, Lineage, & Profiling
+   - Alignment to Kiewit Bus Data Model
+   - Data Reconciliation Across Domains
+   - Data Modeling
+   - Initial DDL Definition & Delivery
+   - Source to Target Mappings
+
+4. DATA SCIENTIST
+   Function: Provides data science expertise and builds applications/models
+   - Provides data science expertise and input for data discovery
+   - Designs solution architecture
+   - Builds applications in dev environment
+   - Tests applications and supports go-live
+   Deliverables:
+   - Data Science / Model Expertise
+   - Technology Requirements
+   - Data Collection Application Build
+   - Model Development / Management
+   - Test Plan / Test Execution
+   - Go-Live Prep & Implementation
+   - Ongoing Maintenance & Support
+
+5. DATA ENGINEERING (Highlighted Role)
+   Function: Designs and builds data pipelines
+   - Provides data engineering expertise and input for data profiling
+   - Designs pipeline architecture
+   - Builds data pipelines in dev environment
+   - Tests pipelines and supports go-live
+   Deliverables:
+   - Data Engineering Tool Design
+   - Data Pipeline Architecture
+   - Data Pipeline Build
+   - Test Plan / Test Execution
+   - Go-Live Prep & Implementation
+   - Ongoing Maintenance & Support
+
+6. DATABASE MANAGEMENT
+   Function: Manages data stores, security, and repository standards
+   - Builds data stores in dev environment
+   - Implements RBAC and security
+   - Tests data stores and supports cutover to production
+   Deliverables:
+   - Data Store Design & Architecture
+   - Data Repository Naming Conventions
+   - RBAC & Security Implementation
+   - Test Plan / Test Execution
+   - Go-Live Prep & Implementation
+   - Ongoing Maintenance & Support
+
+7. INFRASTRUCTURE & SECURITY
+   Function: Manages infrastructure, security, performance, and cost
+   - Designs infrastructure architecture
+   - Builds infrastructure in dev environment
+   - Tests infrastructure and supports cutover to production
+   - Manages security, performance, and cost (FinOps)
+   Deliverables:
+   - Infrastructure Design & Architecture
+   - Security Design
+   - Performance Assurance
+   - Cost Management (FinOps)
+   - Monitoring
+   - Ongoing Maintenance & Support
+
+KEY WORKFLOW:
+- Strategy: Stakeholders provide input → Strategy Manager defines objectives → Foundational Data Mgmt assesses current state → Data Scientist/Engineer provide expertise
+- Design: Strategy Manager scopes work package → All teams design their components (Solution Architecture, Pipeline Architecture, Infrastructure Architecture, Detailed Data Profiling)
+- Build: All teams build in dev (Application Build, Pipeline Build, Data Store Build, Infrastructure Build)
+- Test: All teams test → Results feed into Strategy Manager's User Acceptance decision
+- Go-Live: Upon acceptance, all teams execute production cutover → Strategy Manager coordinates deployment & delivery → Stakeholders receive adoption
+
+
+
+MATT PAPPAS'S THOUGHTS:
+3. ORGANIZATIONAL REALITY:
+   - Embedded engineers report to domain data review board leadership (spoke structure)
+   - Hub governance must align with organizational strategy
+   - Teams will circumvent processes that don't fit culture
+   - Kiewit culture encourages challenging systems
+
+4. BALANCE NEEDED:
+   - Need central governance (hub) to ensure standards
+   - But must work with organizational culture that encourages autonomy
+   - Technical enforcement (CI/CD) rather than process/ticket-based governance
+   - Embedded engineers maintain domain ownership while hub provides standards
+
+IMPLICATIONS FOR HUB-AND-SPOKE MODEL:
+- Hub must provide technical enforcement (CI/CD conformance checks) rather than process-based governance
+- Spoke teams (embedded engineers) maintain organizational reporting to data review board leadership
+- Governance must account for Kiewit's culture of challenging digital systems
+- Standardization concerns addressed through automated conformance, not manual compliance checks
+
+
+
+INSTRUCTIONS:
+Section 1: Data Engineering Organizational Models --> good leave it.
+Section 2: Recommendation: Hub-and-Spoke Model --> needs to summarize this model and explain the embedded engineers and the data review board.
+Section 3: data review board: what does it govern?  summarize thoughts into a section.
+Section 4: embedded engineers are the domain manager responsibilities and we need to elaborate where needed to this section.
+Section 5: What's changing from a Jams scheduler to a Dagster / Confluent Kafka / open-tables made extensible into Snowflake?  We will have a lot better everything - be extensive in your list of what this will provide.
+Section 6: this goes on a page by itself and is how each domain rolls up to the embedded engineer whom works for someone on the data review board.
+Section 7: We become explicit about the data review board and the embedded domain data engineer's roles.  we are explicit about how this team will build a data model (kiewit has nothing actively built --> it's passive which means it's not maintained), we will have async consumption, more rapid velocity through pub/sub, etc.

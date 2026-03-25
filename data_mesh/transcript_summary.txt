@@ -1,0 +1,63 @@
+Hub-and-Spoke Governance Model - Transcript Summary
+
+KEY STATEMENTS BY SPEAKER:
+
+ED SMITH (Concerns about Decentralization):
+- "There's no central storage. There's not one Q at data lake. There's eight Q at data lakes."
+  → Expresses concern about lack of central hub in a fully decentralized model
+
+- "I feel like that there's the standardization can be too poor. You know that how do we know that some other team is gonna comply is gonna keep their data lake compatible with the way the enterprise is using it?"
+  → Raises critical governance concern: Without a central hub enforcing standards, how do we ensure teams maintain compatibility and compliance?
+
+MATTHEW MALATEK (Active Conformance & CI/CD Enforcement):
+- "And then for conformance, I I'm gonna push heavily for active conformance through our CICD pipeline."
+  → Proposes hub governance mechanism: Use CI/CD pipeline to enforce conformance automatically
+
+- "We don't let it get there and then go check to see if it's right. We make sure it fails before it even gets there."
+  → Emphasizes proactive hub governance: Prevent non-conforming work from reaching production through automated checks
+
+- "I'm not talking about firing anyone. Their build will just fail if it doesn't conform. That's what I'm pushing for."
+  → Clarifies governance approach: Technical enforcement (build failures) rather than punitive measures
+
+MATT PAPPAS (Embedded Engineers & Organizational Strategy):
+- "But if you have an embedded engineer, they work for someone on this call."
+  → Highlights spoke structure: Embedded engineers report to DATA REVIEW BOARD
+
+- "You gotta combine the the organ, the strategy. I mean, you just can't. You're not gonna get anywhere because they'll circumvent those tickets. We're super good at it."
+  → Critical insight: Hub governance must align with organizational strategy; teams will circumvent processes that don't fit organizational culture
+
+- "Yeah, because we don't fire anybody for bucking the system. We don't fire anybody for bucking the system. We like courage it. It's like your anarchist awesome. We all hate it."
+  → Organizational culture context: Kiewit culture encourages challenging systems, which requires governance that works with (not against) this culture
+
+KAREN MANHART:
+- "Yeah, probably at probably at key with that is probably a true statement. So I'll retract my, I'll retract my previous statement."
+  → Acknowledges validity of concerns about organizational culture and governance challenges
+
+KEY THEMES:
+
+1. CENTRAL HUB CONCERNS:
+   - Ed Smith questions how to maintain standardization without a central storage/hub
+   - Concern about ensuring teams maintain compatibility with enterprise standards
+
+2. GOVERNANCE MECHANISM:
+   - Matthew Malatek advocates for "active conformance" through CI/CD pipelines
+   - Build failures as enforcement mechanism (technical, not punitive)
+   - Proactive checking before production deployment
+
+3. ORGANIZATIONAL REALITY:
+   - Embedded engineers report to domain leadership (spoke structure)
+   - Hub governance must align with organizational strategy
+   - Teams will circumvent processes that don't fit culture
+   - Kiewit culture encourages challenging systems
+
+4. BALANCE NEEDED:
+   - Need central governance (hub) to ensure standards
+   - But must work with organizational culture that encourages autonomy
+   - Technical enforcement (CI/CD) rather than process/ticket-based governance
+   - Embedded engineers maintain domain ownership while hub provides standards
+
+IMPLICATIONS FOR HUB-AND-SPOKE MODEL:
+- Hub must provide technical enforcement (CI/CD conformance checks) rather than process-based governance
+- Spoke teams (embedded engineers) maintain organizational reporting to domain leadership
+- Governance must account for Kiewit's culture of challenging systems
+- Standardization concerns addressed through automated conformance, not manual compliance checks

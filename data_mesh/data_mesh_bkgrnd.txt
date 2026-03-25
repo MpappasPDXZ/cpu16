@@ -1,0 +1,185 @@
+
+================================
+=          background          =
+================================
+
+Today we are in a dualistic centralized data domain organization schema with two organizations with data engineering managers focused on the same topic.  
+The only real differentiation between the two are the consumer groups and only KTG has access to the source data in most cases.
+Our data science organization has clear capability operating standards that are more advanced including integrating dagster, a 16 node B200 GPU that we are deploying kubernetes on and running massive fine tuned models.  
+The data science organiztion is very advanced in capabilities as compared to the KTG group which uses Jams to move data into Snowflake and does not move unstructured data.  The web team at KDS also uses NextJS / React with a FastAPI backend.  Utilizes a data lake architecture for post app publication of datasets.  KTG's teams use almost exclusively azure sql server and do not replicate for analytical usage.  An 8-screen NextJS react app took KTG 18 months to build this would have been built in 6 weeks in KDS.
+Unstructured data in a construction company is vital to predicting quantities of permanent material and must be part of the ecosystem.
+You cannot clearly state that the KTG group has less capability than KDS and therefore KDS should retain the data engineering management work.  Also KTG has groups that have been focused on design model software management and KDS does not.  
+
+The company is investing $40m into KIP between 2026-2027.  read more on this at LATEX/KIP/ main.tex and read more about the architecture of KIP in LATEX/ARB/main.tex
+
+================================
+=          data mesh           =
+================================
+
+Data mesh is a decentralized data architecture that organizes data by specific business domains—such as marketing, sales, or finance—rather than funneling all information into a single, centralized data lake or warehouse. Introduced by Zhamak Dehghani in 2019, it is described as a "socio-technical" approach because it requires shifts in both organizational culture and technical infrastructure. 
+The Four Foundational Principles
+A data mesh is defined by four core pillars that distinguish it from traditional, monolithic architectures: 
+Domain-Oriented Decentralized Ownership: Responsibility for data is shifted to the teams closest to it (e.g., the sales team owns sales data). These teams are accountable for their data's full lifecycle, including collection, cleaning, and transformation.
+Data as a Product: Domain teams treat their data as a product for the rest of the organization to "consume". To be effective, these data products must be discoverable, addressable, trustworthy, self-describing, interoperable, and secure.
+Self-Serve Data Infrastructure as a Platform: A central data platform team provides the underlying tools—such as storage, compute, and orchestration—enabling domain teams to build and manage their data products independently without deep technical specialization.
+Federated Computational Governance: A central body sets global standards for security, compliance, and interoperability, while individual domain teams enforce these rules locally. This ensures the mesh functions as a unified ecosystem rather than a series of disconnected silos. 
+Key Benefits
+Scalability: Eliminates the bottleneck of a single, central data engineering team that struggles to keep up with growing organizational demands.
+Agility: Allows domain teams to move faster by removing the need for central approval for every new dataset or report.
+Higher Quality: Because the people who understand the data's context are responsible for it, the data tends to be more accurate and reliable.
+Democratization: Self-service tools allow non-technical business users to find and analyze data on their own terms. 
+Data Mesh vs. Alternatives
+Data Lake/Warehouse: These are technological storage solutions that can act as nodes within a data mesh. While they are typically centralized, a data mesh uses them as a distributed foundation.
+Data Fabric: While often confused, a data fabric is a technocentric layer that uses AI and metadata to automate data integration across existing systems. Data mesh focuses more on organizational change and human ownership. 
+
+================================
+=       alternatives           =
+================================
+
+1. Centralized Platform Ownership
+The most significant shift in 2026 is the consolidation of data infrastructure under a dedicated internal platform team. 
+Structure: A core platform team maintains standardized "building blocks"—such as ingestion frameworks, transformation templates, and deployment patterns.
+Ownership: The platform team owns the service-level expectations and upgrade paths, while individual squads use these tools as "collaborators" rather than building their own plumbing from scratch.
+Key Advantage: Reduces tool sprawl and duplication of effort, ensuring high consistency and control. 
+
+2. Hub-and-Spoke (Hybrid) Model
+This remains a common alternative for large enterprises that need both central control and domain agility. 
+Structure: A central "Hub" team sets global standards and provides common infrastructure (often a shared data lakehouse or fabric).
+The Spoke: Domain-specific teams (e.g., Marketing or Finance) embed data engineers to build custom logic on top of the shared foundation.
+Key Advantage: Balances the need for enterprise-wide governance with the speed of local business units. 
+
+3. Integrated Analytics Engineering 
+The traditional wall between "data engineering" (moving data) and "analytics" (using data) is fading. 
+Structure: Organizations combine these roles into cross-functional teams focused on end-to-end data delivery.
+Role: Engineers work closely with analysts to design models optimized for both performance and business usability, often using tools like dbt for modular transformations.
+Key Advantage: Accelerates insight delivery by keeping engineering efforts strictly aligned with business decisions. 
+
+Model 	Primary Focus	Best For
+Centralized Platform	Infrastructure efficiency & standardization	Small to mid-sized orgs; companies with high tool sprawl
+Hub-and-Spoke	Balanced agility & governance	Large enterprises with diverse business units
+Integrated Analytics	Business outcomes & insight speed	Product-led companies; rapid-growth startups
+
+Kiewit has 5 main domains that we are focused on:
+
+1. ESTIMATING
+   - Senior Executive Sponsor: Chad Jessen
+   - Business Executive: Kevin Needham
+   - Business Executive: John Willard
+   - Business Executive: (vacant)
+   - Sponsor: Jake Macholtz
+   - Data Strategy: Colin Davis
+   - Data Execution: Matt Pappas
+   - Technical Strategy / Execution: Dave Hansen
+
+2. ENGINEERING
+   - Senior Executive Sponsor: Dan Lumma
+   - Business Executive: Robert Zinsmeister
+   - Business Executive: Jay Steinmetz
+   - Business Executive: Robert Allen
+   - Sponsor: Jake Macholtz
+   - Data Strategy: Colin Davis
+   - Data Execution: Matt Pappas
+   - Technical Strategy / Execution: Dave Hansen
+
+3. PROCUREMENT
+   - Senior Executive Sponsor: Tyler Nordquist
+   - Business Executive: Colin McKernan
+   - Business Executive: Dan Rocole
+   - Business Executive: Suzanne Motica
+   - Sponsor: Jake Macholtz
+   - Data Strategy: Colin Davis
+   - Data Execution: Matt Pappas
+   - Technical Strategy / Execution: Justin Rauner
+
+4. PROJECT CONTROLS
+   - Senior Executive Sponsor: Dave Flickinger
+   - Business Executive: Matt Scott
+   - Business Executive: (vacant)
+   - Business Executive: (vacant)
+   - Sponsor: Jake Macholtz
+   - Data Strategy: Colin Davis
+   - Data Execution: Matt Pappas
+   - Technical Strategy / Execution: Dave Hansen
+
+5. SHARED SERVICES
+   - Senior Executive Sponsor: Trent Demulling
+   - Business Executive: Colin McKernan
+   - Business Executive: Andre Pessini
+   - Business Executive: Alyson Manning Angela
+   - Sponsor: Jimmy Nolan
+   - Data Strategy: Colin Davis
+   - Data Execution: Matt Pappas
+   - Technical Strategy / Execution: Justin Rauner
+
+ESTIMATING HAS 2 INDUSTRIES (GROUPINGS OF MARKETS):
+ENERGY MARKET AND INFRASTRUCTURE MARKET
+
+ENGINEERING HAS 2 INDUSTRIES (GROUPINGS OF MARKETS):
+ENERGY 
+INFRASTRUCTURE
+
+PROJECT CONTROLS IS A SUPER DOMAIN WITH SUB DOMAINS:
+cost
+Schedule
+contracts
+
+
+KDS has a gravity of machine learning models for these areas:
+
+probability of success index: released in 2017 since then our win rates have almost doubled.  Not totally related to just the PSI model but also organizational capabilities and resume but not fishing in dry holes makes a big difference.
+watch dog: algorithm that predicts if a job will lose 20% of margin thereby allowing early intervention.  This algorithm catches 94% of jobs that lose 20% of margin and 76% before 20% complete.
+hours / quantity (MHF) prediction: 97% of estimates use this model and projects that use this model are 100 million closer to budget than estimates that do not use it.
+job loss avoidance model (JLAM): predicts if a project will lose 80% of margin and projects that use this tool put 1% more contingency ($90b of bid volume / $30b+ won in the last year) than jobs that do not.
+quantity prediction: uses engineering parameters of the project and supplies quantity predictions at a discipline level.
+quantity diffusion: takes a level 4 estimate (discipline level quantities) and diffuses the quantities to terminal quantites which allows hours / quantity prediction and JLAM.
+KDS has 20 data scientists, 10 data engineers, 15 web developers
+KTG has 20 data engineers, platform operations, 70 web developers
+
+
+I want to generate a LaTeX paper (main.tex and structure.tex like ARB / main.tex / structure.tex outlining your opinion of how the data engineering management should be executed.  Who should prioritize data sources, build the pipelines, collaborate with data strategy (KDS has the Data Strategy Manager and KTG has technology managers predominately focused on external software management but also 70 custom builders), and integrate with data analytics (KDS has all of these).  
+Historically, the KTG data engineers are less skilled (cannot say this directly) and only receive changes through an antiquated ticket process where they provision code changes very slowly and only recently began to use CI/CD (2024).  Can you put together a one page document on the data management strategy (look above for options) and then assign these domains to each organization (KDS or KTG) with the goal of eliminating centrally overlapping one domain.  The domain manager will be responsible for Confluent Kafka topics/organization, Dagster orchestration/monitoring, code review, and working with consumers to improve velocity of projects.
+
+
+Points to clarify:
+what does the central group (Data Review Board) approve (bottleneck)?
+we have confluent Kafka and Dagster to administer who does that?
+we have data architects that play into this as well - how do they fit in?
+We have to oversee the conformance (audit passively or active) the lake structures and scripts
+
+Ed Smith:
+Publication of data is the topic to address - consumption is permissions.
+We need a provisionment process where a central group with access to sources pushes out data - fit for a purpose
+When you have bronze provisioned 
+obtaining truly enterprise datasets (Kiewit gold)
+Need to deconflict duplicative datasets 
+I want to publish enterprise data.  here's your bronze landing zone go crazy.
+KIP Pro Serve: data engineers from hub go to domain and help them get started.
+Some dagster permissions, they get a dagster private deployment.
+
+Events (Confluent Kafka) + Orchestration (Dagster) are tools that vastly improve over jams scheduler and notebook code.
+
+Data Review Board: 
+
+--must be governed: 
+1-reuse where appropriate
+-- deduplicate environment by producing inventory
+-- curating the enterprise data model
+-- --> let them go crazy into bronze 
+
+
+
+--tech. debt reduction?
+--apply for KIP data source
+--what happens when they never go past just using the tools?
+--KIP tenants - hub engineering team has a liasion for every tenant
+
+
+2-technology choices 
+
+
+3-conformance to patterns 
+4-finops
+
+agreed upon organizational structure: hub-and-spoke model: central platform + embedded domain engineers
+Hire 1-2 people to admin. KIP infrastructure
+
